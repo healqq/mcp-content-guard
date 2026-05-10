@@ -1,0 +1,35 @@
+{
+  "name": "github",
+  "mcp": "@modelcontextprotocol/server-github",
+  "cmd": ["npx", "-y", "@modelcontextprotocol/server-github"],
+  "notes": "Requires: node.js + GITHUB_PERSONAL_ACCESS_TOKEN env var set.",
+  "cases": [
+    {
+      "name": "search_code_go_errors",
+      "tool": "search_code",
+      "arguments": { "q": "language:go errors.New", "per_page": 30 },
+      "filter": ".[0].text[:3000]"
+    },
+    {
+      "name": "list_commits_main",
+      "tool": "list_commits",
+      "arguments": {
+        "owner": "golang",
+        "repo": "go",
+        "sha": "master",
+        "per_page": 100
+      },
+      "filter": "grep:\"message\":"
+    },
+    {
+      "name": "get_file_contents_large",
+      "tool": "get_file_contents",
+      "arguments": {
+        "owner": "torvalds",
+        "repo": "linux",
+        "path": "kernel/sched/fair.c"
+      },
+      "filter": "grep:^static "
+    }
+  ]
+}

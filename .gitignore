@@ -1,0 +1,15 @@
+# build artifacts
+mcp-context-guard
+mcp-context-guard.exe
+mcp-context-guard-*
+bench.exe
+
+# bench generated / downloaded data
+bench/data/bench.db
+bench/data/react-repo/
+
+# bench run outputs
+bench/eval/results-*.json
+
+# node
+bench/eval/node_modules/

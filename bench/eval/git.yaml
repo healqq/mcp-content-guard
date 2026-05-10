@@ -1,0 +1,102 @@
+description: "mcp-context-guard savings — git history (React v18.2.0)"
+
+# Requires: bench/setup.sh clones React v18.2.0 at depth=300 into bench/data/react-repo/.
+# git_log(max_count=300) returns ~300 commit records — well above the 10240-byte threshold.
+# Tasks use flexible llm-rubric assertions since exact git history values aren't known upfront;
+# the rubric verifies format and plausibility rather than exact strings.
+
+providers:
+  - id: file://provider.js
+    label: "git/direct"
+    config:
+      mcpCmd: ["uvx", "mcp-server-git", "--repository", "../../data/react-repo"]
+      maxTurns: 6
+      model: gpt-5.4-mini-2026-03-17
+
+  - id: file://provider.js
+    label: "git/proxied"
+    config:
+      mcpCmd:
+        - "../../mcp-context-guard.exe"
+        - "--threshold=10240"
+        - "--"
+        - "uvx"
+        - "mcp-server-git"
+        - "--repository"
+        - "../../data/react-repo"
+      maxTurns: 6
+      model: gpt-5.4-mini-2026-03-17
+
+prompts:
+  - "{{task}}"
+
+defaultTest:
+  options:
+    provider: openai:gpt-5.4-mini-2026-03-17
+
+tests:
+  - description: "most recent commit message"
+    vars:
+      task: >
+        Call git_log to retrieve the commit history of the repository.
+        What is the full commit message of the most recent (first) commit?
+        Reply with only the message text, nothing else.
+    assert:
+      - type: llm-rubric
+        value: >
+          The response is a plausible git commit message: a short non-empty string
+          that does not look like an error, a refusal, or 'no commits found'.
+        threshold: 0.8
+
+  - description: "fix commits count"
+    vars:
+      task: >
+        Call git_log with max_count=300 to retrieve 300 commits.
+        Count how many commit messages contain the word 'fix' (case-insensitive).
+        Reply with only the integer count.
+    assert:
+      - type: llm-rubric
+        value: >
+          The response is a single integer greater than 5. A major project like React
+          should have more than 5 commits mentioning 'fix' in 300 commits.
+        threshold: 0.8
+
+  - description: "oldest commit author in window"
+    vars:
+      task: >
+        Call git_log with max_count=300 to retrieve 300 commits.
+        Who is the author of the last (oldest) commit in the returned list?
+        Reply with only the author's name, not their email.
+    assert:
+      - type: llm-rubric
+        value: >
+          The response looks like a person's name (at least one word, typically
+          First Last format). It should not be an error message or empty.
+        threshold: 0.8
+
+  - description: "10th commit message"
+    vars:
+      task: >
+        Call git_log with max_count=300 to retrieve 300 commits.
+        What is the commit message of the 10th most recent commit (index 9, 0-based)?
+        Reply with only the message text.
+    assert:
+      - type: llm-rubric
+        value: >
+          The response is a plausible git commit message: a short non-empty string
+          that does not look like an error or 'not found'.
+        threshold: 0.8
+
+  - description: "author search by name"
+    vars:
+      task: >
+        Call git_log with max_count=300 to retrieve 300 commits.
+        Does any commit list 'Andrew Clark' as the author?
+        If yes, reply with only the abbreviated commit hash (7-10 hex chars) of the first such commit.
+        If no such commit exists, reply with only the word "not-found".
+    assert:
+      - type: llm-rubric
+        value: >
+          The response is either: (a) a hexadecimal string of 7-10 characters representing
+          a git commit hash, or (b) the exact string "not-found". Any other format is wrong.
+        threshold: 0.8

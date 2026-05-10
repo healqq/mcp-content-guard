@@ -1,0 +1,20 @@
+{
+  "name": "mcp-context-guard-eval",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "setup": "cd .. && bash setup.sh",
+    "eval:sqlite": "promptfoo eval -c sqlite.yaml --output results-sqlite.json",
+    "eval:filesystem": "promptfoo eval -c filesystem.yaml --output results-filesystem.json",
+    "eval:playwright": "promptfoo eval -c playwright.yaml --output results-playwright.json",
+    "eval:git": "promptfoo eval -c git.yaml --output results-git.json",
+    "eval:mock": "promptfoo eval -c test-one.yaml --output results-mock.json",
+    "compare": "node compare.js"
+  },
+  "dependencies": {
+    "openai": "^4.98.0"
+  },
+  "devDependencies": {
+    "promptfoo": "^0.121.11"
+  }
+}

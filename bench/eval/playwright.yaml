@@ -1,0 +1,105 @@
+description: "mcp-context-guard savings — playwright interactive web table"
+
+# 300-row orders table with JS filters, a sortable Amount column, and a summary bar.
+# browser_snapshot() of the full page (~75 KB) exceeds the threshold and gets cached.
+# Tasks test five genuinely different capabilities, not just repeated column lookups:
+#   1. read a summary statistic  2. use a dropdown filter + read first visible row
+#   3. use a dropdown filter + count results  4. sort a column + read first row
+#   5. single-row lookup (baseline to confirm correctness under proxy)
+#
+# Verified values (deterministic generation):
+#   Amount formula: ((i * 97) % 4900) + 100  →  non-monotonic, makes sort tasks meaningful
+#   Highest amount: ORD-0101  $4,997.00
+#   Lowest amount:  ORD-0253  $141.00
+#   First Cancelled row: ORD-0004
+#   APAC orders: 75
+#   ORD-0182 status: Shipped
+
+providers:
+  - id: file://provider.js
+    label: "playwright/direct"
+    config:
+      mcpCmd: ["npx", "-y", "@playwright/mcp", "--headless"]
+      maxTurns: 8
+      model: gpt-5.4-mini-2026-03-17
+
+  - id: file://provider.js
+    label: "playwright/proxied"
+    config:
+      mcpCmd:
+        - "../../mcp-context-guard.exe"
+        - "--threshold=10240"
+        - "--"
+        - "npx"
+        - "-y"
+        - "@playwright/mcp"
+        - "--headless"
+      maxTurns: 8
+      model: gpt-5.4-mini-2026-03-17
+
+prompts:
+  - "{{task}}"
+
+defaultTest:
+  options:
+    provider: openai:gpt-5.4-mini-2026-03-17
+
+tests:
+  - description: "read summary stat"
+    vars:
+      task: >
+        Navigate to %%WEBAPP_URL%%.
+        What is the total revenue shown in the page summary bar?
+        Reply with only the dollar amount, e.g. "$763,950.00".
+    assert:
+      - type: llm-rubric
+        value: "The response contains $763,950.00"
+        threshold: 0.9
+
+  - description: "filter by status, first visible row"
+    vars:
+      task: >
+        Navigate to %%WEBAPP_URL%%.
+        Use the Status dropdown filter to select 'Cancelled'.
+        What is the Order ID shown in the first row of the filtered table?
+        Reply with only the Order ID, e.g. "ORD-0004".
+    assert:
+      - type: llm-rubric
+        value: "The response contains ORD-0004"
+        threshold: 0.9
+
+  - description: "filter by region, count results"
+    vars:
+      task: >
+        Navigate to %%WEBAPP_URL%%.
+        Use the Region dropdown filter to select 'APAC'.
+        How many orders are shown after filtering? (Check the 'Showing X of 300 orders' counter.)
+        Reply with only the number.
+    assert:
+      - type: llm-rubric
+        value: "The response contains the number 75"
+        threshold: 0.9
+
+  - description: "sort by amount, read first row"
+    vars:
+      task: >
+        Navigate to %%WEBAPP_URL%%.
+        Click the 'Amount' column header to sort the table by amount (highest first).
+        What is the Order ID shown in the first row after sorting?
+        Reply with only the Order ID, e.g. "ORD-XXXX".
+    assert:
+      - type: llm-rubric
+        value: "The response contains ORD-0101"
+        threshold: 0.9
+
+  - description: "single row lookup baseline"
+    vars:
+      task: >
+        Navigate to %%WEBAPP_URL%%.
+        Find the row for order ORD-0182 in the table.
+        What is its status?
+        Reply with only the status word.
+    assert:
+      - type: llm-rubric
+        value: "The response contains the word Shipped"
+        threshold: 0.9

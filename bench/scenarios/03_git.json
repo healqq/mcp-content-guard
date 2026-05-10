@@ -1,0 +1,26 @@
+{
+  "name": "git",
+  "mcp": "mcp-server-git",
+  "cmd": ["uvx", "mcp-server-git", "--repository", "${BENCH_GIT_REPO}"],
+  "notes": "Requires: Python + uv (pip install uv). Set BENCH_GIT_REPO to the absolute path of any git repository with substantial history.",
+  "cases": [
+    {
+      "name": "git_log_100",
+      "tool": "git_log",
+      "arguments": { "repo_path": "${BENCH_GIT_REPO}", "max_count": 100 },
+      "filter": "grep:commit "
+    },
+    {
+      "name": "git_diff_unstaged",
+      "tool": "git_diff_unstaged",
+      "arguments": { "repo_path": "${BENCH_GIT_REPO}" },
+      "filter": "grep:^\\+"
+    },
+    {
+      "name": "git_log_500",
+      "tool": "git_log",
+      "arguments": { "repo_path": "${BENCH_GIT_REPO}", "max_count": 500 },
+      "filter": ".[0].text[:5000]"
+    }
+  ]
+}

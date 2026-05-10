@@ -1,0 +1,91 @@
+description: "mcp-context-guard savings — filesystem large files"
+
+# products.json: 200 products as NDJSON (~35 KB) — one JSON object per line so grep
+# returns the full record for a matched product (id, name, category, price, stock, ...).
+# app.log: 500 log lines (~46 KB) — each line is a complete record.
+# Both files well exceed the 10240-byte threshold, so every read_file call triggers caching.
+
+providers:
+  - id: file://provider.js
+    label: "filesystem/direct"
+    config:
+      mcpCmd: ["npx", "-y", "@modelcontextprotocol/server-filesystem", "../../data/codebase"]
+      maxTurns: 6
+      model: gpt-5.4-mini-2026-03-17
+
+  - id: file://provider.js
+    label: "filesystem/proxied"
+    config:
+      mcpCmd:
+        - "../../mcp-context-guard.exe"
+        - "--threshold=10240"
+        - "--"
+        - "npx"
+        - "-y"
+        - "@modelcontextprotocol/server-filesystem"
+        - "../../data/codebase"
+      maxTurns: 6
+      model: gpt-5.4-mini-2026-03-17
+
+prompts:
+  - "{{task}}"
+
+defaultTest:
+  options:
+    provider: openai:gpt-5.4-mini-2026-03-17
+
+tests:
+  - description: "product price lookup"
+    vars:
+      task: >
+        Use the filesystem read_file tool to read %%CODEBASE_DIR%%/data/products.json.
+        What is the price of product PROD-0042?
+        Reply with only the price, e.g. "$96.99".
+    assert:
+      - type: llm-rubric
+        value: "The response contains the price $96.99"
+        threshold: 0.9
+
+  - description: "product most expensive"
+    vars:
+      task: >
+        Use the filesystem read_file tool to read %%CODEBASE_DIR%%/data/products.json.
+        What is the id of the most expensive product, and what is its price?
+        Reply in the format: "PROD-XXXX at $YYY.YY"
+    assert:
+      - type: llm-rubric
+        value: "The response contains PROD-0142 and $199.99"
+        threshold: 0.9
+
+  - description: "electronics category count"
+    vars:
+      task: >
+        Use the filesystem read_file tool to read %%CODEBASE_DIR%%/data/products.json.
+        How many products have category "electronics"?
+        Reply with only the number.
+    assert:
+      - type: llm-rubric
+        value: "The response contains the number 40"
+        threshold: 0.9
+
+  - description: "log level for request"
+    vars:
+      task: >
+        Use the filesystem read_file tool to read %%CODEBASE_DIR%%/logs/app.log.
+        What is the log level (INFO, WARN, or ERROR) of the entry for req-0237?
+        Reply with only the level, e.g. "WARN".
+    assert:
+      - type: llm-rubric
+        value: "The response contains exactly WARN"
+        threshold: 0.9
+
+  - description: "error entry count"
+    vars:
+      task: >
+        Use the filesystem read_file tool to read %%CODEBASE_DIR%%/logs/app.log.
+        How many log entries have level ERROR?
+        Reply with only the number.
+    assert:
+      - type: llm-rubric
+        value: "The response contains the number 50"
+        threshold: 0.9

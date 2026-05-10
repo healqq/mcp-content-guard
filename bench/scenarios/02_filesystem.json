@@ -1,0 +1,20 @@
+{
+  "name": "filesystem",
+  "mcp": "@modelcontextprotocol/server-filesystem",
+  "cmd": ["npx", "-y", "@modelcontextprotocol/server-filesystem", "${BENCH_FS_ROOT}"],
+  "notes": "Requires: node.js. Set BENCH_FS_ROOT to an allowed directory (e.g. export BENCH_FS_ROOT=/path/to/repo). BENCH_FS_FILE must be an absolute path inside that directory.",
+  "cases": [
+    {
+      "name": "read_large_source_file",
+      "tool": "read_file",
+      "arguments": { "path": "${BENCH_FS_FILE}" },
+      "filter": "grep:func "
+    },
+    {
+      "name": "directory_tree",
+      "tool": "directory_tree",
+      "arguments": { "path": "${BENCH_FS_ROOT}" },
+      "filter": ".[0].text[:2000]"
+    }
+  ]
+}

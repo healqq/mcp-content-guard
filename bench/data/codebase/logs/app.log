@@ -1,0 +1,500 @@
+2024-03-01 00:03:00 INFO [req-0001] Request processed successfully for user_id=17 in 73ms
+2024-03-01 00:06:00 INFO [req-0002] Request processed successfully for user_id=34 in 96ms
+2024-03-01 00:09:00 INFO [req-0003] Request processed successfully for user_id=51 in 119ms
+2024-03-01 00:12:00 INFO [req-0004] Request processed successfully for user_id=68 in 142ms
+2024-03-01 00:15:00 INFO [req-0005] Request processed successfully for user_id=85 in 165ms
+2024-03-01 00:18:00 INFO [req-0006] Request processed successfully for user_id=102 in 188ms
+2024-03-01 00:21:00 WARN [req-0007] Slow query detected on table orders: 1217ms (req-0007)
+2024-03-01 00:24:00 WARN [req-0008] Slow query detected on table orders: 1248ms (req-0008)
+2024-03-01 00:27:00 ERROR [req-0009] Database connection timeout after 1117ms (req-0009)
+2024-03-01 00:30:00 INFO [req-0010] Request processed successfully for user_id=170 in 280ms
+2024-03-01 00:33:00 INFO [req-0011] Request processed successfully for user_id=187 in 303ms
+2024-03-01 00:36:00 INFO [req-0012] Request processed successfully for user_id=204 in 326ms
+2024-03-01 00:39:00 INFO [req-0013] Request processed successfully for user_id=221 in 349ms
+2024-03-01 00:42:00 INFO [req-0014] Request processed successfully for user_id=238 in 372ms
+2024-03-01 00:45:00 INFO [req-0015] Request processed successfully for user_id=255 in 395ms
+2024-03-01 00:48:00 INFO [req-0016] Request processed successfully for user_id=272 in 418ms
+2024-03-01 00:51:00 WARN [req-0017] Slow query detected on table orders: 1527ms (req-0017)
+2024-03-01 00:54:00 WARN [req-0018] Slow query detected on table orders: 1558ms (req-0018)
+2024-03-01 00:57:00 ERROR [req-0019] Database connection timeout after 1247ms (req-0019)
+2024-03-01 01:00:00 INFO [req-0020] Request processed successfully for user_id=340 in 510ms
+2024-03-01 01:03:00 INFO [req-0021] Request processed successfully for user_id=357 in 533ms
+2024-03-01 01:06:00 INFO [req-0022] Request processed successfully for user_id=374 in 556ms
+2024-03-01 01:09:00 INFO [req-0023] Request processed successfully for user_id=391 in 579ms
+2024-03-01 01:12:00 INFO [req-0024] Request processed successfully for user_id=408 in 602ms
+2024-03-01 01:15:00 INFO [req-0025] Request processed successfully for user_id=425 in 625ms
+2024-03-01 01:18:00 INFO [req-0026] Request processed successfully for user_id=442 in 648ms
+2024-03-01 01:21:00 WARN [req-0027] Slow query detected on table orders: 1837ms (req-0027)
+2024-03-01 01:24:00 WARN [req-0028] Slow query detected on table orders: 1868ms (req-0028)
+2024-03-01 01:27:00 ERROR [req-0029] Database connection timeout after 1377ms (req-0029)
+2024-03-01 01:30:00 INFO [req-0030] Request processed successfully for user_id=510 in 740ms
+2024-03-01 01:33:00 INFO [req-0031] Request processed successfully for user_id=527 in 763ms
+2024-03-01 01:36:00 INFO [req-0032] Request processed successfully for user_id=544 in 786ms
+2024-03-01 01:39:00 INFO [req-0033] Request processed successfully for user_id=561 in 809ms
+2024-03-01 01:42:00 INFO [req-0034] Request processed successfully for user_id=578 in 832ms
+2024-03-01 01:45:00 INFO [req-0035] Request processed successfully for user_id=595 in 55ms
+2024-03-01 01:48:00 INFO [req-0036] Request processed successfully for user_id=612 in 78ms
+2024-03-01 01:51:00 WARN [req-0037] Slow query detected on table orders: 2147ms (req-0037)
+2024-03-01 01:54:00 WARN [req-0038] Slow query detected on table orders: 2178ms (req-0038)
+2024-03-01 01:57:00 ERROR [req-0039] Database connection timeout after 1507ms (req-0039)
+2024-03-01 02:00:00 INFO [req-0040] Request processed successfully for user_id=680 in 170ms
+2024-03-01 02:03:00 INFO [req-0041] Request processed successfully for user_id=697 in 193ms
+2024-03-01 02:06:00 INFO [req-0042] Request processed successfully for user_id=714 in 216ms
+2024-03-01 02:09:00 INFO [req-0043] Request processed successfully for user_id=731 in 239ms
+2024-03-01 02:12:00 INFO [req-0044] Request processed successfully for user_id=748 in 262ms
+2024-03-01 02:15:00 INFO [req-0045] Request processed successfully for user_id=765 in 285ms
+2024-03-01 02:18:00 INFO [req-0046] Request processed successfully for user_id=782 in 308ms
+2024-03-01 02:21:00 WARN [req-0047] Slow query detected on table orders: 2457ms (req-0047)
+2024-03-01 02:24:00 WARN [req-0048] Slow query detected on table orders: 2488ms (req-0048)
+2024-03-01 02:27:00 ERROR [req-0049] Database connection timeout after 1637ms (req-0049)
+2024-03-01 02:30:00 INFO [req-0050] Request processed successfully for user_id=850 in 400ms
+2024-03-01 02:33:00 INFO [req-0051] Request processed successfully for user_id=867 in 423ms
+2024-03-01 02:36:00 INFO [req-0052] Request processed successfully for user_id=884 in 446ms
+2024-03-01 02:39:00 INFO [req-0053] Request processed successfully for user_id=901 in 469ms
+2024-03-01 02:42:00 INFO [req-0054] Request processed successfully for user_id=918 in 492ms
+2024-03-01 02:45:00 INFO [req-0055] Request processed successfully for user_id=935 in 515ms
+2024-03-01 02:48:00 INFO [req-0056] Request processed successfully for user_id=952 in 538ms
+2024-03-01 02:51:00 WARN [req-0057] Slow query detected on table orders: 2767ms (req-0057)
+2024-03-01 02:54:00 WARN [req-0058] Slow query detected on table orders: 2798ms (req-0058)
+2024-03-01 02:57:00 ERROR [req-0059] Database connection timeout after 1767ms (req-0059)
+2024-03-01 03:00:00 INFO [req-0060] Request processed successfully for user_id=1020 in 630ms
+2024-03-01 03:03:00 INFO [req-0061] Request processed successfully for user_id=1037 in 653ms
+2024-03-01 03:06:00 INFO [req-0062] Request processed successfully for user_id=1054 in 676ms
+2024-03-01 03:09:00 INFO [req-0063] Request processed successfully for user_id=1071 in 699ms
+2024-03-01 03:12:00 INFO [req-0064] Request processed successfully for user_id=1088 in 722ms
+2024-03-01 03:15:00 INFO [req-0065] Request processed successfully for user_id=1105 in 745ms
+2024-03-01 03:18:00 INFO [req-0066] Request processed successfully for user_id=1122 in 768ms
+2024-03-01 03:21:00 WARN [req-0067] Slow query detected on table orders: 3077ms (req-0067)
+2024-03-01 03:24:00 WARN [req-0068] Slow query detected on table orders: 3108ms (req-0068)
+2024-03-01 03:27:00 ERROR [req-0069] Database connection timeout after 1897ms (req-0069)
+2024-03-01 03:30:00 INFO [req-0070] Request processed successfully for user_id=1190 in 60ms
+2024-03-01 03:33:00 INFO [req-0071] Request processed successfully for user_id=1207 in 83ms
+2024-03-01 03:36:00 INFO [req-0072] Request processed successfully for user_id=1224 in 106ms
+2024-03-01 03:39:00 INFO [req-0073] Request processed successfully for user_id=1241 in 129ms
+2024-03-01 03:42:00 INFO [req-0074] Request processed successfully for user_id=1258 in 152ms
+2024-03-01 03:45:00 INFO [req-0075] Request processed successfully for user_id=1275 in 175ms
+2024-03-01 03:48:00 INFO [req-0076] Request processed successfully for user_id=1292 in 198ms
+2024-03-01 03:51:00 WARN [req-0077] Slow query detected on table orders: 3387ms (req-0077)
+2024-03-01 03:54:00 WARN [req-0078] Slow query detected on table orders: 3418ms (req-0078)
+2024-03-01 03:57:00 ERROR [req-0079] Database connection timeout after 2027ms (req-0079)
+2024-03-01 04:00:00 INFO [req-0080] Request processed successfully for user_id=1360 in 290ms
+2024-03-01 04:03:00 INFO [req-0081] Request processed successfully for user_id=1377 in 313ms
+2024-03-01 04:06:00 INFO [req-0082] Request processed successfully for user_id=1394 in 336ms
+2024-03-01 04:09:00 INFO [req-0083] Request processed successfully for user_id=1411 in 359ms
+2024-03-01 04:12:00 INFO [req-0084] Request processed successfully for user_id=1428 in 382ms
+2024-03-01 04:15:00 INFO [req-0085] Request processed successfully for user_id=1445 in 405ms
+2024-03-01 04:18:00 INFO [req-0086] Request processed successfully for user_id=1462 in 428ms
+2024-03-01 04:21:00 WARN [req-0087] Slow query detected on table orders: 3697ms (req-0087)
+2024-03-01 04:24:00 WARN [req-0088] Slow query detected on table orders: 3728ms (req-0088)
+2024-03-01 04:27:00 ERROR [req-0089] Database connection timeout after 2157ms (req-0089)
+2024-03-01 04:30:00 INFO [req-0090] Request processed successfully for user_id=1530 in 520ms
+2024-03-01 04:33:00 INFO [req-0091] Request processed successfully for user_id=1547 in 543ms
+2024-03-01 04:36:00 INFO [req-0092] Request processed successfully for user_id=1564 in 566ms
+2024-03-01 04:39:00 INFO [req-0093] Request processed successfully for user_id=1581 in 589ms
+2024-03-01 04:42:00 INFO [req-0094] Request processed successfully for user_id=1598 in 612ms
+2024-03-01 04:45:00 INFO [req-0095] Request processed successfully for user_id=1615 in 635ms
+2024-03-01 04:48:00 INFO [req-0096] Request processed successfully for user_id=1632 in 658ms
+2024-03-01 04:51:00 WARN [req-0097] Slow query detected on table orders: 1007ms (req-0097)
+2024-03-01 04:54:00 WARN [req-0098] Slow query detected on table orders: 1038ms (req-0098)
+2024-03-01 04:57:00 ERROR [req-0099] Database connection timeout after 2287ms (req-0099)
+2024-03-01 05:00:00 INFO [req-0100] Request processed successfully for user_id=1700 in 750ms
+2024-03-01 05:03:00 INFO [req-0101] Request processed successfully for user_id=1717 in 773ms
+2024-03-01 05:06:00 INFO [req-0102] Request processed successfully for user_id=1734 in 796ms
+2024-03-01 05:09:00 INFO [req-0103] Request processed successfully for user_id=1751 in 819ms
+2024-03-01 05:12:00 INFO [req-0104] Request processed successfully for user_id=1768 in 842ms
+2024-03-01 05:15:00 INFO [req-0105] Request processed successfully for user_id=1785 in 65ms
+2024-03-01 05:18:00 INFO [req-0106] Request processed successfully for user_id=1802 in 88ms
+2024-03-01 05:21:00 WARN [req-0107] Slow query detected on table orders: 1317ms (req-0107)
+2024-03-01 05:24:00 WARN [req-0108] Slow query detected on table orders: 1348ms (req-0108)
+2024-03-01 05:27:00 ERROR [req-0109] Database connection timeout after 2417ms (req-0109)
+2024-03-01 05:30:00 INFO [req-0110] Request processed successfully for user_id=1870 in 180ms
+2024-03-01 05:33:00 INFO [req-0111] Request processed successfully for user_id=1887 in 203ms
+2024-03-01 05:36:00 INFO [req-0112] Request processed successfully for user_id=1904 in 226ms
+2024-03-01 05:39:00 INFO [req-0113] Request processed successfully for user_id=1921 in 249ms
+2024-03-01 05:42:00 INFO [req-0114] Request processed successfully for user_id=1938 in 272ms
+2024-03-01 05:45:00 INFO [req-0115] Request processed successfully for user_id=1955 in 295ms
+2024-03-01 05:48:00 INFO [req-0116] Request processed successfully for user_id=1972 in 318ms
+2024-03-01 05:51:00 WARN [req-0117] Slow query detected on table orders: 1627ms (req-0117)
+2024-03-01 05:54:00 WARN [req-0118] Slow query detected on table orders: 1658ms (req-0118)
+2024-03-01 05:57:00 ERROR [req-0119] Database connection timeout after 2547ms (req-0119)
+2024-03-01 06:00:00 INFO [req-0120] Request processed successfully for user_id=2040 in 410ms
+2024-03-01 06:03:00 INFO [req-0121] Request processed successfully for user_id=2057 in 433ms
+2024-03-01 06:06:00 INFO [req-0122] Request processed successfully for user_id=2074 in 456ms
+2024-03-01 06:09:00 INFO [req-0123] Request processed successfully for user_id=2091 in 479ms
+2024-03-01 06:12:00 INFO [req-0124] Request processed successfully for user_id=2108 in 502ms
+2024-03-01 06:15:00 INFO [req-0125] Request processed successfully for user_id=2125 in 525ms
+2024-03-01 06:18:00 INFO [req-0126] Request processed successfully for user_id=2142 in 548ms
+2024-03-01 06:21:00 WARN [req-0127] Slow query detected on table orders: 1937ms (req-0127)
+2024-03-01 06:24:00 WARN [req-0128] Slow query detected on table orders: 1968ms (req-0128)
+2024-03-01 06:27:00 ERROR [req-0129] Database connection timeout after 2677ms (req-0129)
+2024-03-01 06:30:00 INFO [req-0130] Request processed successfully for user_id=2210 in 640ms
+2024-03-01 06:33:00 INFO [req-0131] Request processed successfully for user_id=2227 in 663ms
+2024-03-01 06:36:00 INFO [req-0132] Request processed successfully for user_id=2244 in 686ms
+2024-03-01 06:39:00 INFO [req-0133] Request processed successfully for user_id=2261 in 709ms
+2024-03-01 06:42:00 INFO [req-0134] Request processed successfully for user_id=2278 in 732ms
+2024-03-01 06:45:00 INFO [req-0135] Request processed successfully for user_id=2295 in 755ms
+2024-03-01 06:48:00 INFO [req-0136] Request processed successfully for user_id=2312 in 778ms
+2024-03-01 06:51:00 WARN [req-0137] Slow query detected on table orders: 2247ms (req-0137)
+2024-03-01 06:54:00 WARN [req-0138] Slow query detected on table orders: 2278ms (req-0138)
+2024-03-01 06:57:00 ERROR [req-0139] Database connection timeout after 2807ms (req-0139)
+2024-03-01 07:00:00 INFO [req-0140] Request processed successfully for user_id=2380 in 70ms
+2024-03-01 07:03:00 INFO [req-0141] Request processed successfully for user_id=2397 in 93ms
+2024-03-01 07:06:00 INFO [req-0142] Request processed successfully for user_id=2414 in 116ms
+2024-03-01 07:09:00 INFO [req-0143] Request processed successfully for user_id=2431 in 139ms
+2024-03-01 07:12:00 INFO [req-0144] Request processed successfully for user_id=2448 in 162ms
+2024-03-01 07:15:00 INFO [req-0145] Request processed successfully for user_id=2465 in 185ms
+2024-03-01 07:18:00 INFO [req-0146] Request processed successfully for user_id=2482 in 208ms
+2024-03-01 07:21:00 WARN [req-0147] Slow query detected on table orders: 2557ms (req-0147)
+2024-03-01 07:24:00 WARN [req-0148] Slow query detected on table orders: 2588ms (req-0148)
+2024-03-01 07:27:00 ERROR [req-0149] Database connection timeout after 2937ms (req-0149)
+2024-03-01 07:30:00 INFO [req-0150] Request processed successfully for user_id=2550 in 300ms
+2024-03-01 07:33:00 INFO [req-0151] Request processed successfully for user_id=2567 in 323ms
+2024-03-01 07:36:00 INFO [req-0152] Request processed successfully for user_id=2584 in 346ms
+2024-03-01 07:39:00 INFO [req-0153] Request processed successfully for user_id=2601 in 369ms
+2024-03-01 07:42:00 INFO [req-0154] Request processed successfully for user_id=2618 in 392ms
+2024-03-01 07:45:00 INFO [req-0155] Request processed successfully for user_id=2635 in 415ms
+2024-03-01 07:48:00 INFO [req-0156] Request processed successfully for user_id=2652 in 438ms
+2024-03-01 07:51:00 WARN [req-0157] Slow query detected on table orders: 2867ms (req-0157)
+2024-03-01 07:54:00 WARN [req-0158] Slow query detected on table orders: 2898ms (req-0158)
+2024-03-01 07:57:00 ERROR [req-0159] Database connection timeout after 3067ms (req-0159)
+2024-03-01 08:00:00 INFO [req-0160] Request processed successfully for user_id=2720 in 530ms
+2024-03-01 08:03:00 INFO [req-0161] Request processed successfully for user_id=2737 in 553ms
+2024-03-01 08:06:00 INFO [req-0162] Request processed successfully for user_id=2754 in 576ms
+2024-03-01 08:09:00 INFO [req-0163] Request processed successfully for user_id=2771 in 599ms
+2024-03-01 08:12:00 INFO [req-0164] Request processed successfully for user_id=2788 in 622ms
+2024-03-01 08:15:00 INFO [req-0165] Request processed successfully for user_id=2805 in 645ms
+2024-03-01 08:18:00 INFO [req-0166] Request processed successfully for user_id=2822 in 668ms
+2024-03-01 08:21:00 WARN [req-0167] Slow query detected on table orders: 3177ms (req-0167)
+2024-03-01 08:24:00 WARN [req-0168] Slow query detected on table orders: 3208ms (req-0168)
+2024-03-01 08:27:00 ERROR [req-0169] Database connection timeout after 3197ms (req-0169)
+2024-03-01 08:30:00 INFO [req-0170] Request processed successfully for user_id=2890 in 760ms
+2024-03-01 08:33:00 INFO [req-0171] Request processed successfully for user_id=2907 in 783ms
+2024-03-01 08:36:00 INFO [req-0172] Request processed successfully for user_id=2924 in 806ms
+2024-03-01 08:39:00 INFO [req-0173] Request processed successfully for user_id=2941 in 829ms
+2024-03-01 08:42:00 INFO [req-0174] Request processed successfully for user_id=2958 in 52ms
+2024-03-01 08:45:00 INFO [req-0175] Request processed successfully for user_id=2975 in 75ms
+2024-03-01 08:48:00 INFO [req-0176] Request processed successfully for user_id=2992 in 98ms
+2024-03-01 08:51:00 WARN [req-0177] Slow query detected on table orders: 3487ms (req-0177)
+2024-03-01 08:54:00 WARN [req-0178] Slow query detected on table orders: 3518ms (req-0178)
+2024-03-01 08:57:00 ERROR [req-0179] Database connection timeout after 3327ms (req-0179)
+2024-03-01 09:00:00 INFO [req-0180] Request processed successfully for user_id=3060 in 190ms
+2024-03-01 09:03:00 INFO [req-0181] Request processed successfully for user_id=3077 in 213ms
+2024-03-01 09:06:00 INFO [req-0182] Request processed successfully for user_id=3094 in 236ms
+2024-03-01 09:09:00 INFO [req-0183] Request processed successfully for user_id=3111 in 259ms
+2024-03-01 09:12:00 INFO [req-0184] Request processed successfully for user_id=3128 in 282ms
+2024-03-01 09:15:00 INFO [req-0185] Request processed successfully for user_id=3145 in 305ms
+2024-03-01 09:18:00 INFO [req-0186] Request processed successfully for user_id=3162 in 328ms
+2024-03-01 09:21:00 WARN [req-0187] Slow query detected on table orders: 3797ms (req-0187)
+2024-03-01 09:24:00 WARN [req-0188] Slow query detected on table orders: 3828ms (req-0188)
+2024-03-01 09:27:00 ERROR [req-0189] Database connection timeout after 3457ms (req-0189)
+2024-03-01 09:30:00 INFO [req-0190] Request processed successfully for user_id=3230 in 420ms
+2024-03-01 09:33:00 INFO [req-0191] Request processed successfully for user_id=3247 in 443ms
+2024-03-01 09:36:00 INFO [req-0192] Request processed successfully for user_id=3264 in 466ms
+2024-03-01 09:39:00 INFO [req-0193] Request processed successfully for user_id=3281 in 489ms
+2024-03-01 09:42:00 INFO [req-0194] Request processed successfully for user_id=3298 in 512ms
+2024-03-01 09:45:00 INFO [req-0195] Request processed successfully for user_id=3315 in 535ms
+2024-03-01 09:48:00 INFO [req-0196] Request processed successfully for user_id=3332 in 558ms
+2024-03-01 09:51:00 WARN [req-0197] Slow query detected on table orders: 1107ms (req-0197)
+2024-03-01 09:54:00 WARN [req-0198] Slow query detected on table orders: 1138ms (req-0198)
+2024-03-01 09:57:00 ERROR [req-0199] Database connection timeout after 3587ms (req-0199)
+2024-03-01 10:00:00 INFO [req-0200] Request processed successfully for user_id=3400 in 650ms
+2024-03-01 10:03:00 INFO [req-0201] Request processed successfully for user_id=3417 in 673ms
+2024-03-01 10:06:00 INFO [req-0202] Request processed successfully for user_id=3434 in 696ms
+2024-03-01 10:09:00 INFO [req-0203] Request processed successfully for user_id=3451 in 719ms
+2024-03-01 10:12:00 INFO [req-0204] Request processed successfully for user_id=3468 in 742ms
+2024-03-01 10:15:00 INFO [req-0205] Request processed successfully for user_id=3485 in 765ms
+2024-03-01 10:18:00 INFO [req-0206] Request processed successfully for user_id=3502 in 788ms
+2024-03-01 10:21:00 WARN [req-0207] Slow query detected on table orders: 1417ms (req-0207)
+2024-03-01 10:24:00 WARN [req-0208] Slow query detected on table orders: 1448ms (req-0208)
+2024-03-01 10:27:00 ERROR [req-0209] Database connection timeout after 3717ms (req-0209)
+2024-03-01 10:30:00 INFO [req-0210] Request processed successfully for user_id=3570 in 80ms
+2024-03-01 10:33:00 INFO [req-0211] Request processed successfully for user_id=3587 in 103ms
+2024-03-01 10:36:00 INFO [req-0212] Request processed successfully for user_id=3604 in 126ms
+2024-03-01 10:39:00 INFO [req-0213] Request processed successfully for user_id=3621 in 149ms
+2024-03-01 10:42:00 INFO [req-0214] Request processed successfully for user_id=3638 in 172ms
+2024-03-01 10:45:00 INFO [req-0215] Request processed successfully for user_id=3655 in 195ms
+2024-03-01 10:48:00 INFO [req-0216] Request processed successfully for user_id=3672 in 218ms
+2024-03-01 10:51:00 WARN [req-0217] Slow query detected on table orders: 1727ms (req-0217)
+2024-03-01 10:54:00 WARN [req-0218] Slow query detected on table orders: 1758ms (req-0218)
+2024-03-01 10:57:00 ERROR [req-0219] Database connection timeout after 3847ms (req-0219)
+2024-03-01 11:00:00 INFO [req-0220] Request processed successfully for user_id=3740 in 310ms
+2024-03-01 11:03:00 INFO [req-0221] Request processed successfully for user_id=3757 in 333ms
+2024-03-01 11:06:00 INFO [req-0222] Request processed successfully for user_id=3774 in 356ms
+2024-03-01 11:09:00 INFO [req-0223] Request processed successfully for user_id=3791 in 379ms
+2024-03-01 11:12:00 INFO [req-0224] Request processed successfully for user_id=3808 in 402ms
+2024-03-01 11:15:00 INFO [req-0225] Request processed successfully for user_id=3825 in 425ms
+2024-03-01 11:18:00 INFO [req-0226] Request processed successfully for user_id=3842 in 448ms
+2024-03-01 11:21:00 WARN [req-0227] Slow query detected on table orders: 2037ms (req-0227)
+2024-03-01 11:24:00 WARN [req-0228] Slow query detected on table orders: 2068ms (req-0228)
+2024-03-01 11:27:00 ERROR [req-0229] Database connection timeout after 3977ms (req-0229)
+2024-03-01 11:30:00 INFO [req-0230] Request processed successfully for user_id=3910 in 540ms
+2024-03-01 11:33:00 INFO [req-0231] Request processed successfully for user_id=3927 in 563ms
+2024-03-01 11:36:00 INFO [req-0232] Request processed successfully for user_id=3944 in 586ms
+2024-03-01 11:39:00 INFO [req-0233] Request processed successfully for user_id=3961 in 609ms
+2024-03-01 11:42:00 INFO [req-0234] Request processed successfully for user_id=3978 in 632ms
+2024-03-01 11:45:00 INFO [req-0235] Request processed successfully for user_id=3995 in 655ms
+2024-03-01 11:48:00 INFO [req-0236] Request processed successfully for user_id=4012 in 678ms
+2024-03-01 11:51:00 WARN [req-0237] Slow query detected on table orders: 2347ms (req-0237)
+2024-03-01 11:54:00 WARN [req-0238] Slow query detected on table orders: 2378ms (req-0238)
+2024-03-01 11:57:00 ERROR [req-0239] Database connection timeout after 4107ms (req-0239)
+2024-03-01 12:00:00 INFO [req-0240] Request processed successfully for user_id=4080 in 770ms
+2024-03-01 12:03:00 INFO [req-0241] Request processed successfully for user_id=4097 in 793ms
+2024-03-01 12:06:00 INFO [req-0242] Request processed successfully for user_id=4114 in 816ms
+2024-03-01 12:09:00 INFO [req-0243] Request processed successfully for user_id=4131 in 839ms
+2024-03-01 12:12:00 INFO [req-0244] Request processed successfully for user_id=4148 in 62ms
+2024-03-01 12:15:00 INFO [req-0245] Request processed successfully for user_id=4165 in 85ms
+2024-03-01 12:18:00 INFO [req-0246] Request processed successfully for user_id=4182 in 108ms
+2024-03-01 12:21:00 WARN [req-0247] Slow query detected on table orders: 2657ms (req-0247)
+2024-03-01 12:24:00 WARN [req-0248] Slow query detected on table orders: 2688ms (req-0248)
+2024-03-01 12:27:00 ERROR [req-0249] Database connection timeout after 4237ms (req-0249)
+2024-03-01 12:30:00 INFO [req-0250] Request processed successfully for user_id=4250 in 200ms
+2024-03-01 12:33:00 INFO [req-0251] Request processed successfully for user_id=4267 in 223ms
+2024-03-01 12:36:00 INFO [req-0252] Request processed successfully for user_id=4284 in 246ms
+2024-03-01 12:39:00 INFO [req-0253] Request processed successfully for user_id=4301 in 269ms
+2024-03-01 12:42:00 INFO [req-0254] Request processed successfully for user_id=4318 in 292ms
+2024-03-01 12:45:00 INFO [req-0255] Request processed successfully for user_id=4335 in 315ms
+2024-03-01 12:48:00 INFO [req-0256] Request processed successfully for user_id=4352 in 338ms
+2024-03-01 12:51:00 WARN [req-0257] Slow query detected on table orders: 2967ms (req-0257)
+2024-03-01 12:54:00 WARN [req-0258] Slow query detected on table orders: 2998ms (req-0258)
+2024-03-01 12:57:00 ERROR [req-0259] Database connection timeout after 4367ms (req-0259)
+2024-03-01 13:00:00 INFO [req-0260] Request processed successfully for user_id=4420 in 430ms
+2024-03-01 13:03:00 INFO [req-0261] Request processed successfully for user_id=4437 in 453ms
+2024-03-01 13:06:00 INFO [req-0262] Request processed successfully for user_id=4454 in 476ms
+2024-03-01 13:09:00 INFO [req-0263] Request processed successfully for user_id=4471 in 499ms
+2024-03-01 13:12:00 INFO [req-0264] Request processed successfully for user_id=4488 in 522ms
+2024-03-01 13:15:00 INFO [req-0265] Request processed successfully for user_id=4505 in 545ms
+2024-03-01 13:18:00 INFO [req-0266] Request processed successfully for user_id=4522 in 568ms
+2024-03-01 13:21:00 WARN [req-0267] Slow query detected on table orders: 3277ms (req-0267)
+2024-03-01 13:24:00 WARN [req-0268] Slow query detected on table orders: 3308ms (req-0268)
+2024-03-01 13:27:00 ERROR [req-0269] Database connection timeout after 4497ms (req-0269)
+2024-03-01 13:30:00 INFO [req-0270] Request processed successfully for user_id=4590 in 660ms
+2024-03-01 13:33:00 INFO [req-0271] Request processed successfully for user_id=4607 in 683ms
+2024-03-01 13:36:00 INFO [req-0272] Request processed successfully for user_id=4624 in 706ms
+2024-03-01 13:39:00 INFO [req-0273] Request processed successfully for user_id=4641 in 729ms
+2024-03-01 13:42:00 INFO [req-0274] Request processed successfully for user_id=4658 in 752ms
+2024-03-01 13:45:00 INFO [req-0275] Request processed successfully for user_id=4675 in 775ms
+2024-03-01 13:48:00 INFO [req-0276] Request processed successfully for user_id=4692 in 798ms
+2024-03-01 13:51:00 WARN [req-0277] Slow query detected on table orders: 3587ms (req-0277)
+2024-03-01 13:54:00 WARN [req-0278] Slow query detected on table orders: 3618ms (req-0278)
+2024-03-01 13:57:00 ERROR [req-0279] Database connection timeout after 4627ms (req-0279)
+2024-03-01 14:00:00 INFO [req-0280] Request processed successfully for user_id=4760 in 90ms
+2024-03-01 14:03:00 INFO [req-0281] Request processed successfully for user_id=4777 in 113ms
+2024-03-01 14:06:00 INFO [req-0282] Request processed successfully for user_id=4794 in 136ms
+2024-03-01 14:09:00 INFO [req-0283] Request processed successfully for user_id=4811 in 159ms
+2024-03-01 14:12:00 INFO [req-0284] Request processed successfully for user_id=4828 in 182ms
+2024-03-01 14:15:00 INFO [req-0285] Request processed successfully for user_id=4845 in 205ms
+2024-03-01 14:18:00 INFO [req-0286] Request processed successfully for user_id=4862 in 228ms
+2024-03-01 14:21:00 WARN [req-0287] Slow query detected on table orders: 3897ms (req-0287)
+2024-03-01 14:24:00 WARN [req-0288] Slow query detected on table orders: 3928ms (req-0288)
+2024-03-01 14:27:00 ERROR [req-0289] Database connection timeout after 4757ms (req-0289)
+2024-03-01 14:30:00 INFO [req-0290] Request processed successfully for user_id=4930 in 320ms
+2024-03-01 14:33:00 INFO [req-0291] Request processed successfully for user_id=4947 in 343ms
+2024-03-01 14:36:00 INFO [req-0292] Request processed successfully for user_id=4964 in 366ms
+2024-03-01 14:39:00 INFO [req-0293] Request processed successfully for user_id=4981 in 389ms
+2024-03-01 14:42:00 INFO [req-0294] Request processed successfully for user_id=4998 in 412ms
+2024-03-01 14:45:00 INFO [req-0295] Request processed successfully for user_id=5015 in 435ms
+2024-03-01 14:48:00 INFO [req-0296] Request processed successfully for user_id=5032 in 458ms
+2024-03-01 14:51:00 WARN [req-0297] Slow query detected on table orders: 1207ms (req-0297)
+2024-03-01 14:54:00 WARN [req-0298] Slow query detected on table orders: 1238ms (req-0298)
+2024-03-01 14:57:00 ERROR [req-0299] Database connection timeout after 4887ms (req-0299)
+2024-03-01 15:00:00 INFO [req-0300] Request processed successfully for user_id=5100 in 550ms
+2024-03-01 15:03:00 INFO [req-0301] Request processed successfully for user_id=5117 in 573ms
+2024-03-01 15:06:00 INFO [req-0302] Request processed successfully for user_id=5134 in 596ms
+2024-03-01 15:09:00 INFO [req-0303] Request processed successfully for user_id=5151 in 619ms
+2024-03-01 15:12:00 INFO [req-0304] Request processed successfully for user_id=5168 in 642ms
+2024-03-01 15:15:00 INFO [req-0305] Request processed successfully for user_id=5185 in 665ms
+2024-03-01 15:18:00 INFO [req-0306] Request processed successfully for user_id=5202 in 688ms
+2024-03-01 15:21:00 WARN [req-0307] Slow query detected on table orders: 1517ms (req-0307)
+2024-03-01 15:24:00 WARN [req-0308] Slow query detected on table orders: 1548ms (req-0308)
+2024-03-01 15:27:00 ERROR [req-0309] Database connection timeout after 5017ms (req-0309)
+2024-03-01 15:30:00 INFO [req-0310] Request processed successfully for user_id=5270 in 780ms
+2024-03-01 15:33:00 INFO [req-0311] Request processed successfully for user_id=5287 in 803ms
+2024-03-01 15:36:00 INFO [req-0312] Request processed successfully for user_id=5304 in 826ms
+2024-03-01 15:39:00 INFO [req-0313] Request processed successfully for user_id=5321 in 849ms
+2024-03-01 15:42:00 INFO [req-0314] Request processed successfully for user_id=5338 in 72ms
+2024-03-01 15:45:00 INFO [req-0315] Request processed successfully for user_id=5355 in 95ms
+2024-03-01 15:48:00 INFO [req-0316] Request processed successfully for user_id=5372 in 118ms
+2024-03-01 15:51:00 WARN [req-0317] Slow query detected on table orders: 1827ms (req-0317)
+2024-03-01 15:54:00 WARN [req-0318] Slow query detected on table orders: 1858ms (req-0318)
+2024-03-01 15:57:00 ERROR [req-0319] Database connection timeout after 5147ms (req-0319)
+2024-03-01 16:00:00 INFO [req-0320] Request processed successfully for user_id=5440 in 210ms
+2024-03-01 16:03:00 INFO [req-0321] Request processed successfully for user_id=5457 in 233ms
+2024-03-01 16:06:00 INFO [req-0322] Request processed successfully for user_id=5474 in 256ms
+2024-03-01 16:09:00 INFO [req-0323] Request processed successfully for user_id=5491 in 279ms
+2024-03-01 16:12:00 INFO [req-0324] Request processed successfully for user_id=5508 in 302ms
+2024-03-01 16:15:00 INFO [req-0325] Request processed successfully for user_id=5525 in 325ms
+2024-03-01 16:18:00 INFO [req-0326] Request processed successfully for user_id=5542 in 348ms
+2024-03-01 16:21:00 WARN [req-0327] Slow query detected on table orders: 2137ms (req-0327)
+2024-03-01 16:24:00 WARN [req-0328] Slow query detected on table orders: 2168ms (req-0328)
+2024-03-01 16:27:00 ERROR [req-0329] Database connection timeout after 5277ms (req-0329)
+2024-03-01 16:30:00 INFO [req-0330] Request processed successfully for user_id=5610 in 440ms
+2024-03-01 16:33:00 INFO [req-0331] Request processed successfully for user_id=5627 in 463ms
+2024-03-01 16:36:00 INFO [req-0332] Request processed successfully for user_id=5644 in 486ms
+2024-03-01 16:39:00 INFO [req-0333] Request processed successfully for user_id=5661 in 509ms
+2024-03-01 16:42:00 INFO [req-0334] Request processed successfully for user_id=5678 in 532ms
+2024-03-01 16:45:00 INFO [req-0335] Request processed successfully for user_id=5695 in 555ms
+2024-03-01 16:48:00 INFO [req-0336] Request processed successfully for user_id=5712 in 578ms
+2024-03-01 16:51:00 WARN [req-0337] Slow query detected on table orders: 2447ms (req-0337)
+2024-03-01 16:54:00 WARN [req-0338] Slow query detected on table orders: 2478ms (req-0338)
+2024-03-01 16:57:00 ERROR [req-0339] Database connection timeout after 5407ms (req-0339)
+2024-03-01 17:00:00 INFO [req-0340] Request processed successfully for user_id=5780 in 670ms
+2024-03-01 17:03:00 INFO [req-0341] Request processed successfully for user_id=5797 in 693ms
+2024-03-01 17:06:00 INFO [req-0342] Request processed successfully for user_id=5814 in 716ms
+2024-03-01 17:09:00 INFO [req-0343] Request processed successfully for user_id=5831 in 739ms
+2024-03-01 17:12:00 INFO [req-0344] Request processed successfully for user_id=5848 in 762ms
+2024-03-01 17:15:00 INFO [req-0345] Request processed successfully for user_id=5865 in 785ms
+2024-03-01 17:18:00 INFO [req-0346] Request processed successfully for user_id=5882 in 808ms
+2024-03-01 17:21:00 WARN [req-0347] Slow query detected on table orders: 2757ms (req-0347)
+2024-03-01 17:24:00 WARN [req-0348] Slow query detected on table orders: 2788ms (req-0348)
+2024-03-01 17:27:00 ERROR [req-0349] Database connection timeout after 5537ms (req-0349)
+2024-03-01 17:30:00 INFO [req-0350] Request processed successfully for user_id=5950 in 100ms
+2024-03-01 17:33:00 INFO [req-0351] Request processed successfully for user_id=5967 in 123ms
+2024-03-01 17:36:00 INFO [req-0352] Request processed successfully for user_id=5984 in 146ms
+2024-03-01 17:39:00 INFO [req-0353] Request processed successfully for user_id=6001 in 169ms
+2024-03-01 17:42:00 INFO [req-0354] Request processed successfully for user_id=6018 in 192ms
+2024-03-01 17:45:00 INFO [req-0355] Request processed successfully for user_id=6035 in 215ms
+2024-03-01 17:48:00 INFO [req-0356] Request processed successfully for user_id=6052 in 238ms
+2024-03-01 17:51:00 WARN [req-0357] Slow query detected on table orders: 3067ms (req-0357)
+2024-03-01 17:54:00 WARN [req-0358] Slow query detected on table orders: 3098ms (req-0358)
+2024-03-01 17:57:00 ERROR [req-0359] Database connection timeout after 5667ms (req-0359)
+2024-03-01 18:00:00 INFO [req-0360] Request processed successfully for user_id=6120 in 330ms
+2024-03-01 18:03:00 INFO [req-0361] Request processed successfully for user_id=6137 in 353ms
+2024-03-01 18:06:00 INFO [req-0362] Request processed successfully for user_id=6154 in 376ms
+2024-03-01 18:09:00 INFO [req-0363] Request processed successfully for user_id=6171 in 399ms
+2024-03-01 18:12:00 INFO [req-0364] Request processed successfully for user_id=6188 in 422ms
+2024-03-01 18:15:00 INFO [req-0365] Request processed successfully for user_id=6205 in 445ms
+2024-03-01 18:18:00 INFO [req-0366] Request processed successfully for user_id=6222 in 468ms
+2024-03-01 18:21:00 WARN [req-0367] Slow query detected on table orders: 3377ms (req-0367)
+2024-03-01 18:24:00 WARN [req-0368] Slow query detected on table orders: 3408ms (req-0368)
+2024-03-01 18:27:00 ERROR [req-0369] Database connection timeout after 5797ms (req-0369)
+2024-03-01 18:30:00 INFO [req-0370] Request processed successfully for user_id=6290 in 560ms
+2024-03-01 18:33:00 INFO [req-0371] Request processed successfully for user_id=6307 in 583ms
+2024-03-01 18:36:00 INFO [req-0372] Request processed successfully for user_id=6324 in 606ms
+2024-03-01 18:39:00 INFO [req-0373] Request processed successfully for user_id=6341 in 629ms
+2024-03-01 18:42:00 INFO [req-0374] Request processed successfully for user_id=6358 in 652ms
+2024-03-01 18:45:00 INFO [req-0375] Request processed successfully for user_id=6375 in 675ms
+2024-03-01 18:48:00 INFO [req-0376] Request processed successfully for user_id=6392 in 698ms
+2024-03-01 18:51:00 WARN [req-0377] Slow query detected on table orders: 3687ms (req-0377)
+2024-03-01 18:54:00 WARN [req-0378] Slow query detected on table orders: 3718ms (req-0378)
+2024-03-01 18:57:00 ERROR [req-0379] Database connection timeout after 5927ms (req-0379)
+2024-03-01 19:00:00 INFO [req-0380] Request processed successfully for user_id=6460 in 790ms
+2024-03-01 19:03:00 INFO [req-0381] Request processed successfully for user_id=6477 in 813ms
+2024-03-01 19:06:00 INFO [req-0382] Request processed successfully for user_id=6494 in 836ms
+2024-03-01 19:09:00 INFO [req-0383] Request processed successfully for user_id=6511 in 59ms
+2024-03-01 19:12:00 INFO [req-0384] Request processed successfully for user_id=6528 in 82ms
+2024-03-01 19:15:00 INFO [req-0385] Request processed successfully for user_id=6545 in 105ms
+2024-03-01 19:18:00 INFO [req-0386] Request processed successfully for user_id=6562 in 128ms
+2024-03-01 19:21:00 WARN [req-0387] Slow query detected on table orders: 3997ms (req-0387)
+2024-03-01 19:24:00 WARN [req-0388] Slow query detected on table orders: 1028ms (req-0388)
+2024-03-01 19:27:00 ERROR [req-0389] Database connection timeout after 1057ms (req-0389)
+2024-03-01 19:30:00 INFO [req-0390] Request processed successfully for user_id=6630 in 220ms
+2024-03-01 19:33:00 INFO [req-0391] Request processed successfully for user_id=6647 in 243ms
+2024-03-01 19:36:00 INFO [req-0392] Request processed successfully for user_id=6664 in 266ms
+2024-03-01 19:39:00 INFO [req-0393] Request processed successfully for user_id=6681 in 289ms
+2024-03-01 19:42:00 INFO [req-0394] Request processed successfully for user_id=6698 in 312ms
+2024-03-01 19:45:00 INFO [req-0395] Request processed successfully for user_id=6715 in 335ms
+2024-03-01 19:48:00 INFO [req-0396] Request processed successfully for user_id=6732 in 358ms
+2024-03-01 19:51:00 WARN [req-0397] Slow query detected on table orders: 1307ms (req-0397)
+2024-03-01 19:54:00 WARN [req-0398] Slow query detected on table orders: 1338ms (req-0398)
+2024-03-01 19:57:00 ERROR [req-0399] Database connection timeout after 1187ms (req-0399)
+2024-03-01 20:00:00 INFO [req-0400] Request processed successfully for user_id=6800 in 450ms
+2024-03-01 20:03:00 INFO [req-0401] Request processed successfully for user_id=6817 in 473ms
+2024-03-01 20:06:00 INFO [req-0402] Request processed successfully for user_id=6834 in 496ms
+2024-03-01 20:09:00 INFO [req-0403] Request processed successfully for user_id=6851 in 519ms
+2024-03-01 20:12:00 INFO [req-0404] Request processed successfully for user_id=6868 in 542ms
+2024-03-01 20:15:00 INFO [req-0405] Request processed successfully for user_id=6885 in 565ms
+2024-03-01 20:18:00 INFO [req-0406] Request processed successfully for user_id=6902 in 588ms
+2024-03-01 20:21:00 WARN [req-0407] Slow query detected on table orders: 1617ms (req-0407)
+2024-03-01 20:24:00 WARN [req-0408] Slow query detected on table orders: 1648ms (req-0408)
+2024-03-01 20:27:00 ERROR [req-0409] Database connection timeout after 1317ms (req-0409)
+2024-03-01 20:30:00 INFO [req-0410] Request processed successfully for user_id=6970 in 680ms
+2024-03-01 20:33:00 INFO [req-0411] Request processed successfully for user_id=6987 in 703ms
+2024-03-01 20:36:00 INFO [req-0412] Request processed successfully for user_id=7004 in 726ms
+2024-03-01 20:39:00 INFO [req-0413] Request processed successfully for user_id=7021 in 749ms
+2024-03-01 20:42:00 INFO [req-0414] Request processed successfully for user_id=7038 in 772ms
+2024-03-01 20:45:00 INFO [req-0415] Request processed successfully for user_id=7055 in 795ms
+2024-03-01 20:48:00 INFO [req-0416] Request processed successfully for user_id=7072 in 818ms
+2024-03-01 20:51:00 WARN [req-0417] Slow query detected on table orders: 1927ms (req-0417)
+2024-03-01 20:54:00 WARN [req-0418] Slow query detected on table orders: 1958ms (req-0418)
+2024-03-01 20:57:00 ERROR [req-0419] Database connection timeout after 1447ms (req-0419)
+2024-03-01 21:00:00 INFO [req-0420] Request processed successfully for user_id=7140 in 110ms
+2024-03-01 21:03:00 INFO [req-0421] Request processed successfully for user_id=7157 in 133ms
+2024-03-01 21:06:00 INFO [req-0422] Request processed successfully for user_id=7174 in 156ms
+2024-03-01 21:09:00 INFO [req-0423] Request processed successfully for user_id=7191 in 179ms
+2024-03-01 21:12:00 INFO [req-0424] Request processed successfully for user_id=7208 in 202ms
+2024-03-01 21:15:00 INFO [req-0425] Request processed successfully for user_id=7225 in 225ms
+2024-03-01 21:18:00 INFO [req-0426] Request processed successfully for user_id=7242 in 248ms
+2024-03-01 21:21:00 WARN [req-0427] Slow query detected on table orders: 2237ms (req-0427)
+2024-03-01 21:24:00 WARN [req-0428] Slow query detected on table orders: 2268ms (req-0428)
+2024-03-01 21:27:00 ERROR [req-0429] Database connection timeout after 1577ms (req-0429)
+2024-03-01 21:30:00 INFO [req-0430] Request processed successfully for user_id=7310 in 340ms
+2024-03-01 21:33:00 INFO [req-0431] Request processed successfully for user_id=7327 in 363ms
+2024-03-01 21:36:00 INFO [req-0432] Request processed successfully for user_id=7344 in 386ms
+2024-03-01 21:39:00 INFO [req-0433] Request processed successfully for user_id=7361 in 409ms
+2024-03-01 21:42:00 INFO [req-0434] Request processed successfully for user_id=7378 in 432ms
+2024-03-01 21:45:00 INFO [req-0435] Request processed successfully for user_id=7395 in 455ms
+2024-03-01 21:48:00 INFO [req-0436] Request processed successfully for user_id=7412 in 478ms
+2024-03-01 21:51:00 WARN [req-0437] Slow query detected on table orders: 2547ms (req-0437)
+2024-03-01 21:54:00 WARN [req-0438] Slow query detected on table orders: 2578ms (req-0438)
+2024-03-01 21:57:00 ERROR [req-0439] Database connection timeout after 1707ms (req-0439)
+2024-03-01 22:00:00 INFO [req-0440] Request processed successfully for user_id=7480 in 570ms
+2024-03-01 22:03:00 INFO [req-0441] Request processed successfully for user_id=7497 in 593ms
+2024-03-01 22:06:00 INFO [req-0442] Request processed successfully for user_id=7514 in 616ms
+2024-03-01 22:09:00 INFO [req-0443] Request processed successfully for user_id=7531 in 639ms
+2024-03-01 22:12:00 INFO [req-0444] Request processed successfully for user_id=7548 in 662ms
+2024-03-01 22:15:00 INFO [req-0445] Request processed successfully for user_id=7565 in 685ms
+2024-03-01 22:18:00 INFO [req-0446] Request processed successfully for user_id=7582 in 708ms
+2024-03-01 22:21:00 WARN [req-0447] Slow query detected on table orders: 2857ms (req-0447)
+2024-03-01 22:24:00 WARN [req-0448] Slow query detected on table orders: 2888ms (req-0448)
+2024-03-01 22:27:00 ERROR [req-0449] Database connection timeout after 1837ms (req-0449)
+2024-03-01 22:30:00 INFO [req-0450] Request processed successfully for user_id=7650 in 800ms
+2024-03-01 22:33:00 INFO [req-0451] Request processed successfully for user_id=7667 in 823ms
+2024-03-01 22:36:00 INFO [req-0452] Request processed successfully for user_id=7684 in 846ms
+2024-03-01 22:39:00 INFO [req-0453] Request processed successfully for user_id=7701 in 69ms
+2024-03-01 22:42:00 INFO [req-0454] Request processed successfully for user_id=7718 in 92ms
+2024-03-01 22:45:00 INFO [req-0455] Request processed successfully for user_id=7735 in 115ms
+2024-03-01 22:48:00 INFO [req-0456] Request processed successfully for user_id=7752 in 138ms
+2024-03-01 22:51:00 WARN [req-0457] Slow query detected on table orders: 3167ms (req-0457)
+2024-03-01 22:54:00 WARN [req-0458] Slow query detected on table orders: 3198ms (req-0458)
+2024-03-01 22:57:00 ERROR [req-0459] Database connection timeout after 1967ms (req-0459)
+2024-03-01 23:00:00 INFO [req-0460] Request processed successfully for user_id=7820 in 230ms
+2024-03-01 23:03:00 INFO [req-0461] Request processed successfully for user_id=7837 in 253ms
+2024-03-01 23:06:00 INFO [req-0462] Request processed successfully for user_id=7854 in 276ms
+2024-03-01 23:09:00 INFO [req-0463] Request processed successfully for user_id=7871 in 299ms
+2024-03-01 23:12:00 INFO [req-0464] Request processed successfully for user_id=7888 in 322ms
+2024-03-01 23:15:00 INFO [req-0465] Request processed successfully for user_id=7905 in 345ms
+2024-03-01 23:18:00 INFO [req-0466] Request processed successfully for user_id=7922 in 368ms
+2024-03-01 23:21:00 WARN [req-0467] Slow query detected on table orders: 3477ms (req-0467)
+2024-03-01 23:24:00 WARN [req-0468] Slow query detected on table orders: 3508ms (req-0468)
+2024-03-01 23:27:00 ERROR [req-0469] Database connection timeout after 2097ms (req-0469)
+2024-03-01 23:30:00 INFO [req-0470] Request processed successfully for user_id=7990 in 460ms
+2024-03-01 23:33:00 INFO [req-0471] Request processed successfully for user_id=8007 in 483ms
+2024-03-01 23:36:00 INFO [req-0472] Request processed successfully for user_id=8024 in 506ms
+2024-03-01 23:39:00 INFO [req-0473] Request processed successfully for user_id=8041 in 529ms
+2024-03-01 23:42:00 INFO [req-0474] Request processed successfully for user_id=8058 in 552ms
+2024-03-01 23:45:00 INFO [req-0475] Request processed successfully for user_id=8075 in 575ms
+2024-03-01 23:48:00 INFO [req-0476] Request processed successfully for user_id=8092 in 598ms
+2024-03-01 23:51:00 WARN [req-0477] Slow query detected on table orders: 3787ms (req-0477)
+2024-03-01 23:54:00 WARN [req-0478] Slow query detected on table orders: 3818ms (req-0478)
+2024-03-01 23:57:00 ERROR [req-0479] Database connection timeout after 2227ms (req-0479)
+2024-03-02 00:00:00 INFO [req-0480] Request processed successfully for user_id=8160 in 690ms
+2024-03-02 00:03:00 INFO [req-0481] Request processed successfully for user_id=8177 in 713ms
+2024-03-02 00:06:00 INFO [req-0482] Request processed successfully for user_id=8194 in 736ms
+2024-03-02 00:09:00 INFO [req-0483] Request processed successfully for user_id=8211 in 759ms
+2024-03-02 00:12:00 INFO [req-0484] Request processed successfully for user_id=8228 in 782ms
+2024-03-02 00:15:00 INFO [req-0485] Request processed successfully for user_id=8245 in 805ms
+2024-03-02 00:18:00 INFO [req-0486] Request processed successfully for user_id=8262 in 828ms
+2024-03-02 00:21:00 WARN [req-0487] Slow query detected on table orders: 1097ms (req-0487)
+2024-03-02 00:24:00 WARN [req-0488] Slow query detected on table orders: 1128ms (req-0488)
+2024-03-02 00:27:00 ERROR [req-0489] Database connection timeout after 2357ms (req-0489)
+2024-03-02 00:30:00 INFO [req-0490] Request processed successfully for user_id=8330 in 120ms
+2024-03-02 00:33:00 INFO [req-0491] Request processed successfully for user_id=8347 in 143ms
+2024-03-02 00:36:00 INFO [req-0492] Request processed successfully for user_id=8364 in 166ms
+2024-03-02 00:39:00 INFO [req-0493] Request processed successfully for user_id=8381 in 189ms
+2024-03-02 00:42:00 INFO [req-0494] Request processed successfully for user_id=8398 in 212ms
+2024-03-02 00:45:00 INFO [req-0495] Request processed successfully for user_id=8415 in 235ms
+2024-03-02 00:48:00 INFO [req-0496] Request processed successfully for user_id=8432 in 258ms
+2024-03-02 00:51:00 WARN [req-0497] Slow query detected on table orders: 1407ms (req-0497)
+2024-03-02 00:54:00 WARN [req-0498] Slow query detected on table orders: 1438ms (req-0498)
+2024-03-02 00:57:00 ERROR [req-0499] Database connection timeout after 2487ms (req-0499)
+2024-03-02 01:00:00 INFO [req-0500] Request processed successfully for user_id=8500 in 350ms

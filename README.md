@@ -1,0 +1,111 @@
+# mcp-context-guard
+
+A lightweight wrapper for any [MCP](https://modelcontextprotocol.io) server that prevents large tool responses from flooding your context window.
+
+When a tool response exceeds a configurable size threshold, the proxy caches it and returns a small stub instead. You then query the cached response using the injected `seek_result` tool, applying a jq expression or grep pattern to extract only what you need.
+
+## How it works
+
+```
+MCP Client → mcp-context-guard → your MCP server
+```
+
+The wrapper sits between your MCP client and any stdio MCP server. It:
+
+1. **Passes through all tool schemas unchanged** — the client sees the same tools as before, plus one new tool: `seek_result`.
+2. **Intercepts large responses** — when a tool call response exceeds the size threshold, it is cached and the client receives a human-readable stub:
+   ```
+   [Response too large to return (142830 bytes cached).
+   Call seek_result(id="3f9a...", filter="<jq or grep:pattern>") to retrieve specific content.]
+   ```
+3. **Lets you query the cache** — call `seek_result` with the id and a filter to extract the relevant portion.
+
+Small responses (under the threshold) are returned directly with no change in behaviour.
+
+## Installation
+
+```bash
+git clone https://github.com/healqq/mcp-slim
+cd mcp-slim
+go build -o mcp-context-guard .
+```
+
+Requires Go 1.21+. Produces a single static binary with no runtime dependencies.
+
+## Usage
+
+```bash
+mcp-context-guard [--threshold N] [--config path] -- <upstream-command> [args...]
+```
+
+Anywhere you currently point your MCP client at an upstream server, point it at `mcp-context-guard` instead and pass the original command after `--`.
+
+**Example — wrap the filesystem MCP server:**
+```bash
+mcp-context-guard --threshold 10240 -- npx -y @modelcontextprotocol/server-filesystem /home/user
+```
+
+**Example — with a config file:**
+```bash
+mcp-context-guard --config guard.json -- python my_server.py
+```
+
+### Options
+
+| Flag | Default | Description |
+|---|---|---|
+| `--threshold N` | `10240` | Response size in bytes above which responses are cached instead of returned directly |
+| `--config path` | — | Path to a JSON config file (see below) |
+
+### Config file
+
+```json
+{
+  "threshold": 10240
+}
+```
+
+## seek_result tool
+
+When a response is cached, use `seek_result` to query it.
+
+**Parameters:**
+
+| Parameter | Description |
+|---|---|
+| `id` | The cache id from the stub response |
+| `filter` | A jq expression or a grep pattern prefixed with `grep:` |
+
+**jq filter** — any valid jq expression, applied to the raw `content` array of the cached response:
+
+```
+.[0].text              → the full text of the first content block
+.[0].text | split("\n") | length   → number of lines
+```
+
+**grep filter** — prefix `grep:` followed by a regular expression, matched line-by-line against text content blocks:
+
+```
+grep:error             → lines containing "error"
+grep:^import           → lines starting with "import"
+grep:TODO|FIXME        → lines containing TODO or FIXME
+```
+
+The same `id` can be queried multiple times with different filters — the cached response is not consumed.
+
+## Cross-compilation
+
+The binary compiles for any platform Go supports:
+
+```bash
+GOOS=linux   GOARCH=amd64  go build -o mcp-context-guard-linux-amd64 .
+GOOS=linux   GOARCH=arm64  go build -o mcp-context-guard-linux-arm64 .
+GOOS=darwin  GOARCH=arm64  go build -o mcp-context-guard-darwin-arm64 .
+GOOS=windows GOARCH=amd64  go build -o mcp-context-guard-windows-amd64.exe .
+```
+
+## Limitations
+
+- The cache is in-memory and scoped to the lifetime of the wrapper process. Restarting the wrapper clears all cached responses.
+- `seek_result` is not forwarded to the upstream server — it is handled entirely by the wrapper.
+- Structured content (`structuredContent` field) is always forwarded unchanged and is never cached.

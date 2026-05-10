@@ -1,0 +1,87 @@
+description: "mcp-context-guard savings — SQLite orders database"
+
+# @modelcontextprotocol/server-sqlite exposes read_query/write_query/list_tables/describe_table.
+# Models tend to write efficient SQL, so proxy savings are lower here than in other scenarios.
+# These tasks still verify correctness: does the proxied path answer correctly even when
+# some intermediate result sets are large?
+
+providers:
+  - id: file://provider.js
+    label: "sqlite/direct"
+    config:
+      mcpCmd: ["npx", "-y", "@modelcontextprotocol/server-sqlite", "../../data/bench.db"]
+      maxTurns: 6
+      model: gpt-5.4-mini-2026-03-17
+
+  - id: file://provider.js
+    label: "sqlite/proxied"
+    config:
+      mcpCmd:
+        - "../../mcp-context-guard.exe"
+        - "--threshold=10240"
+        - "--"
+        - "npx"
+        - "-y"
+        - "@modelcontextprotocol/server-sqlite"
+        - "../../data/bench.db"
+      maxTurns: 6
+      model: gpt-5.4-mini-2026-03-17
+
+prompts:
+  - "{{task}}"
+
+defaultTest:
+  options:
+    provider: openai:gpt-5.4-mini-2026-03-17
+
+tests:
+  - description: "customer email by id"
+    vars:
+      task: >
+        Query the database to find the email address of the customer with id=42.
+        Reply with only the email address, nothing else.
+    assert:
+      - type: llm-rubric
+        value: "The response is exactly or contains the email address customer042@example.com"
+        threshold: 0.9
+
+  - description: "order status lookup"
+    vars:
+      task: >
+        Query the database to find the status of the order with id=409.
+        Reply with only the status value, nothing else.
+    assert:
+      - type: llm-rubric
+        value: "The response contains the word 'cancelled' (case-insensitive)"
+        threshold: 0.9
+
+  - description: "find order by exact amount"
+    vars:
+      task: >
+        Query the orders table to find which order has an amount of exactly $265.99.
+        Reply with only the order id number, nothing else.
+    assert:
+      - type: llm-rubric
+        value: "The response contains the number 296"
+        threshold: 0.9
+
+  - description: "product category count"
+    vars:
+      task: >
+        Query the products table and count how many products belong to the 'Electronics' category.
+        Reply with only the number, nothing else.
+    assert:
+      - type: llm-rubric
+        value: "The response contains the number 20"
+        threshold: 0.9
+
+  - description: "orders in february 2024"
+    vars:
+      task: >
+        Query the orders table and count how many orders have a created_at date in February 2024
+        (between 2024-02-01 and 2024-02-29 inclusive).
+        Reply with only the count, nothing else.
+    assert:
+      - type: llm-rubric
+        value: "The response contains the number 29"
+        threshold: 0.9

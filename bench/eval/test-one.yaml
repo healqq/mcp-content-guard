@@ -1,0 +1,67 @@
+description: "mcp-context-guard savings — mock inventory MCP"
+
+# The mock server returns a 200-product inventory (~11 KB).
+# That exceeds the 10240-byte threshold, so the proxy caches it and
+# returns a stub telling the model to call seek_result with a filter.
+# Tasks require finding specific facts inside that large payload.
+
+providers:
+  - id: file://provider.js
+    label: "mock/direct"
+    config:
+      mcpCmd: ["python", "mock_upstream.py"]
+      maxTurns: 5
+      model: gpt-5.4-mini-2026-03-17
+
+  - id: file://provider.js
+    label: "mock/proxied"
+    config:
+      mcpCmd:
+        - "../../mcp-context-guard.exe"
+        - "--threshold=10240"
+        - "--"
+        - "python"
+        - "mock_upstream.py"
+      maxTurns: 5
+      model: gpt-5.4-mini-2026-03-17
+
+prompts:
+  - "{{task}}"
+
+defaultTest:
+  options:
+    provider: openai:gpt-5.4-mini-2026-03-17
+
+tests:
+  - description: "price lookup — product_0042"
+    vars:
+      task: >
+        Call list_products to get the inventory.
+        What is the price of product_0042?
+        Reply with only the price, e.g. "$12.34".
+    assert:
+      - type: llm-rubric
+        value: "The response contains the price $147.94"
+        threshold: 0.9
+
+  - description: "category lookup — product_0130"
+    vars:
+      task: >
+        Call list_products to get the inventory.
+        What category does product_0130 belong to?
+        Reply with only the category name.
+    assert:
+      - type: llm-rubric
+        value: "The response says 'electronics'"
+        threshold: 0.9
+
+  - description: "zero-stock products"
+    vars:
+      task: >
+        Call list_products to get the inventory.
+        List all product IDs that have stock=0.
+        Reply with just the product IDs, one per line.
+    assert:
+      - type: llm-rubric
+        value: "The response includes both product_0097 and product_0194, and no others."
+        threshold: 0.9

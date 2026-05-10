@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Order Management Dashboard</title>
+<style>
+  body { font-family: sans-serif; margin: 20px; }
+  .summary { background: #f0f4ff; padding: 12px 16px; border-radius: 6px; margin-bottom: 16px; font-size: 1.1em; }
+  .summary span { margin-right: 32px; }
+  .filters { margin-bottom: 12px; }
+  .filters label { margin-right: 6px; font-weight: bold; }
+  .filters select { margin-right: 24px; padding: 4px 8px; }
+  #showing { color: #555; font-size: 0.95em; margin-bottom: 8px; }
+  table { border-collapse: collapse; width: 100%; }
+  th { background: #3a5bd9; color: white; padding: 8px 12px; text-align: left; white-space: nowrap; }
+  th.sortable { cursor: pointer; user-select: none; }
+  th.sortable:hover { background: #2a4bc9; }
+  td { padding: 7px 12px; border-bottom: 1px solid #ddd; }
+  tr:nth-child(even) { background: #f9f9f9; }
+  tr.hidden { display: none; }
+</style>
+</head>
+<body>
+<h1>Order Management Dashboard</h1>
+
+<div class="summary">
+  <span id="total-count">Total Orders: 300</span>
+  <span id="total-revenue">Total Revenue: </span>
+</div>
+
+<div class="filters">
+  <label for="status-filter">Status:</label>
+  <select id="status-filter" onchange="applyFilters()">
+    <option value="">All</option>
+    <option value="Processing">Processing</option>
+    <option value="Shipped">Shipped</option>
+    <option value="Delivered">Delivered</option>
+    <option value="Cancelled">Cancelled</option>
+    <option value="Pending">Pending</option>
+  </select>
+  <label for="region-filter">Region:</label>
+  <select id="region-filter" onchange="applyFilters()">
+    <option value="">All</option>
+    <option value="EMEA">EMEA</option>
+    <option value="APAC">APAC</option>
+    <option value="AMER">AMER</option>
+    <option value="LATAM">LATAM</option>
+  </select>
+</div>
+
+<div id="showing">Showing 300 of 300 orders</div>
+
+<table id="orders-table">
+  <thead>
+    <tr>
+      <th>Order ID</th>
+      <th>Company</th>
+      <th>Contact Email</th>
+      <th>Region</th>
+      <th>Status</th>
+      <th class="sortable" id="amount-header" onclick="sortByAmount()">Amount &#9660;</th>
+      <th>Date</th>
+      <th>Items</th>
+    </tr>
+  </thead>
+  <tbody id="table-body">
+    <tr data-status="Processing" data-region="EMEA" data-amount="197"><td>ORD-0001</td><td>Acme Corp</td><td>acme001@business.com</td><td>EMEA</td><td>Processing</td><td data-val="197">$197.00</td><td>2024-01-01</td><td>2</td></tr>
+    <tr data-status="Shipped" data-region="APAC" data-amount="294"><td>ORD-0002</td><td>GlobalTech Inc</td><td>globaltech002@business.com</td><td>APAC</td><td>Shipped</td><td data-val="294">$294.00</td><td>2024-01-02</td><td>3</td></tr>
+    <tr data-status="Delivered" data-region="AMER" data-amount="391"><td>ORD-0003</td><td>MegaRetail</td><td>megaretail003@business.com</td><td>AMER</td><td>Delivered</td><td data-val="391">$391.00</td><td>2024-01-03</td><td>4</td></tr>
+    <tr data-status="Cancelled" data-region="LATAM" data-amount="488"><td>ORD-0004</td><td>FastShop Ltd</td><td>fastshop004@business.com</td><td>LATAM</td><td>Cancelled</td><td data-val="488">$488.00</td><td>2024-01-04</td><td>5</td></tr>
+    <tr data-status="Pending" data-region="EMEA" data-amount="585"><td>ORD-0005</td><td>TopBuyer Co</td><td>topbuyer005@business.com</td><td>EMEA</td><td>Pending</td><td data-val="585">$585.00</td><td>2024-01-05</td><td>6</td></tr>
+    <tr data-status="Processing" data-region="APAC" data-amount="682"><td>ORD-0006</td><td>BestClient</td><td>bestclient006@business.com</td><td>APAC</td><td>Processing</td><td data-val="682">$682.00</td><td>2024-01-06</td><td>7</td></tr>
+    <tr data-status="Shipped" data-region="AMER" data-amount="779"><td>ORD-0007</td><td>QuickOrder</td><td>quickorder007@business.com</td><td>AMER</td><td>Shipped</td><td data-val="779">$779.00</td><td>2024-01-07</td><td>8</td></tr>
+    <tr data-status="Delivered" data-region="LATAM" data-amount="876"><td>ORD-0008</td><td>PrimePurchase</td><td>primepurchase008@business.com</td><td>LATAM</td><td>Delivered</td><td data-val="876">$876.00</td><td>2024-01-08</td><td>9</td></tr>
+    <tr data-status="Cancelled" data-region="EMEA" data-amount="973"><td>ORD-0009</td><td>AlphaTrade</td><td>alphatrade009@business.com</td><td>EMEA</td><td>Cancelled</td><td data-val="973">$973.00</td><td>2024-01-09</td><td>10</td></tr>
+    <tr data-status="Pending" data-region="APAC" data-amount="1070"><td>ORD-0010</td><td>ZetaMarket</td><td>zetamarket010@business.com</td><td>APAC</td><td>Pending</td><td data-val="1070">$1,070.00</td><td>2024-01-10</td><td>1</td></tr>
+    <tr data-status="Processing" data-region="AMER" data-amount="1167"><td>ORD-0011</td><td>Acme Corp</td><td>acme011@business.com</td><td>AMER</td><td>Processing</td><td data-val="1167">$1,167.00</td><td>2024-01-11</td><td>2</td></tr>
+    <tr data-status="Shipped" data-region="LATAM" data-amount="1264"><td>ORD-0012</td><td>GlobalTech Inc</td><td>globaltech012@business.com</td><td>LATAM</td><td>Shipped</td><td data-val="1264">$1,264.00</td><td>2024-01-12</td><td>3</td></tr>
+    <tr data-status="Delivered" data-region="EMEA" data-amount="1361"><td>ORD-0013</td><td>MegaRetail</td><td>megaretail013@business.com</td><td>EMEA</td><td>Delivered</td><td data-val="1361">$1,361.00</td><td>2024-01-13</td><td>4</td></tr>
+    <tr data-status="Cancelled" data-region="APAC" data-amount="1458"><td>ORD-0014</td><td>FastShop Ltd</td><td>fastshop014@business.com</td><td>APAC</td><td>Cancelled</td><td data-val="1458">$1,458.00</td><td>2024-01-14</td><td>5</td></tr>
+    <tr data-status="Pending" data-region="AMER" data-amount="1555"><td>ORD-0015</td><td>TopBuyer Co</td><td>topbuyer015@business.com</td><td>AMER</td><td>Pending</td><td data-val="1555">$1,555.00</td><td>2024-01-15</td><td>6</td></tr>
+    <tr data-status="Processing" data-region="LATAM" data-amount="1652"><td>ORD-0016</td><td>BestClient</td><td>bestclient016@business.com</td><td>LATAM</td><td>Processing</td><td data-val="1652">$1,652.00</td><td>2024-01-16</td><td>7</td></tr>
+    <tr data-status="Shipped" data-region="EMEA" data-amount="1749"><td>ORD-0017</td><td>QuickOrder</td><td>quickorder017@business.com</td><td>EMEA</td><td>Shipped</td><td data-val="1749">$1,749.00</td><td>2024-01-17</td><td>8</td></tr>
+    <tr data-status="Delivered" data-region="APAC" data-amount="1846"><td>ORD-0018</td><td>PrimePurchase</td><td>primepurchase018@business.com</td><td>APAC</td><td>Delivered</td><td data-val="1846">$1,846.00</td><td>2024-01-18</td><td>9</td></tr>
+    <tr data-status="Cancelled" data-region="AMER" data-amount="1943"><td>ORD-0019</td><td>AlphaTrade</td><td>alphatrade019@business.com</td><td>AMER</td><td>Cancelled</td><td data-val="1943">$1,943.00</td><td>2024-01-19</td><td>10</td></tr>
+    <tr data-status="Pending" data-region="LATAM" data-amount="2040"><td>ORD-0020</td><td>ZetaMarket</td><td>zetamarket020@business.com</td><td>LATAM</td><td>Pending</td><td data-val="2040">$2,040.00</td><td>2024-01-20</td><td>1</td></tr>
+    <tr data-status="Processing" data-region="EMEA" data-amount="2137"><td>ORD-0021</td><td>Acme Corp</td><td>acme021@business.com</td><td>EMEA</td><td>Processing</td><td data-val="2137">$2,137.00</td><td>2024-01-21</td><td>2</td></tr>
+    <tr data-status="Shipped" data-region="APAC" data-amount="2234"><td>ORD-0022</td><td>GlobalTech Inc</td><td>globaltech022@business.com</td><td>APAC</td><td>Shipped</td><td data-val="2234">$2,234.00</td><td>2024-01-22</td><td>3</td></tr>
+    <tr data-status="Delivered" data-region="AMER" data-amount="2331"><td>ORD-0023</td><td>MegaRetail</td><td>megaretail023@business.com</td><td>AMER</td><td>Delivered</td><td data-val="2331">$2,331.00</td><td>2024-01-23</td><td>4</td></tr>
+    <tr data-status="Cancelled" data-region="LATAM" data-amount="2428"><td>ORD-0024</td><td>FastShop Ltd</td><td>fastshop024@business.com</td><td>LATAM</td><td>Cancelled</td><td data-val="2428">$2,428.00</td><td>2024-01-24</td><td>5</td></tr>
+    <tr data-status="Pending" data-region="EMEA" data-amount="2525"><td>ORD-0025</td><td>TopBuyer Co</td><td>topbuyer025@business.com</td><td>EMEA</td><td>Pending</td><td data-val="2525">$2,525.00</td><td>2024-01-25</td><td>6</td></tr>
+    <tr data-status="Processing" data-region="APAC" data-amount="2622"><td>ORD-0026</td><td>BestClient</td><td>bestclient026@business.com</td><td>APAC</td><td>Processing</td><td data-val="2622">$2,622.00</td><td>2024-01-26</td><td>7</td></tr>
+    <tr data-status="Shipped" data-region="AMER" data-amount="2719"><td>ORD-0027</td><td>QuickOrder</td><td>quickorder027@business.com</td><td>AMER</td><td>Shipped</td><td data-val="2719">$2,719.00</td><td>2024-01-27</td><td>8</td></tr>
+    <tr data-status="Delivered" data-region="LATAM" data-amount="2816"><td>ORD-0028</td><td>PrimePurchase</td><td>primepurchase028@business.com</td><td>LATAM</td><td>Delivered</td><td data-val="2816">$2,816.00</td><td>2024-01-28</td><td>9</td></tr>
+    <tr data-status="Cancelled" data-region="EMEA" data-amount="2913"><td>ORD-0029</td><td>AlphaTrade</td><td>alphatrade029@business.com</td><td>EMEA</td><td>Cancelled</td><td data-val="2913">$2,913.00</td><td>2024-01-29</td><td>10</td></tr>
+    <tr data-status="Pending" data-region="APAC" data-amount="3010"><td>ORD-0030</td><td>ZetaMarket</td><td>zetamarket030@business.com</td><td>APAC</td><td>Pending</td><td data-val="3010">$3,010.00</td><td>2024-01-30</td><td>1</td></tr>
+    <tr data-status="Processing" data-region="AMER" data-amount="3107"><td>ORD-0031</td><td>Acme Corp</td><td>acme031@business.com</td><td>AMER</td><td>Processing</td><td data-val="3107">$3,107.00</td><td>2024-01-31</td><td>2</td></tr>
+    <tr data-status="Shipped" data-region="LATAM" data-amount="3204"><td>ORD-0032</td><td>GlobalTech Inc</td><td>globaltech032@business.com</td><td>LATAM</td><td>Shipped</td><td data-val="3204">$3,204.00</td><td>2024-02-01</td><td>3</td></tr>
+    <tr data-status="Delivered" data-region="EMEA" data-amount="3301"><td>ORD-0033</td><td>MegaRetail</td><td>megaretail033@business.com</td><td>EMEA</td><td>Delivered</td><td data-val="3301">$3,301.00</td><td>2024-02-02</td><td>4</td></tr>
+    <tr data-status="Cancelled" data-region="APAC" data-amount="3398"><td>ORD-0034</td><td>FastShop Ltd</td><td>fastshop034@business.com</td><td>APAC</td><td>Cancelled</td><td data-val="3398">$3,398.00</td><td>2024-02-03</td><td>5</td></tr>
+    <tr data-status="Pending" data-region="AMER" data-amount="3495"><td>ORD-0035</td><td>TopBuyer Co</td><td>topbuyer035@business.com</td><td>AMER</td><td>Pending</td><td data-val="3495">$3,495.00</td><td>2024-02-04</td><td>6</td></tr>
+    <tr data-status="Processing" data-region="LATAM" data-amount="3592"><td>ORD-0036</td><td>BestClient</td><td>bestclient036@business.com</td><td>LATAM</td><td>Processing</td><td data-val="3592">$3,592.00</td><td>2024-02-05</td><td>7</td></tr>
+    <tr data-status="Shipped" data-region="EMEA" data-amount="3689"><td>ORD-0037</td><td>QuickOrder</td><td>quickorder037@business.com</td><td>EMEA</td><td>Shipped</td><td data-val="3689">$3,689.00</td><td>2024-02-06</td><td>8</td></tr>
+    <tr data-status="Delivered" data-region="APAC" data-amount="3786"><td>ORD-0038</td><td>PrimePurchase</td><td>primepurchase038@business.com</td><td>APAC</td><td>Delivered</td><td data-val="3786">$3,786.00</td><td>2024-02-07</td><td>9</td></tr>
+    <tr data-status="Cancelled" data-region="AMER" data-amount="3883"><td>ORD-0039</td><td>AlphaTrade</td><td>alphatrade039@business.com</td><td>AMER</td><td>Cancelled</td><td data-val="3883">$3,883.00</td><td>2024-02-08</td><td>10</td></tr>
+    <tr data-status="Pending" data-region="LATAM" data-amount="3980"><td>ORD-0040</td><td>ZetaMarket</td><td>zetamarket040@business.com</td><td>LATAM</td><td>Pending</td><td data-val="3980">$3,980.00</td><td>2024-02-09</td><td>1</td></tr>
+    <tr data-status="Processing" data-region="EMEA" data-amount="4077"><td>ORD-0041</td><td>Acme Corp</td><td>acme041@business.com</td><td>EMEA</td><td>Processing</td><td data-val="4077">$4,077.00</td><td>2024-02-10</td><td>2</td></tr>
+    <tr data-status="Shipped" data-region="APAC" data-amount="4174"><td>ORD-0042</td><td>GlobalTech Inc</td><td>globaltech042@business.com</td><td>APAC</td><td>Shipped</td><td data-val="4174">$4,174.00</td><td>2024-02-11</td><td>3</td></tr>
+    <tr data-status="Delivered" data-region="AMER" data-amount="4271"><td>ORD-0043</td><td>MegaRetail</td><td>megaretail043@business.com</td><td>AMER</td><td>Delivered</td><td data-val="4271">$4,271.00</td><td>2024-02-12</td><td>4</td></tr>
+    <tr data-status="Cancelled" data-region="LATAM" data-amount="4368"><td>ORD-0044</td><td>FastShop Ltd</td><td>fastshop044@business.com</td><td>LATAM</td><td>Cancelled</td><td data-val="4368">$4,368.00</td><td>2024-02-13</td><td>5</td></tr>
+    <tr data-status="Pending" data-region="EMEA" data-amount="4465"><td>ORD-0045</td><td>TopBuyer Co</td><td>topbuyer045@business.com</td><td>EMEA</td><td>Pending</td><td data-val="4465">$4,465.00</td><td>2024-02-14</td><td>6</td></tr>
+    <tr data-status="Processing" data-region="APAC" data-amount="4562"><td>ORD-0046</td><td>BestClient</td><td>bestclient046@business.com</td><td>APAC</td><td>Processing</td><td data-val="4562">$4,562.00</td><td>2024-02-15</td><td>7</td></tr>
+    <tr data-status="Shipped" data-region="AMER" data-amount="4659"><td>ORD-0047</td><td>QuickOrder</td><td>quickorder047@business.com</td><td>AMER</td><td>Shipped</td><td data-val="4659">$4,659.00</td><td>2024-02-16</td><td>8</td></tr>
+    <tr data-status="Delivered" data-region="LATAM" data-amount="4756"><td>ORD-0048</td><td>PrimePurchase</td><td>primepurchase048@business.com</td><td>LATAM</td><td>Delivered</td><td data-val="4756">$4,756.00</td><td>2024-02-17</td><td>9</td></tr>
+    <tr data-status="Cancelled" data-region="EMEA" data-amount="4853"><td>ORD-0049</td><td>AlphaTrade</td><td>alphatrade049@business.com</td><td>EMEA</td><td>Cancelled</td><td data-val="4853">$4,853.00</td><td>2024-02-18</td><td>10</td></tr>
+    <tr data-status="Pending" data-region="APAC" data-amount="4950"><td>ORD-0050</td><td>ZetaMarket</td><td>zetamarket050@business.com</td><td>APAC</td><td>Pending</td><td data-val="4950">$4,950.00</td><td>2024-02-19</td><td>1</td></tr>
+    <tr data-status="Processing" data-region="AMER" data-amount="147"><td>ORD-0051</td><td>Acme Corp</td><td>acme051@business.com</td><td>AMER</td><td>Processing</td><td data-val="147">$147.00</td><td>2024-02-20</td><td>2</td></tr>
+    <tr data-status="Shipped" data-region="LATAM" data-amount="244"><td>ORD-0052</td><td>GlobalTech Inc</td><td>globaltech052@business.com</td><td>LATAM</td><td>Shipped</td><td data-val="244">$244.00</td><td>2024-02-21</td><td>3</td></tr>
+    <tr data-status="Delivered" data-region="EMEA" data-amount="341"><td>ORD-0053</td><td>MegaRetail</td><td>megaretail053@business.com</td><td>EMEA</td><td>Delivered</td><td data-val="341">$341.00</td><td>2024-02-22</td><td>4</td></tr>
+    <tr data-status="Cancelled" data-region="APAC" data-amount="438"><td>ORD-0054</td><td>FastShop Ltd</td><td>fastshop054@business.com</td><td>APAC</td><td>Cancelled</td><td data-val="438">$438.00</td><td>2024-02-23</td><td>5</td></tr>
+    <tr data-status="Pending" data-region="AMER" data-amount="535"><td>ORD-0055</td><td>TopBuyer Co</td><td>topbuyer055@business.com</td><td>AMER</td><td>Pending</td><td data-val="535">$535.00</td><td>2024-02-24</td><td>6</td></tr>
+    <tr data-status="Processing" data-region="LATAM" data-amount="632"><td>ORD-0056</td><td>BestClient</td><td>bestclient056@business.com</td><td>LATAM</td><td>Processing</td><td data-val="632">$632.00</td><td>2024-02-25</td><td>7</td></tr>
+    <tr data-status="Shipped" data-region="EMEA" data-amount="729"><td>ORD-0057</td><td>QuickOrder</td><td>quickorder057@business.com</td><td>EMEA</td><td>Shipped</td><td data-val="729">$729.00</td><td>2024-02-26</td><td>8</td></tr>
+    <tr data-status="Delivered" data-region="APAC" data-amount="826"><td>ORD-0058</td><td>PrimePurchase</td><td>primepurchase058@business.com</td><td>APAC</td><td>Delivered</td><td data-val="826">$826.00</td><td>2024-02-27</td><td>9</td></tr>
+    <tr data-status="Cancelled" data-region="AMER" data-amount="923"><td>ORD-0059</td><td>AlphaTrade</td><td>alphatrade059@business.com</td><td>AMER</td><td>Cancelled</td><td data-val="923">$923.00</td><td>2024-02-28</td><td>10</td></tr>
+    <tr data-status="Pending" data-region="LATAM" data-amount="1020"><td>ORD-0060</td><td>ZetaMarket</td><td>zetamarket060@business.com</td><td>LATAM</td><td>Pending</td><td data-val="1020">$1,020.00</td><td>2024-02-29</td><td>1</td></tr>
+    <tr data-status="Processing" data-region="EMEA" data-amount="1117"><td>ORD-0061</td><td>Acme Corp</td><td>acme061@business.com</td><td>EMEA</td><td>Processing</td><td data-val="1117">$1,117.00</td><td>2024-03-01</td><td>2</td></tr>
+    <tr data-status="Shipped" data-region="APAC" data-amount="1214"><td>ORD-0062</td><td>GlobalTech Inc</td><td>globaltech062@business.com</td><td>APAC</td><td>Shipped</td><td data-val="1214">$1,214.00</td><td>2024-03-02</td><td>3</td></tr>
+    <tr data-status="Delivered" data-region="AMER" data-amount="1311"><td>ORD-0063</td><td>MegaRetail</td><td>megaretail063@business.com</td><td>AMER</td><td>Delivered</td><td data-val="1311">$1,311.00</td><td>2024-03-03</td><td>4</td></tr>
+    <tr data-status="Cancelled" data-region="LATAM" data-amount="1408"><td>ORD-0064</td><td>FastShop Ltd</td><td>fastshop064@business.com</td><td>LATAM</td><td>Cancelled</td><td data-val="1408">$1,408.00</td><td>2024-03-04</td><td>5</td></tr>
+    <tr data-status="Pending" data-region="EMEA" data-amount="1505"><td>ORD-0065</td><td>TopBuyer Co</td><td>topbuyer065@business.com</td><td>EMEA</td><td>Pending</td><td data-val="1505">$1,505.00</td><td>2024-03-05</td><td>6</td></tr>
+    <tr data-status="Processing" data-region="APAC" data-amount="1602"><td>ORD-0066</td><td>BestClient</td><td>bestclient066@business.com</td><td>APAC</td><td>Processing</td><td data-val="1602">$1,602.00</td><td>2024-03-06</td><td>7</td></tr>
+    <tr data-status="Shipped" data-region="AMER" data-amount="1699"><td>ORD-0067</td><td>QuickOrder</td><td>quickorder067@business.com</td><td>AMER</td><td>Shipped</td><td data-val="1699">$1,699.00</td><td>2024-03-07</td><td>8</td></tr>
+    <tr data-status="Delivered" data-region="LATAM" data-amount="1796"><td>ORD-0068</td><td>PrimePurchase</td><td>primepurchase068@business.com</td><td>LATAM</td><td>Delivered</td><td data-val="1796">$1,796.00</td><td>2024-03-08</td><td>9</td></tr>
+    <tr data-status="Cancelled" data-region="EMEA" data-amount="1893"><td>ORD-0069</td><td>AlphaTrade</td><td>alphatrade069@business.com</td><td>EMEA</td><td>Cancelled</td><td data-val="1893">$1,893.00</td><td>2024-03-09</td><td>10</td></tr>
+    <tr data-status="Pending" data-region="APAC" data-amount="1990"><td>ORD-0070</td><td>ZetaMarket</td><td>zetamarket070@business.com</td><td>APAC</td><td>Pending</td><td data-val="1990">$1,990.00</td><td>2024-03-10</td><td>1</td></tr>
+    <tr data-status="Processing" data-region="AMER" data-amount="2087"><td>ORD-0071</td><td>Acme Corp</td><td>acme071@business.com</td><td>AMER</td><td>Processing</td><td data-val="2087">$2,087.00</td><td>2024-03-11</td><td>2</td></tr>
+    <tr data-status="Shipped" data-region="LATAM" data-amount="2184"><td>ORD-0072</td><td>GlobalTech Inc</td><td>globaltech072@business.com</td><td>LATAM</td><td>Shipped</td><td data-val="2184">$2,184.00</td><td>2024-03-12</td><td>3</td></tr>
+    <tr data-status="Delivered" data-region="EMEA" data-amount="2281"><td>ORD-0073</td><td>MegaRetail</td><td>megaretail073@business.com</td><td>EMEA</td><td>Delivered</td><td data-val="2281">$2,281.00</td><td>2024-03-13</td><td>4</td></tr>
+    <tr data-status="Cancelled" data-region="APAC" data-amount="2378"><td>ORD-0074</td><td>FastShop Ltd</td><td>fastshop074@business.com</td><td>APAC</td><td>Cancelled</td><td data-val="2378">$2,378.00</td><td>2024-03-14</td><td>5</td></tr>
+    <tr data-status="Pending" data-region="AMER" data-amount="2475"><td>ORD-0075</td><td>TopBuyer Co</td><td>topbuyer075@business.com</td><td>AMER</td><td>Pending</td><td data-val="2475">$2,475.00</td><td>2024-03-15</td><td>6</td></tr>
+    <tr data-status="Processing" data-region="LATAM" data-amount="2572"><td>ORD-0076</td><td>BestClient</td><td>bestclient076@business.com</td><td>LATAM</td><td>Processing</td><td data-val="2572">$2,572.00</td><td>2024-03-16</td><td>7</td></tr>
+    <tr data-status="Shipped" data-region="EMEA" data-amount="2669"><td>ORD-0077</td><td>QuickOrder</td><td>quickorder077@business.com</td><td>EMEA</td><td>Shipped</td><td data-val="2669">$2,669.00</td><td>2024-03-17</td><td>8</td></tr>
+    <tr data-status="Delivered" data-region="APAC" data-amount="2766"><td>ORD-0078</td><td>PrimePurchase</td><td>primepurchase078@business.com</td><td>APAC</td><td>Delivered</td><td data-val="2766">$2,766.00</td><td>2024-03-18</td><td>9</td></tr>
+    <tr data-status="Cancelled" data-region="AMER" data-amount="2863"><td>ORD-0079</td><td>AlphaTrade</td><td>alphatrade079@business.com</td><td>AMER</td><td>Cancelled</td><td data-val="2863">$2,863.00</td><td>2024-03-19</td><td>10</td></tr>
+    <tr data-status="Pending" data-region="LATAM" data-amount="2960"><td>ORD-0080</td><td>ZetaMarket</td><td>zetamarket080@business.com</td><td>LATAM</td><td>Pending</td><td data-val="2960">$2,960.00</td><td>2024-03-20</td><td>1</td></tr>
+    <tr data-status="Processing" data-region="EMEA" data-amount="3057"><td>ORD-0081</td><td>Acme Corp</td><td>acme081@business.com</td><td>EMEA</td><td>Processing</td><td data-val="3057">$3,057.00</td><td>2024-03-21</td><td>2</td></tr>
+    <tr data-status="Shipped" data-region="APAC" data-amount="3154"><td>ORD-0082</td><td>GlobalTech Inc</td><td>globaltech082@business.com</td><td>APAC</td><td>Shipped</td><td data-val="3154">$3,154.00</td><td>2024-03-22</td><td>3</td></tr>
+    <tr data-status="Delivered" data-region="AMER" data-amount="3251"><td>ORD-0083</td><td>MegaRetail</td><td>megaretail083@business.com</td><td>AMER</td><td>Delivered</td><td data-val="3251">$3,251.00</td><td>2024-03-23</td><td>4</td></tr>
+    <tr data-status="Cancelled" data-region="LATAM" data-amount="3348"><td>ORD-0084</td><td>FastShop Ltd</td><td>fastshop084@business.com</td><td>LATAM</td><td>Cancelled</td><td data-val="3348">$3,348.00</td><td>2024-03-24</td><td>5</td></tr>
+    <tr data-status="Pending" data-region="EMEA" data-amount="3445"><td>ORD-0085</td><td>TopBuyer Co</td><td>topbuyer085@business.com</td><td>EMEA</td><td>Pending</td><td data-val="3445">$3,445.00</td><td>2024-03-25</td><td>6</td></tr>
+    <tr data-status="Processing" data-region="APAC" data-amount="3542"><td>ORD-0086</td><td>BestClient</td><td>bestclient086@business.com</td><td>APAC</td><td>Processing</td><td data-val="3542">$3,542.00</td><td>2024-03-26</td><td>7</td></tr>
+    <tr data-status="Shipped" data-region="AMER" data-amount="3639"><td>ORD-0087</td><td>QuickOrder</td><td>quickorder087@business.com</td><td>AMER</td><td>Shipped</td><td data-val="3639">$3,639.00</td><td>2024-03-27</td><td>8</td></tr>
+    <tr data-status="Delivered" data-region="LATAM" data-amount="3736"><td>ORD-0088</td><td>PrimePurchase</td><td>primepurchase088@business.com</td><td>LATAM</td><td>Delivered</td><td data-val="3736">$3,736.00</td><td>2024-03-28</td><td>9</td></tr>
+    <tr data-status="Cancelled" data-region="EMEA" data-amount="3833"><td>ORD-0089</td><td>AlphaTrade</td><td>alphatrade089@business.com</td><td>EMEA</td><td>Cancelled</td><td data-val="3833">$3,833.00</td><td>2024-03-29</td><td>10</td></tr>
+    <tr data-status="Pending" data-region="APAC" data-amount="3930"><td>ORD-0090</td><td>ZetaMarket</td><td>zetamarket090@business.com</td><td>APAC</td><td>Pending</td><td data-val="3930">$3,930.00</td><td>2024-03-30</td><td>1</td></tr>
+    <tr data-status="Processing" data-region="AMER" data-amount="4027"><td>ORD-0091</td><td>Acme Corp</td><td>acme091@business.com</td><td>AMER</td><td>Processing</td><td data-val="4027">$4,027.00</td><td>2024-03-31</td><td>2</td></tr>
+    <tr data-status="Shipped" data-region="LATAM" data-amount="4124"><td>ORD-0092</td><td>GlobalTech Inc</td><td>globaltech092@business.com</td><td>LATAM</td><td>Shipped</td><td data-val="4124">$4,124.00</td><td>2024-04-01</td><td>3</td></tr>
+    <tr data-status="Delivered" data-region="EMEA" data-amount="4221"><td>ORD-0093</td><td>MegaRetail</td><td>megaretail093@business.com</td><td>EMEA</td><td>Delivered</td><td data-val="4221">$4,221.00</td><td>2024-04-02</td><td>4</td></tr>
+    <tr data-status="Cancelled" data-region="APAC" data-amount="4318"><td>ORD-0094</td><td>FastShop Ltd</td><td>fastshop094@business.com</td><td>APAC</td><td>Cancelled</td><td data-val="4318">$4,318.00</td><td>2024-04-03</td><td>5</td></tr>
+    <tr data-status="Pending" data-region="AMER" data-amount="4415"><td>ORD-0095</td><td>TopBuyer Co</td><td>topbuyer095@business.com</td><td>AMER</td><td>Pending</td><td data-val="4415">$4,415.00</td><td>2024-04-04</td><td>6</td></tr>
+    <tr data-status="Processing" data-region="LATAM" data-amount="4512"><td>ORD-0096</td><td>BestClient</td><td>bestclient096@business.com</td><td>LATAM</td><td>Processing</td><td data-val="4512">$4,512.00</td><td>2024-04-05</td><td>7</td></tr>
+    <tr data-status="Shipped" data-region="EMEA" data-amount="4609"><td>ORD-0097</td><td>QuickOrder</td><td>quickorder097@business.com</td><td>EMEA</td><td>Shipped</td><td data-val="4609">$4,609.00</td><td>2024-04-06</td><td>8</td></tr>
+    <tr data-status="Delivered" data-region="APAC" data-amount="4706"><td>ORD-0098</td><td>PrimePurchase</td><td>primepurchase098@business.com</td><td>APAC</td><td>Delivered</td><td data-val="4706">$4,706.00</td><td>2024-04-07</td><td>9</td></tr>
+    <tr data-status="Cancelled" data-region="AMER" data-amount="4803"><td>ORD-0099</td><td>AlphaTrade</td><td>alphatrade099@business.com</td><td>AMER</td><td>Cancelled</td><td data-val="4803">$4,803.00</td><td>2024-04-08</td><td>10</td></tr>
+    <tr data-status="Pending" data-region="LATAM" data-amount="4900"><td>ORD-0100</td><td>ZetaMarket</td><td>zetamarket100@business.com</td><td>LATAM</td><td>Pending</td><td data-val="4900">$4,900.00</td><td>2024-04-09</td><td>1</td></tr>
+    <tr data-status="Processing" data-region="EMEA" data-amount="4997"><td>ORD-0101</td><td>Acme Corp</td><td>acme101@business.com</td><td>EMEA</td><td>Processing</td><td data-val="4997">$4,997.00</td><td>2024-04-10</td><td>2</td></tr>
+    <tr data-status="Shipped" data-region="APAC" data-amount="194"><td>ORD-0102</td><td>GlobalTech Inc</td><td>globaltech102@business.com</td><td>APAC</td><td>Shipped</td><td data-val="194">$194.00</td><td>2024-04-11</td><td>3</td></tr>
+    <tr data-status="Delivered" data-region="AMER" data-amount="291"><td>ORD-0103</td><td>MegaRetail</td><td>megaretail103@business.com</td><td>AMER</td><td>Delivered</td><td data-val="291">$291.00</td><td>2024-04-12</td><td>4</td></tr>
+    <tr data-status="Cancelled" data-region="LATAM" data-amount="388"><td>ORD-0104</td><td>FastShop Ltd</td><td>fastshop104@business.com</td><td>LATAM</td><td>Cancelled</td><td data-val="388">$388.00</td><td>2024-04-13</td><td>5</td></tr>
+    <tr data-status="Pending" data-region="EMEA" data-amount="485"><td>ORD-0105</td><td>TopBuyer Co</td><td>topbuyer105@business.com</td><td>EMEA</td><td>Pending</td><td data-val="485">$485.00</td><td>2024-04-14</td><td>6</td></tr>
+    <tr data-status="Processing" data-region="APAC" data-amount="582"><td>ORD-0106</td><td>BestClient</td><td>bestclient106@business.com</td><td>APAC</td><td>Processing</td><td data-val="582">$582.00</td><td>2024-04-15</td><td>7</td></tr>
+    <tr data-status="Shipped" data-region="AMER" data-amount="679"><td>ORD-0107</td><td>QuickOrder</td><td>quickorder107@business.com</td><td>AMER</td><td>Shipped</td><td data-val="679">$679.00</td><td>2024-04-16</td><td>8</td></tr>
+    <tr data-status="Delivered" data-region="LATAM" data-amount="776"><td>ORD-0108</td><td>PrimePurchase</td><td>primepurchase108@business.com</td><td>LATAM</td><td>Delivered</td><td data-val="776">$776.00</td><td>2024-04-17</td><td>9</td></tr>
+    <tr data-status="Cancelled" data-region="EMEA" data-amount="873"><td>ORD-0109</td><td>AlphaTrade</td><td>alphatrade109@business.com</td><td>EMEA</td><td>Cancelled</td><td data-val="873">$873.00</td><td>2024-04-18</td><td>10</td></tr>
+    <tr data-status="Pending" data-region="APAC" data-amount="970"><td>ORD-0110</td><td>ZetaMarket</td><td>zetamarket110@business.com</td><td>APAC</td><td>Pending</td><td data-val="970">$970.00</td><td>2024-04-19</td><td>1</td></tr>
+    <tr data-status="Processing" data-region="AMER" data-amount="1067"><td>ORD-0111</td><td>Acme Corp</td><td>acme111@business.com</td><td>AMER</td><td>Processing</td><td data-val="1067">$1,067.00</td><td>2024-04-20</td><td>2</td></tr>
+    <tr data-status="Shipped" data-region="LATAM" data-amount="1164"><td>ORD-0112</td><td>GlobalTech Inc</td><td>globaltech112@business.com</td><td>LATAM</td><td>Shipped</td><td data-val="1164">$1,164.00</td><td>2024-04-21</td><td>3</td></tr>
+    <tr data-status="Delivered" data-region="EMEA" data-amount="1261"><td>ORD-0113</td><td>MegaRetail</td><td>megaretail113@business.com</td><td>EMEA</td><td>Delivered</td><td data-val="1261">$1,261.00</td><td>2024-04-22</td><td>4</td></tr>
+    <tr data-status="Cancelled" data-region="APAC" data-amount="1358"><td>ORD-0114</td><td>FastShop Ltd</td><td>fastshop114@business.com</td><td>APAC</td><td>Cancelled</td><td data-val="1358">$1,358.00</td><td>2024-04-23</td><td>5</td></tr>
+    <tr data-status="Pending" data-region="AMER" data-amount="1455"><td>ORD-0115</td><td>TopBuyer Co</td><td>topbuyer115@business.com</td><td>AMER</td><td>Pending</td><td data-val="1455">$1,455.00</td><td>2024-04-24</td><td>6</td></tr>
+    <tr data-status="Processing" data-region="LATAM" data-amount="1552"><td>ORD-0116</td><td>BestClient</td><td>bestclient116@business.com</td><td>LATAM</td><td>Processing</td><td data-val="1552">$1,552.00</td><td>2024-04-25</td><td>7</td></tr>
+    <tr data-status="Shipped" data-region="EMEA" data-amount="1649"><td>ORD-0117</td><td>QuickOrder</td><td>quickorder117@business.com</td><td>EMEA</td><td>Shipped</td><td data-val="1649">$1,649.00</td><td>2024-04-26</td><td>8</td></tr>
+    <tr data-status="Delivered" data-region="APAC" data-amount="1746"><td>ORD-0118</td><td>PrimePurchase</td><td>primepurchase118@business.com</td><td>APAC</td><td>Delivered</td><td data-val="1746">$1,746.00</td><td>2024-04-27</td><td>9</td></tr>
+    <tr data-status="Cancelled" data-region="AMER" data-amount="1843"><td>ORD-0119</td><td>AlphaTrade</td><td>alphatrade119@business.com</td><td>AMER</td><td>Cancelled</td><td data-val="1843">$1,843.00</td><td>2024-04-28</td><td>10</td></tr>
+    <tr data-status="Pending" data-region="LATAM" data-amount="1940"><td>ORD-0120</td><td>ZetaMarket</td><td>zetamarket120@business.com</td><td>LATAM</td><td>Pending</td><td data-val="1940">$1,940.00</td><td>2024-04-29</td><td>1</td></tr>
+    <tr data-status="Processing" data-region="EMEA" data-amount="2037"><td>ORD-0121</td><td>Acme Corp</td><td>acme121@business.com</td><td>EMEA</td><td>Processing</td><td data-val="2037">$2,037.00</td><td>2024-04-30</td><td>2</td></tr>
+    <tr data-status="Shipped" data-region="APAC" data-amount="2134"><td>ORD-0122</td><td>GlobalTech Inc</td><td>globaltech122@business.com</td><td>APAC</td><td>Shipped</td><td data-val="2134">$2,134.00</td><td>2024-05-01</td><td>3</td></tr>
+    <tr data-status="Delivered" data-region="AMER" data-amount="2231"><td>ORD-0123</td><td>MegaRetail</td><td>megaretail123@business.com</td><td>AMER</td><td>Delivered</td><td data-val="2231">$2,231.00</td><td>2024-05-02</td><td>4</td></tr>
+    <tr data-status="Cancelled" data-region="LATAM" data-amount="2328"><td>ORD-0124</td><td>FastShop Ltd</td><td>fastshop124@business.com</td><td>LATAM</td><td>Cancelled</td><td data-val="2328">$2,328.00</td><td>2024-05-03</td><td>5</td></tr>
+    <tr data-status="Pending" data-region="EMEA" data-amount="2425"><td>ORD-0125</td><td>TopBuyer Co</td><td>topbuyer125@business.com</td><td>EMEA</td><td>Pending</td><td data-val="2425">$2,425.00</td><td>2024-05-04</td><td>6</td></tr>
+    <tr data-status="Processing" data-region="APAC" data-amount="2522"><td>ORD-0126</td><td>BestClient</td><td>bestclient126@business.com</td><td>APAC</td><td>Processing</td><td data-val="2522">$2,522.00</td><td>2024-05-05</td><td>7</td></tr>
+    <tr data-status="Shipped" data-region="AMER" data-amount="2619"><td>ORD-0127</td><td>QuickOrder</td><td>quickorder127@business.com</td><td>AMER</td><td>Shipped</td><td data-val="2619">$2,619.00</td><td>2024-05-06</td><td>8</td></tr>
+    <tr data-status="Delivered" data-region="LATAM" data-amount="2716"><td>ORD-0128</td><td>PrimePurchase</td><td>primepurchase128@business.com</td><td>LATAM</td><td>Delivered</td><td data-val="2716">$2,716.00</td><td>2024-05-07</td><td>9</td></tr>
+    <tr data-status="Cancelled" data-region="EMEA" data-amount="2813"><td>ORD-0129</td><td>AlphaTrade</td><td>alphatrade129@business.com</td><td>EMEA</td><td>Cancelled</td><td data-val="2813">$2,813.00</td><td>2024-05-08</td><td>10</td></tr>
+    <tr data-status="Pending" data-region="APAC" data-amount="2910"><td>ORD-0130</td><td>ZetaMarket</td><td>zetamarket130@business.com</td><td>APAC</td><td>Pending</td><td data-val="2910">$2,910.00</td><td>2024-05-09</td><td>1</td></tr>
+    <tr data-status="Processing" data-region="AMER" data-amount="3007"><td>ORD-0131</td><td>Acme Corp</td><td>acme131@business.com</td><td>AMER</td><td>Processing</td><td data-val="3007">$3,007.00</td><td>2024-05-10</td><td>2</td></tr>
+    <tr data-status="Shipped" data-region="LATAM" data-amount="3104"><td>ORD-0132</td><td>GlobalTech Inc</td><td>globaltech132@business.com</td><td>LATAM</td><td>Shipped</td><td data-val="3104">$3,104.00</td><td>2024-05-11</td><td>3</td></tr>
+    <tr data-status="Delivered" data-region="EMEA" data-amount="3201"><td>ORD-0133</td><td>MegaRetail</td><td>megaretail133@business.com</td><td>EMEA</td><td>Delivered</td><td data-val="3201">$3,201.00</td><td>2024-05-12</td><td>4</td></tr>
+    <tr data-status="Cancelled" data-region="APAC" data-amount="3298"><td>ORD-0134</td><td>FastShop Ltd</td><td>fastshop134@business.com</td><td>APAC</td><td>Cancelled</td><td data-val="3298">$3,298.00</td><td>2024-05-13</td><td>5</td></tr>
+    <tr data-status="Pending" data-region="AMER" data-amount="3395"><td>ORD-0135</td><td>TopBuyer Co</td><td>topbuyer135@business.com</td><td>AMER</td><td>Pending</td><td data-val="3395">$3,395.00</td><td>2024-05-14</td><td>6</td></tr>
+    <tr data-status="Processing" data-region="LATAM" data-amount="3492"><td>ORD-0136</td><td>BestClient</td><td>bestclient136@business.com</td><td>LATAM</td><td>Processing</td><td data-val="3492">$3,492.00</td><td>2024-05-15</td><td>7</td></tr>
+    <tr data-status="Shipped" data-region="EMEA" data-amount="3589"><td>ORD-0137</td><td>QuickOrder</td><td>quickorder137@business.com</td><td>EMEA</td><td>Shipped</td><td data-val="3589">$3,589.00</td><td>2024-05-16</td><td>8</td></tr>
+    <tr data-status="Delivered" data-region="APAC" data-amount="3686"><td>ORD-0138</td><td>PrimePurchase</td><td>primepurchase138@business.com</td><td>APAC</td><td>Delivered</td><td data-val="3686">$3,686.00</td><td>2024-05-17</td><td>9</td></tr>
+    <tr data-status="Cancelled" data-region="AMER" data-amount="3783"><td>ORD-0139</td><td>AlphaTrade</td><td>alphatrade139@business.com</td><td>AMER</td><td>Cancelled</td><td data-val="3783">$3,783.00</td><td>2024-05-18</td><td>10</td></tr>
+    <tr data-status="Pending" data-region="LATAM" data-amount="3880"><td>ORD-0140</td><td>ZetaMarket</td><td>zetamarket140@business.com</td><td>LATAM</td><td>Pending</td><td data-val="3880">$3,880.00</td><td>2024-05-19</td><td>1</td></tr>
+    <tr data-status="Processing" data-region="EMEA" data-amount="3977"><td>ORD-0141</td><td>Acme Corp</td><td>acme141@business.com</td><td>EMEA</td><td>Processing</td><td data-val="3977">$3,977.00</td><td>2024-05-20</td><td>2</td></tr>
+    <tr data-status="Shipped" data-region="APAC" data-amount="4074"><td>ORD-0142</td><td>GlobalTech Inc</td><td>globaltech142@business.com</td><td>APAC</td><td>Shipped</td><td data-val="4074">$4,074.00</td><td>2024-05-21</td><td>3</td></tr>
+    <tr data-status="Delivered" data-region="AMER" data-amount="4171"><td>ORD-0143</td><td>MegaRetail</td><td>megaretail143@business.com</td><td>AMER</td><td>Delivered</td><td data-val="4171">$4,171.00</td><td>2024-05-22</td><td>4</td></tr>
+    <tr data-status="Cancelled" data-region="LATAM" data-amount="4268"><td>ORD-0144</td><td>FastShop Ltd</td><td>fastshop144@business.com</td><td>LATAM</td><td>Cancelled</td><td data-val="4268">$4,268.00</td><td>2024-05-23</td><td>5</td></tr>
+    <tr data-status="Pending" data-region="EMEA" data-amount="4365"><td>ORD-0145</td><td>TopBuyer Co</td><td>topbuyer145@business.com</td><td>EMEA</td><td>Pending</td><td data-val="4365">$4,365.00</td><td>2024-05-24</td><td>6</td></tr>
+    <tr data-status="Processing" data-region="APAC" data-amount="4462"><td>ORD-0146</td><td>BestClient</td><td>bestclient146@business.com</td><td>APAC</td><td>Processing</td><td data-val="4462">$4,462.00</td><td>2024-05-25</td><td>7</td></tr>
+    <tr data-status="Shipped" data-region="AMER" data-amount="4559"><td>ORD-0147</td><td>QuickOrder</td><td>quickorder147@business.com</td><td>AMER</td><td>Shipped</td><td data-val="4559">$4,559.00</td><td>2024-05-26</td><td>8</td></tr>
+    <tr data-status="Delivered" data-region="LATAM" data-amount="4656"><td>ORD-0148</td><td>PrimePurchase</td><td>primepurchase148@business.com</td><td>LATAM</td><td>Delivered</td><td data-val="4656">$4,656.00</td><td>2024-05-27</td><td>9</td></tr>
+    <tr data-status="Cancelled" data-region="EMEA" data-amount="4753"><td>ORD-0149</td><td>AlphaTrade</td><td>alphatrade149@business.com</td><td>EMEA</td><td>Cancelled</td><td data-val="4753">$4,753.00</td><td>2024-05-28</td><td>10</td></tr>
+    <tr data-status="Pending" data-region="APAC" data-amount="4850"><td>ORD-0150</td><td>ZetaMarket</td><td>zetamarket150@business.com</td><td>APAC</td><td>Pending</td><td data-val="4850">$4,850.00</td><td>2024-05-29</td><td>1</td></tr>
+    <tr data-status="Processing" data-region="AMER" data-amount="4947"><td>ORD-0151</td><td>Acme Corp</td><td>acme151@business.com</td><td>AMER</td><td>Processing</td><td data-val="4947">$4,947.00</td><td>2024-05-30</td><td>2</td></tr>
+    <tr data-status="Shipped" data-region="LATAM" data-amount="144"><td>ORD-0152</td><td>GlobalTech Inc</td><td>globaltech152@business.com</td><td>LATAM</td><td>Shipped</td><td data-val="144">$144.00</td><td>2024-05-31</td><td>3</td></tr>
+    <tr data-status="Delivered" data-region="EMEA" data-amount="241"><td>ORD-0153</td><td>MegaRetail</td><td>megaretail153@business.com</td><td>EMEA</td><td>Delivered</td><td data-val="241">$241.00</td><td>2024-06-01</td><td>4</td></tr>
+    <tr data-status="Cancelled" data-region="APAC" data-amount="338"><td>ORD-0154</td><td>FastShop Ltd</td><td>fastshop154@business.com</td><td>APAC</td><td>Cancelled</td><td data-val="338">$338.00</td><td>2024-06-02</td><td>5</td></tr>
+    <tr data-status="Pending" data-region="AMER" data-amount="435"><td>ORD-0155</td><td>TopBuyer Co</td><td>topbuyer155@business.com</td><td>AMER</td><td>Pending</td><td data-val="435">$435.00</td><td>2024-06-03</td><td>6</td></tr>
+    <tr data-status="Processing" data-region="LATAM" data-amount="532"><td>ORD-0156</td><td>BestClient</td><td>bestclient156@business.com</td><td>LATAM</td><td>Processing</td><td data-val="532">$532.00</td><td>2024-06-04</td><td>7</td></tr>
+    <tr data-status="Shipped" data-region="EMEA" data-amount="629"><td>ORD-0157</td><td>QuickOrder</td><td>quickorder157@business.com</td><td>EMEA</td><td>Shipped</td><td data-val="629">$629.00</td><td>2024-06-05</td><td>8</td></tr>
+    <tr data-status="Delivered" data-region="APAC" data-amount="726"><td>ORD-0158</td><td>PrimePurchase</td><td>primepurchase158@business.com</td><td>APAC</td><td>Delivered</td><td data-val="726">$726.00</td><td>2024-06-06</td><td>9</td></tr>
+    <tr data-status="Cancelled" data-region="AMER" data-amount="823"><td>ORD-0159</td><td>AlphaTrade</td><td>alphatrade159@business.com</td><td>AMER</td><td>Cancelled</td><td data-val="823">$823.00</td><td>2024-06-07</td><td>10</td></tr>
+    <tr data-status="Pending" data-region="LATAM" data-amount="920"><td>ORD-0160</td><td>ZetaMarket</td><td>zetamarket160@business.com</td><td>LATAM</td><td>Pending</td><td data-val="920">$920.00</td><td>2024-06-08</td><td>1</td></tr>
+    <tr data-status="Processing" data-region="EMEA" data-amount="1017"><td>ORD-0161</td><td>Acme Corp</td><td>acme161@business.com</td><td>EMEA</td><td>Processing</td><td data-val="1017">$1,017.00</td><td>2024-06-09</td><td>2</td></tr>
+    <tr data-status="Shipped" data-region="APAC" data-amount="1114"><td>ORD-0162</td><td>GlobalTech Inc</td><td>globaltech162@business.com</td><td>APAC</td><td>Shipped</td><td data-val="1114">$1,114.00</td><td>2024-06-10</td><td>3</td></tr>
+    <tr data-status="Delivered" data-region="AMER" data-amount="1211"><td>ORD-0163</td><td>MegaRetail</td><td>megaretail163@business.com</td><td>AMER</td><td>Delivered</td><td data-val="1211">$1,211.00</td><td>2024-06-11</td><td>4</td></tr>
+    <tr data-status="Cancelled" data-region="LATAM" data-amount="1308"><td>ORD-0164</td><td>FastShop Ltd</td><td>fastshop164@business.com</td><td>LATAM</td><td>Cancelled</td><td data-val="1308">$1,308.00</td><td>2024-06-12</td><td>5</td></tr>
+    <tr data-status="Pending" data-region="EMEA" data-amount="1405"><td>ORD-0165</td><td>TopBuyer Co</td><td>topbuyer165@business.com</td><td>EMEA</td><td>Pending</td><td data-val="1405">$1,405.00</td><td>2024-06-13</td><td>6</td></tr>
+    <tr data-status="Processing" data-region="APAC" data-amount="1502"><td>ORD-0166</td><td>BestClient</td><td>bestclient166@business.com</td><td>APAC</td><td>Processing</td><td data-val="1502">$1,502.00</td><td>2024-06-14</td><td>7</td></tr>
+    <tr data-status="Shipped" data-region="AMER" data-amount="1599"><td>ORD-0167</td><td>QuickOrder</td><td>quickorder167@business.com</td><td>AMER</td><td>Shipped</td><td data-val="1599">$1,599.00</td><td>2024-06-15</td><td>8</td></tr>
+    <tr data-status="Delivered" data-region="LATAM" data-amount="1696"><td>ORD-0168</td><td>PrimePurchase</td><td>primepurchase168@business.com</td><td>LATAM</td><td>Delivered</td><td data-val="1696">$1,696.00</td><td>2024-06-16</td><td>9</td></tr>
+    <tr data-status="Cancelled" data-region="EMEA" data-amount="1793"><td>ORD-0169</td><td>AlphaTrade</td><td>alphatrade169@business.com</td><td>EMEA</td><td>Cancelled</td><td data-val="1793">$1,793.00</td><td>2024-06-17</td><td>10</td></tr>
+    <tr data-status="Pending" data-region="APAC" data-amount="1890"><td>ORD-0170</td><td>ZetaMarket</td><td>zetamarket170@business.com</td><td>APAC</td><td>Pending</td><td data-val="1890">$1,890.00</td><td>2024-06-18</td><td>1</td></tr>
+    <tr data-status="Processing" data-region="AMER" data-amount="1987"><td>ORD-0171</td><td>Acme Corp</td><td>acme171@business.com</td><td>AMER</td><td>Processing</td><td data-val="1987">$1,987.00</td><td>2024-06-19</td><td>2</td></tr>
+    <tr data-status="Shipped" data-region="LATAM" data-amount="2084"><td>ORD-0172</td><td>GlobalTech Inc</td><td>globaltech172@business.com</td><td>LATAM</td><td>Shipped</td><td data-val="2084">$2,084.00</td><td>2024-06-20</td><td>3</td></tr>
+    <tr data-status="Delivered" data-region="EMEA" data-amount="2181"><td>ORD-0173</td><td>MegaRetail</td><td>megaretail173@business.com</td><td>EMEA</td><td>Delivered</td><td data-val="2181">$2,181.00</td><td>2024-06-21</td><td>4</td></tr>
+    <tr data-status="Cancelled" data-region="APAC" data-amount="2278"><td>ORD-0174</td><td>FastShop Ltd</td><td>fastshop174@business.com</td><td>APAC</td><td>Cancelled</td><td data-val="2278">$2,278.00</td><td>2024-06-22</td><td>5</td></tr>
+    <tr data-status="Pending" data-region="AMER" data-amount="2375"><td>ORD-0175</td><td>TopBuyer Co</td><td>topbuyer175@business.com</td><td>AMER</td><td>Pending</td><td data-val="2375">$2,375.00</td><td>2024-06-23</td><td>6</td></tr>
+    <tr data-status="Processing" data-region="LATAM" data-amount="2472"><td>ORD-0176</td><td>BestClient</td><td>bestclient176@business.com</td><td>LATAM</td><td>Processing</td><td data-val="2472">$2,472.00</td><td>2024-06-24</td><td>7</td></tr>
+    <tr data-status="Shipped" data-region="EMEA" data-amount="2569"><td>ORD-0177</td><td>QuickOrder</td><td>quickorder177@business.com</td><td>EMEA</td><td>Shipped</td><td data-val="2569">$2,569.00</td><td>2024-06-25</td><td>8</td></tr>
+    <tr data-status="Delivered" data-region="APAC" data-amount="2666"><td>ORD-0178</td><td>PrimePurchase</td><td>primepurchase178@business.com</td><td>APAC</td><td>Delivered</td><td data-val="2666">$2,666.00</td><td>2024-06-26</td><td>9</td></tr>
+    <tr data-status="Cancelled" data-region="AMER" data-amount="2763"><td>ORD-0179</td><td>AlphaTrade</td><td>alphatrade179@business.com</td><td>AMER</td><td>Cancelled</td><td data-val="2763">$2,763.00</td><td>2024-06-27</td><td>10</td></tr>
+    <tr data-status="Pending" data-region="LATAM" data-amount="2860"><td>ORD-0180</td><td>ZetaMarket</td><td>zetamarket180@business.com</td><td>LATAM</td><td>Pending</td><td data-val="2860">$2,860.00</td><td>2024-06-28</td><td>1</td></tr>
+    <tr data-status="Processing" data-region="EMEA" data-amount="2957"><td>ORD-0181</td><td>Acme Corp</td><td>acme181@business.com</td><td>EMEA</td><td>Processing</td><td data-val="2957">$2,957.00</td><td>2024-06-29</td><td>2</td></tr>
+    <tr data-status="Shipped" data-region="APAC" data-amount="3054"><td>ORD-0182</td><td>GlobalTech Inc</td><td>globaltech182@business.com</td><td>APAC</td><td>Shipped</td><td data-val="3054">$3,054.00</td><td>2024-06-30</td><td>3</td></tr>
+    <tr data-status="Delivered" data-region="AMER" data-amount="3151"><td>ORD-0183</td><td>MegaRetail</td><td>megaretail183@business.com</td><td>AMER</td><td>Delivered</td><td data-val="3151">$3,151.00</td><td>2024-07-01</td><td>4</td></tr>
+    <tr data-status="Cancelled" data-region="LATAM" data-amount="3248"><td>ORD-0184</td><td>FastShop Ltd</td><td>fastshop184@business.com</td><td>LATAM</td><td>Cancelled</td><td data-val="3248">$3,248.00</td><td>2024-07-02</td><td>5</td></tr>
+    <tr data-status="Pending" data-region="EMEA" data-amount="3345"><td>ORD-0185</td><td>TopBuyer Co</td><td>topbuyer185@business.com</td><td>EMEA</td><td>Pending</td><td data-val="3345">$3,345.00</td><td>2024-07-03</td><td>6</td></tr>
+    <tr data-status="Processing" data-region="APAC" data-amount="3442"><td>ORD-0186</td><td>BestClient</td><td>bestclient186@business.com</td><td>APAC</td><td>Processing</td><td data-val="3442">$3,442.00</td><td>2024-07-04</td><td>7</td></tr>
+    <tr data-status="Shipped" data-region="AMER" data-amount="3539"><td>ORD-0187</td><td>QuickOrder</td><td>quickorder187@business.com</td><td>AMER</td><td>Shipped</td><td data-val="3539">$3,539.00</td><td>2024-07-05</td><td>8</td></tr>
+    <tr data-status="Delivered" data-region="LATAM" data-amount="3636"><td>ORD-0188</td><td>PrimePurchase</td><td>primepurchase188@business.com</td><td>LATAM</td><td>Delivered</td><td data-val="3636">$3,636.00</td><td>2024-07-06</td><td>9</td></tr>
+    <tr data-status="Cancelled" data-region="EMEA" data-amount="3733"><td>ORD-0189</td><td>AlphaTrade</td><td>alphatrade189@business.com</td><td>EMEA</td><td>Cancelled</td><td data-val="3733">$3,733.00</td><td>2024-07-07</td><td>10</td></tr>
+    <tr data-status="Pending" data-region="APAC" data-amount="3830"><td>ORD-0190</td><td>ZetaMarket</td><td>zetamarket190@business.com</td><td>APAC</td><td>Pending</td><td data-val="3830">$3,830.00</td><td>2024-07-08</td><td>1</td></tr>
+    <tr data-status="Processing" data-region="AMER" data-amount="3927"><td>ORD-0191</td><td>Acme Corp</td><td>acme191@business.com</td><td>AMER</td><td>Processing</td><td data-val="3927">$3,927.00</td><td>2024-07-09</td><td>2</td></tr>
+    <tr data-status="Shipped" data-region="LATAM" data-amount="4024"><td>ORD-0192</td><td>GlobalTech Inc</td><td>globaltech192@business.com</td><td>LATAM</td><td>Shipped</td><td data-val="4024">$4,024.00</td><td>2024-07-10</td><td>3</td></tr>
+    <tr data-status="Delivered" data-region="EMEA" data-amount="4121"><td>ORD-0193</td><td>MegaRetail</td><td>megaretail193@business.com</td><td>EMEA</td><td>Delivered</td><td data-val="4121">$4,121.00</td><td>2024-07-11</td><td>4</td></tr>
+    <tr data-status="Cancelled" data-region="APAC" data-amount="4218"><td>ORD-0194</td><td>FastShop Ltd</td><td>fastshop194@business.com</td><td>APAC</td><td>Cancelled</td><td data-val="4218">$4,218.00</td><td>2024-07-12</td><td>5</td></tr>
+    <tr data-status="Pending" data-region="AMER" data-amount="4315"><td>ORD-0195</td><td>TopBuyer Co</td><td>topbuyer195@business.com</td><td>AMER</td><td>Pending</td><td data-val="4315">$4,315.00</td><td>2024-07-13</td><td>6</td></tr>
+    <tr data-status="Processing" data-region="LATAM" data-amount="4412"><td>ORD-0196</td><td>BestClient</td><td>bestclient196@business.com</td><td>LATAM</td><td>Processing</td><td data-val="4412">$4,412.00</td><td>2024-07-14</td><td>7</td></tr>
+    <tr data-status="Shipped" data-region="EMEA" data-amount="4509"><td>ORD-0197</td><td>QuickOrder</td><td>quickorder197@business.com</td><td>EMEA</td><td>Shipped</td><td data-val="4509">$4,509.00</td><td>2024-07-15</td><td>8</td></tr>
+    <tr data-status="Delivered" data-region="APAC" data-amount="4606"><td>ORD-0198</td><td>PrimePurchase</td><td>primepurchase198@business.com</td><td>APAC</td><td>Delivered</td><td data-val="4606">$4,606.00</td><td>2024-07-16</td><td>9</td></tr>
+    <tr data-status="Cancelled" data-region="AMER" data-amount="4703"><td>ORD-0199</td><td>AlphaTrade</td><td>alphatrade199@business.com</td><td>AMER</td><td>Cancelled</td><td data-val="4703">$4,703.00</td><td>2024-07-17</td><td>10</td></tr>
+    <tr data-status="Pending" data-region="LATAM" data-amount="4800"><td>ORD-0200</td><td>ZetaMarket</td><td>zetamarket200@business.com</td><td>LATAM</td><td>Pending</td><td data-val="4800">$4,800.00</td><td>2024-07-18</td><td>1</td></tr>
+    <tr data-status="Processing" data-region="EMEA" data-amount="4897"><td>ORD-0201</td><td>Acme Corp</td><td>acme201@business.com</td><td>EMEA</td><td>Processing</td><td data-val="4897">$4,897.00</td><td>2024-07-19</td><td>2</td></tr>
+    <tr data-status="Shipped" data-region="APAC" data-amount="4994"><td>ORD-0202</td><td>GlobalTech Inc</td><td>globaltech202@business.com</td><td>APAC</td><td>Shipped</td><td data-val="4994">$4,994.00</td><td>2024-07-20</td><td>3</td></tr>
+    <tr data-status="Delivered" data-region="AMER" data-amount="191"><td>ORD-0203</td><td>MegaRetail</td><td>megaretail203@business.com</td><td>AMER</td><td>Delivered</td><td data-val="191">$191.00</td><td>2024-07-21</td><td>4</td></tr>
+    <tr data-status="Cancelled" data-region="LATAM" data-amount="288"><td>ORD-0204</td><td>FastShop Ltd</td><td>fastshop204@business.com</td><td>LATAM</td><td>Cancelled</td><td data-val="288">$288.00</td><td>2024-07-22</td><td>5</td></tr>
+    <tr data-status="Pending" data-region="EMEA" data-amount="385"><td>ORD-0205</td><td>TopBuyer Co</td><td>topbuyer205@business.com</td><td>EMEA</td><td>Pending</td><td data-val="385">$385.00</td><td>2024-07-23</td><td>6</td></tr>
+    <tr data-status="Processing" data-region="APAC" data-amount="482"><td>ORD-0206</td><td>BestClient</td><td>bestclient206@business.com</td><td>APAC</td><td>Processing</td><td data-val="482">$482.00</td><td>2024-07-24</td><td>7</td></tr>
+    <tr data-status="Shipped" data-region="AMER" data-amount="579"><td>ORD-0207</td><td>QuickOrder</td><td>quickorder207@business.com</td><td>AMER</td><td>Shipped</td><td data-val="579">$579.00</td><td>2024-07-25</td><td>8</td></tr>
+    <tr data-status="Delivered" data-region="LATAM" data-amount="676"><td>ORD-0208</td><td>PrimePurchase</td><td>primepurchase208@business.com</td><td>LATAM</td><td>Delivered</td><td data-val="676">$676.00</td><td>2024-07-26</td><td>9</td></tr>
+    <tr data-status="Cancelled" data-region="EMEA" data-amount="773"><td>ORD-0209</td><td>AlphaTrade</td><td>alphatrade209@business.com</td><td>EMEA</td><td>Cancelled</td><td data-val="773">$773.00</td><td>2024-07-27</td><td>10</td></tr>
+    <tr data-status="Pending" data-region="APAC" data-amount="870"><td>ORD-0210</td><td>ZetaMarket</td><td>zetamarket210@business.com</td><td>APAC</td><td>Pending</td><td data-val="870">$870.00</td><td>2024-07-28</td><td>1</td></tr>
+    <tr data-status="Processing" data-region="AMER" data-amount="967"><td>ORD-0211</td><td>Acme Corp</td><td>acme211@business.com</td><td>AMER</td><td>Processing</td><td data-val="967">$967.00</td><td>2024-07-29</td><td>2</td></tr>
+    <tr data-status="Shipped" data-region="LATAM" data-amount="1064"><td>ORD-0212</td><td>GlobalTech Inc</td><td>globaltech212@business.com</td><td>LATAM</td><td>Shipped</td><td data-val="1064">$1,064.00</td><td>2024-07-30</td><td>3</td></tr>
+    <tr data-status="Delivered" data-region="EMEA" data-amount="1161"><td>ORD-0213</td><td>MegaRetail</td><td>megaretail213@business.com</td><td>EMEA</td><td>Delivered</td><td data-val="1161">$1,161.00</td><td>2024-07-31</td><td>4</td></tr>
+    <tr data-status="Cancelled" data-region="APAC" data-amount="1258"><td>ORD-0214</td><td>FastShop Ltd</td><td>fastshop214@business.com</td><td>APAC</td><td>Cancelled</td><td data-val="1258">$1,258.00</td><td>2024-08-01</td><td>5</td></tr>
+    <tr data-status="Pending" data-region="AMER" data-amount="1355"><td>ORD-0215</td><td>TopBuyer Co</td><td>topbuyer215@business.com</td><td>AMER</td><td>Pending</td><td data-val="1355">$1,355.00</td><td>2024-08-02</td><td>6</td></tr>
+    <tr data-status="Processing" data-region="LATAM" data-amount="1452"><td>ORD-0216</td><td>BestClient</td><td>bestclient216@business.com</td><td>LATAM</td><td>Processing</td><td data-val="1452">$1,452.00</td><td>2024-08-03</td><td>7</td></tr>
+    <tr data-status="Shipped" data-region="EMEA" data-amount="1549"><td>ORD-0217</td><td>QuickOrder</td><td>quickorder217@business.com</td><td>EMEA</td><td>Shipped</td><td data-val="1549">$1,549.00</td><td>2024-08-04</td><td>8</td></tr>
+    <tr data-status="Delivered" data-region="APAC" data-amount="1646"><td>ORD-0218</td><td>PrimePurchase</td><td>primepurchase218@business.com</td><td>APAC</td><td>Delivered</td><td data-val="1646">$1,646.00</td><td>2024-08-05</td><td>9</td></tr>
+    <tr data-status="Cancelled" data-region="AMER" data-amount="1743"><td>ORD-0219</td><td>AlphaTrade</td><td>alphatrade219@business.com</td><td>AMER</td><td>Cancelled</td><td data-val="1743">$1,743.00</td><td>2024-08-06</td><td>10</td></tr>
+    <tr data-status="Pending" data-region="LATAM" data-amount="1840"><td>ORD-0220</td><td>ZetaMarket</td><td>zetamarket220@business.com</td><td>LATAM</td><td>Pending</td><td data-val="1840">$1,840.00</td><td>2024-08-07</td><td>1</td></tr>
+    <tr data-status="Processing" data-region="EMEA" data-amount="1937"><td>ORD-0221</td><td>Acme Corp</td><td>acme221@business.com</td><td>EMEA</td><td>Processing</td><td data-val="1937">$1,937.00</td><td>2024-08-08</td><td>2</td></tr>
+    <tr data-status="Shipped" data-region="APAC" data-amount="2034"><td>ORD-0222</td><td>GlobalTech Inc</td><td>globaltech222@business.com</td><td>APAC</td><td>Shipped</td><td data-val="2034">$2,034.00</td><td>2024-08-09</td><td>3</td></tr>
+    <tr data-status="Delivered" data-region="AMER" data-amount="2131"><td>ORD-0223</td><td>MegaRetail</td><td>megaretail223@business.com</td><td>AMER</td><td>Delivered</td><td data-val="2131">$2,131.00</td><td>2024-08-10</td><td>4</td></tr>
+    <tr data-status="Cancelled" data-region="LATAM" data-amount="2228"><td>ORD-0224</td><td>FastShop Ltd</td><td>fastshop224@business.com</td><td>LATAM</td><td>Cancelled</td><td data-val="2228">$2,228.00</td><td>2024-08-11</td><td>5</td></tr>
+    <tr data-status="Pending" data-region="EMEA" data-amount="2325"><td>ORD-0225</td><td>TopBuyer Co</td><td>topbuyer225@business.com</td><td>EMEA</td><td>Pending</td><td data-val="2325">$2,325.00</td><td>2024-08-12</td><td>6</td></tr>
+    <tr data-status="Processing" data-region="APAC" data-amount="2422"><td>ORD-0226</td><td>BestClient</td><td>bestclient226@business.com</td><td>APAC</td><td>Processing</td><td data-val="2422">$2,422.00</td><td>2024-08-13</td><td>7</td></tr>
+    <tr data-status="Shipped" data-region="AMER" data-amount="2519"><td>ORD-0227</td><td>QuickOrder</td><td>quickorder227@business.com</td><td>AMER</td><td>Shipped</td><td data-val="2519">$2,519.00</td><td>2024-08-14</td><td>8</td></tr>
+    <tr data-status="Delivered" data-region="LATAM" data-amount="2616"><td>ORD-0228</td><td>PrimePurchase</td><td>primepurchase228@business.com</td><td>LATAM</td><td>Delivered</td><td data-val="2616">$2,616.00</td><td>2024-08-15</td><td>9</td></tr>
+    <tr data-status="Cancelled" data-region="EMEA" data-amount="2713"><td>ORD-0229</td><td>AlphaTrade</td><td>alphatrade229@business.com</td><td>EMEA</td><td>Cancelled</td><td data-val="2713">$2,713.00</td><td>2024-08-16</td><td>10</td></tr>
+    <tr data-status="Pending" data-region="APAC" data-amount="2810"><td>ORD-0230</td><td>ZetaMarket</td><td>zetamarket230@business.com</td><td>APAC</td><td>Pending</td><td data-val="2810">$2,810.00</td><td>2024-08-17</td><td>1</td></tr>
+    <tr data-status="Processing" data-region="AMER" data-amount="2907"><td>ORD-0231</td><td>Acme Corp</td><td>acme231@business.com</td><td>AMER</td><td>Processing</td><td data-val="2907">$2,907.00</td><td>2024-08-18</td><td>2</td></tr>
+    <tr data-status="Shipped" data-region="LATAM" data-amount="3004"><td>ORD-0232</td><td>GlobalTech Inc</td><td>globaltech232@business.com</td><td>LATAM</td><td>Shipped</td><td data-val="3004">$3,004.00</td><td>2024-08-19</td><td>3</td></tr>
+    <tr data-status="Delivered" data-region="EMEA" data-amount="3101"><td>ORD-0233</td><td>MegaRetail</td><td>megaretail233@business.com</td><td>EMEA</td><td>Delivered</td><td data-val="3101">$3,101.00</td><td>2024-08-20</td><td>4</td></tr>
+    <tr data-status="Cancelled" data-region="APAC" data-amount="3198"><td>ORD-0234</td><td>FastShop Ltd</td><td>fastshop234@business.com</td><td>APAC</td><td>Cancelled</td><td data-val="3198">$3,198.00</td><td>2024-08-21</td><td>5</td></tr>
+    <tr data-status="Pending" data-region="AMER" data-amount="3295"><td>ORD-0235</td><td>TopBuyer Co</td><td>topbuyer235@business.com</td><td>AMER</td><td>Pending</td><td data-val="3295">$3,295.00</td><td>2024-08-22</td><td>6</td></tr>
+    <tr data-status="Processing" data-region="LATAM" data-amount="3392"><td>ORD-0236</td><td>BestClient</td><td>bestclient236@business.com</td><td>LATAM</td><td>Processing</td><td data-val="3392">$3,392.00</td><td>2024-08-23</td><td>7</td></tr>
+    <tr data-status="Shipped" data-region="EMEA" data-amount="3489"><td>ORD-0237</td><td>QuickOrder</td><td>quickorder237@business.com</td><td>EMEA</td><td>Shipped</td><td data-val="3489">$3,489.00</td><td>2024-08-24</td><td>8</td></tr>
+    <tr data-status="Delivered" data-region="APAC" data-amount="3586"><td>ORD-0238</td><td>PrimePurchase</td><td>primepurchase238@business.com</td><td>APAC</td><td>Delivered</td><td data-val="3586">$3,586.00</td><td>2024-08-25</td><td>9</td></tr>
+    <tr data-status="Cancelled" data-region="AMER" data-amount="3683"><td>ORD-0239</td><td>AlphaTrade</td><td>alphatrade239@business.com</td><td>AMER</td><td>Cancelled</td><td data-val="3683">$3,683.00</td><td>2024-08-26</td><td>10</td></tr>
+    <tr data-status="Pending" data-region="LATAM" data-amount="3780"><td>ORD-0240</td><td>ZetaMarket</td><td>zetamarket240@business.com</td><td>LATAM</td><td>Pending</td><td data-val="3780">$3,780.00</td><td>2024-08-27</td><td>1</td></tr>
+    <tr data-status="Processing" data-region="EMEA" data-amount="3877"><td>ORD-0241</td><td>Acme Corp</td><td>acme241@business.com</td><td>EMEA</td><td>Processing</td><td data-val="3877">$3,877.00</td><td>2024-08-28</td><td>2</td></tr>
+    <tr data-status="Shipped" data-region="APAC" data-amount="3974"><td>ORD-0242</td><td>GlobalTech Inc</td><td>globaltech242@business.com</td><td>APAC</td><td>Shipped</td><td data-val="3974">$3,974.00</td><td>2024-08-29</td><td>3</td></tr>
+    <tr data-status="Delivered" data-region="AMER" data-amount="4071"><td>ORD-0243</td><td>MegaRetail</td><td>megaretail243@business.com</td><td>AMER</td><td>Delivered</td><td data-val="4071">$4,071.00</td><td>2024-08-30</td><td>4</td></tr>
+    <tr data-status="Cancelled" data-region="LATAM" data-amount="4168"><td>ORD-0244</td><td>FastShop Ltd</td><td>fastshop244@business.com</td><td>LATAM</td><td>Cancelled</td><td data-val="4168">$4,168.00</td><td>2024-08-31</td><td>5</td></tr>
+    <tr data-status="Pending" data-region="EMEA" data-amount="4265"><td>ORD-0245</td><td>TopBuyer Co</td><td>topbuyer245@business.com</td><td>EMEA</td><td>Pending</td><td data-val="4265">$4,265.00</td><td>2024-09-01</td><td>6</td></tr>
+    <tr data-status="Processing" data-region="APAC" data-amount="4362"><td>ORD-0246</td><td>BestClient</td><td>bestclient246@business.com</td><td>APAC</td><td>Processing</td><td data-val="4362">$4,362.00</td><td>2024-09-02</td><td>7</td></tr>
+    <tr data-status="Shipped" data-region="AMER" data-amount="4459"><td>ORD-0247</td><td>QuickOrder</td><td>quickorder247@business.com</td><td>AMER</td><td>Shipped</td><td data-val="4459">$4,459.00</td><td>2024-09-03</td><td>8</td></tr>
+    <tr data-status="Delivered" data-region="LATAM" data-amount="4556"><td>ORD-0248</td><td>PrimePurchase</td><td>primepurchase248@business.com</td><td>LATAM</td><td>Delivered</td><td data-val="4556">$4,556.00</td><td>2024-09-04</td><td>9</td></tr>
+    <tr data-status="Cancelled" data-region="EMEA" data-amount="4653"><td>ORD-0249</td><td>AlphaTrade</td><td>alphatrade249@business.com</td><td>EMEA</td><td>Cancelled</td><td data-val="4653">$4,653.00</td><td>2024-09-05</td><td>10</td></tr>
+    <tr data-status="Pending" data-region="APAC" data-amount="4750"><td>ORD-0250</td><td>ZetaMarket</td><td>zetamarket250@business.com</td><td>APAC</td><td>Pending</td><td data-val="4750">$4,750.00</td><td>2024-09-06</td><td>1</td></tr>
+    <tr data-status="Processing" data-region="AMER" data-amount="4847"><td>ORD-0251</td><td>Acme Corp</td><td>acme251@business.com</td><td>AMER</td><td>Processing</td><td data-val="4847">$4,847.00</td><td>2024-09-07</td><td>2</td></tr>
+    <tr data-status="Shipped" data-region="LATAM" data-amount="4944"><td>ORD-0252</td><td>GlobalTech Inc</td><td>globaltech252@business.com</td><td>LATAM</td><td>Shipped</td><td data-val="4944">$4,944.00</td><td>2024-09-08</td><td>3</td></tr>
+    <tr data-status="Delivered" data-region="EMEA" data-amount="141"><td>ORD-0253</td><td>MegaRetail</td><td>megaretail253@business.com</td><td>EMEA</td><td>Delivered</td><td data-val="141">$141.00</td><td>2024-09-09</td><td>4</td></tr>
+    <tr data-status="Cancelled" data-region="APAC" data-amount="238"><td>ORD-0254</td><td>FastShop Ltd</td><td>fastshop254@business.com</td><td>APAC</td><td>Cancelled</td><td data-val="238">$238.00</td><td>2024-09-10</td><td>5</td></tr>
+    <tr data-status="Pending" data-region="AMER" data-amount="335"><td>ORD-0255</td><td>TopBuyer Co</td><td>topbuyer255@business.com</td><td>AMER</td><td>Pending</td><td data-val="335">$335.00</td><td>2024-09-11</td><td>6</td></tr>
+    <tr data-status="Processing" data-region="LATAM" data-amount="432"><td>ORD-0256</td><td>BestClient</td><td>bestclient256@business.com</td><td>LATAM</td><td>Processing</td><td data-val="432">$432.00</td><td>2024-09-12</td><td>7</td></tr>
+    <tr data-status="Shipped" data-region="EMEA" data-amount="529"><td>ORD-0257</td><td>QuickOrder</td><td>quickorder257@business.com</td><td>EMEA</td><td>Shipped</td><td data-val="529">$529.00</td><td>2024-09-13</td><td>8</td></tr>
+    <tr data-status="Delivered" data-region="APAC" data-amount="626"><td>ORD-0258</td><td>PrimePurchase</td><td>primepurchase258@business.com</td><td>APAC</td><td>Delivered</td><td data-val="626">$626.00</td><td>2024-09-14</td><td>9</td></tr>
+    <tr data-status="Cancelled" data-region="AMER" data-amount="723"><td>ORD-0259</td><td>AlphaTrade</td><td>alphatrade259@business.com</td><td>AMER</td><td>Cancelled</td><td data-val="723">$723.00</td><td>2024-09-15</td><td>10</td></tr>
+    <tr data-status="Pending" data-region="LATAM" data-amount="820"><td>ORD-0260</td><td>ZetaMarket</td><td>zetamarket260@business.com</td><td>LATAM</td><td>Pending</td><td data-val="820">$820.00</td><td>2024-09-16</td><td>1</td></tr>
+    <tr data-status="Processing" data-region="EMEA" data-amount="917"><td>ORD-0261</td><td>Acme Corp</td><td>acme261@business.com</td><td>EMEA</td><td>Processing</td><td data-val="917">$917.00</td><td>2024-09-17</td><td>2</td></tr>
+    <tr data-status="Shipped" data-region="APAC" data-amount="1014"><td>ORD-0262</td><td>GlobalTech Inc</td><td>globaltech262@business.com</td><td>APAC</td><td>Shipped</td><td data-val="1014">$1,014.00</td><td>2024-09-18</td><td>3</td></tr>
+    <tr data-status="Delivered" data-region="AMER" data-amount="1111"><td>ORD-0263</td><td>MegaRetail</td><td>megaretail263@business.com</td><td>AMER</td><td>Delivered</td><td data-val="1111">$1,111.00</td><td>2024-09-19</td><td>4</td></tr>
+    <tr data-status="Cancelled" data-region="LATAM" data-amount="1208"><td>ORD-0264</td><td>FastShop Ltd</td><td>fastshop264@business.com</td><td>LATAM</td><td>Cancelled</td><td data-val="1208">$1,208.00</td><td>2024-09-20</td><td>5</td></tr>
+    <tr data-status="Pending" data-region="EMEA" data-amount="1305"><td>ORD-0265</td><td>TopBuyer Co</td><td>topbuyer265@business.com</td><td>EMEA</td><td>Pending</td><td data-val="1305">$1,305.00</td><td>2024-09-21</td><td>6</td></tr>
+    <tr data-status="Processing" data-region="APAC" data-amount="1402"><td>ORD-0266</td><td>BestClient</td><td>bestclient266@business.com</td><td>APAC</td><td>Processing</td><td data-val="1402">$1,402.00</td><td>2024-09-22</td><td>7</td></tr>
+    <tr data-status="Shipped" data-region="AMER" data-amount="1499"><td>ORD-0267</td><td>QuickOrder</td><td>quickorder267@business.com</td><td>AMER</td><td>Shipped</td><td data-val="1499">$1,499.00</td><td>2024-09-23</td><td>8</td></tr>
+    <tr data-status="Delivered" data-region="LATAM" data-amount="1596"><td>ORD-0268</td><td>PrimePurchase</td><td>primepurchase268@business.com</td><td>LATAM</td><td>Delivered</td><td data-val="1596">$1,596.00</td><td>2024-09-24</td><td>9</td></tr>
+    <tr data-status="Cancelled" data-region="EMEA" data-amount="1693"><td>ORD-0269</td><td>AlphaTrade</td><td>alphatrade269@business.com</td><td>EMEA</td><td>Cancelled</td><td data-val="1693">$1,693.00</td><td>2024-09-25</td><td>10</td></tr>
+    <tr data-status="Pending" data-region="APAC" data-amount="1790"><td>ORD-0270</td><td>ZetaMarket</td><td>zetamarket270@business.com</td><td>APAC</td><td>Pending</td><td data-val="1790">$1,790.00</td><td>2024-09-26</td><td>1</td></tr>
+    <tr data-status="Processing" data-region="AMER" data-amount="1887"><td>ORD-0271</td><td>Acme Corp</td><td>acme271@business.com</td><td>AMER</td><td>Processing</td><td data-val="1887">$1,887.00</td><td>2024-09-27</td><td>2</td></tr>
+    <tr data-status="Shipped" data-region="LATAM" data-amount="1984"><td>ORD-0272</td><td>GlobalTech Inc</td><td>globaltech272@business.com</td><td>LATAM</td><td>Shipped</td><td data-val="1984">$1,984.00</td><td>2024-09-28</td><td>3</td></tr>
+    <tr data-status="Delivered" data-region="EMEA" data-amount="2081"><td>ORD-0273</td><td>MegaRetail</td><td>megaretail273@business.com</td><td>EMEA</td><td>Delivered</td><td data-val="2081">$2,081.00</td><td>2024-09-29</td><td>4</td></tr>
+    <tr data-status="Cancelled" data-region="APAC" data-amount="2178"><td>ORD-0274</td><td>FastShop Ltd</td><td>fastshop274@business.com</td><td>APAC</td><td>Cancelled</td><td data-val="2178">$2,178.00</td><td>2024-09-30</td><td>5</td></tr>
+    <tr data-status="Pending" data-region="AMER" data-amount="2275"><td>ORD-0275</td><td>TopBuyer Co</td><td>topbuyer275@business.com</td><td>AMER</td><td>Pending</td><td data-val="2275">$2,275.00</td><td>2024-10-01</td><td>6</td></tr>
+    <tr data-status="Processing" data-region="LATAM" data-amount="2372"><td>ORD-0276</td><td>BestClient</td><td>bestclient276@business.com</td><td>LATAM</td><td>Processing</td><td data-val="2372">$2,372.00</td><td>2024-10-02</td><td>7</td></tr>
+    <tr data-status="Shipped" data-region="EMEA" data-amount="2469"><td>ORD-0277</td><td>QuickOrder</td><td>quickorder277@business.com</td><td>EMEA</td><td>Shipped</td><td data-val="2469">$2,469.00</td><td>2024-10-03</td><td>8</td></tr>
+    <tr data-status="Delivered" data-region="APAC" data-amount="2566"><td>ORD-0278</td><td>PrimePurchase</td><td>primepurchase278@business.com</td><td>APAC</td><td>Delivered</td><td data-val="2566">$2,566.00</td><td>2024-10-04</td><td>9</td></tr>
+    <tr data-status="Cancelled" data-region="AMER" data-amount="2663"><td>ORD-0279</td><td>AlphaTrade</td><td>alphatrade279@business.com</td><td>AMER</td><td>Cancelled</td><td data-val="2663">$2,663.00</td><td>2024-10-05</td><td>10</td></tr>
+    <tr data-status="Pending" data-region="LATAM" data-amount="2760"><td>ORD-0280</td><td>ZetaMarket</td><td>zetamarket280@business.com</td><td>LATAM</td><td>Pending</td><td data-val="2760">$2,760.00</td><td>2024-10-06</td><td>1</td></tr>
+    <tr data-status="Processing" data-region="EMEA" data-amount="2857"><td>ORD-0281</td><td>Acme Corp</td><td>acme281@business.com</td><td>EMEA</td><td>Processing</td><td data-val="2857">$2,857.00</td><td>2024-10-07</td><td>2</td></tr>
+    <tr data-status="Shipped" data-region="APAC" data-amount="2954"><td>ORD-0282</td><td>GlobalTech Inc</td><td>globaltech282@business.com</td><td>APAC</td><td>Shipped</td><td data-val="2954">$2,954.00</td><td>2024-10-08</td><td>3</td></tr>
+    <tr data-status="Delivered" data-region="AMER" data-amount="3051"><td>ORD-0283</td><td>MegaRetail</td><td>megaretail283@business.com</td><td>AMER</td><td>Delivered</td><td data-val="3051">$3,051.00</td><td>2024-10-09</td><td>4</td></tr>
+    <tr data-status="Cancelled" data-region="LATAM" data-amount="3148"><td>ORD-0284</td><td>FastShop Ltd</td><td>fastshop284@business.com</td><td>LATAM</td><td>Cancelled</td><td data-val="3148">$3,148.00</td><td>2024-10-10</td><td>5</td></tr>
+    <tr data-status="Pending" data-region="EMEA" data-amount="3245"><td>ORD-0285</td><td>TopBuyer Co</td><td>topbuyer285@business.com</td><td>EMEA</td><td>Pending</td><td data-val="3245">$3,245.00</td><td>2024-10-11</td><td>6</td></tr>
+    <tr data-status="Processing" data-region="APAC" data-amount="3342"><td>ORD-0286</td><td>BestClient</td><td>bestclient286@business.com</td><td>APAC</td><td>Processing</td><td data-val="3342">$3,342.00</td><td>2024-10-12</td><td>7</td></tr>
+    <tr data-status="Shipped" data-region="AMER" data-amount="3439"><td>ORD-0287</td><td>QuickOrder</td><td>quickorder287@business.com</td><td>AMER</td><td>Shipped</td><td data-val="3439">$3,439.00</td><td>2024-10-13</td><td>8</td></tr>
+    <tr data-status="Delivered" data-region="LATAM" data-amount="3536"><td>ORD-0288</td><td>PrimePurchase</td><td>primepurchase288@business.com</td><td>LATAM</td><td>Delivered</td><td data-val="3536">$3,536.00</td><td>2024-10-14</td><td>9</td></tr>
+    <tr data-status="Cancelled" data-region="EMEA" data-amount="3633"><td>ORD-0289</td><td>AlphaTrade</td><td>alphatrade289@business.com</td><td>EMEA</td><td>Cancelled</td><td data-val="3633">$3,633.00</td><td>2024-10-15</td><td>10</td></tr>
+    <tr data-status="Pending" data-region="APAC" data-amount="3730"><td>ORD-0290</td><td>ZetaMarket</td><td>zetamarket290@business.com</td><td>APAC</td><td>Pending</td><td data-val="3730">$3,730.00</td><td>2024-10-16</td><td>1</td></tr>
+    <tr data-status="Processing" data-region="AMER" data-amount="3827"><td>ORD-0291</td><td>Acme Corp</td><td>acme291@business.com</td><td>AMER</td><td>Processing</td><td data-val="3827">$3,827.00</td><td>2024-10-17</td><td>2</td></tr>
+    <tr data-status="Shipped" data-region="LATAM" data-amount="3924"><td>ORD-0292</td><td>GlobalTech Inc</td><td>globaltech292@business.com</td><td>LATAM</td><td>Shipped</td><td data-val="3924">$3,924.00</td><td>2024-10-18</td><td>3</td></tr>
+    <tr data-status="Delivered" data-region="EMEA" data-amount="4021"><td>ORD-0293</td><td>MegaRetail</td><td>megaretail293@business.com</td><td>EMEA</td><td>Delivered</td><td data-val="4021">$4,021.00</td><td>2024-10-19</td><td>4</td></tr>
+    <tr data-status="Cancelled" data-region="APAC" data-amount="4118"><td>ORD-0294</td><td>FastShop Ltd</td><td>fastshop294@business.com</td><td>APAC</td><td>Cancelled</td><td data-val="4118">$4,118.00</td><td>2024-10-20</td><td>5</td></tr>
+    <tr data-status="Pending" data-region="AMER" data-amount="4215"><td>ORD-0295</td><td>TopBuyer Co</td><td>topbuyer295@business.com</td><td>AMER</td><td>Pending</td><td data-val="4215">$4,215.00</td><td>2024-10-21</td><td>6</td></tr>
+    <tr data-status="Processing" data-region="LATAM" data-amount="4312"><td>ORD-0296</td><td>BestClient</td><td>bestclient296@business.com</td><td>LATAM</td><td>Processing</td><td data-val="4312">$4,312.00</td><td>2024-10-22</td><td>7</td></tr>
+    <tr data-status="Shipped" data-region="EMEA" data-amount="4409"><td>ORD-0297</td><td>QuickOrder</td><td>quickorder297@business.com</td><td>EMEA</td><td>Shipped</td><td data-val="4409">$4,409.00</td><td>2024-10-23</td><td>8</td></tr>
+    <tr data-status="Delivered" data-region="APAC" data-amount="4506"><td>ORD-0298</td><td>PrimePurchase</td><td>primepurchase298@business.com</td><td>APAC</td><td>Delivered</td><td data-val="4506">$4,506.00</td><td>2024-10-24</td><td>9</td></tr>
+    <tr data-status="Cancelled" data-region="AMER" data-amount="4603"><td>ORD-0299</td><td>AlphaTrade</td><td>alphatrade299@business.com</td><td>AMER</td><td>Cancelled</td><td data-val="4603">$4,603.00</td><td>2024-10-25</td><td>10</td></tr>
+    <tr data-status="Pending" data-region="LATAM" data-amount="4700"><td>ORD-0300</td><td>ZetaMarket</td><td>zetamarket300@business.com</td><td>LATAM</td><td>Pending</td><td data-val="4700">$4,700.00</td><td>2024-10-26</td><td>1</td></tr>
+  </tbody>
+</table>
+
+<script>
+var amountSortDesc = false;
+
+function applyFilters() {
+  var statusVal = document.getElementById('status-filter').value;
+  var regionVal = document.getElementById('region-filter').value;
+  var rows = document.querySelectorAll('#table-body tr');
+  var shown = 0;
+  rows.forEach(function(row) {
+    var ok = (!statusVal || row.dataset.status === statusVal)
+          && (!regionVal || row.dataset.region === regionVal);
+    row.classList.toggle('hidden', !ok);
+    if (ok) shown++;
+  });
+  document.getElementById('showing').textContent =
+    'Showing ' + shown + ' of 300 orders';
+}
+
+function sortByAmount() {
+  amountSortDesc = !amountSortDesc;
+  var tbody = document.getElementById('table-body');
+  var rows = Array.from(tbody.querySelectorAll('tr'));
+  rows.sort(function(a, b) {
+    var av = parseInt(a.querySelector('[data-val]').dataset.val);
+    var bv = parseInt(b.querySelector('[data-val]').dataset.val);
+    return amountSortDesc ? bv - av : av - bv;
+  });
+  rows.forEach(function(r) { tbody.appendChild(r); });
+  document.getElementById('amount-header').innerHTML =
+    'Amount ' + (amountSortDesc ? '&#9660;' : '&#9650;');
+}
+</script>
+</body>
+</html>

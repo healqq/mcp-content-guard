@@ -1,0 +1,26 @@
+{
+  "name": "fetch",
+  "mcp": "@modelcontextprotocol/server-fetch",
+  "cmd": ["npx", "-y", "@modelcontextprotocol/server-fetch"],
+  "notes": "Requires: node.js. No credentials needed. Fetches real URLs and returns content as markdown.",
+  "cases": [
+    {
+      "name": "python_builtins_docs",
+      "tool": "fetch",
+      "arguments": { "url": "https://docs.python.org/3/library/functions.html" },
+      "filter": "grep:def "
+    },
+    {
+      "name": "mdn_html_elements",
+      "tool": "fetch",
+      "arguments": { "url": "https://developer.mozilla.org/en-US/docs/Web/HTML/Element" },
+      "filter": ".[0].text[:3000]"
+    },
+    {
+      "name": "go_stdlib_fmt",
+      "tool": "fetch",
+      "arguments": { "url": "https://pkg.go.dev/fmt" },
+      "filter": "grep:func "
+    }
+  ]
+}
