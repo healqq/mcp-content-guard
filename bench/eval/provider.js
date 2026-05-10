@@ -20,10 +20,10 @@ const readline         = require('readline');
 const { OpenAI }       = require('openai');
 const { pathToFileURL } = require('url');
 
-const DATA_DIR     = path.resolve(__dirname, '../../data');
-const CODEBASE_DIR = path.resolve(__dirname, '../../data/codebase');
-const WEBAPP_URL   = pathToFileURL(path.resolve(__dirname, '../../data/webapp/index.html')).href;
-const REPO_DIR     = path.resolve(__dirname, '../../data/react-repo');
+const DATA_DIR     = path.resolve(__dirname, '../data');
+const CODEBASE_DIR = path.resolve(__dirname, '../data/codebase');
+const WEBAPP_URL   = pathToFileURL(path.resolve(__dirname, '../data/webapp/index.html')).href;
+const REPO_DIR     = path.resolve(__dirname, '../data/react-repo');
 
 // ── MCP client (stdio JSON-RPC 2.0) ─────────────────────────────────────────
 

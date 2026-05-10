@@ -51,7 +51,7 @@ if (allResults.length === 0) {
 const groups = new Map();
 
 for (const { file, row } of allResults) {
-  const desc     = row.description || row.prompt?.raw?.slice(0, 60) || '(unknown)';
+  const desc     = row.testCase?.description || row.description || row.prompt?.raw?.slice(0, 60) || '(unknown)';
   const label    = row.provider?.label || row.provider?.id || 'unknown';
   const key      = `${file}::${desc}`;
 

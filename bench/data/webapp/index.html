@@ -370,6 +370,15 @@
 <script>
 var amountSortDesc = false;
 
+window.addEventListener('DOMContentLoaded', function() {
+  var total = 0;
+  document.querySelectorAll('#table-body tr [data-val]').forEach(function(el) {
+    total += parseInt(el.dataset.val, 10);
+  });
+  var formatted = '$' + total.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  document.getElementById('total-revenue').textContent = 'Total Revenue: ' + formatted;
+});
+
 function applyFilters() {
   var statusVal = document.getElementById('status-filter').value;
   var regionVal = document.getElementById('region-filter').value;

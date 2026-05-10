@@ -1,0 +1,1602 @@
+{
+  "evalId": "eval-Nr4-2026-05-10T16:31:25",
+  "results": {
+    "version": 3,
+    "timestamp": "2026-05-10T16:31:25.693Z",
+    "prompts": [
+      {
+        "id": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "raw": "{{task}}",
+        "label": "{{task}}",
+        "provider": "sqlite/direct",
+        "metrics": {
+          "score": 5,
+          "testPassCount": 5,
+          "testFailCount": 0,
+          "testErrorCount": 0,
+          "assertPassCount": 5,
+          "assertFailCount": 0,
+          "totalLatencyMs": 25748,
+          "tokenUsage": {
+            "prompt": 8140,
+            "completion": 308,
+            "cached": 0,
+            "total": 8448,
+            "numRequests": 5,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            },
+            "assertions": {
+              "total": 1094,
+              "prompt": 956,
+              "completion": 138,
+              "cached": 0,
+              "numRequests": 0,
+              "completionDetails": {
+                "reasoning": 0,
+                "acceptedPrediction": 0,
+                "rejectedPrediction": 0,
+                "cacheReadInputTokens": 0,
+                "cacheCreationInputTokens": 0
+              }
+            }
+          },
+          "namedScores": {},
+          "namedScoresCount": {},
+          "namedScoreWeights": {},
+          "cost": 0
+        }
+      },
+      {
+        "id": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "raw": "{{task}}",
+        "label": "{{task}}",
+        "provider": "sqlite/proxied",
+        "metrics": {
+          "score": 5,
+          "testPassCount": 5,
+          "testFailCount": 0,
+          "testErrorCount": 0,
+          "assertPassCount": 5,
+          "assertFailCount": 0,
+          "totalLatencyMs": 27683,
+          "tokenUsage": {
+            "prompt": 10300,
+            "completion": 321,
+            "cached": 0,
+            "total": 10621,
+            "numRequests": 5,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            },
+            "assertions": {
+              "total": 1094,
+              "prompt": 768,
+              "completion": 114,
+              "cached": 212,
+              "numRequests": 0,
+              "completionDetails": {
+                "reasoning": 0,
+                "acceptedPrediction": 0,
+                "rejectedPrediction": 0,
+                "cacheReadInputTokens": 0,
+                "cacheCreationInputTokens": 0
+              }
+            }
+          },
+          "namedScores": {},
+          "namedScoresCount": {},
+          "namedScoreWeights": {},
+          "cost": 0
+        }
+      }
+    ],
+    "results": [
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 225,
+            "prompt": 197,
+            "completion": 28,
+            "cached": 0,
+            "numRequests": 1
+          },
+          "componentResults": [
+            {
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "The response is exactly or contains the email address customer042@example.com",
+                "threshold": 0.9
+              },
+              "pass": true,
+              "score": 1,
+              "reason": "The output exactly contains the email address customer042@example.com.",
+              "tokensUsed": {
+                "total": 225,
+                "prompt": 197,
+                "completion": 28,
+                "cached": 0,
+                "numRequests": 1,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              },
+              "metadata": {
+                "http": {
+                  "status": 200,
+                  "statusText": "OK",
+                  "headers": {
+                    "access-control-expose-headers": "X-Request-ID",
+                    "alt-svc": "h3=\":443\"; ma=86400",
+                    "cf-cache-status": "[REDACTED]",
+                    "cf-ray": "[REDACTED]",
+                    "connection": "keep-alive",
+                    "content-encoding": "br",
+                    "content-type": "application/json",
+                    "date": "Sun, 10 May 2026 16:31:30 GMT",
+                    "openai-organization": "[REDACTED]",
+                    "openai-processing-ms": "624",
+                    "openai-project": "[REDACTED]",
+                    "openai-version": "[REDACTED]",
+                    "server": "cloudflare",
+                    "set-cookie": "[REDACTED]",
+                    "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                    "transfer-encoding": "chunked",
+                    "x-content-type-options": "nosniff",
+                    "x-openai-proxy-wasm": "[REDACTED]",
+                    "x-ratelimit-limit-requests": "[REDACTED]",
+                    "x-ratelimit-limit-tokens": "[REDACTED]",
+                    "x-ratelimit-remaining-requests": "[REDACTED]",
+                    "x-ratelimit-remaining-tokens": "[REDACTED]",
+                    "x-ratelimit-reset-requests": "[REDACTED]",
+                    "x-ratelimit-reset-tokens": "[REDACTED]",
+                    "x-request-id": "[REDACTED]"
+                  }
+                },
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\ncustomer042@example.com\\n</Output>\\n<Rubric>\\nThe response is exactly or contains the email address customer042@example.com\\n</Rubric>\"}]"
+              }
+            }
+          ]
+        },
+        "id": "8ea851df-4558-4b8b-9263-6ea480fe43d6",
+        "latencyMs": 4203,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Query the database to find the email address of the customer with id=42. Reply with only the email address, nothing else.",
+          "label": "{{task}}",
+          "config": {
+            "provider": "openai:gpt-5.4-mini-2026-03-17"
+          }
+        },
+        "promptId": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "promptIdx": 0,
+        "provider": {
+          "id": "mcp-bench",
+          "label": "sqlite/direct"
+        },
+        "response": {
+          "output": "customer042@example.com",
+          "tokenUsage": {
+            "total": 1820,
+            "prompt": 1756,
+            "completion": 64
+          },
+          "metadata": {
+            "turns": 4,
+            "inputTokens": 1756,
+            "outputTokens": 64
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "customer email by id",
+          "vars": {
+            "task": "Query the database to find the email address of the customer with id=42. Reply with only the email address, nothing else.\n"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "The response is exactly or contains the email address customer042@example.com",
+              "threshold": 0.9
+            }
+          ],
+          "options": {
+            "provider": "openai:gpt-5.4-mini-2026-03-17"
+          },
+          "metadata": {}
+        },
+        "testIdx": 0,
+        "vars": {
+          "task": "Query the database to find the email address of the customer with id=42. Reply with only the email address, nothing else.\n"
+        },
+        "metadata": {
+          "turns": 4,
+          "inputTokens": 1756,
+          "outputTokens": 64,
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 225,
+            "prompt": 197,
+            "completion": 28,
+            "cached": 0,
+            "numRequests": 1
+          },
+          "componentResults": [
+            {
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "The response is exactly or contains the email address customer042@example.com",
+                "threshold": 0.9
+              },
+              "pass": true,
+              "score": 1,
+              "reason": "The output exactly contains the email address customer042@example.com.",
+              "tokensUsed": {
+                "total": 225,
+                "prompt": 197,
+                "completion": 28,
+                "cached": 0,
+                "numRequests": 1,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              },
+              "metadata": {
+                "http": {
+                  "status": 200,
+                  "statusText": "OK",
+                  "headers": {
+                    "access-control-expose-headers": "X-Request-ID",
+                    "alt-svc": "h3=\":443\"; ma=86400",
+                    "cf-cache-status": "[REDACTED]",
+                    "cf-ray": "[REDACTED]",
+                    "connection": "keep-alive",
+                    "content-encoding": "br",
+                    "content-type": "application/json",
+                    "date": "Sun, 10 May 2026 16:31:30 GMT",
+                    "openai-organization": "[REDACTED]",
+                    "openai-processing-ms": "624",
+                    "openai-project": "[REDACTED]",
+                    "openai-version": "[REDACTED]",
+                    "server": "cloudflare",
+                    "set-cookie": "[REDACTED]",
+                    "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                    "transfer-encoding": "chunked",
+                    "x-content-type-options": "nosniff",
+                    "x-openai-proxy-wasm": "[REDACTED]",
+                    "x-ratelimit-limit-requests": "[REDACTED]",
+                    "x-ratelimit-limit-tokens": "[REDACTED]",
+                    "x-ratelimit-remaining-requests": "[REDACTED]",
+                    "x-ratelimit-remaining-tokens": "[REDACTED]",
+                    "x-ratelimit-reset-requests": "[REDACTED]",
+                    "x-ratelimit-reset-tokens": "[REDACTED]",
+                    "x-request-id": "[REDACTED]"
+                  }
+                },
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\ncustomer042@example.com\\n</Output>\\n<Rubric>\\nThe response is exactly or contains the email address customer042@example.com\\n</Rubric>\"}]"
+              }
+            }
+          ]
+        },
+        "id": "de480eca-6782-4df8-b7c4-f06b0a9133b0",
+        "latencyMs": 4290,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Query the database to find the email address of the customer with id=42. Reply with only the email address, nothing else.",
+          "label": "{{task}}",
+          "config": {
+            "provider": "openai:gpt-5.4-mini-2026-03-17"
+          }
+        },
+        "promptId": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "promptIdx": 1,
+        "provider": {
+          "id": "mcp-bench",
+          "label": "sqlite/proxied"
+        },
+        "response": {
+          "output": "customer042@example.com",
+          "tokenUsage": {
+            "total": 2188,
+            "prompt": 2124,
+            "completion": 64
+          },
+          "metadata": {
+            "turns": 4,
+            "inputTokens": 2124,
+            "outputTokens": 64
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "customer email by id",
+          "vars": {
+            "task": "Query the database to find the email address of the customer with id=42. Reply with only the email address, nothing else.\n"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "The response is exactly or contains the email address customer042@example.com",
+              "threshold": 0.9
+            }
+          ],
+          "options": {
+            "provider": "openai:gpt-5.4-mini-2026-03-17"
+          },
+          "metadata": {}
+        },
+        "testIdx": 0,
+        "vars": {
+          "task": "Query the database to find the email address of the customer with id=42. Reply with only the email address, nothing else.\n"
+        },
+        "metadata": {
+          "turns": 4,
+          "inputTokens": 2124,
+          "outputTokens": 64,
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 232,
+            "prompt": 195,
+            "completion": 37,
+            "cached": 0,
+            "numRequests": 1
+          },
+          "componentResults": [
+            {
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "The response contains the word 'cancelled' (case-insensitive)",
+                "threshold": 0.9
+              },
+              "pass": true,
+              "score": 1,
+              "reason": "The output contains the word 'cancelled' exactly, which satisfies the rubric case-insensitively.",
+              "tokensUsed": {
+                "total": 232,
+                "prompt": 195,
+                "completion": 37,
+                "cached": 0,
+                "numRequests": 1,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              },
+              "metadata": {
+                "http": {
+                  "status": 200,
+                  "statusText": "OK",
+                  "headers": {
+                    "access-control-expose-headers": "X-Request-ID",
+                    "alt-svc": "h3=\":443\"; ma=86400",
+                    "cf-cache-status": "[REDACTED]",
+                    "cf-ray": "[REDACTED]",
+                    "connection": "keep-alive",
+                    "content-encoding": "br",
+                    "content-type": "application/json",
+                    "date": "Sun, 10 May 2026 16:31:31 GMT",
+                    "openai-organization": "[REDACTED]",
+                    "openai-processing-ms": "748",
+                    "openai-project": "[REDACTED]",
+                    "openai-version": "[REDACTED]",
+                    "server": "cloudflare",
+                    "set-cookie": "[REDACTED]",
+                    "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                    "transfer-encoding": "chunked",
+                    "x-content-type-options": "nosniff",
+                    "x-openai-proxy-wasm": "[REDACTED]",
+                    "x-ratelimit-limit-requests": "[REDACTED]",
+                    "x-ratelimit-limit-tokens": "[REDACTED]",
+                    "x-ratelimit-remaining-requests": "[REDACTED]",
+                    "x-ratelimit-remaining-tokens": "[REDACTED]",
+                    "x-ratelimit-reset-requests": "[REDACTED]",
+                    "x-ratelimit-reset-tokens": "[REDACTED]",
+                    "x-request-id": "[REDACTED]"
+                  }
+                },
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\ncancelled\\n</Output>\\n<Rubric>\\nThe response contains the word 'cancelled' (case-insensitive)\\n</Rubric>\"}]"
+              }
+            }
+          ]
+        },
+        "id": "f53228b0-29d5-429f-9b67-957b55b937af",
+        "latencyMs": 4690,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Query the database to find the status of the order with id=409. Reply with only the status value, nothing else.",
+          "label": "{{task}}",
+          "config": {
+            "provider": "openai:gpt-5.4-mini-2026-03-17"
+          }
+        },
+        "promptId": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "promptIdx": 0,
+        "provider": {
+          "id": "mcp-bench",
+          "label": "sqlite/direct"
+        },
+        "response": {
+          "output": "cancelled",
+          "tokenUsage": {
+            "total": 1970,
+            "prompt": 1908,
+            "completion": 62
+          },
+          "metadata": {
+            "turns": 4,
+            "inputTokens": 1908,
+            "outputTokens": 62
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "order status lookup",
+          "vars": {
+            "task": "Query the database to find the status of the order with id=409. Reply with only the status value, nothing else.\n"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "The response contains the word 'cancelled' (case-insensitive)",
+              "threshold": 0.9
+            }
+          ],
+          "options": {
+            "provider": "openai:gpt-5.4-mini-2026-03-17"
+          },
+          "metadata": {}
+        },
+        "testIdx": 1,
+        "vars": {
+          "task": "Query the database to find the status of the order with id=409. Reply with only the status value, nothing else.\n"
+        },
+        "metadata": {
+          "turns": 4,
+          "inputTokens": 1908,
+          "outputTokens": 62,
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 232,
+            "prompt": 195,
+            "completion": 37,
+            "cached": 0,
+            "numRequests": 1
+          },
+          "componentResults": [
+            {
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "The response contains the word 'cancelled' (case-insensitive)",
+                "threshold": 0.9
+              },
+              "pass": true,
+              "score": 1,
+              "reason": "The output contains the word 'cancelled' exactly, which satisfies the rubric case-insensitively.",
+              "tokensUsed": {
+                "total": 232,
+                "prompt": 195,
+                "completion": 37,
+                "cached": 0,
+                "numRequests": 1,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              },
+              "metadata": {
+                "http": {
+                  "status": 200,
+                  "statusText": "OK",
+                  "headers": {
+                    "access-control-expose-headers": "X-Request-ID",
+                    "alt-svc": "h3=\":443\"; ma=86400",
+                    "cf-cache-status": "[REDACTED]",
+                    "cf-ray": "[REDACTED]",
+                    "connection": "keep-alive",
+                    "content-encoding": "br",
+                    "content-type": "application/json",
+                    "date": "Sun, 10 May 2026 16:31:31 GMT",
+                    "openai-organization": "[REDACTED]",
+                    "openai-processing-ms": "748",
+                    "openai-project": "[REDACTED]",
+                    "openai-version": "[REDACTED]",
+                    "server": "cloudflare",
+                    "set-cookie": "[REDACTED]",
+                    "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                    "transfer-encoding": "chunked",
+                    "x-content-type-options": "nosniff",
+                    "x-openai-proxy-wasm": "[REDACTED]",
+                    "x-ratelimit-limit-requests": "[REDACTED]",
+                    "x-ratelimit-limit-tokens": "[REDACTED]",
+                    "x-ratelimit-remaining-requests": "[REDACTED]",
+                    "x-ratelimit-remaining-tokens": "[REDACTED]",
+                    "x-ratelimit-reset-requests": "[REDACTED]",
+                    "x-ratelimit-reset-tokens": "[REDACTED]",
+                    "x-request-id": "[REDACTED]"
+                  }
+                },
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\ncancelled\\n</Output>\\n<Rubric>\\nThe response contains the word 'cancelled' (case-insensitive)\\n</Rubric>\"}]"
+              }
+            }
+          ]
+        },
+        "id": "3c9f428f-7e40-49cd-a2e5-469a4e9a6eca",
+        "latencyMs": 4819,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Query the database to find the status of the order with id=409. Reply with only the status value, nothing else.",
+          "label": "{{task}}",
+          "config": {
+            "provider": "openai:gpt-5.4-mini-2026-03-17"
+          }
+        },
+        "promptId": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "promptIdx": 1,
+        "provider": {
+          "id": "mcp-bench",
+          "label": "sqlite/proxied"
+        },
+        "response": {
+          "output": "cancelled",
+          "tokenUsage": {
+            "total": 2338,
+            "prompt": 2276,
+            "completion": 62
+          },
+          "metadata": {
+            "turns": 4,
+            "inputTokens": 2276,
+            "outputTokens": 62
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "order status lookup",
+          "vars": {
+            "task": "Query the database to find the status of the order with id=409. Reply with only the status value, nothing else.\n"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "The response contains the word 'cancelled' (case-insensitive)",
+              "threshold": 0.9
+            }
+          ],
+          "options": {
+            "provider": "openai:gpt-5.4-mini-2026-03-17"
+          },
+          "metadata": {}
+        },
+        "testIdx": 1,
+        "vars": {
+          "task": "Query the database to find the status of the order with id=409. Reply with only the status value, nothing else.\n"
+        },
+        "metadata": {
+          "turns": 4,
+          "inputTokens": 2276,
+          "outputTokens": 62,
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 212,
+            "prompt": 188,
+            "completion": 24,
+            "cached": 0,
+            "numRequests": 1
+          },
+          "componentResults": [
+            {
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "The response contains the number 296",
+                "threshold": 0.9
+              },
+              "pass": true,
+              "score": 1,
+              "reason": "The output contains the number 296.",
+              "tokensUsed": {
+                "total": 212,
+                "prompt": 188,
+                "completion": 24,
+                "cached": 0,
+                "numRequests": 1,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              },
+              "metadata": {
+                "http": {
+                  "status": 200,
+                  "statusText": "OK",
+                  "headers": {
+                    "access-control-expose-headers": "X-Request-ID",
+                    "alt-svc": "h3=\":443\"; ma=86400",
+                    "cf-cache-status": "[REDACTED]",
+                    "cf-ray": "[REDACTED]",
+                    "connection": "keep-alive",
+                    "content-encoding": "br",
+                    "content-type": "application/json",
+                    "date": "Sun, 10 May 2026 16:31:37 GMT",
+                    "openai-organization": "[REDACTED]",
+                    "openai-processing-ms": "626",
+                    "openai-project": "[REDACTED]",
+                    "openai-version": "[REDACTED]",
+                    "server": "cloudflare",
+                    "set-cookie": "[REDACTED]",
+                    "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                    "transfer-encoding": "chunked",
+                    "x-content-type-options": "nosniff",
+                    "x-openai-proxy-wasm": "[REDACTED]",
+                    "x-ratelimit-limit-requests": "[REDACTED]",
+                    "x-ratelimit-limit-tokens": "[REDACTED]",
+                    "x-ratelimit-remaining-requests": "[REDACTED]",
+                    "x-ratelimit-remaining-tokens": "[REDACTED]",
+                    "x-ratelimit-reset-requests": "[REDACTED]",
+                    "x-ratelimit-reset-tokens": "[REDACTED]",
+                    "x-request-id": "[REDACTED]"
+                  }
+                },
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\n296\\n</Output>\\n<Rubric>\\nThe response contains the number 296\\n</Rubric>\"}]"
+              }
+            }
+          ]
+        },
+        "id": "63d21eaf-2acb-49b1-8c3c-82a8c03e6439",
+        "latencyMs": 6172,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Query the orders table to find which order has an amount of exactly $265.99. Reply with only the order id number, nothing else.",
+          "label": "{{task}}",
+          "config": {
+            "provider": "openai:gpt-5.4-mini-2026-03-17"
+          }
+        },
+        "promptId": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "promptIdx": 0,
+        "provider": {
+          "id": "mcp-bench",
+          "label": "sqlite/direct"
+        },
+        "response": {
+          "output": "296",
+          "tokenUsage": {
+            "total": 1993,
+            "prompt": 1927,
+            "completion": 66
+          },
+          "metadata": {
+            "turns": 4,
+            "inputTokens": 1927,
+            "outputTokens": 66
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "find order by exact amount",
+          "vars": {
+            "task": "Query the orders table to find which order has an amount of exactly $265.99. Reply with only the order id number, nothing else.\n"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "The response contains the number 296",
+              "threshold": 0.9
+            }
+          ],
+          "options": {
+            "provider": "openai:gpt-5.4-mini-2026-03-17"
+          },
+          "metadata": {}
+        },
+        "testIdx": 2,
+        "vars": {
+          "task": "Query the orders table to find which order has an amount of exactly $265.99. Reply with only the order id number, nothing else.\n"
+        },
+        "metadata": {
+          "turns": 4,
+          "inputTokens": 1927,
+          "outputTokens": 66,
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 212,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 212,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "The response contains the number 296",
+                "threshold": 0.9
+              },
+              "pass": true,
+              "score": 1,
+              "reason": "The output contains the number 296.",
+              "tokensUsed": {
+                "total": 212,
+                "prompt": 0,
+                "completion": 0,
+                "cached": 212,
+                "numRequests": 0,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              },
+              "metadata": {
+                "http": {
+                  "status": 200,
+                  "statusText": "OK",
+                  "headers": {
+                    "access-control-expose-headers": "X-Request-ID",
+                    "alt-svc": "h3=\":443\"; ma=86400",
+                    "cf-cache-status": "[REDACTED]",
+                    "cf-ray": "[REDACTED]",
+                    "connection": "keep-alive",
+                    "content-encoding": "br",
+                    "content-type": "application/json",
+                    "date": "Sun, 10 May 2026 16:31:37 GMT",
+                    "openai-organization": "[REDACTED]",
+                    "openai-processing-ms": "626",
+                    "openai-project": "[REDACTED]",
+                    "openai-version": "[REDACTED]",
+                    "server": "cloudflare",
+                    "set-cookie": "[REDACTED]",
+                    "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                    "transfer-encoding": "chunked",
+                    "x-content-type-options": "nosniff",
+                    "x-openai-proxy-wasm": "[REDACTED]",
+                    "x-ratelimit-limit-requests": "[REDACTED]",
+                    "x-ratelimit-limit-tokens": "[REDACTED]",
+                    "x-ratelimit-remaining-requests": "[REDACTED]",
+                    "x-ratelimit-remaining-tokens": "[REDACTED]",
+                    "x-ratelimit-reset-requests": "[REDACTED]",
+                    "x-ratelimit-reset-tokens": "[REDACTED]",
+                    "x-request-id": "[REDACTED]"
+                  }
+                },
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\n296\\n</Output>\\n<Rubric>\\nThe response contains the number 296\\n</Rubric>\"}]"
+              }
+            }
+          ]
+        },
+        "id": "c67f40fe-039e-4eb7-8f40-45bf92b30351",
+        "latencyMs": 7445,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Query the orders table to find which order has an amount of exactly $265.99. Reply with only the order id number, nothing else.",
+          "label": "{{task}}",
+          "config": {
+            "provider": "openai:gpt-5.4-mini-2026-03-17"
+          }
+        },
+        "promptId": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "promptIdx": 1,
+        "provider": {
+          "id": "mcp-bench",
+          "label": "sqlite/proxied"
+        },
+        "response": {
+          "output": "296",
+          "tokenUsage": {
+            "total": 2361,
+            "prompt": 2295,
+            "completion": 66
+          },
+          "metadata": {
+            "turns": 4,
+            "inputTokens": 2295,
+            "outputTokens": 66
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "find order by exact amount",
+          "vars": {
+            "task": "Query the orders table to find which order has an amount of exactly $265.99. Reply with only the order id number, nothing else.\n"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "The response contains the number 296",
+              "threshold": 0.9
+            }
+          ],
+          "options": {
+            "provider": "openai:gpt-5.4-mini-2026-03-17"
+          },
+          "metadata": {}
+        },
+        "testIdx": 2,
+        "vars": {
+          "task": "Query the orders table to find which order has an amount of exactly $265.99. Reply with only the order id number, nothing else.\n"
+        },
+        "metadata": {
+          "turns": 4,
+          "inputTokens": 2295,
+          "outputTokens": 66,
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 213,
+            "prompt": 188,
+            "completion": 25,
+            "cached": 0,
+            "numRequests": 1
+          },
+          "componentResults": [
+            {
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "The response contains the number 20",
+                "threshold": 0.9
+              },
+              "pass": true,
+              "score": 1,
+              "reason": "The output contains the number 20 exactly.",
+              "tokensUsed": {
+                "total": 213,
+                "prompt": 188,
+                "completion": 25,
+                "cached": 0,
+                "numRequests": 1,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              },
+              "metadata": {
+                "http": {
+                  "status": 200,
+                  "statusText": "OK",
+                  "headers": {
+                    "access-control-expose-headers": "X-Request-ID",
+                    "alt-svc": "h3=\":443\"; ma=86400",
+                    "cf-cache-status": "[REDACTED]",
+                    "cf-ray": "[REDACTED]",
+                    "connection": "keep-alive",
+                    "content-encoding": "br",
+                    "content-type": "application/json",
+                    "date": "Sun, 10 May 2026 16:31:38 GMT",
+                    "openai-organization": "[REDACTED]",
+                    "openai-processing-ms": "785",
+                    "openai-project": "[REDACTED]",
+                    "openai-version": "[REDACTED]",
+                    "server": "cloudflare",
+                    "set-cookie": "[REDACTED]",
+                    "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                    "transfer-encoding": "chunked",
+                    "x-content-type-options": "nosniff",
+                    "x-openai-proxy-wasm": "[REDACTED]",
+                    "x-ratelimit-limit-requests": "[REDACTED]",
+                    "x-ratelimit-limit-tokens": "[REDACTED]",
+                    "x-ratelimit-remaining-requests": "[REDACTED]",
+                    "x-ratelimit-remaining-tokens": "[REDACTED]",
+                    "x-ratelimit-reset-requests": "[REDACTED]",
+                    "x-ratelimit-reset-tokens": "[REDACTED]",
+                    "x-request-id": "[REDACTED]"
+                  }
+                },
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\n20\\n</Output>\\n<Rubric>\\nThe response contains the number 20\\n</Rubric>\"}]"
+              }
+            }
+          ]
+        },
+        "id": "3326f3b0-123c-4c5d-b247-c22a45d19fb8",
+        "latencyMs": 6163,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Query the products table and count how many products belong to the 'Electronics' category. Reply with only the number, nothing else.",
+          "label": "{{task}}",
+          "config": {
+            "provider": "openai:gpt-5.4-mini-2026-03-17"
+          }
+        },
+        "promptId": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "promptIdx": 1,
+        "provider": {
+          "id": "mcp-bench",
+          "label": "sqlite/proxied"
+        },
+        "response": {
+          "output": "20",
+          "tokenUsage": {
+            "total": 2269,
+            "prompt": 2204,
+            "completion": 65
+          },
+          "metadata": {
+            "turns": 4,
+            "inputTokens": 2204,
+            "outputTokens": 65
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "product category count",
+          "vars": {
+            "task": "Query the products table and count how many products belong to the 'Electronics' category. Reply with only the number, nothing else.\n"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "The response contains the number 20",
+              "threshold": 0.9
+            }
+          ],
+          "options": {
+            "provider": "openai:gpt-5.4-mini-2026-03-17"
+          },
+          "metadata": {}
+        },
+        "testIdx": 3,
+        "vars": {
+          "task": "Query the products table and count how many products belong to the 'Electronics' category. Reply with only the number, nothing else.\n"
+        },
+        "metadata": {
+          "turns": 4,
+          "inputTokens": 2204,
+          "outputTokens": 65,
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 213,
+            "prompt": 188,
+            "completion": 25,
+            "cached": 0,
+            "numRequests": 1
+          },
+          "componentResults": [
+            {
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "The response contains the number 20",
+                "threshold": 0.9
+              },
+              "pass": true,
+              "score": 1,
+              "reason": "The output contains the number 20 exactly.",
+              "tokensUsed": {
+                "total": 213,
+                "prompt": 188,
+                "completion": 25,
+                "cached": 0,
+                "numRequests": 1,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              },
+              "metadata": {
+                "http": {
+                  "status": 200,
+                  "statusText": "OK",
+                  "headers": {
+                    "access-control-expose-headers": "X-Request-ID",
+                    "alt-svc": "h3=\":443\"; ma=86400",
+                    "cf-cache-status": "[REDACTED]",
+                    "cf-ray": "[REDACTED]",
+                    "connection": "keep-alive",
+                    "content-encoding": "br",
+                    "content-type": "application/json",
+                    "date": "Sun, 10 May 2026 16:31:38 GMT",
+                    "openai-organization": "[REDACTED]",
+                    "openai-processing-ms": "785",
+                    "openai-project": "[REDACTED]",
+                    "openai-version": "[REDACTED]",
+                    "server": "cloudflare",
+                    "set-cookie": "[REDACTED]",
+                    "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                    "transfer-encoding": "chunked",
+                    "x-content-type-options": "nosniff",
+                    "x-openai-proxy-wasm": "[REDACTED]",
+                    "x-ratelimit-limit-requests": "[REDACTED]",
+                    "x-ratelimit-limit-tokens": "[REDACTED]",
+                    "x-ratelimit-remaining-requests": "[REDACTED]",
+                    "x-ratelimit-remaining-tokens": "[REDACTED]",
+                    "x-ratelimit-reset-requests": "[REDACTED]",
+                    "x-ratelimit-reset-tokens": "[REDACTED]",
+                    "x-request-id": "[REDACTED]"
+                  }
+                },
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\n20\\n</Output>\\n<Rubric>\\nThe response contains the number 20\\n</Rubric>\"}]"
+              }
+            }
+          ]
+        },
+        "id": "2063b93c-5cf0-40d3-ae92-a68c12f88a4c",
+        "latencyMs": 6329,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Query the products table and count how many products belong to the 'Electronics' category. Reply with only the number, nothing else.",
+          "label": "{{task}}",
+          "config": {
+            "provider": "openai:gpt-5.4-mini-2026-03-17"
+          }
+        },
+        "promptId": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "promptIdx": 0,
+        "provider": {
+          "id": "mcp-bench",
+          "label": "sqlite/direct"
+        },
+        "response": {
+          "output": "20",
+          "tokenUsage": {
+            "total": 1901,
+            "prompt": 1836,
+            "completion": 65
+          },
+          "metadata": {
+            "turns": 4,
+            "inputTokens": 1836,
+            "outputTokens": 65
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "product category count",
+          "vars": {
+            "task": "Query the products table and count how many products belong to the 'Electronics' category. Reply with only the number, nothing else.\n"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "The response contains the number 20",
+              "threshold": 0.9
+            }
+          ],
+          "options": {
+            "provider": "openai:gpt-5.4-mini-2026-03-17"
+          },
+          "metadata": {}
+        },
+        "testIdx": 3,
+        "vars": {
+          "task": "Query the products table and count how many products belong to the 'Electronics' category. Reply with only the number, nothing else.\n"
+        },
+        "metadata": {
+          "turns": 4,
+          "inputTokens": 1836,
+          "outputTokens": 65,
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 212,
+            "prompt": 188,
+            "completion": 24,
+            "cached": 0,
+            "numRequests": 1
+          },
+          "componentResults": [
+            {
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "The response contains the number 29",
+                "threshold": 0.9
+              },
+              "pass": true,
+              "score": 1,
+              "reason": "The output contains the number 29.",
+              "tokensUsed": {
+                "total": 212,
+                "prompt": 188,
+                "completion": 24,
+                "cached": 0,
+                "numRequests": 1,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              },
+              "metadata": {
+                "http": {
+                  "status": 200,
+                  "statusText": "OK",
+                  "headers": {
+                    "access-control-expose-headers": "X-Request-ID",
+                    "alt-svc": "h3=\":443\"; ma=86400",
+                    "cf-cache-status": "[REDACTED]",
+                    "cf-ray": "[REDACTED]",
+                    "connection": "keep-alive",
+                    "content-encoding": "br",
+                    "content-type": "application/json",
+                    "date": "Sun, 10 May 2026 16:31:43 GMT",
+                    "openai-organization": "[REDACTED]",
+                    "openai-processing-ms": "597",
+                    "openai-project": "[REDACTED]",
+                    "openai-version": "[REDACTED]",
+                    "server": "cloudflare",
+                    "set-cookie": "[REDACTED]",
+                    "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                    "transfer-encoding": "chunked",
+                    "x-content-type-options": "nosniff",
+                    "x-openai-proxy-wasm": "[REDACTED]",
+                    "x-ratelimit-limit-requests": "[REDACTED]",
+                    "x-ratelimit-limit-tokens": "[REDACTED]",
+                    "x-ratelimit-remaining-requests": "[REDACTED]",
+                    "x-ratelimit-remaining-tokens": "[REDACTED]",
+                    "x-ratelimit-reset-requests": "[REDACTED]",
+                    "x-ratelimit-reset-tokens": "[REDACTED]",
+                    "x-request-id": "[REDACTED]"
+                  }
+                },
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\n29\\n</Output>\\n<Rubric>\\nThe response contains the number 29\\n</Rubric>\"}]"
+              }
+            }
+          ]
+        },
+        "id": "b85ca72d-dc77-44e2-a8ca-329f1096ec4b",
+        "latencyMs": 4354,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Query the orders table and count how many orders have a created_at date in February 2024 (between 2024-02-01 and 2024-02-29 inclusive). Reply with only the count, nothing else.",
+          "label": "{{task}}",
+          "config": {
+            "provider": "openai:gpt-5.4-mini-2026-03-17"
+          }
+        },
+        "promptId": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "promptIdx": 0,
+        "provider": {
+          "id": "mcp-bench",
+          "label": "sqlite/direct"
+        },
+        "response": {
+          "output": "29",
+          "tokenUsage": {
+            "total": 764,
+            "prompt": 713,
+            "completion": 51
+          },
+          "metadata": {
+            "turns": 2,
+            "inputTokens": 713,
+            "outputTokens": 51
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "orders in february 2024",
+          "vars": {
+            "task": "Query the orders table and count how many orders have a created_at date in February 2024 (between 2024-02-01 and 2024-02-29 inclusive). Reply with only the count, nothing else.\n"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "The response contains the number 29",
+              "threshold": 0.9
+            }
+          ],
+          "options": {
+            "provider": "openai:gpt-5.4-mini-2026-03-17"
+          },
+          "metadata": {}
+        },
+        "testIdx": 4,
+        "vars": {
+          "task": "Query the orders table and count how many orders have a created_at date in February 2024 (between 2024-02-01 and 2024-02-29 inclusive). Reply with only the count, nothing else.\n"
+        },
+        "metadata": {
+          "turns": 2,
+          "inputTokens": 713,
+          "outputTokens": 51,
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 212,
+            "prompt": 188,
+            "completion": 24,
+            "cached": 0,
+            "numRequests": 1
+          },
+          "componentResults": [
+            {
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "The response contains the number 29",
+                "threshold": 0.9
+              },
+              "pass": true,
+              "score": 1,
+              "reason": "The output contains the number 29.",
+              "tokensUsed": {
+                "total": 212,
+                "prompt": 188,
+                "completion": 24,
+                "cached": 0,
+                "numRequests": 1,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              },
+              "metadata": {
+                "http": {
+                  "status": 200,
+                  "statusText": "OK",
+                  "headers": {
+                    "access-control-expose-headers": "X-Request-ID",
+                    "alt-svc": "h3=\":443\"; ma=86400",
+                    "cf-cache-status": "[REDACTED]",
+                    "cf-ray": "[REDACTED]",
+                    "connection": "keep-alive",
+                    "content-encoding": "br",
+                    "content-type": "application/json",
+                    "date": "Sun, 10 May 2026 16:31:43 GMT",
+                    "openai-organization": "[REDACTED]",
+                    "openai-processing-ms": "597",
+                    "openai-project": "[REDACTED]",
+                    "openai-version": "[REDACTED]",
+                    "server": "cloudflare",
+                    "set-cookie": "[REDACTED]",
+                    "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                    "transfer-encoding": "chunked",
+                    "x-content-type-options": "nosniff",
+                    "x-openai-proxy-wasm": "[REDACTED]",
+                    "x-ratelimit-limit-requests": "[REDACTED]",
+                    "x-ratelimit-limit-tokens": "[REDACTED]",
+                    "x-ratelimit-remaining-requests": "[REDACTED]",
+                    "x-ratelimit-remaining-tokens": "[REDACTED]",
+                    "x-ratelimit-reset-requests": "[REDACTED]",
+                    "x-ratelimit-reset-tokens": "[REDACTED]",
+                    "x-request-id": "[REDACTED]"
+                  }
+                },
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\n29\\n</Output>\\n<Rubric>\\nThe response contains the number 29\\n</Rubric>\"}]"
+              }
+            }
+          ]
+        },
+        "id": "90fb8b56-2774-46b8-9138-699b473c94e9",
+        "latencyMs": 4966,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Query the orders table and count how many orders have a created_at date in February 2024 (between 2024-02-01 and 2024-02-29 inclusive). Reply with only the count, nothing else.",
+          "label": "{{task}}",
+          "config": {
+            "provider": "openai:gpt-5.4-mini-2026-03-17"
+          }
+        },
+        "promptId": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "promptIdx": 1,
+        "provider": {
+          "id": "mcp-bench",
+          "label": "sqlite/proxied"
+        },
+        "response": {
+          "output": "29",
+          "tokenUsage": {
+            "total": 1465,
+            "prompt": 1401,
+            "completion": 64
+          },
+          "metadata": {
+            "turns": 3,
+            "inputTokens": 1401,
+            "outputTokens": 64
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "orders in february 2024",
+          "vars": {
+            "task": "Query the orders table and count how many orders have a created_at date in February 2024 (between 2024-02-01 and 2024-02-29 inclusive). Reply with only the count, nothing else.\n"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "The response contains the number 29",
+              "threshold": 0.9
+            }
+          ],
+          "options": {
+            "provider": "openai:gpt-5.4-mini-2026-03-17"
+          },
+          "metadata": {}
+        },
+        "testIdx": 4,
+        "vars": {
+          "task": "Query the orders table and count how many orders have a created_at date in February 2024 (between 2024-02-01 and 2024-02-29 inclusive). Reply with only the count, nothing else.\n"
+        },
+        "metadata": {
+          "turns": 3,
+          "inputTokens": 1401,
+          "outputTokens": 64,
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      }
+    ],
+    "stats": {
+      "successes": 10,
+      "failures": 0,
+      "errors": 0,
+      "tokenUsage": {
+        "prompt": 18440,
+        "completion": 629,
+        "cached": 0,
+        "total": 19069,
+        "numRequests": 10,
+        "completionDetails": {
+          "reasoning": 0,
+          "acceptedPrediction": 0,
+          "rejectedPrediction": 0,
+          "cacheReadInputTokens": 0,
+          "cacheCreationInputTokens": 0
+        },
+        "assertions": {
+          "total": 2188,
+          "prompt": 1724,
+          "completion": 252,
+          "cached": 212,
+          "numRequests": 0,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          }
+        }
+      },
+      "durationMs": 17871,
+      "evaluationDurationMs": 17871
+    }
+  },
+  "config": {
+    "tags": {},
+    "description": "mcp-context-guard savings — SQLite orders database",
+    "prompts": [
+      "{{task}}"
+    ],
+    "providers": [
+      {
+        "id": "file://provider.js",
+        "label": "sqlite/direct",
+        "config": {
+          "mcpCmd": [
+            "uvx",
+            "mcp-server-sqlite",
+            "--db-path",
+            "../data/bench.db"
+          ],
+          "maxTurns": 6,
+          "model": "gpt-5.4-mini-2026-03-17"
+        }
+      },
+      {
+        "id": "file://provider.js",
+        "label": "sqlite/proxied",
+        "config": {
+          "mcpCmd": [
+            "../../mcp-context-guard.exe",
+            "--threshold=10240",
+            "--",
+            "uvx",
+            "mcp-server-sqlite",
+            "--db-path",
+            "../data/bench.db"
+          ],
+          "maxTurns": 6,
+          "model": "gpt-5.4-mini-2026-03-17"
+        }
+      }
+    ],
+    "tests": [
+      {
+        "description": "customer email by id",
+        "vars": {
+          "task": "Query the database to find the email address of the customer with id=42. Reply with only the email address, nothing else.\n"
+        },
+        "assert": [
+          {
+            "type": "llm-rubric",
+            "value": "The response is exactly or contains the email address customer042@example.com",
+            "threshold": 0.9
+          }
+        ]
+      },
+      {
+        "description": "order status lookup",
+        "vars": {
+          "task": "Query the database to find the status of the order with id=409. Reply with only the status value, nothing else.\n"
+        },
+        "assert": [
+          {
+            "type": "llm-rubric",
+            "value": "The response contains the word 'cancelled' (case-insensitive)",
+            "threshold": 0.9
+          }
+        ]
+      },
+      {
+        "description": "find order by exact amount",
+        "vars": {
+          "task": "Query the orders table to find which order has an amount of exactly $265.99. Reply with only the order id number, nothing else.\n"
+        },
+        "assert": [
+          {
+            "type": "llm-rubric",
+            "value": "The response contains the number 296",
+            "threshold": 0.9
+          }
+        ]
+      },
+      {
+        "description": "product category count",
+        "vars": {
+          "task": "Query the products table and count how many products belong to the 'Electronics' category. Reply with only the number, nothing else.\n"
+        },
+        "assert": [
+          {
+            "type": "llm-rubric",
+            "value": "The response contains the number 20",
+            "threshold": 0.9
+          }
+        ]
+      },
+      {
+        "description": "orders in february 2024",
+        "vars": {
+          "task": "Query the orders table and count how many orders have a created_at date in February 2024 (between 2024-02-01 and 2024-02-29 inclusive). Reply with only the count, nothing else.\n"
+        },
+        "assert": [
+          {
+            "type": "llm-rubric",
+            "value": "The response contains the number 29",
+            "threshold": 0.9
+          }
+        ]
+      }
+    ],
+    "scenarios": [],
+    "env": {},
+    "defaultTest": {
+      "options": {
+        "provider": "openai:gpt-5.4-mini-2026-03-17"
+      },
+      "vars": {},
+      "assert": [],
+      "metadata": {}
+    },
+    "outputPath": [
+      "results-sqlite.json"
+    ],
+    "extensions": [],
+    "metadata": {},
+    "evaluateOptions": {}
+  },
+  "shareableUrl": null,
+  "metadata": {
+    "promptfooVersion": "0.121.11",
+    "nodeVersion": "v22.22.0",
+    "platform": "win32",
+    "arch": "x64",
+    "exportedAt": "2026-05-10T16:31:43.646Z",
+    "evaluationCreatedAt": "2026-05-10T16:31:25.693Z"
+  }
+}

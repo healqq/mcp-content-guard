@@ -1,0 +1,1604 @@
+{
+  "evalId": "eval-Rcq-2026-05-10T16:31:35",
+  "results": {
+    "version": 3,
+    "timestamp": "2026-05-10T16:31:35.533Z",
+    "prompts": [
+      {
+        "id": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "raw": "{{task}}",
+        "label": "{{task}}",
+        "provider": "git/direct",
+        "metrics": {
+          "score": 5,
+          "testPassCount": 5,
+          "testFailCount": 0,
+          "testErrorCount": 0,
+          "assertPassCount": 5,
+          "assertFailCount": 0,
+          "totalLatencyMs": 60056,
+          "tokenUsage": {
+            "prompt": 218704,
+            "completion": 407,
+            "cached": 0,
+            "total": 219111,
+            "numRequests": 5,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            },
+            "assertions": {
+              "total": 1326,
+              "prompt": 1117,
+              "completion": 209,
+              "cached": 0,
+              "numRequests": 0,
+              "completionDetails": {
+                "reasoning": 0,
+                "acceptedPrediction": 0,
+                "rejectedPrediction": 0,
+                "cacheReadInputTokens": 0,
+                "cacheCreationInputTokens": 0
+              }
+            }
+          },
+          "namedScores": {},
+          "namedScoresCount": {},
+          "namedScoreWeights": {},
+          "cost": 0
+        }
+      },
+      {
+        "id": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "raw": "{{task}}",
+        "label": "{{task}}",
+        "provider": "git/proxied",
+        "metrics": {
+          "score": 3,
+          "testPassCount": 3,
+          "testFailCount": 2,
+          "testErrorCount": 0,
+          "assertPassCount": 3,
+          "assertFailCount": 2,
+          "totalLatencyMs": 212393,
+          "tokenUsage": {
+            "prompt": 55151,
+            "completion": 930,
+            "cached": 0,
+            "total": 56081,
+            "numRequests": 5,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            },
+            "assertions": {
+              "total": 1336,
+              "prompt": 1114,
+              "completion": 222,
+              "cached": 0,
+              "numRequests": 0,
+              "completionDetails": {
+                "reasoning": 0,
+                "acceptedPrediction": 0,
+                "rejectedPrediction": 0,
+                "cacheReadInputTokens": 0,
+                "cacheCreationInputTokens": 0
+              }
+            }
+          },
+          "namedScores": {},
+          "namedScoresCount": {},
+          "namedScoreWeights": {},
+          "cost": 0
+        }
+      }
+    ],
+    "results": [
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 303,
+            "prompt": 253,
+            "completion": 50,
+            "cached": 0,
+            "numRequests": 1
+          },
+          "componentResults": [
+            {
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "The response is a plausible git commit message: a short non-empty string that does not look like an error, a refusal, or 'no commits found'.\n",
+                "threshold": 0.8
+              },
+              "pass": true,
+              "score": 1,
+              "reason": "The output is a plausible git commit message with a subject line and bullet points, and it is non-empty and not an error/refusal.",
+              "tokensUsed": {
+                "total": 303,
+                "prompt": 253,
+                "completion": 50,
+                "cached": 0,
+                "numRequests": 1,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              },
+              "metadata": {
+                "http": {
+                  "status": 200,
+                  "statusText": "OK",
+                  "headers": {
+                    "access-control-expose-headers": "X-Request-ID",
+                    "alt-svc": "h3=\":443\"; ma=86400",
+                    "cf-cache-status": "[REDACTED]",
+                    "cf-ray": "[REDACTED]",
+                    "connection": "keep-alive",
+                    "content-encoding": "br",
+                    "content-type": "application/json",
+                    "date": "Sun, 10 May 2026 16:31:47 GMT",
+                    "openai-organization": "[REDACTED]",
+                    "openai-processing-ms": "674",
+                    "openai-project": "[REDACTED]",
+                    "openai-version": "[REDACTED]",
+                    "server": "cloudflare",
+                    "set-cookie": "[REDACTED]",
+                    "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                    "transfer-encoding": "chunked",
+                    "x-content-type-options": "nosniff",
+                    "x-openai-proxy-wasm": "[REDACTED]",
+                    "x-ratelimit-limit-requests": "[REDACTED]",
+                    "x-ratelimit-limit-tokens": "[REDACTED]",
+                    "x-ratelimit-remaining-requests": "[REDACTED]",
+                    "x-ratelimit-remaining-tokens": "[REDACTED]",
+                    "x-ratelimit-reset-requests": "[REDACTED]",
+                    "x-ratelimit-reset-tokens": "[REDACTED]",
+                    "x-request-id": "[REDACTED]"
+                  }
+                },
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\nUpdate error transform to allow excluding errors inside subexpressions like ternaries (#24693)\\n\\n* Update error transform to allow excluding errors inside subexpressions like ternaries\\n\\n* make leadingcomments aggregation walk the expression stack\\n</Output>\\n<Rubric>\\nThe response is a plausible git commit message: a short non-empty string that does not look like an error, a refusal, or 'no commits found'.\\n\\n</Rubric>\"}]"
+              }
+            }
+          ]
+        },
+        "id": "9ec2d20b-79fa-46f3-993e-85bb982f4156",
+        "latencyMs": 10896,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Call git_log to retrieve the commit history of the repository. What is the full commit message of the most recent (first) commit? Reply with only the message text, nothing else.",
+          "label": "{{task}}",
+          "config": {
+            "provider": "openai:gpt-5.4-mini-2026-03-17"
+          }
+        },
+        "promptId": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "promptIdx": 1,
+        "provider": {
+          "id": "mcp-bench",
+          "label": "git/proxied"
+        },
+        "response": {
+          "output": "Update error transform to allow excluding errors inside subexpressions like ternaries (#24693)\n\n* Update error transform to allow excluding errors inside subexpressions like ternaries\n\n* make leadingcomments aggregation walk the expression stack",
+          "tokenUsage": {
+            "total": 3416,
+            "prompt": 3306,
+            "completion": 110
+          },
+          "metadata": {
+            "turns": 3,
+            "inputTokens": 3306,
+            "outputTokens": 110
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "most recent commit message",
+          "vars": {
+            "task": "Call git_log to retrieve the commit history of the repository. What is the full commit message of the most recent (first) commit? Reply with only the message text, nothing else.\n"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "The response is a plausible git commit message: a short non-empty string that does not look like an error, a refusal, or 'no commits found'.\n",
+              "threshold": 0.8
+            }
+          ],
+          "options": {
+            "provider": "openai:gpt-5.4-mini-2026-03-17"
+          },
+          "metadata": {}
+        },
+        "testIdx": 0,
+        "vars": {
+          "task": "Call git_log to retrieve the commit history of the repository. What is the full commit message of the most recent (first) commit? Reply with only the message text, nothing else.\n"
+        },
+        "metadata": {
+          "turns": 3,
+          "inputTokens": 3306,
+          "outputTokens": 110,
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 313,
+            "prompt": 253,
+            "completion": 60,
+            "cached": 0,
+            "numRequests": 1
+          },
+          "componentResults": [
+            {
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "The response is a plausible git commit message: a short non-empty string that does not look like an error, a refusal, or 'no commits found'.\n",
+                "threshold": 0.8
+              },
+              "pass": true,
+              "score": 1,
+              "reason": "The output is a plausible git commit message with a short descriptive summary and bullet points; it is non-empty and does not look like an error, refusal, or 'no commits found'.",
+              "tokensUsed": {
+                "total": 313,
+                "prompt": 253,
+                "completion": 60,
+                "cached": 0,
+                "numRequests": 1,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              },
+              "metadata": {
+                "http": {
+                  "status": 200,
+                  "statusText": "OK",
+                  "headers": {
+                    "access-control-expose-headers": "X-Request-ID",
+                    "alt-svc": "h3=\":443\"; ma=86400",
+                    "cf-cache-status": "[REDACTED]",
+                    "cf-ray": "[REDACTED]",
+                    "connection": "keep-alive",
+                    "content-encoding": "br",
+                    "content-type": "application/json",
+                    "date": "Sun, 10 May 2026 16:31:48 GMT",
+                    "openai-organization": "[REDACTED]",
+                    "openai-processing-ms": "666",
+                    "openai-project": "[REDACTED]",
+                    "openai-version": "[REDACTED]",
+                    "server": "cloudflare",
+                    "set-cookie": "[REDACTED]",
+                    "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                    "transfer-encoding": "chunked",
+                    "x-content-type-options": "nosniff",
+                    "x-openai-proxy-wasm": "[REDACTED]",
+                    "x-ratelimit-limit-requests": "[REDACTED]",
+                    "x-ratelimit-limit-tokens": "[REDACTED]",
+                    "x-ratelimit-remaining-requests": "[REDACTED]",
+                    "x-ratelimit-remaining-tokens": "[REDACTED]",
+                    "x-ratelimit-reset-requests": "[REDACTED]",
+                    "x-ratelimit-reset-tokens": "[REDACTED]",
+                    "x-request-id": "[REDACTED]"
+                  }
+                },
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\nUpdate error transform to allow excluding errors inside subexpressions like ternaries (#24693)\\n\\n* Update error transform to allow excluding errors inside subexpressions like ternaries\\r\\n\\r\\n* make leadingcomments aggregation walk the expression stack\\n</Output>\\n<Rubric>\\nThe response is a plausible git commit message: a short non-empty string that does not look like an error, a refusal, or 'no commits found'.\\n\\n</Rubric>\"}]"
+              }
+            }
+          ]
+        },
+        "id": "d7c07ca9-1ebf-490b-aad5-731ce0d582bc",
+        "latencyMs": 11724,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Call git_log to retrieve the commit history of the repository. What is the full commit message of the most recent (first) commit? Reply with only the message text, nothing else.",
+          "label": "{{task}}",
+          "config": {
+            "provider": "openai:gpt-5.4-mini-2026-03-17"
+          }
+        },
+        "promptId": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "promptIdx": 0,
+        "provider": {
+          "id": "mcp-bench",
+          "label": "git/direct"
+        },
+        "response": {
+          "output": "Update error transform to allow excluding errors inside subexpressions like ternaries (#24693)\n\n* Update error transform to allow excluding errors inside subexpressions like ternaries\r\n\r\n* make leadingcomments aggregation walk the expression stack",
+          "tokenUsage": {
+            "total": 3140,
+            "prompt": 3030,
+            "completion": 110
+          },
+          "metadata": {
+            "turns": 3,
+            "inputTokens": 3030,
+            "outputTokens": 110
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "most recent commit message",
+          "vars": {
+            "task": "Call git_log to retrieve the commit history of the repository. What is the full commit message of the most recent (first) commit? Reply with only the message text, nothing else.\n"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "The response is a plausible git commit message: a short non-empty string that does not look like an error, a refusal, or 'no commits found'.\n",
+              "threshold": 0.8
+            }
+          ],
+          "options": {
+            "provider": "openai:gpt-5.4-mini-2026-03-17"
+          },
+          "metadata": {}
+        },
+        "testIdx": 0,
+        "vars": {
+          "task": "Call git_log to retrieve the commit history of the repository. What is the full commit message of the most recent (first) commit? Reply with only the message text, nothing else.\n"
+        },
+        "metadata": {
+          "turns": 3,
+          "inputTokens": 3030,
+          "outputTokens": 110,
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 246,
+            "prompt": 212,
+            "completion": 34,
+            "cached": 0,
+            "numRequests": 1
+          },
+          "componentResults": [
+            {
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "The response is a single integer greater than 5. A major project like React should have more than 5 commits mentioning 'fix' in 300 commits.\n",
+                "threshold": 0.8
+              },
+              "pass": true,
+              "score": 1,
+              "reason": "The output is a single integer, 137, and it is greater than 5.",
+              "tokensUsed": {
+                "total": 246,
+                "prompt": 212,
+                "completion": 34,
+                "cached": 0,
+                "numRequests": 1,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              },
+              "metadata": {
+                "http": {
+                  "status": 200,
+                  "statusText": "OK",
+                  "headers": {
+                    "access-control-expose-headers": "X-Request-ID",
+                    "alt-svc": "h3=\":443\"; ma=86400",
+                    "cf-cache-status": "[REDACTED]",
+                    "cf-ray": "[REDACTED]",
+                    "connection": "keep-alive",
+                    "content-encoding": "br",
+                    "content-type": "application/json",
+                    "date": "Sun, 10 May 2026 16:31:47 GMT",
+                    "openai-organization": "[REDACTED]",
+                    "openai-processing-ms": "629",
+                    "openai-project": "[REDACTED]",
+                    "openai-version": "[REDACTED]",
+                    "server": "cloudflare",
+                    "set-cookie": "[REDACTED]",
+                    "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                    "transfer-encoding": "chunked",
+                    "x-content-type-options": "nosniff",
+                    "x-openai-proxy-wasm": "[REDACTED]",
+                    "x-ratelimit-limit-requests": "[REDACTED]",
+                    "x-ratelimit-limit-tokens": "[REDACTED]",
+                    "x-ratelimit-remaining-requests": "[REDACTED]",
+                    "x-ratelimit-remaining-tokens": "[REDACTED]",
+                    "x-ratelimit-reset-requests": "[REDACTED]",
+                    "x-ratelimit-reset-tokens": "[REDACTED]",
+                    "x-request-id": "[REDACTED]"
+                  }
+                },
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\n137\\n</Output>\\n<Rubric>\\nThe response is a single integer greater than 5. A major project like React should have more than 5 commits mentioning 'fix' in 300 commits.\\n\\n</Rubric>\"}]"
+              }
+            }
+          ]
+        },
+        "id": "0229eb73-9fec-4259-a3fb-5634cec2efd9",
+        "latencyMs": 11363,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Call git_log with max_count=300 to retrieve 300 commits. Count how many commit messages contain the word 'fix' (case-insensitive). Reply with only the integer count.",
+          "label": "{{task}}",
+          "config": {
+            "provider": "openai:gpt-5.4-mini-2026-03-17"
+          }
+        },
+        "promptId": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "promptIdx": 0,
+        "provider": {
+          "id": "mcp-bench",
+          "label": "git/direct"
+        },
+        "response": {
+          "output": "137",
+          "tokenUsage": {
+            "total": 53964,
+            "prompt": 53890,
+            "completion": 74
+          },
+          "metadata": {
+            "turns": 3,
+            "inputTokens": 53890,
+            "outputTokens": 74
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "fix commits count",
+          "vars": {
+            "task": "Call git_log with max_count=300 to retrieve 300 commits. Count how many commit messages contain the word 'fix' (case-insensitive). Reply with only the integer count.\n"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "The response is a single integer greater than 5. A major project like React should have more than 5 commits mentioning 'fix' in 300 commits.\n",
+              "threshold": 0.8
+            }
+          ],
+          "options": {
+            "provider": "openai:gpt-5.4-mini-2026-03-17"
+          },
+          "metadata": {}
+        },
+        "testIdx": 1,
+        "vars": {
+          "task": "Call git_log with max_count=300 to retrieve 300 commits. Count how many commit messages contain the word 'fix' (case-insensitive). Reply with only the integer count.\n"
+        },
+        "metadata": {
+          "turns": 3,
+          "inputTokens": 53890,
+          "outputTokens": 74,
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 248,
+            "prompt": 212,
+            "completion": 36,
+            "cached": 0,
+            "numRequests": 1
+          },
+          "componentResults": [
+            {
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "The response is a single integer greater than 5. A major project like React should have more than 5 commits mentioning 'fix' in 300 commits.\n",
+                "threshold": 0.8
+              },
+              "pass": true,
+              "score": 1,
+              "reason": "The output is the single integer 150, which is greater than 5, satisfying the rubric.",
+              "tokensUsed": {
+                "total": 248,
+                "prompt": 212,
+                "completion": 36,
+                "cached": 0,
+                "numRequests": 1,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              },
+              "metadata": {
+                "http": {
+                  "status": 200,
+                  "statusText": "OK",
+                  "headers": {
+                    "access-control-expose-headers": "X-Request-ID",
+                    "alt-svc": "h3=\":443\"; ma=86400",
+                    "cf-cache-status": "[REDACTED]",
+                    "cf-ray": "[REDACTED]",
+                    "connection": "keep-alive",
+                    "content-encoding": "br",
+                    "content-type": "application/json",
+                    "date": "Sun, 10 May 2026 16:31:48 GMT",
+                    "openai-organization": "[REDACTED]",
+                    "openai-processing-ms": "654",
+                    "openai-project": "[REDACTED]",
+                    "openai-version": "[REDACTED]",
+                    "server": "cloudflare",
+                    "set-cookie": "[REDACTED]",
+                    "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                    "transfer-encoding": "chunked",
+                    "x-content-type-options": "nosniff",
+                    "x-openai-proxy-wasm": "[REDACTED]",
+                    "x-ratelimit-limit-requests": "[REDACTED]",
+                    "x-ratelimit-limit-tokens": "[REDACTED]",
+                    "x-ratelimit-remaining-requests": "[REDACTED]",
+                    "x-ratelimit-remaining-tokens": "[REDACTED]",
+                    "x-ratelimit-reset-requests": "[REDACTED]",
+                    "x-ratelimit-reset-tokens": "[REDACTED]",
+                    "x-request-id": "[REDACTED]"
+                  }
+                },
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\n150\\n</Output>\\n<Rubric>\\nThe response is a single integer greater than 5. A major project like React should have more than 5 commits mentioning 'fix' in 300 commits.\\n\\n</Rubric>\"}]"
+              }
+            }
+          ]
+        },
+        "id": "a53b9a82-bea4-4a05-9482-e21fe8924e74",
+        "latencyMs": 11922,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Call git_log with max_count=300 to retrieve 300 commits. Count how many commit messages contain the word 'fix' (case-insensitive). Reply with only the integer count.",
+          "label": "{{task}}",
+          "config": {
+            "provider": "openai:gpt-5.4-mini-2026-03-17"
+          }
+        },
+        "promptId": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "promptIdx": 1,
+        "provider": {
+          "id": "mcp-bench",
+          "label": "git/proxied"
+        },
+        "response": {
+          "output": "150",
+          "tokenUsage": {
+            "total": 18588,
+            "prompt": 18473,
+            "completion": 115
+          },
+          "metadata": {
+            "turns": 4,
+            "inputTokens": 18473,
+            "outputTokens": 115
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "fix commits count",
+          "vars": {
+            "task": "Call git_log with max_count=300 to retrieve 300 commits. Count how many commit messages contain the word 'fix' (case-insensitive). Reply with only the integer count.\n"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "The response is a single integer greater than 5. A major project like React should have more than 5 commits mentioning 'fix' in 300 commits.\n",
+              "threshold": 0.8
+            }
+          ],
+          "options": {
+            "provider": "openai:gpt-5.4-mini-2026-03-17"
+          },
+          "metadata": {}
+        },
+        "testIdx": 1,
+        "vars": {
+          "task": "Call git_log with max_count=300 to retrieve 300 commits. Count how many commit messages contain the word 'fix' (case-insensitive). Reply with only the integer count.\n"
+        },
+        "metadata": {
+          "turns": 4,
+          "inputTokens": 18473,
+          "outputTokens": 115,
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "error": "The output is empty and does not look like a person's name; it is not at least one word and is not a non-error response.",
+        "gradingResult": {
+          "pass": false,
+          "score": 0,
+          "reason": "The output is empty and does not look like a person's name; it is not at least one word and is not a non-error response.",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 254,
+            "prompt": 210,
+            "completion": 44,
+            "cached": 0,
+            "numRequests": 1
+          },
+          "componentResults": [
+            {
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "The response looks like a person's name (at least one word, typically First Last format). It should not be an error message or empty.\n",
+                "threshold": 0.8
+              },
+              "pass": false,
+              "score": 0,
+              "reason": "The output is empty and does not look like a person's name; it is not at least one word and is not a non-error response.",
+              "tokensUsed": {
+                "total": 254,
+                "prompt": 210,
+                "completion": 44,
+                "cached": 0,
+                "numRequests": 1,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              },
+              "metadata": {
+                "http": {
+                  "status": 200,
+                  "statusText": "OK",
+                  "headers": {
+                    "access-control-expose-headers": "X-Request-ID",
+                    "alt-svc": "h3=\":443\"; ma=86400",
+                    "cf-cache-status": "[REDACTED]",
+                    "cf-ray": "[REDACTED]",
+                    "connection": "keep-alive",
+                    "content-encoding": "br",
+                    "content-type": "application/json",
+                    "date": "Sun, 10 May 2026 16:33:16 GMT",
+                    "openai-organization": "[REDACTED]",
+                    "openai-processing-ms": "833",
+                    "openai-project": "[REDACTED]",
+                    "openai-version": "[REDACTED]",
+                    "server": "cloudflare",
+                    "set-cookie": "[REDACTED]",
+                    "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                    "transfer-encoding": "chunked",
+                    "x-content-type-options": "nosniff",
+                    "x-openai-proxy-wasm": "[REDACTED]",
+                    "x-ratelimit-limit-requests": "[REDACTED]",
+                    "x-ratelimit-limit-tokens": "[REDACTED]",
+                    "x-ratelimit-remaining-requests": "[REDACTED]",
+                    "x-ratelimit-remaining-tokens": "[REDACTED]",
+                    "x-ratelimit-reset-requests": "[REDACTED]",
+                    "x-ratelimit-reset-tokens": "[REDACTED]",
+                    "x-request-id": "[REDACTED]"
+                  }
+                },
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\n(no text output)\\n</Output>\\n<Rubric>\\nThe response looks like a person's name (at least one word, typically First Last format). It should not be an error message or empty.\\n\\n</Rubric>\"}]"
+              }
+            }
+          ]
+        },
+        "id": "06a01f43-33c3-4f36-856e-69f7e1157b1c",
+        "latencyMs": 88010,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Call git_log with max_count=300 to retrieve 300 commits. Who is the author of the last (oldest) commit in the returned list? Reply with only the author's name, not their email.",
+          "label": "{{task}}",
+          "config": {
+            "provider": "openai:gpt-5.4-mini-2026-03-17"
+          }
+        },
+        "promptId": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "promptIdx": 1,
+        "provider": {
+          "id": "mcp-bench",
+          "label": "git/proxied"
+        },
+        "response": {
+          "output": "(no text output)",
+          "tokenUsage": {
+            "total": 11132,
+            "prompt": 10880,
+            "completion": 252
+          },
+          "metadata": {
+            "turns": 6,
+            "inputTokens": 10880,
+            "outputTokens": 252
+          }
+        },
+        "score": 0,
+        "success": false,
+        "testCase": {
+          "description": "oldest commit author in window",
+          "vars": {
+            "task": "Call git_log with max_count=300 to retrieve 300 commits. Who is the author of the last (oldest) commit in the returned list? Reply with only the author's name, not their email.\n"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "The response looks like a person's name (at least one word, typically First Last format). It should not be an error message or empty.\n",
+              "threshold": 0.8
+            }
+          ],
+          "options": {
+            "provider": "openai:gpt-5.4-mini-2026-03-17"
+          },
+          "metadata": {}
+        },
+        "testIdx": 2,
+        "vars": {
+          "task": "Call git_log with max_count=300 to retrieve 300 commits. Who is the author of the last (oldest) commit in the returned list? Reply with only the author's name, not their email.\n"
+        },
+        "metadata": {
+          "turns": 6,
+          "inputTokens": 10880,
+          "outputTokens": 252,
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 1
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 249,
+            "prompt": 209,
+            "completion": 40,
+            "cached": 0,
+            "numRequests": 1
+          },
+          "componentResults": [
+            {
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "The response looks like a person's name (at least one word, typically First Last format). It should not be an error message or empty.\n",
+                "threshold": 0.8
+              },
+              "pass": true,
+              "score": 1,
+              "reason": "The output contains the name 'Andrew Clark', which looks like a person's name and is not an error message or empty.",
+              "tokensUsed": {
+                "total": 249,
+                "prompt": 209,
+                "completion": 40,
+                "cached": 0,
+                "numRequests": 1,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              },
+              "metadata": {
+                "http": {
+                  "status": 200,
+                  "statusText": "OK",
+                  "headers": {
+                    "access-control-expose-headers": "X-Request-ID",
+                    "alt-svc": "h3=\":443\"; ma=86400",
+                    "cf-cache-status": "[REDACTED]",
+                    "cf-ray": "[REDACTED]",
+                    "connection": "keep-alive",
+                    "content-encoding": "br",
+                    "content-type": "application/json",
+                    "date": "Sun, 10 May 2026 16:31:52 GMT",
+                    "openai-organization": "[REDACTED]",
+                    "openai-processing-ms": "578",
+                    "openai-project": "[REDACTED]",
+                    "openai-version": "[REDACTED]",
+                    "server": "cloudflare",
+                    "set-cookie": "[REDACTED]",
+                    "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                    "transfer-encoding": "chunked",
+                    "x-content-type-options": "nosniff",
+                    "x-openai-proxy-wasm": "[REDACTED]",
+                    "x-ratelimit-limit-requests": "[REDACTED]",
+                    "x-ratelimit-limit-tokens": "[REDACTED]",
+                    "x-ratelimit-remaining-requests": "[REDACTED]",
+                    "x-ratelimit-remaining-tokens": "[REDACTED]",
+                    "x-ratelimit-reset-requests": "[REDACTED]",
+                    "x-ratelimit-reset-tokens": "[REDACTED]",
+                    "x-request-id": "[REDACTED]"
+                  }
+                },
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\nAndrew Clark\\n</Output>\\n<Rubric>\\nThe response looks like a person's name (at least one word, typically First Last format). It should not be an error message or empty.\\n\\n</Rubric>\"}]"
+              }
+            }
+          ]
+        },
+        "id": "4adf932d-806f-41cc-9baa-f955488657b2",
+        "latencyMs": 4190,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Call git_log with max_count=300 to retrieve 300 commits. Who is the author of the last (oldest) commit in the returned list? Reply with only the author's name, not their email.",
+          "label": "{{task}}",
+          "config": {
+            "provider": "openai:gpt-5.4-mini-2026-03-17"
+          }
+        },
+        "promptId": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "promptIdx": 0,
+        "provider": {
+          "id": "mcp-bench",
+          "label": "git/direct"
+        },
+        "response": {
+          "output": "Andrew Clark",
+          "tokenUsage": {
+            "total": 53974,
+            "prompt": 53905,
+            "completion": 69
+          },
+          "metadata": {
+            "turns": 3,
+            "inputTokens": 53905,
+            "outputTokens": 69
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "oldest commit author in window",
+          "vars": {
+            "task": "Call git_log with max_count=300 to retrieve 300 commits. Who is the author of the last (oldest) commit in the returned list? Reply with only the author's name, not their email.\n"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "The response looks like a person's name (at least one word, typically First Last format). It should not be an error message or empty.\n",
+              "threshold": 0.8
+            }
+          ],
+          "options": {
+            "provider": "openai:gpt-5.4-mini-2026-03-17"
+          },
+          "metadata": {}
+        },
+        "testIdx": 2,
+        "vars": {
+          "task": "Call git_log with max_count=300 to retrieve 300 commits. Who is the author of the last (oldest) commit in the returned list? Reply with only the author's name, not their email.\n"
+        },
+        "metadata": {
+          "turns": 3,
+          "inputTokens": 53905,
+          "outputTokens": 69,
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 260,
+            "prompt": 220,
+            "completion": 40,
+            "cached": 0,
+            "numRequests": 1
+          },
+          "componentResults": [
+            {
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "The response is a plausible git commit message: a short non-empty string that does not look like an error or 'not found'.\n",
+                "threshold": 0.8
+              },
+              "pass": true,
+              "score": 1,
+              "reason": "The output is a short, non-empty commit-style message and does not look like an error or 'not found'.",
+              "tokensUsed": {
+                "total": 260,
+                "prompt": 220,
+                "completion": 40,
+                "cached": 0,
+                "numRequests": 1,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              },
+              "metadata": {
+                "http": {
+                  "status": 200,
+                  "statusText": "OK",
+                  "headers": {
+                    "access-control-expose-headers": "X-Request-ID",
+                    "alt-svc": "h3=\":443\"; ma=86400",
+                    "cf-cache-status": "[REDACTED]",
+                    "cf-ray": "[REDACTED]",
+                    "connection": "keep-alive",
+                    "content-encoding": "br",
+                    "content-type": "application/json",
+                    "date": "Sun, 10 May 2026 16:31:53 GMT",
+                    "openai-organization": "[REDACTED]",
+                    "openai-processing-ms": "655",
+                    "openai-project": "[REDACTED]",
+                    "openai-version": "[REDACTED]",
+                    "server": "cloudflare",
+                    "set-cookie": "[REDACTED]",
+                    "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                    "transfer-encoding": "chunked",
+                    "x-content-type-options": "nosniff",
+                    "x-openai-proxy-wasm": "[REDACTED]",
+                    "x-ratelimit-limit-requests": "[REDACTED]",
+                    "x-ratelimit-limit-tokens": "[REDACTED]",
+                    "x-ratelimit-remaining-requests": "[REDACTED]",
+                    "x-ratelimit-remaining-tokens": "[REDACTED]",
+                    "x-ratelimit-reset-requests": "[REDACTED]",
+                    "x-ratelimit-reset-tokens": "[REDACTED]",
+                    "x-request-id": "[REDACTED]"
+                  }
+                },
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\n[DevTools] Run Devtools Regression Tests Once a Day (#24678)\\n\\n\\n</Output>\\n<Rubric>\\nThe response is a plausible git commit message: a short non-empty string that does not look like an error or 'not found'.\\n\\n</Rubric>\"}]"
+              }
+            }
+          ]
+        },
+        "id": "a2577898-61c9-42cc-941d-64d25038599c",
+        "latencyMs": 4370,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Call git_log with max_count=300 to retrieve 300 commits. What is the commit message of the 10th most recent commit (index 9, 0-based)? Reply with only the message text.",
+          "label": "{{task}}",
+          "config": {
+            "provider": "openai:gpt-5.4-mini-2026-03-17"
+          }
+        },
+        "promptId": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "promptIdx": 0,
+        "provider": {
+          "id": "mcp-bench",
+          "label": "git/direct"
+        },
+        "response": {
+          "output": "[DevTools] Run Devtools Regression Tests Once a Day (#24678)\n\n",
+          "tokenUsage": {
+            "total": 53991,
+            "prompt": 53908,
+            "completion": 83
+          },
+          "metadata": {
+            "turns": 3,
+            "inputTokens": 53908,
+            "outputTokens": 83
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "10th commit message",
+          "vars": {
+            "task": "Call git_log with max_count=300 to retrieve 300 commits. What is the commit message of the 10th most recent commit (index 9, 0-based)? Reply with only the message text.\n"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "The response is a plausible git commit message: a short non-empty string that does not look like an error or 'not found'.\n",
+              "threshold": 0.8
+            }
+          ],
+          "options": {
+            "provider": "openai:gpt-5.4-mini-2026-03-17"
+          },
+          "metadata": {}
+        },
+        "testIdx": 3,
+        "vars": {
+          "task": "Call git_log with max_count=300 to retrieve 300 commits. What is the commit message of the 10th most recent commit (index 9, 0-based)? Reply with only the message text.\n"
+        },
+        "metadata": {
+          "turns": 3,
+          "inputTokens": 53908,
+          "outputTokens": 83,
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 259,
+            "prompt": 217,
+            "completion": 42,
+            "cached": 0,
+            "numRequests": 1
+          },
+          "componentResults": [
+            {
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "The response is a plausible git commit message: a short non-empty string that does not look like an error or 'not found'.\n",
+                "threshold": 0.8
+              },
+              "pass": true,
+              "score": 1,
+              "reason": "The output is a short, non-empty string in commit-message style and does not look like an error or 'not found'.",
+              "tokensUsed": {
+                "total": 259,
+                "prompt": 217,
+                "completion": 42,
+                "cached": 0,
+                "numRequests": 1,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              },
+              "metadata": {
+                "http": {
+                  "status": 200,
+                  "statusText": "OK",
+                  "headers": {
+                    "access-control-expose-headers": "X-Request-ID",
+                    "alt-svc": "h3=\":443\"; ma=86400",
+                    "cf-cache-status": "[REDACTED]",
+                    "cf-ray": "[REDACTED]",
+                    "connection": "keep-alive",
+                    "content-encoding": "br",
+                    "content-type": "application/json",
+                    "date": "Sun, 10 May 2026 16:33:25 GMT",
+                    "openai-organization": "[REDACTED]",
+                    "openai-processing-ms": "1857",
+                    "openai-project": "[REDACTED]",
+                    "openai-version": "[REDACTED]",
+                    "server": "cloudflare",
+                    "set-cookie": "[REDACTED]",
+                    "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                    "transfer-encoding": "chunked",
+                    "x-content-type-options": "nosniff",
+                    "x-openai-proxy-wasm": "[REDACTED]",
+                    "x-ratelimit-limit-requests": "[REDACTED]",
+                    "x-ratelimit-limit-tokens": "[REDACTED]",
+                    "x-ratelimit-remaining-requests": "[REDACTED]",
+                    "x-ratelimit-remaining-tokens": "[REDACTED]",
+                    "x-ratelimit-reset-requests": "[REDACTED]",
+                    "x-ratelimit-reset-tokens": "[REDACTED]",
+                    "x-request-id": "[REDACTED]"
+                  }
+                },
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\nTrack revs that intentionally fork the reconciler (#24671)\\n</Output>\\n<Rubric>\\nThe response is a plausible git commit message: a short non-empty string that does not look like an error or 'not found'.\\n\\n</Rubric>\"}]"
+              }
+            }
+          ]
+        },
+        "id": "12d945d6-eb05-4847-beb2-5061c68e0788",
+        "latencyMs": 94651,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Call git_log with max_count=300 to retrieve 300 commits. What is the commit message of the 10th most recent commit (index 9, 0-based)? Reply with only the message text.",
+          "label": "{{task}}",
+          "config": {
+            "provider": "openai:gpt-5.4-mini-2026-03-17"
+          }
+        },
+        "promptId": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "promptIdx": 1,
+        "provider": {
+          "id": "mcp-bench",
+          "label": "git/proxied"
+        },
+        "response": {
+          "output": "Track revs that intentionally fork the reconciler (#24671)",
+          "tokenUsage": {
+            "total": 9039,
+            "prompt": 8832,
+            "completion": 207
+          },
+          "metadata": {
+            "turns": 6,
+            "inputTokens": 8832,
+            "outputTokens": 207
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "10th commit message",
+          "vars": {
+            "task": "Call git_log with max_count=300 to retrieve 300 commits. What is the commit message of the 10th most recent commit (index 9, 0-based)? Reply with only the message text.\n"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "The response is a plausible git commit message: a short non-empty string that does not look like an error or 'not found'.\n",
+              "threshold": 0.8
+            }
+          ],
+          "options": {
+            "provider": "openai:gpt-5.4-mini-2026-03-17"
+          },
+          "metadata": {}
+        },
+        "testIdx": 3,
+        "vars": {
+          "task": "Call git_log with max_count=300 to retrieve 300 commits. What is the commit message of the 10th most recent commit (index 9, 0-based)? Reply with only the message text.\n"
+        },
+        "metadata": {
+          "turns": 6,
+          "inputTokens": 8832,
+          "outputTokens": 207,
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "error": "The output is empty, so it is neither a 7-10 character hexadecimal git commit hash nor the exact string \"not-found\".",
+        "gradingResult": {
+          "pass": false,
+          "score": 0,
+          "reason": "The output is empty, so it is neither a 7-10 character hexadecimal git commit hash nor the exact string \"not-found\".",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 272,
+            "prompt": 222,
+            "completion": 50,
+            "cached": 0,
+            "numRequests": 1
+          },
+          "componentResults": [
+            {
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "The response is either: (a) a hexadecimal string of 7-10 characters representing a git commit hash, or (b) the exact string \"not-found\". Any other format is wrong.\n",
+                "threshold": 0.8
+              },
+              "pass": false,
+              "score": 0,
+              "reason": "The output is empty, so it is neither a 7-10 character hexadecimal git commit hash nor the exact string \"not-found\".",
+              "tokensUsed": {
+                "total": 272,
+                "prompt": 222,
+                "completion": 50,
+                "cached": 0,
+                "numRequests": 1,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              },
+              "metadata": {
+                "http": {
+                  "status": 200,
+                  "statusText": "OK",
+                  "headers": {
+                    "access-control-expose-headers": "X-Request-ID",
+                    "alt-svc": "h3=\":443\"; ma=86400",
+                    "cf-cache-status": "[REDACTED]",
+                    "cf-ray": "[REDACTED]",
+                    "connection": "keep-alive",
+                    "content-encoding": "br",
+                    "content-type": "application/json",
+                    "date": "Sun, 10 May 2026 16:32:01 GMT",
+                    "openai-organization": "[REDACTED]",
+                    "openai-processing-ms": "807",
+                    "openai-project": "[REDACTED]",
+                    "openai-version": "[REDACTED]",
+                    "server": "cloudflare",
+                    "set-cookie": "[REDACTED]",
+                    "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                    "transfer-encoding": "chunked",
+                    "x-content-type-options": "nosniff",
+                    "x-openai-proxy-wasm": "[REDACTED]",
+                    "x-ratelimit-limit-requests": "[REDACTED]",
+                    "x-ratelimit-limit-tokens": "[REDACTED]",
+                    "x-ratelimit-remaining-requests": "[REDACTED]",
+                    "x-ratelimit-remaining-tokens": "[REDACTED]",
+                    "x-ratelimit-reset-requests": "[REDACTED]",
+                    "x-ratelimit-reset-tokens": "[REDACTED]",
+                    "x-request-id": "[REDACTED]"
+                  }
+                },
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\n(no text output)\\n</Output>\\n<Rubric>\\nThe response is either: (a) a hexadecimal string of 7-10 characters representing a git commit hash, or (b) the exact string \\\"not-found\\\". Any other format is wrong.\\n\\n</Rubric>\"}]"
+              }
+            }
+          ]
+        },
+        "id": "aac305f0-1c8b-449d-b8f1-74bebd068875",
+        "latencyMs": 6914,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Call git_log with max_count=300 to retrieve 300 commits. Does any commit list 'Andrew Clark' as the author? If yes, reply with only the abbreviated commit hash (7-10 hex chars) of the first such commit. If no such commit exists, reply with only the word \"not-found\".",
+          "label": "{{task}}",
+          "config": {
+            "provider": "openai:gpt-5.4-mini-2026-03-17"
+          }
+        },
+        "promptId": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "promptIdx": 1,
+        "provider": {
+          "id": "mcp-bench",
+          "label": "git/proxied"
+        },
+        "response": {
+          "output": "(no text output)",
+          "tokenUsage": {
+            "total": 13906,
+            "prompt": 13660,
+            "completion": 246
+          },
+          "metadata": {
+            "turns": 6,
+            "inputTokens": 13660,
+            "outputTokens": 246
+          }
+        },
+        "score": 0,
+        "success": false,
+        "testCase": {
+          "description": "author search by name",
+          "vars": {
+            "task": "Call git_log with max_count=300 to retrieve 300 commits. Does any commit list 'Andrew Clark' as the author? If yes, reply with only the abbreviated commit hash (7-10 hex chars) of the first such commit. If no such commit exists, reply with only the word \"not-found\".\n"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "The response is either: (a) a hexadecimal string of 7-10 characters representing a git commit hash, or (b) the exact string \"not-found\". Any other format is wrong.\n",
+              "threshold": 0.8
+            }
+          ],
+          "options": {
+            "provider": "openai:gpt-5.4-mini-2026-03-17"
+          },
+          "metadata": {}
+        },
+        "testIdx": 4,
+        "vars": {
+          "task": "Call git_log with max_count=300 to retrieve 300 commits. Does any commit list 'Andrew Clark' as the author? If yes, reply with only the abbreviated commit hash (7-10 hex chars) of the first such commit. If no such commit exists, reply with only the word \"not-found\".\n"
+        },
+        "metadata": {
+          "turns": 6,
+          "inputTokens": 13660,
+          "outputTokens": 246,
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 1
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 258,
+            "prompt": 223,
+            "completion": 35,
+            "cached": 0,
+            "numRequests": 1
+          },
+          "componentResults": [
+            {
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "The response is either: (a) a hexadecimal string of 7-10 characters representing a git commit hash, or (b) the exact string \"not-found\". Any other format is wrong.\n",
+                "threshold": 0.8
+              },
+              "pass": true,
+              "score": 1,
+              "reason": "The output is a 7-character hexadecimal string, which matches the allowed git commit hash format.",
+              "tokensUsed": {
+                "total": 258,
+                "prompt": 223,
+                "completion": 35,
+                "cached": 0,
+                "numRequests": 1,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              },
+              "metadata": {
+                "http": {
+                  "status": 200,
+                  "statusText": "OK",
+                  "headers": {
+                    "access-control-expose-headers": "X-Request-ID",
+                    "alt-svc": "h3=\":443\"; ma=86400",
+                    "cf-cache-status": "[REDACTED]",
+                    "cf-ray": "[REDACTED]",
+                    "connection": "keep-alive",
+                    "content-encoding": "br",
+                    "content-type": "application/json",
+                    "date": "Sun, 10 May 2026 16:32:21 GMT",
+                    "openai-organization": "[REDACTED]",
+                    "openai-processing-ms": "742",
+                    "openai-project": "[REDACTED]",
+                    "openai-version": "[REDACTED]",
+                    "server": "cloudflare",
+                    "set-cookie": "[REDACTED]",
+                    "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                    "transfer-encoding": "chunked",
+                    "x-content-type-options": "nosniff",
+                    "x-openai-proxy-wasm": "[REDACTED]",
+                    "x-ratelimit-limit-requests": "[REDACTED]",
+                    "x-ratelimit-limit-tokens": "[REDACTED]",
+                    "x-ratelimit-remaining-requests": "[REDACTED]",
+                    "x-ratelimit-remaining-tokens": "[REDACTED]",
+                    "x-ratelimit-reset-requests": "[REDACTED]",
+                    "x-ratelimit-reset-tokens": "[REDACTED]",
+                    "x-request-id": "[REDACTED]"
+                  }
+                },
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\n42b330c\\n</Output>\\n<Rubric>\\nThe response is either: (a) a hexadecimal string of 7-10 characters representing a git commit hash, or (b) the exact string \\\"not-found\\\". Any other format is wrong.\\n\\n</Rubric>\"}]"
+              }
+            }
+          ]
+        },
+        "id": "ee019978-c10b-4e61-9bd3-1ebfd0b3bc01",
+        "latencyMs": 28409,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Call git_log with max_count=300 to retrieve 300 commits. Does any commit list 'Andrew Clark' as the author? If yes, reply with only the abbreviated commit hash (7-10 hex chars) of the first such commit. If no such commit exists, reply with only the word \"not-found\".",
+          "label": "{{task}}",
+          "config": {
+            "provider": "openai:gpt-5.4-mini-2026-03-17"
+          }
+        },
+        "promptId": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "promptIdx": 0,
+        "provider": {
+          "id": "mcp-bench",
+          "label": "git/direct"
+        },
+        "response": {
+          "output": "42b330c",
+          "tokenUsage": {
+            "total": 54042,
+            "prompt": 53971,
+            "completion": 71
+          },
+          "metadata": {
+            "turns": 3,
+            "inputTokens": 53971,
+            "outputTokens": 71
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "author search by name",
+          "vars": {
+            "task": "Call git_log with max_count=300 to retrieve 300 commits. Does any commit list 'Andrew Clark' as the author? If yes, reply with only the abbreviated commit hash (7-10 hex chars) of the first such commit. If no such commit exists, reply with only the word \"not-found\".\n"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "The response is either: (a) a hexadecimal string of 7-10 characters representing a git commit hash, or (b) the exact string \"not-found\". Any other format is wrong.\n",
+              "threshold": 0.8
+            }
+          ],
+          "options": {
+            "provider": "openai:gpt-5.4-mini-2026-03-17"
+          },
+          "metadata": {}
+        },
+        "testIdx": 4,
+        "vars": {
+          "task": "Call git_log with max_count=300 to retrieve 300 commits. Does any commit list 'Andrew Clark' as the author? If yes, reply with only the abbreviated commit hash (7-10 hex chars) of the first such commit. If no such commit exists, reply with only the word \"not-found\".\n"
+        },
+        "metadata": {
+          "turns": 3,
+          "inputTokens": 53971,
+          "outputTokens": 71,
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      }
+    ],
+    "stats": {
+      "successes": 8,
+      "failures": 2,
+      "errors": 0,
+      "tokenUsage": {
+        "prompt": 273855,
+        "completion": 1337,
+        "cached": 0,
+        "total": 275192,
+        "numRequests": 10,
+        "completionDetails": {
+          "reasoning": 0,
+          "acceptedPrediction": 0,
+          "rejectedPrediction": 0,
+          "cacheReadInputTokens": 0,
+          "cacheCreationInputTokens": 0
+        },
+        "assertions": {
+          "total": 2662,
+          "prompt": 2231,
+          "completion": 431,
+          "cached": 0,
+          "numRequests": 0,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          }
+        }
+      },
+      "durationMs": 109712,
+      "evaluationDurationMs": 109712
+    }
+  },
+  "config": {
+    "tags": {},
+    "description": "mcp-context-guard savings — git history (React v18.2.0)",
+    "prompts": [
+      "{{task}}"
+    ],
+    "providers": [
+      {
+        "id": "file://provider.js",
+        "label": "git/direct",
+        "config": {
+          "mcpCmd": [
+            "uvx",
+            "mcp-server-git",
+            "--repository",
+            "../data/react-repo"
+          ],
+          "maxTurns": 6,
+          "model": "gpt-5.4-mini-2026-03-17"
+        }
+      },
+      {
+        "id": "file://provider.js",
+        "label": "git/proxied",
+        "config": {
+          "mcpCmd": [
+            "../../mcp-context-guard.exe",
+            "--threshold=10240",
+            "--",
+            "uvx",
+            "mcp-server-git",
+            "--repository",
+            "../data/react-repo"
+          ],
+          "maxTurns": 6,
+          "model": "gpt-5.4-mini-2026-03-17"
+        }
+      }
+    ],
+    "tests": [
+      {
+        "description": "most recent commit message",
+        "vars": {
+          "task": "Call git_log to retrieve the commit history of the repository. What is the full commit message of the most recent (first) commit? Reply with only the message text, nothing else.\n"
+        },
+        "assert": [
+          {
+            "type": "llm-rubric",
+            "value": "The response is a plausible git commit message: a short non-empty string that does not look like an error, a refusal, or 'no commits found'.\n",
+            "threshold": 0.8
+          }
+        ]
+      },
+      {
+        "description": "fix commits count",
+        "vars": {
+          "task": "Call git_log with max_count=300 to retrieve 300 commits. Count how many commit messages contain the word 'fix' (case-insensitive). Reply with only the integer count.\n"
+        },
+        "assert": [
+          {
+            "type": "llm-rubric",
+            "value": "The response is a single integer greater than 5. A major project like React should have more than 5 commits mentioning 'fix' in 300 commits.\n",
+            "threshold": 0.8
+          }
+        ]
+      },
+      {
+        "description": "oldest commit author in window",
+        "vars": {
+          "task": "Call git_log with max_count=300 to retrieve 300 commits. Who is the author of the last (oldest) commit in the returned list? Reply with only the author's name, not their email.\n"
+        },
+        "assert": [
+          {
+            "type": "llm-rubric",
+            "value": "The response looks like a person's name (at least one word, typically First Last format). It should not be an error message or empty.\n",
+            "threshold": 0.8
+          }
+        ]
+      },
+      {
+        "description": "10th commit message",
+        "vars": {
+          "task": "Call git_log with max_count=300 to retrieve 300 commits. What is the commit message of the 10th most recent commit (index 9, 0-based)? Reply with only the message text.\n"
+        },
+        "assert": [
+          {
+            "type": "llm-rubric",
+            "value": "The response is a plausible git commit message: a short non-empty string that does not look like an error or 'not found'.\n",
+            "threshold": 0.8
+          }
+        ]
+      },
+      {
+        "description": "author search by name",
+        "vars": {
+          "task": "Call git_log with max_count=300 to retrieve 300 commits. Does any commit list 'Andrew Clark' as the author? If yes, reply with only the abbreviated commit hash (7-10 hex chars) of the first such commit. If no such commit exists, reply with only the word \"not-found\".\n"
+        },
+        "assert": [
+          {
+            "type": "llm-rubric",
+            "value": "The response is either: (a) a hexadecimal string of 7-10 characters representing a git commit hash, or (b) the exact string \"not-found\". Any other format is wrong.\n",
+            "threshold": 0.8
+          }
+        ]
+      }
+    ],
+    "scenarios": [],
+    "env": {},
+    "defaultTest": {
+      "options": {
+        "provider": "openai:gpt-5.4-mini-2026-03-17"
+      },
+      "vars": {},
+      "assert": [],
+      "metadata": {}
+    },
+    "outputPath": [
+      "results-git.json"
+    ],
+    "extensions": [],
+    "metadata": {},
+    "evaluateOptions": {}
+  },
+  "shareableUrl": null,
+  "metadata": {
+    "promptfooVersion": "0.121.11",
+    "nodeVersion": "v22.22.0",
+    "platform": "win32",
+    "arch": "x64",
+    "exportedAt": "2026-05-10T16:33:25.334Z",
+    "evaluationCreatedAt": "2026-05-10T16:31:35.533Z"
+  }
+}

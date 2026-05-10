@@ -9,7 +9,7 @@ providers:
   - id: file://provider.js
     label: "git/direct"
     config:
-      mcpCmd: ["uvx", "mcp-server-git", "--repository", "../../data/react-repo"]
+      mcpCmd: ["uvx", "mcp-server-git", "--repository", "../data/react-repo"]
       maxTurns: 6
       model: gpt-5.4-mini-2026-03-17
 
@@ -23,7 +23,7 @@ providers:
         - "uvx"
         - "mcp-server-git"
         - "--repository"
-        - "../../data/react-repo"
+        - "../data/react-repo"
       maxTurns: 6
       model: gpt-5.4-mini-2026-03-17
 

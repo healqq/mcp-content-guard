@@ -9,7 +9,7 @@ providers:
   - id: file://provider.js
     label: "filesystem/direct"
     config:
-      mcpCmd: ["npx", "-y", "@modelcontextprotocol/server-filesystem", "../../data/codebase"]
+      mcpCmd: ["npx", "-y", "@modelcontextprotocol/server-filesystem", "../data/codebase"]
       maxTurns: 6
       model: gpt-5.4-mini-2026-03-17
 
@@ -23,7 +23,7 @@ providers:
         - "npx"
         - "-y"
         - "@modelcontextprotocol/server-filesystem"
-        - "../../data/codebase"
+        - "../data/codebase"
       maxTurns: 6
       model: gpt-5.4-mini-2026-03-17
 

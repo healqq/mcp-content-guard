@@ -9,7 +9,7 @@ providers:
   - id: file://provider.js
     label: "sqlite/direct"
     config:
-      mcpCmd: ["npx", "-y", "@modelcontextprotocol/server-sqlite", "../../data/bench.db"]
+      mcpCmd: ["uvx", "mcp-server-sqlite", "--db-path", "../data/bench.db"]
       maxTurns: 6
       model: gpt-5.4-mini-2026-03-17
 
@@ -20,10 +20,10 @@ providers:
         - "../../mcp-context-guard.exe"
         - "--threshold=10240"
         - "--"
-        - "npx"
-        - "-y"
-        - "@modelcontextprotocol/server-sqlite"
-        - "../../data/bench.db"
+        - "uvx"
+        - "mcp-server-sqlite"
+        - "--db-path"
+        - "../data/bench.db"
       maxTurns: 6
       model: gpt-5.4-mini-2026-03-17
 

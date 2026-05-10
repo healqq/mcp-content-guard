@@ -1,0 +1,1606 @@
+{
+  "evalId": "eval-OGf-2026-05-10T16:43:25",
+  "results": {
+    "version": 3,
+    "timestamp": "2026-05-10T16:43:25.110Z",
+    "prompts": [
+      {
+        "id": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "raw": "{{task}}",
+        "label": "{{task}}",
+        "provider": "playwright/direct",
+        "metrics": {
+          "score": 5,
+          "testPassCount": 5,
+          "testFailCount": 0,
+          "testErrorCount": 0,
+          "assertPassCount": 5,
+          "assertFailCount": 0,
+          "totalLatencyMs": 35753,
+          "tokenUsage": {
+            "prompt": 640708,
+            "completion": 419,
+            "cached": 0,
+            "total": 641127,
+            "numRequests": 5,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            },
+            "assertions": {
+              "total": 1087,
+              "prompt": 386,
+              "completion": 55,
+              "cached": 646,
+              "numRequests": 0,
+              "completionDetails": {
+                "reasoning": 0,
+                "acceptedPrediction": 0,
+                "rejectedPrediction": 0,
+                "cacheReadInputTokens": 0,
+                "cacheCreationInputTokens": 0
+              }
+            }
+          },
+          "namedScores": {},
+          "namedScoresCount": {},
+          "namedScoreWeights": {},
+          "cost": 0
+        }
+      },
+      {
+        "id": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "raw": "{{task}}",
+        "label": "{{task}}",
+        "provider": "playwright/proxied",
+        "metrics": {
+          "score": 3,
+          "testPassCount": 3,
+          "testFailCount": 2,
+          "testErrorCount": 0,
+          "assertPassCount": 3,
+          "assertFailCount": 2,
+          "totalLatencyMs": 167866,
+          "tokenUsage": {
+            "prompt": 87685,
+            "completion": 752,
+            "cached": 0,
+            "total": 88437,
+            "numRequests": 5,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            },
+            "assertions": {
+              "total": 1100,
+              "prompt": 191,
+              "completion": 33,
+              "cached": 876,
+              "numRequests": 0,
+              "completionDetails": {
+                "reasoning": 0,
+                "acceptedPrediction": 0,
+                "rejectedPrediction": 0,
+                "cacheReadInputTokens": 0,
+                "cacheCreationInputTokens": 0
+              }
+            }
+          },
+          "namedScores": {},
+          "namedScoresCount": {},
+          "namedScoreWeights": {},
+          "cost": 0
+        }
+      }
+    ],
+    "results": [
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 223,
+            "prompt": 195,
+            "completion": 28,
+            "cached": 0,
+            "numRequests": 1
+          },
+          "componentResults": [
+            {
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "The response contains $763,950.00",
+                "threshold": 0.9
+              },
+              "pass": true,
+              "score": 1,
+              "reason": "The output exactly contains \"$763,950.00\".",
+              "tokensUsed": {
+                "total": 223,
+                "prompt": 195,
+                "completion": 28,
+                "cached": 0,
+                "numRequests": 1,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              },
+              "metadata": {
+                "http": {
+                  "status": 200,
+                  "statusText": "OK",
+                  "headers": {
+                    "access-control-expose-headers": "X-Request-ID",
+                    "alt-svc": "h3=\":443\"; ma=86400",
+                    "cf-cache-status": "[REDACTED]",
+                    "cf-ray": "[REDACTED]",
+                    "connection": "keep-alive",
+                    "content-encoding": "br",
+                    "content-type": "application/json",
+                    "date": "Sun, 10 May 2026 16:46:49 GMT",
+                    "openai-organization": "[REDACTED]",
+                    "openai-processing-ms": "941",
+                    "openai-project": "[REDACTED]",
+                    "openai-version": "[REDACTED]",
+                    "server": "cloudflare",
+                    "set-cookie": "[REDACTED]",
+                    "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                    "transfer-encoding": "chunked",
+                    "x-content-type-options": "nosniff",
+                    "x-openai-proxy-wasm": "[REDACTED]",
+                    "x-ratelimit-limit-requests": "[REDACTED]",
+                    "x-ratelimit-limit-tokens": "[REDACTED]",
+                    "x-ratelimit-remaining-requests": "[REDACTED]",
+                    "x-ratelimit-remaining-tokens": "[REDACTED]",
+                    "x-ratelimit-reset-requests": "[REDACTED]",
+                    "x-ratelimit-reset-tokens": "[REDACTED]",
+                    "x-request-id": "[REDACTED]"
+                  }
+                },
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\n$763,950.00\\n</Output>\\n<Rubric>\\nThe response contains $763,950.00\\n</Rubric>\"}]"
+              }
+            }
+          ]
+        },
+        "id": "028629f4-a156-4304-9bdb-407642536650",
+        "latencyMs": 4873,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Use the browser_navigate tool to open this URL in the browser: %%WEBAPP_URL%% Then use browser_snapshot to read the page. What is the total revenue shown in the page summary bar? Reply with only the dollar amount, e.g. \"$763,950.00\".",
+          "label": "{{task}}",
+          "config": {
+            "provider": "openai:gpt-5.4-mini-2026-03-17"
+          }
+        },
+        "promptId": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "promptIdx": 0,
+        "provider": {
+          "id": "mcp-bench",
+          "label": "playwright/direct"
+        },
+        "response": {
+          "output": "$763,950.00",
+          "tokenUsage": {
+            "total": 19533,
+            "prompt": 19471,
+            "completion": 62
+          },
+          "metadata": {
+            "turns": 3,
+            "inputTokens": 19471,
+            "outputTokens": 62
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "read summary stat",
+          "vars": {
+            "task": "Use the browser_navigate tool to open this URL in the browser: %%WEBAPP_URL%% Then use browser_snapshot to read the page. What is the total revenue shown in the page summary bar? Reply with only the dollar amount, e.g. \"$763,950.00\".\n"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "The response contains $763,950.00",
+              "threshold": 0.9
+            }
+          ],
+          "options": {
+            "provider": "openai:gpt-5.4-mini-2026-03-17"
+          },
+          "metadata": {}
+        },
+        "testIdx": 0,
+        "vars": {
+          "task": "Use the browser_navigate tool to open this URL in the browser: %%WEBAPP_URL%% Then use browser_snapshot to read the page. What is the total revenue shown in the page summary bar? Reply with only the dollar amount, e.g. \"$763,950.00\".\n"
+        },
+        "metadata": {
+          "turns": 3,
+          "inputTokens": 19471,
+          "outputTokens": 62,
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 223,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 223,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "The response contains $763,950.00",
+                "threshold": 0.9
+              },
+              "pass": true,
+              "score": 1,
+              "reason": "The output exactly contains \"$763,950.00\".",
+              "tokensUsed": {
+                "total": 223,
+                "prompt": 0,
+                "completion": 0,
+                "cached": 223,
+                "numRequests": 0,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              },
+              "metadata": {
+                "http": {
+                  "status": 200,
+                  "statusText": "OK",
+                  "headers": {
+                    "access-control-expose-headers": "X-Request-ID",
+                    "alt-svc": "h3=\":443\"; ma=86400",
+                    "cf-cache-status": "[REDACTED]",
+                    "cf-ray": "[REDACTED]",
+                    "connection": "keep-alive",
+                    "content-encoding": "br",
+                    "content-type": "application/json",
+                    "date": "Sun, 10 May 2026 16:46:49 GMT",
+                    "openai-organization": "[REDACTED]",
+                    "openai-processing-ms": "941",
+                    "openai-project": "[REDACTED]",
+                    "openai-version": "[REDACTED]",
+                    "server": "cloudflare",
+                    "set-cookie": "[REDACTED]",
+                    "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                    "transfer-encoding": "chunked",
+                    "x-content-type-options": "nosniff",
+                    "x-openai-proxy-wasm": "[REDACTED]",
+                    "x-ratelimit-limit-requests": "[REDACTED]",
+                    "x-ratelimit-limit-tokens": "[REDACTED]",
+                    "x-ratelimit-remaining-requests": "[REDACTED]",
+                    "x-ratelimit-remaining-tokens": "[REDACTED]",
+                    "x-ratelimit-reset-requests": "[REDACTED]",
+                    "x-ratelimit-reset-tokens": "[REDACTED]",
+                    "x-request-id": "[REDACTED]"
+                  }
+                },
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\n$763,950.00\\n</Output>\\n<Rubric>\\nThe response contains $763,950.00\\n</Rubric>\"}]"
+              }
+            }
+          ]
+        },
+        "id": "a7150394-ddd4-4e63-aca0-c60735fc8c9e",
+        "latencyMs": 5708,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Use the browser_navigate tool to open this URL in the browser: %%WEBAPP_URL%% Then use browser_snapshot to read the page. What is the total revenue shown in the page summary bar? Reply with only the dollar amount, e.g. \"$763,950.00\".",
+          "label": "{{task}}",
+          "config": {
+            "provider": "openai:gpt-5.4-mini-2026-03-17"
+          }
+        },
+        "promptId": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "promptIdx": 1,
+        "provider": {
+          "id": "mcp-bench",
+          "label": "playwright/proxied"
+        },
+        "response": {
+          "output": "$763,950.00",
+          "tokenUsage": {
+            "total": 9711,
+            "prompt": 9609,
+            "completion": 102
+          },
+          "metadata": {
+            "turns": 4,
+            "inputTokens": 9609,
+            "outputTokens": 102
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "read summary stat",
+          "vars": {
+            "task": "Use the browser_navigate tool to open this URL in the browser: %%WEBAPP_URL%% Then use browser_snapshot to read the page. What is the total revenue shown in the page summary bar? Reply with only the dollar amount, e.g. \"$763,950.00\".\n"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "The response contains $763,950.00",
+              "threshold": 0.9
+            }
+          ],
+          "options": {
+            "provider": "openai:gpt-5.4-mini-2026-03-17"
+          },
+          "metadata": {}
+        },
+        "testIdx": 0,
+        "vars": {
+          "task": "Use the browser_navigate tool to open this URL in the browser: %%WEBAPP_URL%% Then use browser_snapshot to read the page. What is the total revenue shown in the page summary bar? Reply with only the dollar amount, e.g. \"$763,950.00\".\n"
+        },
+        "metadata": {
+          "turns": 4,
+          "inputTokens": 9609,
+          "outputTokens": 102,
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 218,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 218,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "The response contains ORD-0004",
+                "threshold": 0.9
+              },
+              "pass": true,
+              "score": 1,
+              "reason": "The output exactly contains 'ORD-0004'.",
+              "tokensUsed": {
+                "total": 218,
+                "prompt": 0,
+                "completion": 0,
+                "cached": 218,
+                "numRequests": 0,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              },
+              "metadata": {
+                "http": {
+                  "status": 200,
+                  "statusText": "OK",
+                  "headers": {
+                    "access-control-expose-headers": "X-Request-ID",
+                    "alt-svc": "h3=\":443\"; ma=86400",
+                    "cf-cache-status": "[REDACTED]",
+                    "cf-ray": "[REDACTED]",
+                    "connection": "keep-alive",
+                    "content-encoding": "br",
+                    "content-type": "application/json",
+                    "date": "Sun, 10 May 2026 16:35:41 GMT",
+                    "openai-organization": "[REDACTED]",
+                    "openai-processing-ms": "518",
+                    "openai-project": "[REDACTED]",
+                    "openai-version": "[REDACTED]",
+                    "server": "cloudflare",
+                    "set-cookie": "[REDACTED]",
+                    "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                    "transfer-encoding": "chunked",
+                    "x-content-type-options": "nosniff",
+                    "x-openai-proxy-wasm": "[REDACTED]",
+                    "x-ratelimit-limit-requests": "[REDACTED]",
+                    "x-ratelimit-limit-tokens": "[REDACTED]",
+                    "x-ratelimit-remaining-requests": "[REDACTED]",
+                    "x-ratelimit-remaining-tokens": "[REDACTED]",
+                    "x-ratelimit-reset-requests": "[REDACTED]",
+                    "x-ratelimit-reset-tokens": "[REDACTED]",
+                    "x-request-id": "[REDACTED]"
+                  }
+                },
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\nORD-0004\\n</Output>\\n<Rubric>\\nThe response contains ORD-0004\\n</Rubric>\"}]"
+              }
+            }
+          ]
+        },
+        "id": "9e6ef9bd-9aa6-455a-9a76-be4fa00086f3",
+        "latencyMs": 9326,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Use the browser_navigate tool to open this URL in the browser: %%WEBAPP_URL%% Use the Status dropdown filter to select 'Cancelled', then use browser_snapshot to read the page. What is the Order ID shown in the first row of the filtered table? Reply with only the Order ID, e.g. \"ORD-0004\".",
+          "label": "{{task}}",
+          "config": {
+            "provider": "openai:gpt-5.4-mini-2026-03-17"
+          }
+        },
+        "promptId": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "promptIdx": 0,
+        "provider": {
+          "id": "mcp-bench",
+          "label": "playwright/direct"
+        },
+        "response": {
+          "output": "ORD-0004",
+          "tokenUsage": {
+            "total": 255905,
+            "prompt": 255796,
+            "completion": 109
+          },
+          "metadata": {
+            "turns": 5,
+            "inputTokens": 255796,
+            "outputTokens": 109
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "filter by status, first visible row",
+          "vars": {
+            "task": "Use the browser_navigate tool to open this URL in the browser: %%WEBAPP_URL%% Use the Status dropdown filter to select 'Cancelled', then use browser_snapshot to read the page. What is the Order ID shown in the first row of the filtered table? Reply with only the Order ID, e.g. \"ORD-0004\".\n"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "The response contains ORD-0004",
+              "threshold": 0.9
+            }
+          ],
+          "options": {
+            "provider": "openai:gpt-5.4-mini-2026-03-17"
+          },
+          "metadata": {}
+        },
+        "testIdx": 1,
+        "vars": {
+          "task": "Use the browser_navigate tool to open this URL in the browser: %%WEBAPP_URL%% Use the Status dropdown filter to select 'Cancelled', then use browser_snapshot to read the page. What is the Order ID shown in the first row of the filtered table? Reply with only the Order ID, e.g. \"ORD-0004\".\n"
+        },
+        "metadata": {
+          "turns": 5,
+          "inputTokens": 255796,
+          "outputTokens": 109,
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 218,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 218,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "The response contains ORD-0004",
+                "threshold": 0.9
+              },
+              "pass": true,
+              "score": 1,
+              "reason": "The output exactly contains 'ORD-0004'.",
+              "tokensUsed": {
+                "total": 218,
+                "prompt": 0,
+                "completion": 0,
+                "cached": 218,
+                "numRequests": 0,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              },
+              "metadata": {
+                "http": {
+                  "status": 200,
+                  "statusText": "OK",
+                  "headers": {
+                    "access-control-expose-headers": "X-Request-ID",
+                    "alt-svc": "h3=\":443\"; ma=86400",
+                    "cf-cache-status": "[REDACTED]",
+                    "cf-ray": "[REDACTED]",
+                    "connection": "keep-alive",
+                    "content-encoding": "br",
+                    "content-type": "application/json",
+                    "date": "Sun, 10 May 2026 16:35:41 GMT",
+                    "openai-organization": "[REDACTED]",
+                    "openai-processing-ms": "518",
+                    "openai-project": "[REDACTED]",
+                    "openai-version": "[REDACTED]",
+                    "server": "cloudflare",
+                    "set-cookie": "[REDACTED]",
+                    "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                    "transfer-encoding": "chunked",
+                    "x-content-type-options": "nosniff",
+                    "x-openai-proxy-wasm": "[REDACTED]",
+                    "x-ratelimit-limit-requests": "[REDACTED]",
+                    "x-ratelimit-limit-tokens": "[REDACTED]",
+                    "x-ratelimit-remaining-requests": "[REDACTED]",
+                    "x-ratelimit-remaining-tokens": "[REDACTED]",
+                    "x-ratelimit-reset-requests": "[REDACTED]",
+                    "x-ratelimit-reset-tokens": "[REDACTED]",
+                    "x-request-id": "[REDACTED]"
+                  }
+                },
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\nORD-0004\\n</Output>\\n<Rubric>\\nThe response contains ORD-0004\\n</Rubric>\"}]"
+              }
+            }
+          ]
+        },
+        "id": "d11df414-61e6-4619-ae29-58ad6e2424dd",
+        "latencyMs": 70066,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Use the browser_navigate tool to open this URL in the browser: %%WEBAPP_URL%% Use the Status dropdown filter to select 'Cancelled', then use browser_snapshot to read the page. What is the Order ID shown in the first row of the filtered table? Reply with only the Order ID, e.g. \"ORD-0004\".",
+          "label": "{{task}}",
+          "config": {
+            "provider": "openai:gpt-5.4-mini-2026-03-17"
+          }
+        },
+        "promptId": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "promptIdx": 1,
+        "provider": {
+          "id": "mcp-bench",
+          "label": "playwright/proxied"
+        },
+        "response": {
+          "output": "ORD-0004",
+          "tokenUsage": {
+            "total": 12955,
+            "prompt": 12860,
+            "completion": 95
+          },
+          "metadata": {
+            "turns": 4,
+            "inputTokens": 12860,
+            "outputTokens": 95
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "filter by status, first visible row",
+          "vars": {
+            "task": "Use the browser_navigate tool to open this URL in the browser: %%WEBAPP_URL%% Use the Status dropdown filter to select 'Cancelled', then use browser_snapshot to read the page. What is the Order ID shown in the first row of the filtered table? Reply with only the Order ID, e.g. \"ORD-0004\".\n"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "The response contains ORD-0004",
+              "threshold": 0.9
+            }
+          ],
+          "options": {
+            "provider": "openai:gpt-5.4-mini-2026-03-17"
+          },
+          "metadata": {}
+        },
+        "testIdx": 1,
+        "vars": {
+          "task": "Use the browser_navigate tool to open this URL in the browser: %%WEBAPP_URL%% Use the Status dropdown filter to select 'Cancelled', then use browser_snapshot to read the page. What is the Order ID shown in the first row of the filtered table? Reply with only the Order ID, e.g. \"ORD-0004\".\n"
+        },
+        "metadata": {
+          "turns": 4,
+          "inputTokens": 12860,
+          "outputTokens": 95,
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "error": "The output is empty and does not contain the number 75.",
+        "gradingResult": {
+          "pass": false,
+          "score": 0,
+          "reason": "The output is empty and does not contain the number 75.",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 219,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 219,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "The response contains the number 75",
+                "threshold": 0.9
+              },
+              "pass": false,
+              "score": 0,
+              "reason": "The output is empty and does not contain the number 75.",
+              "tokensUsed": {
+                "total": 219,
+                "prompt": 0,
+                "completion": 0,
+                "cached": 219,
+                "numRequests": 0,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              },
+              "metadata": {
+                "http": {
+                  "status": 200,
+                  "statusText": "OK",
+                  "headers": {
+                    "access-control-expose-headers": "X-Request-ID",
+                    "alt-svc": "h3=\":443\"; ma=86400",
+                    "cf-cache-status": "[REDACTED]",
+                    "cf-ray": "[REDACTED]",
+                    "connection": "keep-alive",
+                    "content-encoding": "br",
+                    "content-type": "application/json",
+                    "date": "Sun, 10 May 2026 16:35:56 GMT",
+                    "openai-organization": "[REDACTED]",
+                    "openai-processing-ms": "607",
+                    "openai-project": "[REDACTED]",
+                    "openai-version": "[REDACTED]",
+                    "server": "cloudflare",
+                    "set-cookie": "[REDACTED]",
+                    "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                    "transfer-encoding": "chunked",
+                    "x-content-type-options": "nosniff",
+                    "x-openai-proxy-wasm": "[REDACTED]",
+                    "x-ratelimit-limit-requests": "[REDACTED]",
+                    "x-ratelimit-limit-tokens": "[REDACTED]",
+                    "x-ratelimit-remaining-requests": "[REDACTED]",
+                    "x-ratelimit-remaining-tokens": "[REDACTED]",
+                    "x-ratelimit-reset-requests": "[REDACTED]",
+                    "x-ratelimit-reset-tokens": "[REDACTED]",
+                    "x-request-id": "[REDACTED]"
+                  }
+                },
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\n(no text output)\\n</Output>\\n<Rubric>\\nThe response contains the number 75\\n</Rubric>\"}]"
+              }
+            }
+          ]
+        },
+        "id": "5967e3bd-a421-4de6-89a0-5c2c96e6ffaf",
+        "latencyMs": 75083,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Use the browser_navigate tool to open this URL in the browser: %%WEBAPP_URL%% Use the Region dropdown filter to select 'APAC', then use browser_snapshot to read the page. How many orders are shown after filtering? (Check the 'Showing X of 300 orders' counter.) Reply with only the number.",
+          "label": "{{task}}",
+          "config": {
+            "provider": "openai:gpt-5.4-mini-2026-03-17"
+          }
+        },
+        "promptId": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "promptIdx": 1,
+        "provider": {
+          "id": "mcp-bench",
+          "label": "playwright/proxied"
+        },
+        "response": {
+          "output": "(no text output)",
+          "tokenUsage": {
+            "total": 21474,
+            "prompt": 21212,
+            "completion": 262
+          },
+          "metadata": {
+            "turns": 8,
+            "inputTokens": 21212,
+            "outputTokens": 262
+          }
+        },
+        "score": 0,
+        "success": false,
+        "testCase": {
+          "description": "filter by region, count results",
+          "vars": {
+            "task": "Use the browser_navigate tool to open this URL in the browser: %%WEBAPP_URL%% Use the Region dropdown filter to select 'APAC', then use browser_snapshot to read the page. How many orders are shown after filtering? (Check the 'Showing X of 300 orders' counter.) Reply with only the number.\n"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "The response contains the number 75",
+              "threshold": 0.9
+            }
+          ],
+          "options": {
+            "provider": "openai:gpt-5.4-mini-2026-03-17"
+          },
+          "metadata": {}
+        },
+        "testIdx": 2,
+        "vars": {
+          "task": "Use the browser_navigate tool to open this URL in the browser: %%WEBAPP_URL%% Use the Region dropdown filter to select 'APAC', then use browser_snapshot to read the page. How many orders are shown after filtering? (Check the 'Showing X of 300 orders' counter.) Reply with only the number.\n"
+        },
+        "metadata": {
+          "turns": 8,
+          "inputTokens": 21212,
+          "outputTokens": 262,
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 1
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 212,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 212,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "The response contains the number 75",
+                "threshold": 0.9
+              },
+              "pass": true,
+              "score": 1,
+              "reason": "The output contains the number 75.",
+              "tokensUsed": {
+                "total": 212,
+                "prompt": 0,
+                "completion": 0,
+                "cached": 212,
+                "numRequests": 0,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              },
+              "metadata": {
+                "http": {
+                  "status": 200,
+                  "statusText": "OK",
+                  "headers": {
+                    "access-control-expose-headers": "X-Request-ID",
+                    "alt-svc": "h3=\":443\"; ma=86400",
+                    "cf-cache-status": "[REDACTED]",
+                    "cf-ray": "[REDACTED]",
+                    "connection": "keep-alive",
+                    "content-encoding": "br",
+                    "content-type": "application/json",
+                    "date": "Sun, 10 May 2026 16:39:30 GMT",
+                    "openai-organization": "[REDACTED]",
+                    "openai-processing-ms": "487",
+                    "openai-project": "[REDACTED]",
+                    "openai-version": "[REDACTED]",
+                    "server": "cloudflare",
+                    "set-cookie": "[REDACTED]",
+                    "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                    "transfer-encoding": "chunked",
+                    "x-content-type-options": "nosniff",
+                    "x-openai-proxy-wasm": "[REDACTED]",
+                    "x-ratelimit-limit-requests": "[REDACTED]",
+                    "x-ratelimit-limit-tokens": "[REDACTED]",
+                    "x-ratelimit-remaining-requests": "[REDACTED]",
+                    "x-ratelimit-remaining-tokens": "[REDACTED]",
+                    "x-ratelimit-reset-requests": "[REDACTED]",
+                    "x-ratelimit-reset-tokens": "[REDACTED]",
+                    "x-request-id": "[REDACTED]"
+                  }
+                },
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\n75\\n</Output>\\n<Rubric>\\nThe response contains the number 75\\n</Rubric>\"}]"
+              }
+            }
+          ]
+        },
+        "id": "049f7212-fbce-44a4-9313-db5477bc227e",
+        "latencyMs": 8476,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Use the browser_navigate tool to open this URL in the browser: %%WEBAPP_URL%% Use the Region dropdown filter to select 'APAC', then use browser_snapshot to read the page. How many orders are shown after filtering? (Check the 'Showing X of 300 orders' counter.) Reply with only the number.",
+          "label": "{{task}}",
+          "config": {
+            "provider": "openai:gpt-5.4-mini-2026-03-17"
+          }
+        },
+        "promptId": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "promptIdx": 0,
+        "provider": {
+          "id": "mcp-bench",
+          "label": "playwright/direct"
+        },
+        "response": {
+          "output": "75",
+          "tokenUsage": {
+            "total": 256665,
+            "prompt": 256558,
+            "completion": 107
+          },
+          "metadata": {
+            "turns": 5,
+            "inputTokens": 256558,
+            "outputTokens": 107
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "filter by region, count results",
+          "vars": {
+            "task": "Use the browser_navigate tool to open this URL in the browser: %%WEBAPP_URL%% Use the Region dropdown filter to select 'APAC', then use browser_snapshot to read the page. How many orders are shown after filtering? (Check the 'Showing X of 300 orders' counter.) Reply with only the number.\n"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "The response contains the number 75",
+              "threshold": 0.9
+            }
+          ],
+          "options": {
+            "provider": "openai:gpt-5.4-mini-2026-03-17"
+          },
+          "metadata": {}
+        },
+        "testIdx": 2,
+        "vars": {
+          "task": "Use the browser_navigate tool to open this URL in the browser: %%WEBAPP_URL%% Use the Region dropdown filter to select 'APAC', then use browser_snapshot to read the page. How many orders are shown after filtering? (Check the 'Showing X of 300 orders' counter.) Reply with only the number.\n"
+        },
+        "metadata": {
+          "turns": 5,
+          "inputTokens": 256558,
+          "outputTokens": 107,
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "error": "The output contains 'ORD-0010', not 'ORD-0101'.",
+        "gradingResult": {
+          "pass": false,
+          "score": 0,
+          "reason": "The output contains 'ORD-0010', not 'ORD-0101'.",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 224,
+            "prompt": 191,
+            "completion": 33,
+            "cached": 0,
+            "numRequests": 1
+          },
+          "componentResults": [
+            {
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "The response contains ORD-0101",
+                "threshold": 0.9
+              },
+              "pass": false,
+              "score": 0,
+              "reason": "The output contains 'ORD-0010', not 'ORD-0101'.",
+              "tokensUsed": {
+                "total": 224,
+                "prompt": 191,
+                "completion": 33,
+                "cached": 0,
+                "numRequests": 1,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              },
+              "metadata": {
+                "http": {
+                  "status": 200,
+                  "statusText": "OK",
+                  "headers": {
+                    "access-control-expose-headers": "X-Request-ID",
+                    "alt-svc": "h3=\":443\"; ma=86400",
+                    "cf-cache-status": "[REDACTED]",
+                    "cf-ray": "[REDACTED]",
+                    "connection": "keep-alive",
+                    "content-encoding": "br",
+                    "content-type": "application/json",
+                    "date": "Sun, 10 May 2026 16:46:51 GMT",
+                    "openai-organization": "[REDACTED]",
+                    "openai-processing-ms": "661",
+                    "openai-project": "[REDACTED]",
+                    "openai-version": "[REDACTED]",
+                    "server": "cloudflare",
+                    "set-cookie": "[REDACTED]",
+                    "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                    "transfer-encoding": "chunked",
+                    "x-content-type-options": "nosniff",
+                    "x-openai-proxy-wasm": "[REDACTED]",
+                    "x-ratelimit-limit-requests": "[REDACTED]",
+                    "x-ratelimit-limit-tokens": "[REDACTED]",
+                    "x-ratelimit-remaining-requests": "[REDACTED]",
+                    "x-ratelimit-remaining-tokens": "[REDACTED]",
+                    "x-ratelimit-reset-requests": "[REDACTED]",
+                    "x-ratelimit-reset-tokens": "[REDACTED]",
+                    "x-request-id": "[REDACTED]"
+                  }
+                },
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\nORD-0010\\n</Output>\\n<Rubric>\\nThe response contains ORD-0101\\n</Rubric>\"}]"
+              }
+            }
+          ]
+        },
+        "id": "8f67f7dd-8510-4efa-9e6a-a4d3ddd0def4",
+        "latencyMs": 11377,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Use the browser_navigate tool to open this URL in the browser: %%WEBAPP_URL%% Click the 'Amount' column header to sort the table by amount descending (highest first), then use browser_snapshot to read the page. What is the Order ID shown in the first row after sorting? Reply with only the Order ID, e.g. \"ORD-XXXX\".",
+          "label": "{{task}}",
+          "config": {
+            "provider": "openai:gpt-5.4-mini-2026-03-17"
+          }
+        },
+        "promptId": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "promptIdx": 1,
+        "provider": {
+          "id": "mcp-bench",
+          "label": "playwright/proxied"
+        },
+        "response": {
+          "output": "ORD-0010",
+          "tokenUsage": {
+            "total": 34562,
+            "prompt": 34371,
+            "completion": 191
+          },
+          "metadata": {
+            "turns": 7,
+            "inputTokens": 34371,
+            "outputTokens": 191
+          }
+        },
+        "score": 0,
+        "success": false,
+        "testCase": {
+          "description": "sort by amount, read first row",
+          "vars": {
+            "task": "Use the browser_navigate tool to open this URL in the browser: %%WEBAPP_URL%% Click the 'Amount' column header to sort the table by amount descending (highest first), then use browser_snapshot to read the page. What is the Order ID shown in the first row after sorting? Reply with only the Order ID, e.g. \"ORD-XXXX\".\n"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "The response contains ORD-0101",
+              "threshold": 0.9
+            }
+          ],
+          "options": {
+            "provider": "openai:gpt-5.4-mini-2026-03-17"
+          },
+          "metadata": {}
+        },
+        "testIdx": 3,
+        "vars": {
+          "task": "Use the browser_navigate tool to open this URL in the browser: %%WEBAPP_URL%% Click the 'Amount' column header to sort the table by amount descending (highest first), then use browser_snapshot to read the page. What is the Order ID shown in the first row after sorting? Reply with only the Order ID, e.g. \"ORD-XXXX\".\n"
+        },
+        "metadata": {
+          "turns": 7,
+          "inputTokens": 34371,
+          "outputTokens": 191,
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 1
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 218,
+            "prompt": 191,
+            "completion": 27,
+            "cached": 0,
+            "numRequests": 1
+          },
+          "componentResults": [
+            {
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "The response contains ORD-0101",
+                "threshold": 0.9
+              },
+              "pass": true,
+              "score": 1,
+              "reason": "The output exactly contains 'ORD-0101'.",
+              "tokensUsed": {
+                "total": 218,
+                "prompt": 191,
+                "completion": 27,
+                "cached": 0,
+                "numRequests": 1,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              },
+              "metadata": {
+                "http": {
+                  "status": 200,
+                  "statusText": "OK",
+                  "headers": {
+                    "access-control-expose-headers": "X-Request-ID",
+                    "alt-svc": "h3=\":443\"; ma=86400",
+                    "cf-cache-status": "[REDACTED]",
+                    "cf-ray": "[REDACTED]",
+                    "connection": "keep-alive",
+                    "content-encoding": "br",
+                    "content-type": "application/json",
+                    "date": "Sun, 10 May 2026 16:46:50 GMT",
+                    "openai-organization": "[REDACTED]",
+                    "openai-processing-ms": "649",
+                    "openai-project": "[REDACTED]",
+                    "openai-version": "[REDACTED]",
+                    "server": "cloudflare",
+                    "set-cookie": "[REDACTED]",
+                    "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                    "transfer-encoding": "chunked",
+                    "x-content-type-options": "nosniff",
+                    "x-openai-proxy-wasm": "[REDACTED]",
+                    "x-ratelimit-limit-requests": "[REDACTED]",
+                    "x-ratelimit-limit-tokens": "[REDACTED]",
+                    "x-ratelimit-remaining-requests": "[REDACTED]",
+                    "x-ratelimit-remaining-tokens": "[REDACTED]",
+                    "x-ratelimit-reset-requests": "[REDACTED]",
+                    "x-ratelimit-reset-tokens": "[REDACTED]",
+                    "x-request-id": "[REDACTED]"
+                  }
+                },
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\nORD-0101\\n</Output>\\n<Rubric>\\nThe response contains ORD-0101\\n</Rubric>\"}]"
+              }
+            }
+          ]
+        },
+        "id": "f838436e-0d8e-4cb8-9a0b-df7d77c6aebd",
+        "latencyMs": 8163,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Use the browser_navigate tool to open this URL in the browser: %%WEBAPP_URL%% Click the 'Amount' column header to sort the table by amount descending (highest first), then use browser_snapshot to read the page. What is the Order ID shown in the first row after sorting? Reply with only the Order ID, e.g. \"ORD-XXXX\".",
+          "label": "{{task}}",
+          "config": {
+            "provider": "openai:gpt-5.4-mini-2026-03-17"
+          }
+        },
+        "promptId": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "promptIdx": 0,
+        "provider": {
+          "id": "mcp-bench",
+          "label": "playwright/direct"
+        },
+        "response": {
+          "output": "ORD-0101",
+          "tokenUsage": {
+            "total": 89507,
+            "prompt": 89424,
+            "completion": 83
+          },
+          "metadata": {
+            "turns": 4,
+            "inputTokens": 89424,
+            "outputTokens": 83
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "sort by amount, read first row",
+          "vars": {
+            "task": "Use the browser_navigate tool to open this URL in the browser: %%WEBAPP_URL%% Click the 'Amount' column header to sort the table by amount descending (highest first), then use browser_snapshot to read the page. What is the Order ID shown in the first row after sorting? Reply with only the Order ID, e.g. \"ORD-XXXX\".\n"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "The response contains ORD-0101",
+              "threshold": 0.9
+            }
+          ],
+          "options": {
+            "provider": "openai:gpt-5.4-mini-2026-03-17"
+          },
+          "metadata": {}
+        },
+        "testIdx": 3,
+        "vars": {
+          "task": "Use the browser_navigate tool to open this URL in the browser: %%WEBAPP_URL%% Click the 'Amount' column header to sort the table by amount descending (highest first), then use browser_snapshot to read the page. What is the Order ID shown in the first row after sorting? Reply with only the Order ID, e.g. \"ORD-XXXX\".\n"
+        },
+        "metadata": {
+          "turns": 4,
+          "inputTokens": 89424,
+          "outputTokens": 83,
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 216,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 216,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "The response contains the word Shipped",
+                "threshold": 0.9
+              },
+              "pass": true,
+              "score": 1,
+              "reason": "The output contains the word \"Shipped\" exactly.",
+              "tokensUsed": {
+                "total": 216,
+                "prompt": 0,
+                "completion": 0,
+                "cached": 216,
+                "numRequests": 0,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              },
+              "metadata": {
+                "http": {
+                  "status": 200,
+                  "statusText": "OK",
+                  "headers": {
+                    "access-control-expose-headers": "X-Request-ID",
+                    "alt-svc": "h3=\":443\"; ma=86400",
+                    "cf-cache-status": "[REDACTED]",
+                    "cf-ray": "[REDACTED]",
+                    "connection": "keep-alive",
+                    "content-encoding": "br",
+                    "content-type": "application/json",
+                    "date": "Sun, 10 May 2026 16:40:11 GMT",
+                    "openai-organization": "[REDACTED]",
+                    "openai-processing-ms": "1097",
+                    "openai-project": "[REDACTED]",
+                    "openai-version": "[REDACTED]",
+                    "server": "cloudflare",
+                    "set-cookie": "[REDACTED]",
+                    "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                    "transfer-encoding": "chunked",
+                    "x-content-type-options": "nosniff",
+                    "x-openai-proxy-wasm": "[REDACTED]",
+                    "x-ratelimit-limit-requests": "[REDACTED]",
+                    "x-ratelimit-limit-tokens": "[REDACTED]",
+                    "x-ratelimit-remaining-requests": "[REDACTED]",
+                    "x-ratelimit-remaining-tokens": "[REDACTED]",
+                    "x-ratelimit-reset-requests": "[REDACTED]",
+                    "x-ratelimit-reset-tokens": "[REDACTED]",
+                    "x-request-id": "[REDACTED]"
+                  }
+                },
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\nShipped\\n</Output>\\n<Rubric>\\nThe response contains the word Shipped\\n</Rubric>\"}]"
+              }
+            }
+          ]
+        },
+        "id": "b7215b2f-b25b-4eb1-8d5e-7e8948067a26",
+        "latencyMs": 4915,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Use the browser_navigate tool to open this URL in the browser: %%WEBAPP_URL%% Then use browser_snapshot to read the page. Find the row for order ORD-0182 in the table. What is its status? Reply with only the status word.",
+          "label": "{{task}}",
+          "config": {
+            "provider": "openai:gpt-5.4-mini-2026-03-17"
+          }
+        },
+        "promptId": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "promptIdx": 0,
+        "provider": {
+          "id": "mcp-bench",
+          "label": "playwright/direct"
+        },
+        "response": {
+          "output": "Shipped",
+          "tokenUsage": {
+            "total": 19517,
+            "prompt": 19459,
+            "completion": 58
+          },
+          "metadata": {
+            "turns": 3,
+            "inputTokens": 19459,
+            "outputTokens": 58
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "single row lookup baseline",
+          "vars": {
+            "task": "Use the browser_navigate tool to open this URL in the browser: %%WEBAPP_URL%% Then use browser_snapshot to read the page. Find the row for order ORD-0182 in the table. What is its status? Reply with only the status word.\n"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "The response contains the word Shipped",
+              "threshold": 0.9
+            }
+          ],
+          "options": {
+            "provider": "openai:gpt-5.4-mini-2026-03-17"
+          },
+          "metadata": {}
+        },
+        "testIdx": 4,
+        "vars": {
+          "task": "Use the browser_navigate tool to open this URL in the browser: %%WEBAPP_URL%% Then use browser_snapshot to read the page. Find the row for order ORD-0182 in the table. What is its status? Reply with only the status word.\n"
+        },
+        "metadata": {
+          "turns": 3,
+          "inputTokens": 19459,
+          "outputTokens": 58,
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 216,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 216,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "The response contains the word Shipped",
+                "threshold": 0.9
+              },
+              "pass": true,
+              "score": 1,
+              "reason": "The output contains the word \"Shipped\" exactly.",
+              "tokensUsed": {
+                "total": 216,
+                "prompt": 0,
+                "completion": 0,
+                "cached": 216,
+                "numRequests": 0,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              },
+              "metadata": {
+                "http": {
+                  "status": 200,
+                  "statusText": "OK",
+                  "headers": {
+                    "access-control-expose-headers": "X-Request-ID",
+                    "alt-svc": "h3=\":443\"; ma=86400",
+                    "cf-cache-status": "[REDACTED]",
+                    "cf-ray": "[REDACTED]",
+                    "connection": "keep-alive",
+                    "content-encoding": "br",
+                    "content-type": "application/json",
+                    "date": "Sun, 10 May 2026 16:40:11 GMT",
+                    "openai-organization": "[REDACTED]",
+                    "openai-processing-ms": "1097",
+                    "openai-project": "[REDACTED]",
+                    "openai-version": "[REDACTED]",
+                    "server": "cloudflare",
+                    "set-cookie": "[REDACTED]",
+                    "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                    "transfer-encoding": "chunked",
+                    "x-content-type-options": "nosniff",
+                    "x-openai-proxy-wasm": "[REDACTED]",
+                    "x-ratelimit-limit-requests": "[REDACTED]",
+                    "x-ratelimit-limit-tokens": "[REDACTED]",
+                    "x-ratelimit-remaining-requests": "[REDACTED]",
+                    "x-ratelimit-remaining-tokens": "[REDACTED]",
+                    "x-ratelimit-reset-requests": "[REDACTED]",
+                    "x-ratelimit-reset-tokens": "[REDACTED]",
+                    "x-request-id": "[REDACTED]"
+                  }
+                },
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\nShipped\\n</Output>\\n<Rubric>\\nThe response contains the word Shipped\\n</Rubric>\"}]"
+              }
+            }
+          ]
+        },
+        "id": "cc895f25-c308-49d5-acf6-c81c69c8d4bd",
+        "latencyMs": 5632,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Use the browser_navigate tool to open this URL in the browser: %%WEBAPP_URL%% Then use browser_snapshot to read the page. Find the row for order ORD-0182 in the table. What is its status? Reply with only the status word.",
+          "label": "{{task}}",
+          "config": {
+            "provider": "openai:gpt-5.4-mini-2026-03-17"
+          }
+        },
+        "promptId": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "promptIdx": 1,
+        "provider": {
+          "id": "mcp-bench",
+          "label": "playwright/proxied"
+        },
+        "response": {
+          "output": "Shipped",
+          "tokenUsage": {
+            "total": 9735,
+            "prompt": 9633,
+            "completion": 102
+          },
+          "metadata": {
+            "turns": 4,
+            "inputTokens": 9633,
+            "outputTokens": 102
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "single row lookup baseline",
+          "vars": {
+            "task": "Use the browser_navigate tool to open this URL in the browser: %%WEBAPP_URL%% Then use browser_snapshot to read the page. Find the row for order ORD-0182 in the table. What is its status? Reply with only the status word.\n"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "The response contains the word Shipped",
+              "threshold": 0.9
+            }
+          ],
+          "options": {
+            "provider": "openai:gpt-5.4-mini-2026-03-17"
+          },
+          "metadata": {}
+        },
+        "testIdx": 4,
+        "vars": {
+          "task": "Use the browser_navigate tool to open this URL in the browser: %%WEBAPP_URL%% Then use browser_snapshot to read the page. Find the row for order ORD-0182 in the table. What is its status? Reply with only the status word.\n"
+        },
+        "metadata": {
+          "turns": 4,
+          "inputTokens": 9633,
+          "outputTokens": 102,
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      }
+    ],
+    "stats": {
+      "successes": 8,
+      "failures": 2,
+      "errors": 0,
+      "tokenUsage": {
+        "prompt": 728393,
+        "completion": 1171,
+        "cached": 0,
+        "total": 729564,
+        "numRequests": 10,
+        "completionDetails": {
+          "reasoning": 0,
+          "acceptedPrediction": 0,
+          "rejectedPrediction": 0,
+          "cacheReadInputTokens": 0,
+          "cacheCreationInputTokens": 0
+        },
+        "assertions": {
+          "total": 2187,
+          "prompt": 577,
+          "completion": 88,
+          "cached": 1522,
+          "numRequests": 0,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          }
+        }
+      },
+      "durationMs": 207009,
+      "evaluationDurationMs": 207009
+    }
+  },
+  "config": {
+    "tags": {},
+    "description": "mcp-context-guard savings — playwright interactive web table",
+    "prompts": [
+      "{{task}}"
+    ],
+    "providers": [
+      {
+        "id": "file://provider.js",
+        "label": "playwright/direct",
+        "config": {
+          "mcpCmd": [
+            "npx",
+            "-y",
+            "@playwright/mcp",
+            "--headless",
+            "--allow-unrestricted-file-access"
+          ],
+          "maxTurns": 8,
+          "model": "gpt-5.4-mini-2026-03-17"
+        }
+      },
+      {
+        "id": "file://provider.js",
+        "label": "playwright/proxied",
+        "config": {
+          "mcpCmd": [
+            "../../mcp-context-guard.exe",
+            "--threshold=10240",
+            "--",
+            "npx",
+            "-y",
+            "@playwright/mcp",
+            "--headless",
+            "--allow-unrestricted-file-access"
+          ],
+          "maxTurns": 8,
+          "model": "gpt-5.4-mini-2026-03-17"
+        }
+      }
+    ],
+    "tests": [
+      {
+        "description": "read summary stat",
+        "vars": {
+          "task": "Use the browser_navigate tool to open this URL in the browser: %%WEBAPP_URL%% Then use browser_snapshot to read the page. What is the total revenue shown in the page summary bar? Reply with only the dollar amount, e.g. \"$763,950.00\".\n"
+        },
+        "assert": [
+          {
+            "type": "llm-rubric",
+            "value": "The response contains $763,950.00",
+            "threshold": 0.9
+          }
+        ]
+      },
+      {
+        "description": "filter by status, first visible row",
+        "vars": {
+          "task": "Use the browser_navigate tool to open this URL in the browser: %%WEBAPP_URL%% Use the Status dropdown filter to select 'Cancelled', then use browser_snapshot to read the page. What is the Order ID shown in the first row of the filtered table? Reply with only the Order ID, e.g. \"ORD-0004\".\n"
+        },
+        "assert": [
+          {
+            "type": "llm-rubric",
+            "value": "The response contains ORD-0004",
+            "threshold": 0.9
+          }
+        ]
+      },
+      {
+        "description": "filter by region, count results",
+        "vars": {
+          "task": "Use the browser_navigate tool to open this URL in the browser: %%WEBAPP_URL%% Use the Region dropdown filter to select 'APAC', then use browser_snapshot to read the page. How many orders are shown after filtering? (Check the 'Showing X of 300 orders' counter.) Reply with only the number.\n"
+        },
+        "assert": [
+          {
+            "type": "llm-rubric",
+            "value": "The response contains the number 75",
+            "threshold": 0.9
+          }
+        ]
+      },
+      {
+        "description": "sort by amount, read first row",
+        "vars": {
+          "task": "Use the browser_navigate tool to open this URL in the browser: %%WEBAPP_URL%% Click the 'Amount' column header to sort the table by amount descending (highest first), then use browser_snapshot to read the page. What is the Order ID shown in the first row after sorting? Reply with only the Order ID, e.g. \"ORD-XXXX\".\n"
+        },
+        "assert": [
+          {
+            "type": "llm-rubric",
+            "value": "The response contains ORD-0101",
+            "threshold": 0.9
+          }
+        ]
+      },
+      {
+        "description": "single row lookup baseline",
+        "vars": {
+          "task": "Use the browser_navigate tool to open this URL in the browser: %%WEBAPP_URL%% Then use browser_snapshot to read the page. Find the row for order ORD-0182 in the table. What is its status? Reply with only the status word.\n"
+        },
+        "assert": [
+          {
+            "type": "llm-rubric",
+            "value": "The response contains the word Shipped",
+            "threshold": 0.9
+          }
+        ]
+      }
+    ],
+    "scenarios": [],
+    "env": {},
+    "defaultTest": {
+      "options": {
+        "provider": "openai:gpt-5.4-mini-2026-03-17"
+      },
+      "vars": {},
+      "assert": [],
+      "metadata": {}
+    },
+    "outputPath": [
+      "results-playwright.json"
+    ],
+    "extensions": [],
+    "metadata": {},
+    "evaluateOptions": {}
+  },
+  "shareableUrl": null,
+  "metadata": {
+    "promptfooVersion": "0.121.11",
+    "nodeVersion": "v22.22.0",
+    "platform": "win32",
+    "arch": "x64",
+    "exportedAt": "2026-05-10T16:46:52.198Z",
+    "evaluationCreatedAt": "2026-05-10T16:43:25.110Z"
+  }
+}

@@ -1,0 +1,199 @@
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+MCP-CONTEXT-GUARD — TOKEN SAVINGS REPORT
+────────────────────────────────────────────────────────────────────────────────────────────────────
+
+results-filesystem / product price lookup
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                        direct       proxied      savings
+  total tokens                          16 917         4 568       73.0%
+  input tokens                          16 872         4 478
+  output tokens                             45            90
+  turns (tool rounds)                        2             3
+  pass / score                        ✓ (100%)      ✓ (100%)
+
+results-filesystem / product most expensive
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                        direct       proxied      savings
+  total tokens                          18 350        18 751       -2.2%
+  input tokens                          18 282        18 660
+  output tokens                             68            91
+  turns (tool rounds)                        3             3
+  pass / score                        ✓ (100%)      ✓ (100%)
+
+results-filesystem / electronics category count
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                        direct       proxied      savings
+  total tokens                          16 896         8 847       47.6%
+  input tokens                          16 852         8 748
+  output tokens                             44            99
+  turns (tool rounds)                        2             4
+  pass / score                        ✓ (100%)      ✓ (100%)
+
+results-filesystem / log level for request
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                        direct       proxied      savings
+  total tokens                          19 455         4 567       76.5%
+  input tokens                          19 412         4 479
+  output tokens                             43            88
+  turns (tool rounds)                        2             3
+  pass / score                        ✓ (100%)      ✓ (100%)
+
+results-filesystem / error entry count
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                        direct       proxied      savings
+  total tokens                          19 417         6 109       68.5%
+  input tokens                          19 373         6 025
+  output tokens                             44            84
+  turns (tool rounds)                        2             3
+  pass / score                        ✓ (100%)      ✓ (100%)
+
+results-sqlite / customer email by id
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                        direct       proxied      savings
+  total tokens                           1 820         2 188      -20.2%
+  input tokens                           1 756         2 124
+  output tokens                             64            64
+  turns (tool rounds)                        4             4
+  pass / score                        ✓ (100%)      ✓ (100%)
+
+results-sqlite / order status lookup
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                        direct       proxied      savings
+  total tokens                           1 970         2 338      -18.7%
+  input tokens                           1 908         2 276
+  output tokens                             62            62
+  turns (tool rounds)                        4             4
+  pass / score                        ✓ (100%)      ✓ (100%)
+
+results-sqlite / find order by exact amount
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                        direct       proxied      savings
+  total tokens                           1 993         2 361      -18.5%
+  input tokens                           1 927         2 295
+  output tokens                             66            66
+  turns (tool rounds)                        4             4
+  pass / score                        ✓ (100%)      ✓ (100%)
+
+results-sqlite / product category count
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                        direct       proxied      savings
+  total tokens                           1 901         2 269      -19.4%
+  input tokens                           1 836         2 204
+  output tokens                             65            65
+  turns (tool rounds)                        4             4
+  pass / score                        ✓ (100%)      ✓ (100%)
+
+results-sqlite / orders in february 2024
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                        direct       proxied      savings
+  total tokens                             764         1 465      -91.8%
+  input tokens                             713         1 401
+  output tokens                             51            64
+  turns (tool rounds)                        2             3
+  pass / score                        ✓ (100%)      ✓ (100%)
+
+results-playwright / read summary stat
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                        direct       proxied      savings
+  total tokens                          19 533         9 711       50.3%
+  input tokens                          19 471         9 609
+  output tokens                             62           102
+  turns (tool rounds)                        3             4
+  pass / score                        ✓ (100%)      ✓ (100%)
+
+results-playwright / filter by status, first visible row
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                        direct       proxied      savings
+  total tokens                         255 905        12 955       94.9%
+  input tokens                         255 796        12 860
+  output tokens                            109            95
+  turns (tool rounds)                        5             4
+  pass / score                        ✓ (100%)      ✓ (100%)
+
+results-playwright / filter by region, count results
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                        direct       proxied      savings
+  total tokens                         256 665        21 474       91.6%
+  input tokens                         256 558        21 212
+  output tokens                            107           262
+  turns (tool rounds)                        5             8
+  pass / score                        ✓ (100%)        ✗ (0%)
+  proxied error: The output is empty and does not contain the number 75.
+
+results-playwright / sort by amount, read first row
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                        direct       proxied      savings
+  total tokens                          89 507        34 562       61.4%
+  input tokens                          89 424        34 371
+  output tokens                             83           191
+  turns (tool rounds)                        4             7
+  pass / score                        ✓ (100%)        ✗ (0%)
+  proxied error: The output contains 'ORD-0010', not 'ORD-0101'.
+
+results-playwright / single row lookup baseline
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                        direct       proxied      savings
+  total tokens                          19 517         9 735       50.1%
+  input tokens                          19 459         9 633
+  output tokens                             58           102
+  turns (tool rounds)                        3             4
+  pass / score                        ✓ (100%)      ✓ (100%)
+
+results-git / most recent commit message
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                        direct       proxied      savings
+  total tokens                           3 140         3 416       -8.8%
+  input tokens                           3 030         3 306
+  output tokens                            110           110
+  turns (tool rounds)                        3             3
+  pass / score                        ✓ (100%)      ✓ (100%)
+
+results-git / fix commits count
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                        direct       proxied      savings
+  total tokens                          53 964        18 588       65.6%
+  input tokens                          53 890        18 473
+  output tokens                             74           115
+  turns (tool rounds)                        3             4
+  pass / score                        ✓ (100%)      ✓ (100%)
+
+results-git / oldest commit author in window
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                        direct       proxied      savings
+  total tokens                          53 974        11 132       79.4%
+  input tokens                          53 905        10 880
+  output tokens                             69           252
+  turns (tool rounds)                        3             6
+  pass / score                        ✓ (100%)        ✗ (0%)
+  proxied error: The output is empty and does not look like a person's name; it is not at least one word and is not a non-error response.
+
+results-git / 10th commit message
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                        direct       proxied      savings
+  total tokens                          53 991         9 039       83.3%
+  input tokens                          53 908         8 832
+  output tokens                             83           207
+  turns (tool rounds)                        3             6
+  pass / score                        ✓ (100%)      ✓ (100%)
+
+results-git / author search by name
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                        direct       proxied      savings
+  total tokens                          54 042        13 906       74.3%
+  input tokens                          53 971        13 660
+  output tokens                             71           246
+  turns (tool rounds)                        3             6
+  pass / score                        ✓ (100%)        ✗ (0%)
+  proxied error: The output is empty, so it is neither a 7-10 character hexadecimal git commit hash nor the exact string "not-found".
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+AGGREGATE (all tests, cached pairs only)
+────────────────────────────────────────────────────────────────────────────────────────────────────
+  Test pairs compared  : 20
+  Total tokens (direct) : 959 721
+  Total tokens (proxied): 197 981
+  Tokens saved          : 761 740 (79.4%)
+  Pass rate (direct)    : 20/20
+  Pass rate (proxied)   : 16/20
+

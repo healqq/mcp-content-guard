@@ -19,7 +19,7 @@ providers:
   - id: file://provider.js
     label: "playwright/direct"
     config:
-      mcpCmd: ["npx", "-y", "@playwright/mcp", "--headless"]
+      mcpCmd: ["npx", "-y", "@playwright/mcp", "--headless", "--allow-unrestricted-file-access"]
       maxTurns: 8
       model: gpt-5.4-mini-2026-03-17
 
@@ -34,6 +34,7 @@ providers:
         - "-y"
         - "@playwright/mcp"
         - "--headless"
+        - "--allow-unrestricted-file-access"
       maxTurns: 8
       model: gpt-5.4-mini-2026-03-17
 
@@ -48,7 +49,8 @@ tests:
   - description: "read summary stat"
     vars:
       task: >
-        Navigate to %%WEBAPP_URL%%.
+        Use the browser_navigate tool to open this URL in the browser: %%WEBAPP_URL%%
+        Then use browser_snapshot to read the page.
         What is the total revenue shown in the page summary bar?
         Reply with only the dollar amount, e.g. "$763,950.00".
     assert:
@@ -59,8 +61,8 @@ tests:
   - description: "filter by status, first visible row"
     vars:
       task: >
-        Navigate to %%WEBAPP_URL%%.
-        Use the Status dropdown filter to select 'Cancelled'.
+        Use the browser_navigate tool to open this URL in the browser: %%WEBAPP_URL%%
+        Use the Status dropdown filter to select 'Cancelled', then use browser_snapshot to read the page.
         What is the Order ID shown in the first row of the filtered table?
         Reply with only the Order ID, e.g. "ORD-0004".
     assert:
@@ -71,8 +73,8 @@ tests:
   - description: "filter by region, count results"
     vars:
       task: >
-        Navigate to %%WEBAPP_URL%%.
-        Use the Region dropdown filter to select 'APAC'.
+        Use the browser_navigate tool to open this URL in the browser: %%WEBAPP_URL%%
+        Use the Region dropdown filter to select 'APAC', then use browser_snapshot to read the page.
         How many orders are shown after filtering? (Check the 'Showing X of 300 orders' counter.)
         Reply with only the number.
     assert:
@@ -83,8 +85,8 @@ tests:
   - description: "sort by amount, read first row"
     vars:
       task: >
-        Navigate to %%WEBAPP_URL%%.
-        Click the 'Amount' column header to sort the table by amount (highest first).
+        Use the browser_navigate tool to open this URL in the browser: %%WEBAPP_URL%%
+        Click the 'Amount' column header to sort the table by amount descending (highest first), then use browser_snapshot to read the page.
         What is the Order ID shown in the first row after sorting?
         Reply with only the Order ID, e.g. "ORD-XXXX".
     assert:
@@ -95,8 +97,8 @@ tests:
   - description: "single row lookup baseline"
     vars:
       task: >
-        Navigate to %%WEBAPP_URL%%.
-        Find the row for order ORD-0182 in the table.
+        Use the browser_navigate tool to open this URL in the browser: %%WEBAPP_URL%%
+        Then use browser_snapshot to read the page. Find the row for order ORD-0182 in the table.
         What is its status?
         Reply with only the status word.
     assert:

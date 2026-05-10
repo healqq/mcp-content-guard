@@ -1,0 +1,1602 @@
+{
+  "evalId": "eval-lCe-2026-05-10T16:31:01",
+  "results": {
+    "version": 3,
+    "timestamp": "2026-05-10T16:31:01.196Z",
+    "prompts": [
+      {
+        "id": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "raw": "{{task}}",
+        "label": "{{task}}",
+        "provider": "filesystem/direct",
+        "metrics": {
+          "score": 5,
+          "testPassCount": 5,
+          "testFailCount": 0,
+          "testErrorCount": 0,
+          "assertPassCount": 5,
+          "assertFailCount": 0,
+          "totalLatencyMs": 21050,
+          "tokenUsage": {
+            "prompt": 90791,
+            "completion": 244,
+            "cached": 0,
+            "total": 91035,
+            "numRequests": 5,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            },
+            "assertions": {
+              "total": 1102,
+              "prompt": 569,
+              "completion": 82,
+              "cached": 451,
+              "numRequests": 0,
+              "completionDetails": {
+                "reasoning": 0,
+                "acceptedPrediction": 0,
+                "rejectedPrediction": 0,
+                "cacheReadInputTokens": 0,
+                "cacheCreationInputTokens": 0
+              }
+            }
+          },
+          "namedScores": {},
+          "namedScoresCount": {},
+          "namedScoreWeights": {},
+          "cost": 0
+        }
+      },
+      {
+        "id": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "raw": "{{task}}",
+        "label": "{{task}}",
+        "provider": "filesystem/proxied",
+        "metrics": {
+          "score": 5,
+          "testPassCount": 5,
+          "testFailCount": 0,
+          "testErrorCount": 0,
+          "assertPassCount": 5,
+          "assertFailCount": 0,
+          "totalLatencyMs": 25380,
+          "tokenUsage": {
+            "prompt": 42390,
+            "completion": 452,
+            "cached": 0,
+            "total": 42842,
+            "numRequests": 5,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            },
+            "assertions": {
+              "total": 1102,
+              "prompt": 193,
+              "completion": 27,
+              "cached": 882,
+              "numRequests": 0,
+              "completionDetails": {
+                "reasoning": 0,
+                "acceptedPrediction": 0,
+                "rejectedPrediction": 0,
+                "cacheReadInputTokens": 0,
+                "cacheCreationInputTokens": 0
+              }
+            }
+          },
+          "namedScores": {},
+          "namedScoresCount": {},
+          "namedScoreWeights": {},
+          "cost": 0
+        }
+      }
+    ],
+    "results": [
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 220,
+            "prompt": 193,
+            "completion": 27,
+            "cached": 0,
+            "numRequests": 1
+          },
+          "componentResults": [
+            {
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "The response contains the price $96.99",
+                "threshold": 0.9
+              },
+              "pass": true,
+              "score": 1,
+              "reason": "The output contains the exact price $96.99.",
+              "tokensUsed": {
+                "total": 220,
+                "prompt": 193,
+                "completion": 27,
+                "cached": 0,
+                "numRequests": 1,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              },
+              "metadata": {
+                "http": {
+                  "status": 200,
+                  "statusText": "OK",
+                  "headers": {
+                    "access-control-expose-headers": "X-Request-ID",
+                    "alt-svc": "h3=\":443\"; ma=86400",
+                    "cf-cache-status": "[REDACTED]",
+                    "cf-ray": "[REDACTED]",
+                    "connection": "keep-alive",
+                    "content-encoding": "br",
+                    "content-type": "application/json",
+                    "date": "Sun, 10 May 2026 16:31:06 GMT",
+                    "openai-organization": "[REDACTED]",
+                    "openai-processing-ms": "877",
+                    "openai-project": "[REDACTED]",
+                    "openai-version": "[REDACTED]",
+                    "server": "cloudflare",
+                    "set-cookie": "[REDACTED]",
+                    "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                    "transfer-encoding": "chunked",
+                    "x-content-type-options": "nosniff",
+                    "x-openai-proxy-wasm": "[REDACTED]",
+                    "x-ratelimit-limit-requests": "[REDACTED]",
+                    "x-ratelimit-limit-tokens": "[REDACTED]",
+                    "x-ratelimit-remaining-requests": "[REDACTED]",
+                    "x-ratelimit-remaining-tokens": "[REDACTED]",
+                    "x-ratelimit-reset-requests": "[REDACTED]",
+                    "x-ratelimit-reset-tokens": "[REDACTED]",
+                    "x-request-id": "[REDACTED]"
+                  }
+                },
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\n$96.99\\n</Output>\\n<Rubric>\\nThe response contains the price $96.99\\n</Rubric>\"}]"
+              }
+            }
+          ]
+        },
+        "id": "05b2dab9-5e83-40d8-9477-7efdfbf0341a",
+        "latencyMs": 3815,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Use the filesystem read_file tool to read %%CODEBASE_DIR%%/data/products.json. What is the price of product PROD-0042? Reply with only the price, e.g. \"$96.99\".",
+          "label": "{{task}}",
+          "config": {
+            "provider": "openai:gpt-5.4-mini-2026-03-17"
+          }
+        },
+        "promptId": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "promptIdx": 0,
+        "provider": {
+          "id": "mcp-bench",
+          "label": "filesystem/direct"
+        },
+        "response": {
+          "output": "$96.99",
+          "tokenUsage": {
+            "total": 16917,
+            "prompt": 16872,
+            "completion": 45
+          },
+          "metadata": {
+            "turns": 2,
+            "inputTokens": 16872,
+            "outputTokens": 45
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "product price lookup",
+          "vars": {
+            "task": "Use the filesystem read_file tool to read %%CODEBASE_DIR%%/data/products.json. What is the price of product PROD-0042? Reply with only the price, e.g. \"$96.99\".\n"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "The response contains the price $96.99",
+              "threshold": 0.9
+            }
+          ],
+          "options": {
+            "provider": "openai:gpt-5.4-mini-2026-03-17"
+          },
+          "metadata": {}
+        },
+        "testIdx": 0,
+        "vars": {
+          "task": "Use the filesystem read_file tool to read %%CODEBASE_DIR%%/data/products.json. What is the price of product PROD-0042? Reply with only the price, e.g. \"$96.99\".\n"
+        },
+        "metadata": {
+          "turns": 2,
+          "inputTokens": 16872,
+          "outputTokens": 45,
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 220,
+            "prompt": 193,
+            "completion": 27,
+            "cached": 0,
+            "numRequests": 1
+          },
+          "componentResults": [
+            {
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "The response contains the price $96.99",
+                "threshold": 0.9
+              },
+              "pass": true,
+              "score": 1,
+              "reason": "The output contains the exact price $96.99.",
+              "tokensUsed": {
+                "total": 220,
+                "prompt": 193,
+                "completion": 27,
+                "cached": 0,
+                "numRequests": 1,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              },
+              "metadata": {
+                "http": {
+                  "status": 200,
+                  "statusText": "OK",
+                  "headers": {
+                    "access-control-expose-headers": "X-Request-ID",
+                    "alt-svc": "h3=\":443\"; ma=86400",
+                    "cf-cache-status": "[REDACTED]",
+                    "cf-ray": "[REDACTED]",
+                    "connection": "keep-alive",
+                    "content-encoding": "br",
+                    "content-type": "application/json",
+                    "date": "Sun, 10 May 2026 16:31:06 GMT",
+                    "openai-organization": "[REDACTED]",
+                    "openai-processing-ms": "877",
+                    "openai-project": "[REDACTED]",
+                    "openai-version": "[REDACTED]",
+                    "server": "cloudflare",
+                    "set-cookie": "[REDACTED]",
+                    "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                    "transfer-encoding": "chunked",
+                    "x-content-type-options": "nosniff",
+                    "x-openai-proxy-wasm": "[REDACTED]",
+                    "x-ratelimit-limit-requests": "[REDACTED]",
+                    "x-ratelimit-limit-tokens": "[REDACTED]",
+                    "x-ratelimit-remaining-requests": "[REDACTED]",
+                    "x-ratelimit-remaining-tokens": "[REDACTED]",
+                    "x-ratelimit-reset-requests": "[REDACTED]",
+                    "x-ratelimit-reset-tokens": "[REDACTED]",
+                    "x-request-id": "[REDACTED]"
+                  }
+                },
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\n$96.99\\n</Output>\\n<Rubric>\\nThe response contains the price $96.99\\n</Rubric>\"}]"
+              }
+            }
+          ]
+        },
+        "id": "cdee8e4b-f93f-4dd2-a9b3-b69850bdc583",
+        "latencyMs": 4908,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Use the filesystem read_file tool to read %%CODEBASE_DIR%%/data/products.json. What is the price of product PROD-0042? Reply with only the price, e.g. \"$96.99\".",
+          "label": "{{task}}",
+          "config": {
+            "provider": "openai:gpt-5.4-mini-2026-03-17"
+          }
+        },
+        "promptId": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "promptIdx": 1,
+        "provider": {
+          "id": "mcp-bench",
+          "label": "filesystem/proxied"
+        },
+        "response": {
+          "output": "$96.99",
+          "tokenUsage": {
+            "total": 4568,
+            "prompt": 4478,
+            "completion": 90
+          },
+          "metadata": {
+            "turns": 3,
+            "inputTokens": 4478,
+            "outputTokens": 90
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "product price lookup",
+          "vars": {
+            "task": "Use the filesystem read_file tool to read %%CODEBASE_DIR%%/data/products.json. What is the price of product PROD-0042? Reply with only the price, e.g. \"$96.99\".\n"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "The response contains the price $96.99",
+              "threshold": 0.9
+            }
+          ],
+          "options": {
+            "provider": "openai:gpt-5.4-mini-2026-03-17"
+          },
+          "metadata": {}
+        },
+        "testIdx": 0,
+        "vars": {
+          "task": "Use the filesystem read_file tool to read %%CODEBASE_DIR%%/data/products.json. What is the price of product PROD-0042? Reply with only the price, e.g. \"$96.99\".\n"
+        },
+        "metadata": {
+          "turns": 3,
+          "inputTokens": 4478,
+          "outputTokens": 90,
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 236,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 236,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "The response contains PROD-0142 and $199.99",
+                "threshold": 0.9
+              },
+              "pass": true,
+              "score": 1,
+              "reason": "The output contains both 'PROD-0142' and '$199.99'.",
+              "tokensUsed": {
+                "total": 236,
+                "prompt": 0,
+                "completion": 0,
+                "cached": 236,
+                "numRequests": 0,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              },
+              "metadata": {
+                "http": {
+                  "status": 200,
+                  "statusText": "OK",
+                  "headers": {
+                    "access-control-expose-headers": "X-Request-ID",
+                    "alt-svc": "h3=\":443\"; ma=86400",
+                    "cf-cache-status": "[REDACTED]",
+                    "cf-ray": "[REDACTED]",
+                    "connection": "keep-alive",
+                    "content-encoding": "br",
+                    "content-type": "application/json",
+                    "date": "Sun, 10 May 2026 16:29:10 GMT",
+                    "openai-organization": "[REDACTED]",
+                    "openai-processing-ms": "591",
+                    "openai-project": "[REDACTED]",
+                    "openai-version": "[REDACTED]",
+                    "server": "cloudflare",
+                    "set-cookie": "[REDACTED]",
+                    "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                    "transfer-encoding": "chunked",
+                    "x-content-type-options": "nosniff",
+                    "x-openai-proxy-wasm": "[REDACTED]",
+                    "x-ratelimit-limit-requests": "[REDACTED]",
+                    "x-ratelimit-limit-tokens": "[REDACTED]",
+                    "x-ratelimit-remaining-requests": "[REDACTED]",
+                    "x-ratelimit-remaining-tokens": "[REDACTED]",
+                    "x-ratelimit-reset-requests": "[REDACTED]",
+                    "x-ratelimit-reset-tokens": "[REDACTED]",
+                    "x-request-id": "[REDACTED]"
+                  }
+                },
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\nPROD-0142 at $199.99\\n</Output>\\n<Rubric>\\nThe response contains PROD-0142 and $199.99\\n</Rubric>\"}]"
+              }
+            }
+          ]
+        },
+        "id": "fc727f56-211c-4c78-86ba-f93178a7c588",
+        "latencyMs": 4595,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Use the filesystem read_file tool to read %%CODEBASE_DIR%%/data/products.json. What is the id of the most expensive product, and what is its price? Reply in the format: \"PROD-XXXX at $YYY.YY\"",
+          "label": "{{task}}",
+          "config": {
+            "provider": "openai:gpt-5.4-mini-2026-03-17"
+          }
+        },
+        "promptId": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "promptIdx": 0,
+        "provider": {
+          "id": "mcp-bench",
+          "label": "filesystem/direct"
+        },
+        "response": {
+          "output": "PROD-0142 at $199.99",
+          "tokenUsage": {
+            "total": 18350,
+            "prompt": 18282,
+            "completion": 68
+          },
+          "metadata": {
+            "turns": 3,
+            "inputTokens": 18282,
+            "outputTokens": 68
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "product most expensive",
+          "vars": {
+            "task": "Use the filesystem read_file tool to read %%CODEBASE_DIR%%/data/products.json. What is the id of the most expensive product, and what is its price? Reply in the format: \"PROD-XXXX at $YYY.YY\"\n"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "The response contains PROD-0142 and $199.99",
+              "threshold": 0.9
+            }
+          ],
+          "options": {
+            "provider": "openai:gpt-5.4-mini-2026-03-17"
+          },
+          "metadata": {}
+        },
+        "testIdx": 1,
+        "vars": {
+          "task": "Use the filesystem read_file tool to read %%CODEBASE_DIR%%/data/products.json. What is the id of the most expensive product, and what is its price? Reply in the format: \"PROD-XXXX at $YYY.YY\"\n"
+        },
+        "metadata": {
+          "turns": 3,
+          "inputTokens": 18282,
+          "outputTokens": 68,
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 236,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 236,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "The response contains PROD-0142 and $199.99",
+                "threshold": 0.9
+              },
+              "pass": true,
+              "score": 1,
+              "reason": "The output contains both 'PROD-0142' and '$199.99'.",
+              "tokensUsed": {
+                "total": 236,
+                "prompt": 0,
+                "completion": 0,
+                "cached": 236,
+                "numRequests": 0,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              },
+              "metadata": {
+                "http": {
+                  "status": 200,
+                  "statusText": "OK",
+                  "headers": {
+                    "access-control-expose-headers": "X-Request-ID",
+                    "alt-svc": "h3=\":443\"; ma=86400",
+                    "cf-cache-status": "[REDACTED]",
+                    "cf-ray": "[REDACTED]",
+                    "connection": "keep-alive",
+                    "content-encoding": "br",
+                    "content-type": "application/json",
+                    "date": "Sun, 10 May 2026 16:29:10 GMT",
+                    "openai-organization": "[REDACTED]",
+                    "openai-processing-ms": "591",
+                    "openai-project": "[REDACTED]",
+                    "openai-version": "[REDACTED]",
+                    "server": "cloudflare",
+                    "set-cookie": "[REDACTED]",
+                    "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                    "transfer-encoding": "chunked",
+                    "x-content-type-options": "nosniff",
+                    "x-openai-proxy-wasm": "[REDACTED]",
+                    "x-ratelimit-limit-requests": "[REDACTED]",
+                    "x-ratelimit-limit-tokens": "[REDACTED]",
+                    "x-ratelimit-remaining-requests": "[REDACTED]",
+                    "x-ratelimit-remaining-tokens": "[REDACTED]",
+                    "x-ratelimit-reset-requests": "[REDACTED]",
+                    "x-ratelimit-reset-tokens": "[REDACTED]",
+                    "x-request-id": "[REDACTED]"
+                  }
+                },
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\nPROD-0142 at $199.99\\n</Output>\\n<Rubric>\\nThe response contains PROD-0142 and $199.99\\n</Rubric>\"}]"
+              }
+            }
+          ]
+        },
+        "id": "fc1ce7cf-370b-473d-ac96-d7710639c860",
+        "latencyMs": 5860,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Use the filesystem read_file tool to read %%CODEBASE_DIR%%/data/products.json. What is the id of the most expensive product, and what is its price? Reply in the format: \"PROD-XXXX at $YYY.YY\"",
+          "label": "{{task}}",
+          "config": {
+            "provider": "openai:gpt-5.4-mini-2026-03-17"
+          }
+        },
+        "promptId": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "promptIdx": 1,
+        "provider": {
+          "id": "mcp-bench",
+          "label": "filesystem/proxied"
+        },
+        "response": {
+          "output": "PROD-0142 at $199.99",
+          "tokenUsage": {
+            "total": 18751,
+            "prompt": 18660,
+            "completion": 91
+          },
+          "metadata": {
+            "turns": 3,
+            "inputTokens": 18660,
+            "outputTokens": 91
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "product most expensive",
+          "vars": {
+            "task": "Use the filesystem read_file tool to read %%CODEBASE_DIR%%/data/products.json. What is the id of the most expensive product, and what is its price? Reply in the format: \"PROD-XXXX at $YYY.YY\"\n"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "The response contains PROD-0142 and $199.99",
+              "threshold": 0.9
+            }
+          ],
+          "options": {
+            "provider": "openai:gpt-5.4-mini-2026-03-17"
+          },
+          "metadata": {}
+        },
+        "testIdx": 1,
+        "vars": {
+          "task": "Use the filesystem read_file tool to read %%CODEBASE_DIR%%/data/products.json. What is the id of the most expensive product, and what is its price? Reply in the format: \"PROD-XXXX at $YYY.YY\"\n"
+        },
+        "metadata": {
+          "turns": 3,
+          "inputTokens": 18660,
+          "outputTokens": 91,
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 212,
+            "prompt": 188,
+            "completion": 24,
+            "cached": 0,
+            "numRequests": 1
+          },
+          "componentResults": [
+            {
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "The response contains the number 40",
+                "threshold": 0.9
+              },
+              "pass": true,
+              "score": 1,
+              "reason": "The output contains the number 40.",
+              "tokensUsed": {
+                "total": 212,
+                "prompt": 188,
+                "completion": 24,
+                "cached": 0,
+                "numRequests": 1,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              },
+              "metadata": {
+                "http": {
+                  "status": 200,
+                  "statusText": "OK",
+                  "headers": {
+                    "access-control-expose-headers": "X-Request-ID",
+                    "alt-svc": "h3=\":443\"; ma=86400",
+                    "cf-cache-status": "[REDACTED]",
+                    "cf-ray": "[REDACTED]",
+                    "connection": "keep-alive",
+                    "content-encoding": "br",
+                    "content-type": "application/json",
+                    "date": "Sun, 10 May 2026 16:31:10 GMT",
+                    "openai-organization": "[REDACTED]",
+                    "openai-processing-ms": "576",
+                    "openai-project": "[REDACTED]",
+                    "openai-version": "[REDACTED]",
+                    "server": "cloudflare",
+                    "set-cookie": "[REDACTED]",
+                    "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                    "transfer-encoding": "chunked",
+                    "x-content-type-options": "nosniff",
+                    "x-openai-proxy-wasm": "[REDACTED]",
+                    "x-ratelimit-limit-requests": "[REDACTED]",
+                    "x-ratelimit-limit-tokens": "[REDACTED]",
+                    "x-ratelimit-remaining-requests": "[REDACTED]",
+                    "x-ratelimit-remaining-tokens": "[REDACTED]",
+                    "x-ratelimit-reset-requests": "[REDACTED]",
+                    "x-ratelimit-reset-tokens": "[REDACTED]",
+                    "x-request-id": "[REDACTED]"
+                  }
+                },
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\n40\\n</Output>\\n<Rubric>\\nThe response contains the number 40\\n</Rubric>\"}]"
+              }
+            }
+          ]
+        },
+        "id": "4b424542-c59f-4d4d-8b5a-e4a0bd762af7",
+        "latencyMs": 3596,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Use the filesystem read_file tool to read %%CODEBASE_DIR%%/data/products.json. How many products have category \"electronics\"? Reply with only the number.",
+          "label": "{{task}}",
+          "config": {
+            "provider": "openai:gpt-5.4-mini-2026-03-17"
+          }
+        },
+        "promptId": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "promptIdx": 0,
+        "provider": {
+          "id": "mcp-bench",
+          "label": "filesystem/direct"
+        },
+        "response": {
+          "output": "40",
+          "tokenUsage": {
+            "total": 16896,
+            "prompt": 16852,
+            "completion": 44
+          },
+          "metadata": {
+            "turns": 2,
+            "inputTokens": 16852,
+            "outputTokens": 44
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "electronics category count",
+          "vars": {
+            "task": "Use the filesystem read_file tool to read %%CODEBASE_DIR%%/data/products.json. How many products have category \"electronics\"? Reply with only the number.\n"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "The response contains the number 40",
+              "threshold": 0.9
+            }
+          ],
+          "options": {
+            "provider": "openai:gpt-5.4-mini-2026-03-17"
+          },
+          "metadata": {}
+        },
+        "testIdx": 2,
+        "vars": {
+          "task": "Use the filesystem read_file tool to read %%CODEBASE_DIR%%/data/products.json. How many products have category \"electronics\"? Reply with only the number.\n"
+        },
+        "metadata": {
+          "turns": 2,
+          "inputTokens": 16852,
+          "outputTokens": 44,
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 212,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 212,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "The response contains the number 40",
+                "threshold": 0.9
+              },
+              "pass": true,
+              "score": 1,
+              "reason": "The output contains the number 40.",
+              "tokensUsed": {
+                "total": 212,
+                "prompt": 0,
+                "completion": 0,
+                "cached": 212,
+                "numRequests": 0,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              },
+              "metadata": {
+                "http": {
+                  "status": 200,
+                  "statusText": "OK",
+                  "headers": {
+                    "access-control-expose-headers": "X-Request-ID",
+                    "alt-svc": "h3=\":443\"; ma=86400",
+                    "cf-cache-status": "[REDACTED]",
+                    "cf-ray": "[REDACTED]",
+                    "connection": "keep-alive",
+                    "content-encoding": "br",
+                    "content-type": "application/json",
+                    "date": "Sun, 10 May 2026 16:31:10 GMT",
+                    "openai-organization": "[REDACTED]",
+                    "openai-processing-ms": "576",
+                    "openai-project": "[REDACTED]",
+                    "openai-version": "[REDACTED]",
+                    "server": "cloudflare",
+                    "set-cookie": "[REDACTED]",
+                    "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                    "transfer-encoding": "chunked",
+                    "x-content-type-options": "nosniff",
+                    "x-openai-proxy-wasm": "[REDACTED]",
+                    "x-ratelimit-limit-requests": "[REDACTED]",
+                    "x-ratelimit-limit-tokens": "[REDACTED]",
+                    "x-ratelimit-remaining-requests": "[REDACTED]",
+                    "x-ratelimit-remaining-tokens": "[REDACTED]",
+                    "x-ratelimit-reset-requests": "[REDACTED]",
+                    "x-ratelimit-reset-tokens": "[REDACTED]",
+                    "x-request-id": "[REDACTED]"
+                  }
+                },
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\n40\\n</Output>\\n<Rubric>\\nThe response contains the number 40\\n</Rubric>\"}]"
+              }
+            }
+          ]
+        },
+        "id": "c6035d02-9fcc-454f-95ca-78972f3528f5",
+        "latencyMs": 5692,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Use the filesystem read_file tool to read %%CODEBASE_DIR%%/data/products.json. How many products have category \"electronics\"? Reply with only the number.",
+          "label": "{{task}}",
+          "config": {
+            "provider": "openai:gpt-5.4-mini-2026-03-17"
+          }
+        },
+        "promptId": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "promptIdx": 1,
+        "provider": {
+          "id": "mcp-bench",
+          "label": "filesystem/proxied"
+        },
+        "response": {
+          "output": "40",
+          "tokenUsage": {
+            "total": 8847,
+            "prompt": 8748,
+            "completion": 99
+          },
+          "metadata": {
+            "turns": 4,
+            "inputTokens": 8748,
+            "outputTokens": 99
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "electronics category count",
+          "vars": {
+            "task": "Use the filesystem read_file tool to read %%CODEBASE_DIR%%/data/products.json. How many products have category \"electronics\"? Reply with only the number.\n"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "The response contains the number 40",
+              "threshold": 0.9
+            }
+          ],
+          "options": {
+            "provider": "openai:gpt-5.4-mini-2026-03-17"
+          },
+          "metadata": {}
+        },
+        "testIdx": 2,
+        "vars": {
+          "task": "Use the filesystem read_file tool to read %%CODEBASE_DIR%%/data/products.json. How many products have category \"electronics\"? Reply with only the number.\n"
+        },
+        "metadata": {
+          "turns": 4,
+          "inputTokens": 8748,
+          "outputTokens": 99,
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 215,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 215,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "The response contains exactly WARN",
+                "threshold": 0.9
+              },
+              "pass": true,
+              "score": 1,
+              "reason": "The output contains exactly 'WARN' with no additional visible content.",
+              "tokensUsed": {
+                "total": 215,
+                "prompt": 0,
+                "completion": 0,
+                "cached": 215,
+                "numRequests": 0,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              },
+              "metadata": {
+                "http": {
+                  "status": 200,
+                  "statusText": "OK",
+                  "headers": {
+                    "access-control-expose-headers": "X-Request-ID",
+                    "alt-svc": "h3=\":443\"; ma=86400",
+                    "cf-cache-status": "[REDACTED]",
+                    "cf-ray": "[REDACTED]",
+                    "connection": "keep-alive",
+                    "content-encoding": "br",
+                    "content-type": "application/json",
+                    "date": "Sun, 10 May 2026 16:29:17 GMT",
+                    "openai-organization": "[REDACTED]",
+                    "openai-processing-ms": "640",
+                    "openai-project": "[REDACTED]",
+                    "openai-version": "[REDACTED]",
+                    "server": "cloudflare",
+                    "set-cookie": "[REDACTED]",
+                    "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                    "transfer-encoding": "chunked",
+                    "x-content-type-options": "nosniff",
+                    "x-openai-proxy-wasm": "[REDACTED]",
+                    "x-ratelimit-limit-requests": "[REDACTED]",
+                    "x-ratelimit-limit-tokens": "[REDACTED]",
+                    "x-ratelimit-remaining-requests": "[REDACTED]",
+                    "x-ratelimit-remaining-tokens": "[REDACTED]",
+                    "x-ratelimit-reset-requests": "[REDACTED]",
+                    "x-ratelimit-reset-tokens": "[REDACTED]",
+                    "x-request-id": "[REDACTED]"
+                  }
+                },
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\nWARN\\n</Output>\\n<Rubric>\\nThe response contains exactly WARN\\n</Rubric>\"}]"
+              }
+            }
+          ]
+        },
+        "id": "a6600453-b867-42e8-86ba-5a0568110976",
+        "latencyMs": 5408,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Use the filesystem read_file tool to read %%CODEBASE_DIR%%/logs/app.log. What is the log level (INFO, WARN, or ERROR) of the entry for req-0237? Reply with only the level, e.g. \"WARN\".",
+          "label": "{{task}}",
+          "config": {
+            "provider": "openai:gpt-5.4-mini-2026-03-17"
+          }
+        },
+        "promptId": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "promptIdx": 0,
+        "provider": {
+          "id": "mcp-bench",
+          "label": "filesystem/direct"
+        },
+        "response": {
+          "output": "WARN",
+          "tokenUsage": {
+            "total": 19455,
+            "prompt": 19412,
+            "completion": 43
+          },
+          "metadata": {
+            "turns": 2,
+            "inputTokens": 19412,
+            "outputTokens": 43
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "log level for request",
+          "vars": {
+            "task": "Use the filesystem read_file tool to read %%CODEBASE_DIR%%/logs/app.log. What is the log level (INFO, WARN, or ERROR) of the entry for req-0237? Reply with only the level, e.g. \"WARN\".\n"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "The response contains exactly WARN",
+              "threshold": 0.9
+            }
+          ],
+          "options": {
+            "provider": "openai:gpt-5.4-mini-2026-03-17"
+          },
+          "metadata": {}
+        },
+        "testIdx": 3,
+        "vars": {
+          "task": "Use the filesystem read_file tool to read %%CODEBASE_DIR%%/logs/app.log. What is the log level (INFO, WARN, or ERROR) of the entry for req-0237? Reply with only the level, e.g. \"WARN\".\n"
+        },
+        "metadata": {
+          "turns": 2,
+          "inputTokens": 19412,
+          "outputTokens": 43,
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 215,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 215,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "The response contains exactly WARN",
+                "threshold": 0.9
+              },
+              "pass": true,
+              "score": 1,
+              "reason": "The output contains exactly 'WARN' with no additional visible content.",
+              "tokensUsed": {
+                "total": 215,
+                "prompt": 0,
+                "completion": 0,
+                "cached": 215,
+                "numRequests": 0,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              },
+              "metadata": {
+                "http": {
+                  "status": 200,
+                  "statusText": "OK",
+                  "headers": {
+                    "access-control-expose-headers": "X-Request-ID",
+                    "alt-svc": "h3=\":443\"; ma=86400",
+                    "cf-cache-status": "[REDACTED]",
+                    "cf-ray": "[REDACTED]",
+                    "connection": "keep-alive",
+                    "content-encoding": "br",
+                    "content-type": "application/json",
+                    "date": "Sun, 10 May 2026 16:29:17 GMT",
+                    "openai-organization": "[REDACTED]",
+                    "openai-processing-ms": "640",
+                    "openai-project": "[REDACTED]",
+                    "openai-version": "[REDACTED]",
+                    "server": "cloudflare",
+                    "set-cookie": "[REDACTED]",
+                    "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                    "transfer-encoding": "chunked",
+                    "x-content-type-options": "nosniff",
+                    "x-openai-proxy-wasm": "[REDACTED]",
+                    "x-ratelimit-limit-requests": "[REDACTED]",
+                    "x-ratelimit-limit-tokens": "[REDACTED]",
+                    "x-ratelimit-remaining-requests": "[REDACTED]",
+                    "x-ratelimit-remaining-tokens": "[REDACTED]",
+                    "x-ratelimit-reset-requests": "[REDACTED]",
+                    "x-ratelimit-reset-tokens": "[REDACTED]",
+                    "x-request-id": "[REDACTED]"
+                  }
+                },
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\nWARN\\n</Output>\\n<Rubric>\\nThe response contains exactly WARN\\n</Rubric>\"}]"
+              }
+            }
+          ]
+        },
+        "id": "a81bd98a-ff97-457a-bcab-138a08795362",
+        "latencyMs": 4663,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Use the filesystem read_file tool to read %%CODEBASE_DIR%%/logs/app.log. What is the log level (INFO, WARN, or ERROR) of the entry for req-0237? Reply with only the level, e.g. \"WARN\".",
+          "label": "{{task}}",
+          "config": {
+            "provider": "openai:gpt-5.4-mini-2026-03-17"
+          }
+        },
+        "promptId": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "promptIdx": 1,
+        "provider": {
+          "id": "mcp-bench",
+          "label": "filesystem/proxied"
+        },
+        "response": {
+          "output": "WARN",
+          "tokenUsage": {
+            "total": 4567,
+            "prompt": 4479,
+            "completion": 88
+          },
+          "metadata": {
+            "turns": 3,
+            "inputTokens": 4479,
+            "outputTokens": 88
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "log level for request",
+          "vars": {
+            "task": "Use the filesystem read_file tool to read %%CODEBASE_DIR%%/logs/app.log. What is the log level (INFO, WARN, or ERROR) of the entry for req-0237? Reply with only the level, e.g. \"WARN\".\n"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "The response contains exactly WARN",
+              "threshold": 0.9
+            }
+          ],
+          "options": {
+            "provider": "openai:gpt-5.4-mini-2026-03-17"
+          },
+          "metadata": {}
+        },
+        "testIdx": 3,
+        "vars": {
+          "task": "Use the filesystem read_file tool to read %%CODEBASE_DIR%%/logs/app.log. What is the log level (INFO, WARN, or ERROR) of the entry for req-0237? Reply with only the level, e.g. \"WARN\".\n"
+        },
+        "metadata": {
+          "turns": 3,
+          "inputTokens": 4479,
+          "outputTokens": 88,
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 219,
+            "prompt": 188,
+            "completion": 31,
+            "cached": 0,
+            "numRequests": 1
+          },
+          "componentResults": [
+            {
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "The response contains the number 50",
+                "threshold": 0.9
+              },
+              "pass": true,
+              "score": 1,
+              "reason": "The output is exactly '50', so it contains the number 50.",
+              "tokensUsed": {
+                "total": 219,
+                "prompt": 188,
+                "completion": 31,
+                "cached": 0,
+                "numRequests": 1,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              },
+              "metadata": {
+                "http": {
+                  "status": 200,
+                  "statusText": "OK",
+                  "headers": {
+                    "access-control-expose-headers": "X-Request-ID",
+                    "alt-svc": "h3=\":443\"; ma=86400",
+                    "cf-cache-status": "[REDACTED]",
+                    "cf-ray": "[REDACTED]",
+                    "connection": "keep-alive",
+                    "content-encoding": "br",
+                    "content-type": "application/json",
+                    "date": "Sun, 10 May 2026 16:31:14 GMT",
+                    "openai-organization": "[REDACTED]",
+                    "openai-processing-ms": "526",
+                    "openai-project": "[REDACTED]",
+                    "openai-version": "[REDACTED]",
+                    "server": "cloudflare",
+                    "set-cookie": "[REDACTED]",
+                    "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                    "transfer-encoding": "chunked",
+                    "x-content-type-options": "nosniff",
+                    "x-openai-proxy-wasm": "[REDACTED]",
+                    "x-ratelimit-limit-requests": "[REDACTED]",
+                    "x-ratelimit-limit-tokens": "[REDACTED]",
+                    "x-ratelimit-remaining-requests": "[REDACTED]",
+                    "x-ratelimit-remaining-tokens": "[REDACTED]",
+                    "x-ratelimit-reset-requests": "[REDACTED]",
+                    "x-ratelimit-reset-tokens": "[REDACTED]",
+                    "x-request-id": "[REDACTED]"
+                  }
+                },
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\n50\\n</Output>\\n<Rubric>\\nThe response contains the number 50\\n</Rubric>\"}]"
+              }
+            }
+          ]
+        },
+        "id": "212957ae-dec5-4310-8772-c59dc54f6bd2",
+        "latencyMs": 3636,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Use the filesystem read_file tool to read %%CODEBASE_DIR%%/logs/app.log. How many log entries have level ERROR? Reply with only the number.",
+          "label": "{{task}}",
+          "config": {
+            "provider": "openai:gpt-5.4-mini-2026-03-17"
+          }
+        },
+        "promptId": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "promptIdx": 0,
+        "provider": {
+          "id": "mcp-bench",
+          "label": "filesystem/direct"
+        },
+        "response": {
+          "output": "50",
+          "tokenUsage": {
+            "total": 19417,
+            "prompt": 19373,
+            "completion": 44
+          },
+          "metadata": {
+            "turns": 2,
+            "inputTokens": 19373,
+            "outputTokens": 44
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "error entry count",
+          "vars": {
+            "task": "Use the filesystem read_file tool to read %%CODEBASE_DIR%%/logs/app.log. How many log entries have level ERROR? Reply with only the number.\n"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "The response contains the number 50",
+              "threshold": 0.9
+            }
+          ],
+          "options": {
+            "provider": "openai:gpt-5.4-mini-2026-03-17"
+          },
+          "metadata": {}
+        },
+        "testIdx": 4,
+        "vars": {
+          "task": "Use the filesystem read_file tool to read %%CODEBASE_DIR%%/logs/app.log. How many log entries have level ERROR? Reply with only the number.\n"
+        },
+        "metadata": {
+          "turns": 2,
+          "inputTokens": 19373,
+          "outputTokens": 44,
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 219,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 219,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "The response contains the number 50",
+                "threshold": 0.9
+              },
+              "pass": true,
+              "score": 1,
+              "reason": "The output is exactly '50', so it contains the number 50.",
+              "tokensUsed": {
+                "total": 219,
+                "prompt": 0,
+                "completion": 0,
+                "cached": 219,
+                "numRequests": 0,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              },
+              "metadata": {
+                "http": {
+                  "status": 200,
+                  "statusText": "OK",
+                  "headers": {
+                    "access-control-expose-headers": "X-Request-ID",
+                    "alt-svc": "h3=\":443\"; ma=86400",
+                    "cf-cache-status": "[REDACTED]",
+                    "cf-ray": "[REDACTED]",
+                    "connection": "keep-alive",
+                    "content-encoding": "br",
+                    "content-type": "application/json",
+                    "date": "Sun, 10 May 2026 16:31:14 GMT",
+                    "openai-organization": "[REDACTED]",
+                    "openai-processing-ms": "526",
+                    "openai-project": "[REDACTED]",
+                    "openai-version": "[REDACTED]",
+                    "server": "cloudflare",
+                    "set-cookie": "[REDACTED]",
+                    "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                    "transfer-encoding": "chunked",
+                    "x-content-type-options": "nosniff",
+                    "x-openai-proxy-wasm": "[REDACTED]",
+                    "x-ratelimit-limit-requests": "[REDACTED]",
+                    "x-ratelimit-limit-tokens": "[REDACTED]",
+                    "x-ratelimit-remaining-requests": "[REDACTED]",
+                    "x-ratelimit-remaining-tokens": "[REDACTED]",
+                    "x-ratelimit-reset-requests": "[REDACTED]",
+                    "x-ratelimit-reset-tokens": "[REDACTED]",
+                    "x-request-id": "[REDACTED]"
+                  }
+                },
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\n50\\n</Output>\\n<Rubric>\\nThe response contains the number 50\\n</Rubric>\"}]"
+              }
+            }
+          ]
+        },
+        "id": "5da9b86e-9ace-408c-bf91-58255c18a79a",
+        "latencyMs": 4257,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Use the filesystem read_file tool to read %%CODEBASE_DIR%%/logs/app.log. How many log entries have level ERROR? Reply with only the number.",
+          "label": "{{task}}",
+          "config": {
+            "provider": "openai:gpt-5.4-mini-2026-03-17"
+          }
+        },
+        "promptId": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "promptIdx": 1,
+        "provider": {
+          "id": "mcp-bench",
+          "label": "filesystem/proxied"
+        },
+        "response": {
+          "output": "50",
+          "tokenUsage": {
+            "total": 6109,
+            "prompt": 6025,
+            "completion": 84
+          },
+          "metadata": {
+            "turns": 3,
+            "inputTokens": 6025,
+            "outputTokens": 84
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "error entry count",
+          "vars": {
+            "task": "Use the filesystem read_file tool to read %%CODEBASE_DIR%%/logs/app.log. How many log entries have level ERROR? Reply with only the number.\n"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "The response contains the number 50",
+              "threshold": 0.9
+            }
+          ],
+          "options": {
+            "provider": "openai:gpt-5.4-mini-2026-03-17"
+          },
+          "metadata": {}
+        },
+        "testIdx": 4,
+        "vars": {
+          "task": "Use the filesystem read_file tool to read %%CODEBASE_DIR%%/logs/app.log. How many log entries have level ERROR? Reply with only the number.\n"
+        },
+        "metadata": {
+          "turns": 3,
+          "inputTokens": 6025,
+          "outputTokens": 84,
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      }
+    ],
+    "stats": {
+      "successes": 10,
+      "failures": 0,
+      "errors": 0,
+      "tokenUsage": {
+        "prompt": 133181,
+        "completion": 696,
+        "cached": 0,
+        "total": 133877,
+        "numRequests": 10,
+        "completionDetails": {
+          "reasoning": 0,
+          "acceptedPrediction": 0,
+          "rejectedPrediction": 0,
+          "cacheReadInputTokens": 0,
+          "cacheCreationInputTokens": 0
+        },
+        "assertions": {
+          "total": 2204,
+          "prompt": 762,
+          "completion": 109,
+          "cached": 1333,
+          "numRequests": 0,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          }
+        }
+      },
+      "durationMs": 14801,
+      "evaluationDurationMs": 14801
+    }
+  },
+  "config": {
+    "tags": {},
+    "description": "mcp-context-guard savings — filesystem large files",
+    "prompts": [
+      "{{task}}"
+    ],
+    "providers": [
+      {
+        "id": "file://provider.js",
+        "label": "filesystem/direct",
+        "config": {
+          "mcpCmd": [
+            "npx",
+            "-y",
+            "@modelcontextprotocol/server-filesystem",
+            "../data/codebase"
+          ],
+          "maxTurns": 6,
+          "model": "gpt-5.4-mini-2026-03-17"
+        }
+      },
+      {
+        "id": "file://provider.js",
+        "label": "filesystem/proxied",
+        "config": {
+          "mcpCmd": [
+            "../../mcp-context-guard.exe",
+            "--threshold=10240",
+            "--",
+            "npx",
+            "-y",
+            "@modelcontextprotocol/server-filesystem",
+            "../data/codebase"
+          ],
+          "maxTurns": 6,
+          "model": "gpt-5.4-mini-2026-03-17"
+        }
+      }
+    ],
+    "tests": [
+      {
+        "description": "product price lookup",
+        "vars": {
+          "task": "Use the filesystem read_file tool to read %%CODEBASE_DIR%%/data/products.json. What is the price of product PROD-0042? Reply with only the price, e.g. \"$96.99\".\n"
+        },
+        "assert": [
+          {
+            "type": "llm-rubric",
+            "value": "The response contains the price $96.99",
+            "threshold": 0.9
+          }
+        ]
+      },
+      {
+        "description": "product most expensive",
+        "vars": {
+          "task": "Use the filesystem read_file tool to read %%CODEBASE_DIR%%/data/products.json. What is the id of the most expensive product, and what is its price? Reply in the format: \"PROD-XXXX at $YYY.YY\"\n"
+        },
+        "assert": [
+          {
+            "type": "llm-rubric",
+            "value": "The response contains PROD-0142 and $199.99",
+            "threshold": 0.9
+          }
+        ]
+      },
+      {
+        "description": "electronics category count",
+        "vars": {
+          "task": "Use the filesystem read_file tool to read %%CODEBASE_DIR%%/data/products.json. How many products have category \"electronics\"? Reply with only the number.\n"
+        },
+        "assert": [
+          {
+            "type": "llm-rubric",
+            "value": "The response contains the number 40",
+            "threshold": 0.9
+          }
+        ]
+      },
+      {
+        "description": "log level for request",
+        "vars": {
+          "task": "Use the filesystem read_file tool to read %%CODEBASE_DIR%%/logs/app.log. What is the log level (INFO, WARN, or ERROR) of the entry for req-0237? Reply with only the level, e.g. \"WARN\".\n"
+        },
+        "assert": [
+          {
+            "type": "llm-rubric",
+            "value": "The response contains exactly WARN",
+            "threshold": 0.9
+          }
+        ]
+      },
+      {
+        "description": "error entry count",
+        "vars": {
+          "task": "Use the filesystem read_file tool to read %%CODEBASE_DIR%%/logs/app.log. How many log entries have level ERROR? Reply with only the number.\n"
+        },
+        "assert": [
+          {
+            "type": "llm-rubric",
+            "value": "The response contains the number 50",
+            "threshold": 0.9
+          }
+        ]
+      }
+    ],
+    "scenarios": [],
+    "env": {},
+    "defaultTest": {
+      "options": {
+        "provider": "openai:gpt-5.4-mini-2026-03-17"
+      },
+      "vars": {},
+      "assert": [],
+      "metadata": {}
+    },
+    "outputPath": [
+      "results-filesystem.json"
+    ],
+    "extensions": [],
+    "metadata": {},
+    "evaluateOptions": {}
+  },
+  "shareableUrl": null,
+  "metadata": {
+    "promptfooVersion": "0.121.11",
+    "nodeVersion": "v22.22.0",
+    "platform": "win32",
+    "arch": "x64",
+    "exportedAt": "2026-05-10T16:31:16.080Z",
+    "evaluationCreatedAt": "2026-05-10T16:31:01.196Z"
+  }
+}
