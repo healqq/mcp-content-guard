@@ -25,8 +25,8 @@ Small responses (under the threshold) are returned directly with no change in be
 ## Installation
 
 ```bash
-git clone https://github.com/healqq/mcp-slim
-cd mcp-slim
+git clone https://github.com/healqq/mcp-content-guard
+cd mcp-content-guard
 go build -o mcp-context-guard .
 ```
 
