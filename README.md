@@ -91,6 +91,16 @@ grep:^import           → lines starting with "import"
 grep:TODO|FIXME        → lines containing TODO or FIXME
 ```
 
+**line-range filters** — navigate to a specific position in large text responses:
+
+```
+head:20                → first 20 lines
+tail:20                → last 20 lines
+line:9                 → single line at 0-based index 9
+```
+
+These are useful when the data you need is at a known position — for example, `tail:50` to read the oldest entries in a git log, or `line:0` to read the first record of a large list.
+
 The same `id` can be queried multiple times with different filters — the cached response is not consumed.
 
 ## Cross-compilation

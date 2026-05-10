@@ -12,7 +12,7 @@ var seekResultTool = json.RawMessage(`{
     "type": "object",
     "properties": {
       "id":     { "type": "string" },
-      "filter": { "type": "string", "description": "jq expression (e.g. '.[0].text') or grep pattern prefixed with 'grep:' (e.g. 'grep:error')" }
+      "filter": { "type": "string", "description": "How to extract content. Options: jq expression (e.g. '.[0].text'); 'grep:<pattern>' to return matching lines; 'head:<N>' for first N lines; 'tail:<N>' for last N lines; 'line:<N>' for a single 0-based line index." }
     },
     "required": ["id", "filter"]
   }

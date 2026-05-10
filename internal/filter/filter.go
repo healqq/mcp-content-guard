@@ -4,19 +4,41 @@ import (
 	"encoding/json"
 	"fmt"
 	"regexp"
+	"strconv"
 	"strings"
 
 	"github.com/itchyny/gojq"
 )
 
+type lineMode int
+
+const (
+	modeHead lineMode = iota
+	modeTail
+	modeLine
+)
+
 // Apply runs filterExpr against content (a JSON-encoded MCP content array).
-// Prefix "grep:" for line-based regex filtering; otherwise treated as a jq expression.
-// Returns a JSON string suitable for embedding in a text ContentBlock.
+// Supported prefixes:
+//   - "grep:<pattern>"  — lines matching the regex pattern
+//   - "head:<N>"        — first N lines
+//   - "tail:<N>"        — last N lines
+//   - "line:<N>"        — single line at 0-based index N
+//
+// Anything else is treated as a jq expression applied to the raw content array.
 func Apply(content json.RawMessage, filterExpr string) (string, error) {
-	if strings.HasPrefix(filterExpr, "grep:") {
+	switch {
+	case strings.HasPrefix(filterExpr, "grep:"):
 		return applyGrep(content, filterExpr[5:])
+	case strings.HasPrefix(filterExpr, "head:"):
+		return applyLines(content, filterExpr[5:], modeHead)
+	case strings.HasPrefix(filterExpr, "tail:"):
+		return applyLines(content, filterExpr[5:], modeTail)
+	case strings.HasPrefix(filterExpr, "line:"):
+		return applyLines(content, filterExpr[5:], modeLine)
+	default:
+		return applyJQ(content, filterExpr)
 	}
-	return applyJQ(content, filterExpr)
 }
 
 type contentBlock struct {
@@ -45,6 +67,41 @@ func applyGrep(content json.RawMessage, pattern string) (string, error) {
 		}
 	}
 	return strings.Join(lines, "\n"), nil
+}
+
+func applyLines(content json.RawMessage, nStr string, mode lineMode) (string, error) {
+	n, err := strconv.Atoi(strings.TrimSpace(nStr))
+	if err != nil || n < 0 {
+		return "", fmt.Errorf("invalid line count %q: must be a non-negative integer", nStr)
+	}
+	var blocks []contentBlock
+	if err := json.Unmarshal(content, &blocks); err != nil {
+		return "", fmt.Errorf("content is not a ContentBlock array: %w", err)
+	}
+	var all []string
+	for _, b := range blocks {
+		if b.Type == "text" {
+			all = append(all, strings.Split(b.Text, "\n")...)
+		}
+	}
+	switch mode {
+	case modeHead:
+		if n > len(all) {
+			n = len(all)
+		}
+		return strings.Join(all[:n], "\n"), nil
+	case modeTail:
+		if n > len(all) {
+			n = len(all)
+		}
+		return strings.Join(all[len(all)-n:], "\n"), nil
+	case modeLine:
+		if n >= len(all) {
+			return "", fmt.Errorf("line %d out of range (content has %d lines)", n, len(all))
+		}
+		return all[n], nil
+	}
+	return "", nil
 }
 
 func applyJQ(content json.RawMessage, expr string) (string, error) {
