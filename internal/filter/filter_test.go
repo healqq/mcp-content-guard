@@ -121,3 +121,47 @@ func TestMultiBlockTail(t *testing.T) {
 		t.Errorf("tail:2 across two blocks = %q, want %q", got, "c\nd")
 	}
 }
+
+func TestEmptyFilterReturnsFull(t *testing.T) {
+	content := makeContent("hello\nworld")
+	got, err := Apply(content, "")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if got != "hello\nworld" {
+		t.Errorf("empty filter = %q, want %q", got, "hello\nworld")
+	}
+}
+
+func TestEmptyFilterMultiBlock(t *testing.T) {
+	b, _ := json.Marshal([]map[string]string{
+		{"type": "text", "text": "foo"},
+		{"type": "text", "text": "bar"},
+	})
+	got, err := Apply(b, "")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if got != "foo\nbar" {
+		t.Errorf("empty filter multi-block = %q, want %q", got, "foo\nbar")
+	}
+}
+
+func TestJQInvalidExpression(t *testing.T) {
+	content := makeContent(`{"a":1}`)
+	_, err := Apply(content, ".a ][[ bad")
+	if err == nil {
+		t.Error("expected error for invalid jq expression, got nil")
+	}
+}
+
+func TestJQShellSyntaxStripped(t *testing.T) {
+	b, _ := json.Marshal([]map[string]string{{"type": "text", "text": `[1,2,3]`}})
+	got, err := Apply(b, "jq '.[-1]'")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if got != "3" {
+		t.Errorf("jq shell syntax: got %q, want %q", got, "3")
+	}
+}

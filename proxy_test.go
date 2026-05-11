@@ -34,6 +34,7 @@ for line in sys.stdin:
         print(json.dumps({"jsonrpc": "2.0", "id": id_, "result": {"tools": [
             {"name": "echo", "description": "small response", "inputSchema": {"type": "object"}},
             {"name": "dump", "description": "large response", "inputSchema": {"type": "object"}},
+            {"name": "dump_sc", "description": "structured content only", "inputSchema": {"type": "object"}},
         ]}}), flush=True)
     elif m == "tools/call":
         name = msg.get("params", {}).get("name", "")
@@ -44,6 +45,10 @@ for line in sys.stdin:
         elif name == "dump":
             print(json.dumps({"jsonrpc": "2.0", "id": id_, "result": {
                 "content": [{"type": "text", "text": LARGE}]
+            }}), flush=True)
+        elif name == "dump_sc":
+            print(json.dumps({"jsonrpc": "2.0", "id": id_, "result": {
+                "structuredContent": {"items": list(range(50))}
             }}), flush=True)
 `
 
@@ -184,7 +189,7 @@ func TestLargeResponseCached(t *testing.T) {
 	content := result["content"].([]any)
 	text := content[0].(map[string]any)["text"].(string)
 
-	re := regexp.MustCompile(`seek_result\(id="([^"]+)"`)
+	re := regexp.MustCompile(`id="([^"]+)"`)
 	m := re.FindStringSubmatch(text)
 	if m == nil {
 		t.Fatalf("stub missing seek_result call hint, got: %q", text)
@@ -222,7 +227,7 @@ func TestSeekResultGrep(t *testing.T) {
 	result := resp["result"].(map[string]any)
 	content := result["content"].([]any)
 	text := content[0].(map[string]any)["text"].(string)
-	reGrep := regexp.MustCompile(`seek_result\(id="([^"]+)"`)
+	reGrep := regexp.MustCompile(`id="([^"]+)"`)
 	mGrep := reGrep.FindStringSubmatch(text)
 	if mGrep == nil {
 		t.Fatalf("stub missing seek_result hint: %q", text)
@@ -259,6 +264,98 @@ func TestSeekResultCacheMiss(t *testing.T) {
 	if !isError {
 		t.Errorf("expected isError=true for cache miss, got: %v", result)
 	}
+}
+
+func TestSeekResultEmptyFilter(t *testing.T) {
+	p := startProxy(t, 100)
+
+	p.send(map[string]any{"jsonrpc": "2.0", "id": 1, "method": "initialize", "params": map[string]any{
+		"protocolVersion": "2024-11-05", "capabilities": map[string]any{}, "clientInfo": map[string]any{"name": "test", "version": "1"},
+	}})
+	p.recv()
+
+	p.send(map[string]any{"jsonrpc": "2.0", "id": 2, "method": "tools/call", "params": map[string]any{
+		"name": "dump", "arguments": map[string]any{},
+	}})
+	resp := p.recv()
+	result := resp["result"].(map[string]any)
+	content := result["content"].([]any)
+	stub := content[0].(map[string]any)["text"].(string)
+	m := regexp.MustCompile(`id="([^"]+)"`).FindStringSubmatch(stub)
+	if m == nil {
+		t.Fatalf("stub missing id: %q", stub)
+	}
+	cacheID := m[1]
+
+	// empty filter — should return the full payload
+	p.send(map[string]any{"jsonrpc": "2.0", "id": 3, "method": "tools/call", "params": map[string]any{
+		"name": "seek_result", "arguments": map[string]any{"id": cacheID},
+	}})
+	seekResp := p.recv()
+	seekResult := seekResp["result"].(map[string]any)
+	seekContent := seekResult["content"].([]any)
+	text := seekContent[0].(map[string]any)["text"].(string)
+	if !strings.Contains(text, strings.Repeat("x", 200)) {
+		t.Errorf("empty filter did not return full payload; got %q", text[:min(len(text), 40)])
+	}
+}
+
+func TestSeekResultEmptyID(t *testing.T) {
+	p := startProxy(t, 100)
+
+	p.send(map[string]any{"jsonrpc": "2.0", "id": 1, "method": "initialize", "params": map[string]any{
+		"protocolVersion": "2024-11-05", "capabilities": map[string]any{}, "clientInfo": map[string]any{"name": "test", "version": "1"},
+	}})
+	p.recv()
+
+	p.send(map[string]any{"jsonrpc": "2.0", "id": 2, "method": "tools/call", "params": map[string]any{
+		"name": "seek_result", "arguments": map[string]any{"id": ""},
+	}})
+	resp := p.recv()
+	result := resp["result"].(map[string]any)
+	isError, _ := result["isError"].(bool)
+	if !isError {
+		t.Errorf("expected isError=true for empty id, got: %v", result)
+	}
+}
+
+func TestStructuredContentPassthrough(t *testing.T) {
+	p := startProxy(t, 100)
+
+	p.send(map[string]any{"jsonrpc": "2.0", "id": 1, "method": "initialize", "params": map[string]any{
+		"protocolVersion": "2024-11-05", "capabilities": map[string]any{}, "clientInfo": map[string]any{"name": "test", "version": "1"},
+	}})
+	p.recv()
+
+	p.send(map[string]any{"jsonrpc": "2.0", "id": 2, "method": "tools/call", "params": map[string]any{
+		"name": "dump_sc", "arguments": map[string]any{},
+	}})
+	resp := p.recv()
+	result := resp["result"].(map[string]any)
+
+	// structuredContent must be present and unmodified
+	sc, ok := result["structuredContent"]
+	if !ok {
+		t.Fatal("structuredContent missing from response")
+	}
+	scMap, ok := sc.(map[string]any)
+	if !ok {
+		t.Fatalf("structuredContent is not an object: %T", sc)
+	}
+	if _, ok := scMap["items"]; !ok {
+		t.Errorf("structuredContent.items missing; got: %v", scMap)
+	}
+	// content must not be present (the tool returned no content field)
+	if _, ok := result["content"]; ok {
+		t.Error("content field should not be present when tool returned structuredContent only")
+	}
+}
+
+func min(a, b int) int {
+	if a < b {
+		return a
+	}
+	return b
 }
 
 func contains(ss []string, s string) bool {

@@ -15,8 +15,7 @@ import (
 const defaultThreshold = 10240 // 10 KB
 
 type Config struct {
-	Threshold int64            `json:"threshold"`
-	Tools     map[string]int64 `json:"tools"` // reserved for per-tool overrides
+	Threshold int64 `json:"threshold"`
 }
 
 func main() {

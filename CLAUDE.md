@@ -9,7 +9,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Goals
 
 - Inject one extra tool (`seek_result`) into the upstream schema; leave everything else untouched.
-- For tool call responses above a configurable byte threshold: cache the response, return a stub `{id, size_bytes}` instead of the full payload.
+- For tool call responses above a configurable byte threshold: cache the response, return a stub text message instead of the full payload.
 - For responses below the threshold: return the full response directly, no caching.
 - `seek_result` is handled entirely by the wrapper — never forwarded to upstream.
 - Always pass `structuredContent` through unchanged (it is typed by `outputSchema` and almost always small).
@@ -36,36 +36,40 @@ Transport: **stdio on both sides**. The client spawns the wrapper; the wrapper s
 ```json
 {
   "name": "seek_result",
-  "description": "Query a cached tool response. Use the id returned by a previous tool call.",
+  "description": "Retrieve content from a cached tool response. When a tool response was too large to return directly, you receive a stub message with an id. Call this tool with that id to get the content. Omit filter to get the full payload, or use a filter to extract a subset.",
   "inputSchema": {
     "type": "object",
     "properties": {
       "id":     { "type": "string" },
-      "filter": { "type": "string", "description": "jq expression (e.g. '.items[:10]') or grep pattern prefixed with 'grep:' (e.g. 'grep:error')" }
+      "filter": { "type": "string", "description": "Optional. Omit to return the full payload. Options: jq expression (e.g. 'max_by(.price)'); 'grep:<pattern>' to return matching lines; 'head:<N>' for first N lines; 'tail:<N>' for last N lines; 'line:<N>' for a single 0-based line index." }
     },
-    "required": ["id", "filter"]
+    "required": ["id"]
   }
 }
 ```
 
 ### Stub response shape
 
-```json
-{ "id": "a3f9...", "size_bytes": 142830 }
-```
+When a response exceeds the threshold, the client receives a `text` ContentBlock with a human-readable message:
 
-Returned as a `text` ContentBlock. The LLM already knows the tool's output structure from the schema, so no preview is included.
+```
+[Response too large to return (142830 bytes cached, id="a3f9..."). Call seek_result(id) to get the full payload, or seek_result(id, filter) to extract a subset (jq expression, grep:<pattern>, head:<N>, tail:<N>, line:<N>).]
+```
 
 ### Cache
 
-In-memory `map[string]json.RawMessage` (uuid → raw `content` JSON). Scoped to the wrapper process lifetime (one client session). `structuredContent` is never cached — always forwarded directly.
+In-memory `map[string]json.RawMessage` (hex-encoded random id → raw `content` JSON). Scoped to the wrapper process lifetime (one client session). `structuredContent` is never cached — always forwarded directly.
 
 ### Filter DSL
 
-- **jq**: any jq expression applied to the cached `content` value
-- **grep**: prefix `grep:` followed by a regex pattern, matched against each `ContentBlock.text` line
+- **empty / omitted**: return the full concatenated text of all content blocks
+- **jq**: any jq expression; if the cached content is JSON text, the expression runs against the parsed data directly (e.g. `max_by(.price)`). Shell-style `jq 'expr'` syntax is also accepted and normalised automatically.
+- **grep**: prefix `grep:` followed by a regex pattern, matched line-by-line against text content blocks
+- **head**: prefix `head:N` — first N lines
+- **tail**: prefix `tail:N` — last N lines
+- **line**: prefix `line:N` — single line at 0-based index N
 
-External `jq` binary via `gjson` or equivalent — no custom DSL.
+Implemented in Go using `github.com/itchyny/gojq` (pure Go, no cgo, no external binary).
 
 ## Commands
 
@@ -81,8 +85,8 @@ Tests are integration tests in `proxy_test.go` — they spawn the compiled binar
 ## Tech stack
 
 - **Language**: Go
-- **JSON querying**: `gjson` (single dependency, no cgo)
-- **Grep**: stdlib `regexp`
+- **JSON querying**: `github.com/itchyny/gojq` (pure Go jq implementation, no cgo)
+- **Grep / line filters**: stdlib `regexp`, `strings`
 - **Everything else**: stdlib only (`encoding/json`, `bufio`, `os/exec`, `sync`)
 
 ## Key invariants
@@ -90,4 +94,4 @@ Tests are integration tests in `proxy_test.go` — they spawn the compiled binar
 - `structuredContent` is always forwarded as-is; only `content` is subject to caching/filtering.
 - The wrapper never modifies `inputSchema` or `outputSchema` of upstream tools.
 - `seek_result` calls are never forwarded upstream.
-- Threshold is configurable (default TBD); can be set per-tool or globally.
+- Threshold is configurable via `--threshold` flag or config file (default: 10240 bytes); applies globally.

@@ -178,6 +178,10 @@ func (p *Proxy) handleUpstreamMessage(line []byte) {
 }
 
 func (p *Proxy) handleSeekResult(req rpc.Message, id, filterExpr string) {
+	if id == "" {
+		p.out <- rpc.EncodeErrorResult(req.ID, "seek_result: id is required")
+		return
+	}
 	content, ok := p.cache.Get(id)
 	if !ok {
 		p.out <- rpc.EncodeErrorResult(req.ID, fmt.Sprintf("no cached result with id %q", id))
@@ -214,12 +218,21 @@ func (p *Proxy) maybeCache(msg rpc.Message) []byte {
 		"[Response too large to return (%d bytes cached, id=%q). Call seek_result(id) to get the full payload, or seek_result(id, filter) to extract a subset (jq expression, grep:<pattern>, head:<N>, tail:<N>, line:<N>).]",
 		len(contentRaw), cacheID,
 	)
-	contentJSON, _ := json.Marshal([]map[string]string{
+	contentJSON, err := json.Marshal([]map[string]string{
 		{"type": "text", "text": stubText},
 	})
+	if err != nil {
+		return nil
+	}
 	result["content"] = contentJSON
-	msg.Result, _ = json.Marshal(result)
-	b, _ := json.Marshal(msg)
+	msg.Result, err = json.Marshal(result)
+	if err != nil {
+		return nil
+	}
+	b, err := json.Marshal(msg)
+	if err != nil {
+		return nil
+	}
 	return b
 }
 
