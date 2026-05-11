@@ -23,9 +23,17 @@ Small responses (under the threshold) are returned directly with no change in be
 
 ## Installation
 
+**Download a pre-built binary** from the [releases page](https://github.com/healqq/mcp-context-guard/releases) — builds are provided for Linux, macOS, and Windows (amd64 and arm64).
+
+**Install with Go:**
 ```bash
-git clone https://github.com/healqq/mcp-content-guard
-cd mcp-content-guard
+go install github.com/healqq/mcp-context-guard@latest
+```
+
+**Build from source:**
+```bash
+git clone https://github.com/healqq/mcp-context-guard
+cd mcp-context-guard
 go build -o mcp-context-guard .
 ```
 
