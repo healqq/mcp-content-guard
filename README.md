@@ -124,15 +124,16 @@ GOOS=windows GOARCH=amd64  go build -o mcp-context-guard-windows-amd64.exe .
 
 ## Benchmark
 
-Tested against the filesystem MCP server with two large files (35 KB JSON, 46 KB log). The model received a stub on every tool call and queried the cache with `seek_result`. All 5 tasks passed in both modes.
+Tested across four MCP servers with model `gpt-5.4-mini-2026-03-17`. The proxy pays off whenever tool responses exceed the threshold. SQLite is the counter-example: query results are small and never cached, so the proxy adds a small overhead from the extra tool in the schema.
 
-| | Direct | Proxied |
-|---|---|---|
-| Prompt tokens (5 tasks) | 80 044 | 33 737 |
-| Token reduction | — | **58 %** |
-| Extra turns per task | — | +1 |
+| Suite | Direct tokens | Proxied tokens | Savings | Pass rate |
+|---|---:|---:|---:|:---:|
+| Filesystem (35–46 KB files) | 79 812 | 33 249 | **−58 %** | 5/5 vs 5/5 |
+| Git log (300 commits, ~120 KB) | 218 704 | 74 285 | **−66 %** | 5/5 vs 4/5 |
+| SQLite (small query results) | 8 140 | 10 300 | **+27 %** | 5/5 vs 5/5 |
+| Playwright (75 KB page snapshots) | 640 708 | 87 685 | **−86 %** | 5/5 vs 3/5 |
 
-The model used `grep` for lookup and counting tasks, and `jq` for aggregate queries. See [bench/REPORT.md](bench/REPORT.md) for the full per-task breakdown including filters used.
+See [bench/REPORT.md](bench/REPORT.md) for the full per-task breakdown including turn counts, token diffs, and filter expressions used.
 
 ## Limitations
 
