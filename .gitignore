@@ -13,3 +13,6 @@ bench/eval/results-*.json
 
 # node
 bench/eval/node_modules/
+
+# secrets
+.env

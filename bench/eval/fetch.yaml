@@ -1,0 +1,80 @@
+description: "mcp-context-guard token savings — fetch MCP"
+
+# Both providers use the same custom driver; only mcpCmd differs.
+# The proxy provider wraps server-fetch with mcp-context-guard so that
+# large HTML responses are cached and Claude must call seek_result to
+# filter the content it actually needs.
+providers:
+  - id: file://provider.js
+    label: "fetch/direct"
+    config:
+      mcpCmd:
+        - npx
+        - "-y"
+        - "@modelcontextprotocol/server-fetch"
+      maxTurns: 10
+      model: gpt-5.4-mini-2026-03-17
+
+  - id: file://provider.js
+    label: "fetch/proxied"
+    config:
+      mcpCmd:
+        - ../../../mcp-context-guard.exe   # relative to this file; adjust if on Linux
+        - "--threshold=10240"
+        - "--"
+        - npx
+        - "-y"
+        - "@modelcontextprotocol/server-fetch"
+      maxTurns: 10
+      model: gpt-5.4-mini-2026-03-17
+
+# Single prompt template; content comes from test vars.
+prompts:
+  - "{{task}}"
+
+defaultTest:
+  options:
+    # Use Claude as the judge; cheaper than GPT-4 and consistent with the
+    # model under test.
+    provider: openai:gpt-5.4-mini-2026-03-17
+
+tests:
+  - description: "python sorted() return type"
+    vars:
+      task: >
+        Use the fetch tool to retrieve https://docs.python.org/3/library/functions.html
+        and answer: what does sorted() return? One sentence, no preamble.
+    assert:
+      - type: llm-rubric
+        value: "The response says sorted() returns a new sorted list (or 'list')."
+        threshold: 0.8
+
+  - description: "python enumerate() signature"
+    vars:
+      task: >
+        Use the fetch tool to retrieve https://docs.python.org/3/library/functions.html
+        and answer: what are the parameters of enumerate()? One sentence.
+    assert:
+      - type: llm-rubric
+        value: "The response mentions 'iterable' and 'start' as parameters of enumerate()."
+        threshold: 0.8
+
+  - description: "go fmt.Fprintf signature"
+    vars:
+      task: >
+        Use the fetch tool to retrieve https://pkg.go.dev/fmt
+        and find the full function signature of fmt.Fprintf. Return only the signature line.
+    assert:
+      - type: llm-rubric
+        value: "The response contains the Fprintf signature with io.Writer and format string parameters."
+        threshold: 0.8
+
+  - description: "go fmt.Sscanf purpose"
+    vars:
+      task: >
+        Use the fetch tool to retrieve https://pkg.go.dev/fmt
+        and explain in one sentence what fmt.Sscanf does.
+    assert:
+      - type: llm-rubric
+        value: "The response correctly describes Sscanf as scanning a string according to a format."
+        threshold: 0.8

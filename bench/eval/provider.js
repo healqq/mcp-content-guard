@@ -158,6 +158,8 @@ class MCPBenchProvider {
     let finalText  = '';
     let turns      = 0;
 
+    const toolCallLog = []; // { turn, tool, args }
+
     try {
       for (let i = 0; i < maxTurns; i++) {
         turns = i + 1;
@@ -191,6 +193,7 @@ class MCPBenchProvider {
           let content;
           try {
             const args = JSON.parse(call.function.arguments || '{}');
+            toolCallLog.push({ turn: turns, tool: call.function.name, args });
             const mcpResult = await mcp.callTool(call.function.name, args);
             // MCP returns content as an array of blocks; flatten to string for OpenAI
             content = mcpContentToString(mcpResult.content);
@@ -216,6 +219,7 @@ class MCPBenchProvider {
         turns,
         inputTokens:  usage.input,
         outputTokens: usage.output,
+        toolCalls:    toolCallLog,
       },
     };
   }

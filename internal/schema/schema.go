@@ -7,14 +7,14 @@ import (
 
 var seekResultTool = json.RawMessage(`{
   "name": "seek_result",
-  "description": "Retrieve content from a cached tool response. When a tool response was too large to return directly, you receive a stub message with an id. Call this tool with that id and a filter to extract the content you need.",
+  "description": "Retrieve content from a cached tool response. When a tool response was too large to return directly, you receive a stub message with an id. Call this tool with that id to get the content. Omit filter to get the full payload, or use a filter to extract a subset.",
   "inputSchema": {
     "type": "object",
     "properties": {
       "id":     { "type": "string" },
-      "filter": { "type": "string", "description": "How to extract content. Options: jq expression (e.g. '.[0].text'); 'grep:<pattern>' to return matching lines; 'head:<N>' for first N lines; 'tail:<N>' for last N lines; 'line:<N>' for a single 0-based line index." }
+      "filter": { "type": "string", "description": "Optional. How to extract content. Omit (or pass empty string) to return the full payload. Options: jq expression (e.g. '.[0].text'); 'grep:<pattern>' to return matching lines; 'head:<N>' for first N lines; 'tail:<N>' for last N lines; 'line:<N>' for a single 0-based line index." }
     },
-    "required": ["id", "filter"]
+    "required": ["id"]
   }
 }`)
 

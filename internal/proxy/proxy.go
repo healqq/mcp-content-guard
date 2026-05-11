@@ -211,7 +211,7 @@ func (p *Proxy) maybeCache(msg rpc.Message) []byte {
 	}
 	cacheID := p.cache.Store(contentRaw)
 	stubText := fmt.Sprintf(
-		"[Response too large to return (%d bytes cached). Call seek_result(id=%q, filter=\"<jq or grep:pattern>\") to retrieve specific content.]",
+		"[Response too large to return (%d bytes cached, id=%q). Call seek_result(id) to get the full payload, or seek_result(id, filter) to extract a subset (jq expression, grep:<pattern>, head:<N>, tail:<N>, line:<N>).]",
 		len(contentRaw), cacheID,
 	)
 	contentJSON, _ := json.Marshal([]map[string]string{

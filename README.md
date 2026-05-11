@@ -15,8 +15,7 @@ The wrapper sits between your MCP client and any stdio MCP server. It:
 1. **Passes through all tool schemas unchanged** — the client sees the same tools as before, plus one new tool: `seek_result`.
 2. **Intercepts large responses** — when a tool call response exceeds the size threshold, it is cached and the client receives a human-readable stub:
    ```
-   [Response too large to return (142830 bytes cached).
-   Call seek_result(id="3f9a...", filter="<jq or grep:pattern>") to retrieve specific content.]
+   [Response too large to return (142830 bytes cached, id="3f9a..."). Call seek_result(id) to get the full payload, or seek_result(id, filter) to extract a subset (jq expression, grep:<pattern>, head:<N>, tail:<N>, line:<N>).]
    ```
 3. **Lets you query the cache** — call `seek_result` with the id and a filter to extract the relevant portion.
 
@@ -71,16 +70,17 @@ When a response is cached, use `seek_result` to query it.
 
 **Parameters:**
 
-| Parameter | Description |
-|---|---|
-| `id` | The cache id from the stub response |
-| `filter` | A jq expression or a grep pattern prefixed with `grep:` |
+| Parameter | Required | Description |
+|---|---|---|
+| `id` | yes | The cache id from the stub response |
+| `filter` | no | How to extract content. Omit to return the full payload. |
 
-**jq filter** — any valid jq expression, applied to the raw `content` array of the cached response:
+**jq filter** — any valid jq expression. If the cached content is JSON, the expression runs directly against the parsed data:
 
 ```
-.[0].text              → the full text of the first content block
-.[0].text | split("\n") | length   → number of lines
+max_by(.price)                      → object with the highest price field
+.[0]                                → first element of an array
+map(select(.category == "books"))   → filter an array by field value
 ```
 
 **grep filter** — prefix `grep:` followed by a regular expression, matched line-by-line against text content blocks:
@@ -113,6 +113,18 @@ GOOS=linux   GOARCH=arm64  go build -o mcp-context-guard-linux-arm64 .
 GOOS=darwin  GOARCH=arm64  go build -o mcp-context-guard-darwin-arm64 .
 GOOS=windows GOARCH=amd64  go build -o mcp-context-guard-windows-amd64.exe .
 ```
+
+## Benchmark
+
+Tested against the filesystem MCP server with two large files (35 KB JSON, 46 KB log). The model received a stub on every tool call and queried the cache with `seek_result`. All 5 tasks passed in both modes.
+
+| | Direct | Proxied |
+|---|---|---|
+| Prompt tokens (5 tasks) | 80 044 | 33 737 |
+| Token reduction | — | **58 %** |
+| Extra turns per task | — | +1 |
+
+The model used `grep` for lookup and counting tasks, and `jq` for aggregate queries. See [bench/REPORT.md](bench/REPORT.md) for the full per-task breakdown including filters used.
 
 ## Limitations
 

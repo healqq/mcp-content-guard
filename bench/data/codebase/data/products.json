@@ -1,200 +1,202 @@
-{"id": "PROD-0001", "name": "Garment 0001", "category": "clothing", "price": 8.99, "stock": 3, "supplier": "GlobalTech", "sku": "SKU-0001", "weight_kg": 0.25, "active": true}
-{"id": "PROD-0002", "name": "Publication 0002", "category": "books", "price": 15.99, "stock": 6, "supplier": "MegaSupply", "sku": "SKU-0002", "weight_kg": 0.4, "active": true}
-{"id": "PROD-0003", "name": "Food Product 0003", "category": "food", "price": 22.99, "stock": 9, "supplier": "FastGoods", "sku": "SKU-0003", "weight_kg": 0.55, "active": true}
-{"id": "PROD-0004", "name": "Tool Kit 0004", "category": "tools", "price": 29.99, "stock": 12, "supplier": "TopVendor", "sku": "SKU-0004", "weight_kg": 0.7, "active": true}
-{"id": "PROD-0005", "name": "Digital Device 0005", "category": "electronics", "price": 36.99, "stock": 15, "supplier": "BestSource", "sku": "SKU-0005", "weight_kg": 0.85, "active": true}
-{"id": "PROD-0006", "name": "Garment 0006", "category": "clothing", "price": 43.99, "stock": 18, "supplier": "QuickShip", "sku": "SKU-0006", "weight_kg": 1.0, "active": true}
-{"id": "PROD-0007", "name": "Publication 0007", "category": "books", "price": 50.99, "stock": 21, "supplier": "PrimeVendor", "sku": "SKU-0007", "weight_kg": 1.15, "active": false}
-{"id": "PROD-0008", "name": "Food Product 0008", "category": "food", "price": 57.99, "stock": 24, "supplier": "AlphaGoods", "sku": "SKU-0008", "weight_kg": 1.3, "active": true}
-{"id": "PROD-0009", "name": "Tool Kit 0009", "category": "tools", "price": 64.99, "stock": 27, "supplier": "ZetaSupply", "sku": "SKU-0009", "weight_kg": 1.45, "active": true}
-{"id": "PROD-0010", "name": "Digital Device 0010", "category": "electronics", "price": 71.99, "stock": 30, "supplier": "Acme Corp", "sku": "SKU-0010", "weight_kg": 1.6, "active": true}
-{"id": "PROD-0011", "name": "Garment 0011", "category": "clothing", "price": 78.99, "stock": 33, "supplier": "GlobalTech", "sku": "SKU-0011", "weight_kg": 1.75, "active": true}
-{"id": "PROD-0012", "name": "Publication 0012", "category": "books", "price": 85.99, "stock": 36, "supplier": "MegaSupply", "sku": "SKU-0012", "weight_kg": 1.9, "active": true}
-{"id": "PROD-0013", "name": "Food Product 0013", "category": "food", "price": 92.99, "stock": 39, "supplier": "FastGoods", "sku": "SKU-0013", "weight_kg": 2.05, "active": true}
-{"id": "PROD-0014", "name": "Tool Kit 0014", "category": "tools", "price": 99.99, "stock": 42, "supplier": "TopVendor", "sku": "SKU-0014", "weight_kg": 2.2, "active": false}
-{"id": "PROD-0015", "name": "Digital Device 0015", "category": "electronics", "price": 106.99, "stock": 45, "supplier": "BestSource", "sku": "SKU-0015", "weight_kg": 2.35, "active": true}
-{"id": "PROD-0016", "name": "Garment 0016", "category": "clothing", "price": 113.99, "stock": 48, "supplier": "QuickShip", "sku": "SKU-0016", "weight_kg": 2.5, "active": true}
-{"id": "PROD-0017", "name": "Publication 0017", "category": "books", "price": 120.99, "stock": 51, "supplier": "PrimeVendor", "sku": "SKU-0017", "weight_kg": 2.65, "active": true}
-{"id": "PROD-0018", "name": "Food Product 0018", "category": "food", "price": 127.99, "stock": 54, "supplier": "AlphaGoods", "sku": "SKU-0018", "weight_kg": 2.8, "active": true}
-{"id": "PROD-0019", "name": "Tool Kit 0019", "category": "tools", "price": 134.99, "stock": 57, "supplier": "ZetaSupply", "sku": "SKU-0019", "weight_kg": 2.95, "active": true}
-{"id": "PROD-0020", "name": "Digital Device 0020", "category": "electronics", "price": 141.99, "stock": 60, "supplier": "Acme Corp", "sku": "SKU-0020", "weight_kg": 0.1, "active": true}
-{"id": "PROD-0021", "name": "Garment 0021", "category": "clothing", "price": 148.99, "stock": 63, "supplier": "GlobalTech", "sku": "SKU-0021", "weight_kg": 0.25, "active": false}
-{"id": "PROD-0022", "name": "Publication 0022", "category": "books", "price": 155.99, "stock": 66, "supplier": "MegaSupply", "sku": "SKU-0022", "weight_kg": 0.4, "active": true}
-{"id": "PROD-0023", "name": "Food Product 0023", "category": "food", "price": 162.99, "stock": 69, "supplier": "FastGoods", "sku": "SKU-0023", "weight_kg": 0.55, "active": true}
-{"id": "PROD-0024", "name": "Tool Kit 0024", "category": "tools", "price": 169.99, "stock": 72, "supplier": "TopVendor", "sku": "SKU-0024", "weight_kg": 0.7, "active": true}
-{"id": "PROD-0025", "name": "Digital Device 0025", "category": "electronics", "price": 176.99, "stock": 75, "supplier": "BestSource", "sku": "SKU-0025", "weight_kg": 0.85, "active": true}
-{"id": "PROD-0026", "name": "Garment 0026", "category": "clothing", "price": 183.99, "stock": 78, "supplier": "QuickShip", "sku": "SKU-0026", "weight_kg": 1.0, "active": true}
-{"id": "PROD-0027", "name": "Publication 0027", "category": "books", "price": 190.99, "stock": 81, "supplier": "PrimeVendor", "sku": "SKU-0027", "weight_kg": 1.15, "active": true}
-{"id": "PROD-0028", "name": "Food Product 0028", "category": "food", "price": 197.99, "stock": 84, "supplier": "AlphaGoods", "sku": "SKU-0028", "weight_kg": 1.3, "active": false}
-{"id": "PROD-0029", "name": "Tool Kit 0029", "category": "tools", "price": 5.99, "stock": 87, "supplier": "ZetaSupply", "sku": "SKU-0029", "weight_kg": 1.45, "active": true}
-{"id": "PROD-0030", "name": "Digital Device 0030", "category": "electronics", "price": 12.99, "stock": 90, "supplier": "Acme Corp", "sku": "SKU-0030", "weight_kg": 1.6, "active": true}
-{"id": "PROD-0031", "name": "Garment 0031", "category": "clothing", "price": 19.99, "stock": 93, "supplier": "GlobalTech", "sku": "SKU-0031", "weight_kg": 1.75, "active": true}
-{"id": "PROD-0032", "name": "Publication 0032", "category": "books", "price": 26.99, "stock": 96, "supplier": "MegaSupply", "sku": "SKU-0032", "weight_kg": 1.9, "active": true}
-{"id": "PROD-0033", "name": "Food Product 0033", "category": "food", "price": 33.99, "stock": 2, "supplier": "FastGoods", "sku": "SKU-0033", "weight_kg": 2.05, "active": true}
-{"id": "PROD-0034", "name": "Tool Kit 0034", "category": "tools", "price": 40.99, "stock": 5, "supplier": "TopVendor", "sku": "SKU-0034", "weight_kg": 2.2, "active": true}
-{"id": "PROD-0035", "name": "Digital Device 0035", "category": "electronics", "price": 47.99, "stock": 8, "supplier": "BestSource", "sku": "SKU-0035", "weight_kg": 2.35, "active": false}
-{"id": "PROD-0036", "name": "Garment 0036", "category": "clothing", "price": 54.99, "stock": 11, "supplier": "QuickShip", "sku": "SKU-0036", "weight_kg": 2.5, "active": true}
-{"id": "PROD-0037", "name": "Publication 0037", "category": "books", "price": 61.99, "stock": 14, "supplier": "PrimeVendor", "sku": "SKU-0037", "weight_kg": 2.65, "active": true}
-{"id": "PROD-0038", "name": "Food Product 0038", "category": "food", "price": 68.99, "stock": 17, "supplier": "AlphaGoods", "sku": "SKU-0038", "weight_kg": 2.8, "active": true}
-{"id": "PROD-0039", "name": "Tool Kit 0039", "category": "tools", "price": 75.99, "stock": 20, "supplier": "ZetaSupply", "sku": "SKU-0039", "weight_kg": 2.95, "active": true}
-{"id": "PROD-0040", "name": "Digital Device 0040", "category": "electronics", "price": 82.99, "stock": 23, "supplier": "Acme Corp", "sku": "SKU-0040", "weight_kg": 0.1, "active": true}
-{"id": "PROD-0041", "name": "Garment 0041", "category": "clothing", "price": 89.99, "stock": 26, "supplier": "GlobalTech", "sku": "SKU-0041", "weight_kg": 0.25, "active": true}
-{"id": "PROD-0042", "name": "Publication 0042", "category": "books", "price": 96.99, "stock": 29, "supplier": "MegaSupply", "sku": "SKU-0042", "weight_kg": 0.4, "active": false}
-{"id": "PROD-0043", "name": "Food Product 0043", "category": "food", "price": 103.99, "stock": 32, "supplier": "FastGoods", "sku": "SKU-0043", "weight_kg": 0.55, "active": true}
-{"id": "PROD-0044", "name": "Tool Kit 0044", "category": "tools", "price": 110.99, "stock": 35, "supplier": "TopVendor", "sku": "SKU-0044", "weight_kg": 0.7, "active": true}
-{"id": "PROD-0045", "name": "Digital Device 0045", "category": "electronics", "price": 117.99, "stock": 38, "supplier": "BestSource", "sku": "SKU-0045", "weight_kg": 0.85, "active": true}
-{"id": "PROD-0046", "name": "Garment 0046", "category": "clothing", "price": 124.99, "stock": 41, "supplier": "QuickShip", "sku": "SKU-0046", "weight_kg": 1.0, "active": true}
-{"id": "PROD-0047", "name": "Publication 0047", "category": "books", "price": 131.99, "stock": 44, "supplier": "PrimeVendor", "sku": "SKU-0047", "weight_kg": 1.15, "active": true}
-{"id": "PROD-0048", "name": "Food Product 0048", "category": "food", "price": 138.99, "stock": 47, "supplier": "AlphaGoods", "sku": "SKU-0048", "weight_kg": 1.3, "active": true}
-{"id": "PROD-0049", "name": "Tool Kit 0049", "category": "tools", "price": 145.99, "stock": 50, "supplier": "ZetaSupply", "sku": "SKU-0049", "weight_kg": 1.45, "active": false}
-{"id": "PROD-0050", "name": "Digital Device 0050", "category": "electronics", "price": 152.99, "stock": 53, "supplier": "Acme Corp", "sku": "SKU-0050", "weight_kg": 1.6, "active": true}
-{"id": "PROD-0051", "name": "Garment 0051", "category": "clothing", "price": 159.99, "stock": 56, "supplier": "GlobalTech", "sku": "SKU-0051", "weight_kg": 1.75, "active": true}
-{"id": "PROD-0052", "name": "Publication 0052", "category": "books", "price": 166.99, "stock": 59, "supplier": "MegaSupply", "sku": "SKU-0052", "weight_kg": 1.9, "active": true}
-{"id": "PROD-0053", "name": "Food Product 0053", "category": "food", "price": 173.99, "stock": 62, "supplier": "FastGoods", "sku": "SKU-0053", "weight_kg": 2.05, "active": true}
-{"id": "PROD-0054", "name": "Tool Kit 0054", "category": "tools", "price": 180.99, "stock": 65, "supplier": "TopVendor", "sku": "SKU-0054", "weight_kg": 2.2, "active": true}
-{"id": "PROD-0055", "name": "Digital Device 0055", "category": "electronics", "price": 187.99, "stock": 68, "supplier": "BestSource", "sku": "SKU-0055", "weight_kg": 2.35, "active": true}
-{"id": "PROD-0056", "name": "Garment 0056", "category": "clothing", "price": 194.99, "stock": 71, "supplier": "QuickShip", "sku": "SKU-0056", "weight_kg": 2.5, "active": false}
-{"id": "PROD-0057", "name": "Publication 0057", "category": "books", "price": 2.99, "stock": 74, "supplier": "PrimeVendor", "sku": "SKU-0057", "weight_kg": 2.65, "active": true}
-{"id": "PROD-0058", "name": "Food Product 0058", "category": "food", "price": 9.99, "stock": 77, "supplier": "AlphaGoods", "sku": "SKU-0058", "weight_kg": 2.8, "active": true}
-{"id": "PROD-0059", "name": "Tool Kit 0059", "category": "tools", "price": 16.99, "stock": 80, "supplier": "ZetaSupply", "sku": "SKU-0059", "weight_kg": 2.95, "active": true}
-{"id": "PROD-0060", "name": "Digital Device 0060", "category": "electronics", "price": 23.99, "stock": 83, "supplier": "Acme Corp", "sku": "SKU-0060", "weight_kg": 0.1, "active": true}
-{"id": "PROD-0061", "name": "Garment 0061", "category": "clothing", "price": 30.99, "stock": 86, "supplier": "GlobalTech", "sku": "SKU-0061", "weight_kg": 0.25, "active": true}
-{"id": "PROD-0062", "name": "Publication 0062", "category": "books", "price": 37.99, "stock": 89, "supplier": "MegaSupply", "sku": "SKU-0062", "weight_kg": 0.4, "active": true}
-{"id": "PROD-0063", "name": "Food Product 0063", "category": "food", "price": 44.99, "stock": 92, "supplier": "FastGoods", "sku": "SKU-0063", "weight_kg": 0.55, "active": false}
-{"id": "PROD-0064", "name": "Tool Kit 0064", "category": "tools", "price": 51.99, "stock": 95, "supplier": "TopVendor", "sku": "SKU-0064", "weight_kg": 0.7, "active": true}
-{"id": "PROD-0065", "name": "Digital Device 0065", "category": "electronics", "price": 58.99, "stock": 1, "supplier": "BestSource", "sku": "SKU-0065", "weight_kg": 0.85, "active": true}
-{"id": "PROD-0066", "name": "Garment 0066", "category": "clothing", "price": 65.99, "stock": 4, "supplier": "QuickShip", "sku": "SKU-0066", "weight_kg": 1.0, "active": true}
-{"id": "PROD-0067", "name": "Publication 0067", "category": "books", "price": 72.99, "stock": 7, "supplier": "PrimeVendor", "sku": "SKU-0067", "weight_kg": 1.15, "active": true}
-{"id": "PROD-0068", "name": "Food Product 0068", "category": "food", "price": 79.99, "stock": 10, "supplier": "AlphaGoods", "sku": "SKU-0068", "weight_kg": 1.3, "active": true}
-{"id": "PROD-0069", "name": "Tool Kit 0069", "category": "tools", "price": 86.99, "stock": 13, "supplier": "ZetaSupply", "sku": "SKU-0069", "weight_kg": 1.45, "active": true}
-{"id": "PROD-0070", "name": "Digital Device 0070", "category": "electronics", "price": 93.99, "stock": 16, "supplier": "Acme Corp", "sku": "SKU-0070", "weight_kg": 1.6, "active": false}
-{"id": "PROD-0071", "name": "Garment 0071", "category": "clothing", "price": 100.99, "stock": 19, "supplier": "GlobalTech", "sku": "SKU-0071", "weight_kg": 1.75, "active": true}
-{"id": "PROD-0072", "name": "Publication 0072", "category": "books", "price": 107.99, "stock": 22, "supplier": "MegaSupply", "sku": "SKU-0072", "weight_kg": 1.9, "active": true}
-{"id": "PROD-0073", "name": "Food Product 0073", "category": "food", "price": 114.99, "stock": 25, "supplier": "FastGoods", "sku": "SKU-0073", "weight_kg": 2.05, "active": true}
-{"id": "PROD-0074", "name": "Tool Kit 0074", "category": "tools", "price": 121.99, "stock": 28, "supplier": "TopVendor", "sku": "SKU-0074", "weight_kg": 2.2, "active": true}
-{"id": "PROD-0075", "name": "Digital Device 0075", "category": "electronics", "price": 128.99, "stock": 31, "supplier": "BestSource", "sku": "SKU-0075", "weight_kg": 2.35, "active": true}
-{"id": "PROD-0076", "name": "Garment 0076", "category": "clothing", "price": 135.99, "stock": 34, "supplier": "QuickShip", "sku": "SKU-0076", "weight_kg": 2.5, "active": true}
-{"id": "PROD-0077", "name": "Publication 0077", "category": "books", "price": 142.99, "stock": 37, "supplier": "PrimeVendor", "sku": "SKU-0077", "weight_kg": 2.65, "active": false}
-{"id": "PROD-0078", "name": "Food Product 0078", "category": "food", "price": 149.99, "stock": 40, "supplier": "AlphaGoods", "sku": "SKU-0078", "weight_kg": 2.8, "active": true}
-{"id": "PROD-0079", "name": "Tool Kit 0079", "category": "tools", "price": 156.99, "stock": 43, "supplier": "ZetaSupply", "sku": "SKU-0079", "weight_kg": 2.95, "active": true}
-{"id": "PROD-0080", "name": "Digital Device 0080", "category": "electronics", "price": 163.99, "stock": 46, "supplier": "Acme Corp", "sku": "SKU-0080", "weight_kg": 0.1, "active": true}
-{"id": "PROD-0081", "name": "Garment 0081", "category": "clothing", "price": 170.99, "stock": 49, "supplier": "GlobalTech", "sku": "SKU-0081", "weight_kg": 0.25, "active": true}
-{"id": "PROD-0082", "name": "Publication 0082", "category": "books", "price": 177.99, "stock": 52, "supplier": "MegaSupply", "sku": "SKU-0082", "weight_kg": 0.4, "active": true}
-{"id": "PROD-0083", "name": "Food Product 0083", "category": "food", "price": 184.99, "stock": 55, "supplier": "FastGoods", "sku": "SKU-0083", "weight_kg": 0.55, "active": true}
-{"id": "PROD-0084", "name": "Tool Kit 0084", "category": "tools", "price": 191.99, "stock": 58, "supplier": "TopVendor", "sku": "SKU-0084", "weight_kg": 0.7, "active": false}
-{"id": "PROD-0085", "name": "Digital Device 0085", "category": "electronics", "price": 198.99, "stock": 61, "supplier": "BestSource", "sku": "SKU-0085", "weight_kg": 0.85, "active": true}
-{"id": "PROD-0086", "name": "Garment 0086", "category": "clothing", "price": 6.99, "stock": 64, "supplier": "QuickShip", "sku": "SKU-0086", "weight_kg": 1.0, "active": true}
-{"id": "PROD-0087", "name": "Publication 0087", "category": "books", "price": 13.99, "stock": 67, "supplier": "PrimeVendor", "sku": "SKU-0087", "weight_kg": 1.15, "active": true}
-{"id": "PROD-0088", "name": "Food Product 0088", "category": "food", "price": 20.99, "stock": 70, "supplier": "AlphaGoods", "sku": "SKU-0088", "weight_kg": 1.3, "active": true}
-{"id": "PROD-0089", "name": "Tool Kit 0089", "category": "tools", "price": 27.99, "stock": 73, "supplier": "ZetaSupply", "sku": "SKU-0089", "weight_kg": 1.45, "active": true}
-{"id": "PROD-0090", "name": "Digital Device 0090", "category": "electronics", "price": 34.99, "stock": 76, "supplier": "Acme Corp", "sku": "SKU-0090", "weight_kg": 1.6, "active": true}
-{"id": "PROD-0091", "name": "Garment 0091", "category": "clothing", "price": 41.99, "stock": 79, "supplier": "GlobalTech", "sku": "SKU-0091", "weight_kg": 1.75, "active": false}
-{"id": "PROD-0092", "name": "Publication 0092", "category": "books", "price": 48.99, "stock": 82, "supplier": "MegaSupply", "sku": "SKU-0092", "weight_kg": 1.9, "active": true}
-{"id": "PROD-0093", "name": "Food Product 0093", "category": "food", "price": 55.99, "stock": 85, "supplier": "FastGoods", "sku": "SKU-0093", "weight_kg": 2.05, "active": true}
-{"id": "PROD-0094", "name": "Tool Kit 0094", "category": "tools", "price": 62.99, "stock": 88, "supplier": "TopVendor", "sku": "SKU-0094", "weight_kg": 2.2, "active": true}
-{"id": "PROD-0095", "name": "Digital Device 0095", "category": "electronics", "price": 69.99, "stock": 91, "supplier": "BestSource", "sku": "SKU-0095", "weight_kg": 2.35, "active": true}
-{"id": "PROD-0096", "name": "Garment 0096", "category": "clothing", "price": 76.99, "stock": 94, "supplier": "QuickShip", "sku": "SKU-0096", "weight_kg": 2.5, "active": true}
-{"id": "PROD-0097", "name": "Publication 0097", "category": "books", "price": 83.99, "stock": 0, "supplier": "PrimeVendor", "sku": "SKU-0097", "weight_kg": 2.65, "active": true}
-{"id": "PROD-0098", "name": "Food Product 0098", "category": "food", "price": 90.99, "stock": 3, "supplier": "AlphaGoods", "sku": "SKU-0098", "weight_kg": 2.8, "active": false}
-{"id": "PROD-0099", "name": "Tool Kit 0099", "category": "tools", "price": 97.99, "stock": 6, "supplier": "ZetaSupply", "sku": "SKU-0099", "weight_kg": 2.95, "active": true}
-{"id": "PROD-0100", "name": "Digital Device 0100", "category": "electronics", "price": 104.99, "stock": 9, "supplier": "Acme Corp", "sku": "SKU-0100", "weight_kg": 0.1, "active": true}
-{"id": "PROD-0101", "name": "Garment 0101", "category": "clothing", "price": 111.99, "stock": 12, "supplier": "GlobalTech", "sku": "SKU-0101", "weight_kg": 0.25, "active": true}
-{"id": "PROD-0102", "name": "Publication 0102", "category": "books", "price": 118.99, "stock": 15, "supplier": "MegaSupply", "sku": "SKU-0102", "weight_kg": 0.4, "active": true}
-{"id": "PROD-0103", "name": "Food Product 0103", "category": "food", "price": 125.99, "stock": 18, "supplier": "FastGoods", "sku": "SKU-0103", "weight_kg": 0.55, "active": true}
-{"id": "PROD-0104", "name": "Tool Kit 0104", "category": "tools", "price": 132.99, "stock": 21, "supplier": "TopVendor", "sku": "SKU-0104", "weight_kg": 0.7, "active": true}
-{"id": "PROD-0105", "name": "Digital Device 0105", "category": "electronics", "price": 139.99, "stock": 24, "supplier": "BestSource", "sku": "SKU-0105", "weight_kg": 0.85, "active": false}
-{"id": "PROD-0106", "name": "Garment 0106", "category": "clothing", "price": 146.99, "stock": 27, "supplier": "QuickShip", "sku": "SKU-0106", "weight_kg": 1.0, "active": true}
-{"id": "PROD-0107", "name": "Publication 0107", "category": "books", "price": 153.99, "stock": 30, "supplier": "PrimeVendor", "sku": "SKU-0107", "weight_kg": 1.15, "active": true}
-{"id": "PROD-0108", "name": "Food Product 0108", "category": "food", "price": 160.99, "stock": 33, "supplier": "AlphaGoods", "sku": "SKU-0108", "weight_kg": 1.3, "active": true}
-{"id": "PROD-0109", "name": "Tool Kit 0109", "category": "tools", "price": 167.99, "stock": 36, "supplier": "ZetaSupply", "sku": "SKU-0109", "weight_kg": 1.45, "active": true}
-{"id": "PROD-0110", "name": "Digital Device 0110", "category": "electronics", "price": 174.99, "stock": 39, "supplier": "Acme Corp", "sku": "SKU-0110", "weight_kg": 1.6, "active": true}
-{"id": "PROD-0111", "name": "Garment 0111", "category": "clothing", "price": 181.99, "stock": 42, "supplier": "GlobalTech", "sku": "SKU-0111", "weight_kg": 1.75, "active": true}
-{"id": "PROD-0112", "name": "Publication 0112", "category": "books", "price": 188.99, "stock": 45, "supplier": "MegaSupply", "sku": "SKU-0112", "weight_kg": 1.9, "active": false}
-{"id": "PROD-0113", "name": "Food Product 0113", "category": "food", "price": 195.99, "stock": 48, "supplier": "FastGoods", "sku": "SKU-0113", "weight_kg": 2.05, "active": true}
-{"id": "PROD-0114", "name": "Tool Kit 0114", "category": "tools", "price": 3.99, "stock": 51, "supplier": "TopVendor", "sku": "SKU-0114", "weight_kg": 2.2, "active": true}
-{"id": "PROD-0115", "name": "Digital Device 0115", "category": "electronics", "price": 10.99, "stock": 54, "supplier": "BestSource", "sku": "SKU-0115", "weight_kg": 2.35, "active": true}
-{"id": "PROD-0116", "name": "Garment 0116", "category": "clothing", "price": 17.99, "stock": 57, "supplier": "QuickShip", "sku": "SKU-0116", "weight_kg": 2.5, "active": true}
-{"id": "PROD-0117", "name": "Publication 0117", "category": "books", "price": 24.99, "stock": 60, "supplier": "PrimeVendor", "sku": "SKU-0117", "weight_kg": 2.65, "active": true}
-{"id": "PROD-0118", "name": "Food Product 0118", "category": "food", "price": 31.99, "stock": 63, "supplier": "AlphaGoods", "sku": "SKU-0118", "weight_kg": 2.8, "active": true}
-{"id": "PROD-0119", "name": "Tool Kit 0119", "category": "tools", "price": 38.99, "stock": 66, "supplier": "ZetaSupply", "sku": "SKU-0119", "weight_kg": 2.95, "active": false}
-{"id": "PROD-0120", "name": "Digital Device 0120", "category": "electronics", "price": 45.99, "stock": 69, "supplier": "Acme Corp", "sku": "SKU-0120", "weight_kg": 0.1, "active": true}
-{"id": "PROD-0121", "name": "Garment 0121", "category": "clothing", "price": 52.99, "stock": 72, "supplier": "GlobalTech", "sku": "SKU-0121", "weight_kg": 0.25, "active": true}
-{"id": "PROD-0122", "name": "Publication 0122", "category": "books", "price": 59.99, "stock": 75, "supplier": "MegaSupply", "sku": "SKU-0122", "weight_kg": 0.4, "active": true}
-{"id": "PROD-0123", "name": "Food Product 0123", "category": "food", "price": 66.99, "stock": 78, "supplier": "FastGoods", "sku": "SKU-0123", "weight_kg": 0.55, "active": true}
-{"id": "PROD-0124", "name": "Tool Kit 0124", "category": "tools", "price": 73.99, "stock": 81, "supplier": "TopVendor", "sku": "SKU-0124", "weight_kg": 0.7, "active": true}
-{"id": "PROD-0125", "name": "Digital Device 0125", "category": "electronics", "price": 80.99, "stock": 84, "supplier": "BestSource", "sku": "SKU-0125", "weight_kg": 0.85, "active": true}
-{"id": "PROD-0126", "name": "Garment 0126", "category": "clothing", "price": 87.99, "stock": 87, "supplier": "QuickShip", "sku": "SKU-0126", "weight_kg": 1.0, "active": false}
-{"id": "PROD-0127", "name": "Publication 0127", "category": "books", "price": 94.99, "stock": 90, "supplier": "PrimeVendor", "sku": "SKU-0127", "weight_kg": 1.15, "active": true}
-{"id": "PROD-0128", "name": "Food Product 0128", "category": "food", "price": 101.99, "stock": 93, "supplier": "AlphaGoods", "sku": "SKU-0128", "weight_kg": 1.3, "active": true}
-{"id": "PROD-0129", "name": "Tool Kit 0129", "category": "tools", "price": 108.99, "stock": 96, "supplier": "ZetaSupply", "sku": "SKU-0129", "weight_kg": 1.45, "active": true}
-{"id": "PROD-0130", "name": "Digital Device 0130", "category": "electronics", "price": 115.99, "stock": 2, "supplier": "Acme Corp", "sku": "SKU-0130", "weight_kg": 1.6, "active": true}
-{"id": "PROD-0131", "name": "Garment 0131", "category": "clothing", "price": 122.99, "stock": 5, "supplier": "GlobalTech", "sku": "SKU-0131", "weight_kg": 1.75, "active": true}
-{"id": "PROD-0132", "name": "Publication 0132", "category": "books", "price": 129.99, "stock": 8, "supplier": "MegaSupply", "sku": "SKU-0132", "weight_kg": 1.9, "active": true}
-{"id": "PROD-0133", "name": "Food Product 0133", "category": "food", "price": 136.99, "stock": 11, "supplier": "FastGoods", "sku": "SKU-0133", "weight_kg": 2.05, "active": false}
-{"id": "PROD-0134", "name": "Tool Kit 0134", "category": "tools", "price": 143.99, "stock": 14, "supplier": "TopVendor", "sku": "SKU-0134", "weight_kg": 2.2, "active": true}
-{"id": "PROD-0135", "name": "Digital Device 0135", "category": "electronics", "price": 150.99, "stock": 17, "supplier": "BestSource", "sku": "SKU-0135", "weight_kg": 2.35, "active": true}
-{"id": "PROD-0136", "name": "Garment 0136", "category": "clothing", "price": 157.99, "stock": 20, "supplier": "QuickShip", "sku": "SKU-0136", "weight_kg": 2.5, "active": true}
-{"id": "PROD-0137", "name": "Publication 0137", "category": "books", "price": 164.99, "stock": 23, "supplier": "PrimeVendor", "sku": "SKU-0137", "weight_kg": 2.65, "active": true}
-{"id": "PROD-0138", "name": "Food Product 0138", "category": "food", "price": 171.99, "stock": 26, "supplier": "AlphaGoods", "sku": "SKU-0138", "weight_kg": 2.8, "active": true}
-{"id": "PROD-0139", "name": "Tool Kit 0139", "category": "tools", "price": 178.99, "stock": 29, "supplier": "ZetaSupply", "sku": "SKU-0139", "weight_kg": 2.95, "active": true}
-{"id": "PROD-0140", "name": "Digital Device 0140", "category": "electronics", "price": 185.99, "stock": 32, "supplier": "Acme Corp", "sku": "SKU-0140", "weight_kg": 0.1, "active": false}
-{"id": "PROD-0141", "name": "Garment 0141", "category": "clothing", "price": 192.99, "stock": 35, "supplier": "GlobalTech", "sku": "SKU-0141", "weight_kg": 0.25, "active": true}
-{"id": "PROD-0142", "name": "Publication 0142", "category": "books", "price": 199.99, "stock": 38, "supplier": "MegaSupply", "sku": "SKU-0142", "weight_kg": 0.4, "active": true}
-{"id": "PROD-0143", "name": "Food Product 0143", "category": "food", "price": 7.99, "stock": 41, "supplier": "FastGoods", "sku": "SKU-0143", "weight_kg": 0.55, "active": true}
-{"id": "PROD-0144", "name": "Tool Kit 0144", "category": "tools", "price": 14.99, "stock": 44, "supplier": "TopVendor", "sku": "SKU-0144", "weight_kg": 0.7, "active": true}
-{"id": "PROD-0145", "name": "Digital Device 0145", "category": "electronics", "price": 21.99, "stock": 47, "supplier": "BestSource", "sku": "SKU-0145", "weight_kg": 0.85, "active": true}
-{"id": "PROD-0146", "name": "Garment 0146", "category": "clothing", "price": 28.99, "stock": 50, "supplier": "QuickShip", "sku": "SKU-0146", "weight_kg": 1.0, "active": true}
-{"id": "PROD-0147", "name": "Publication 0147", "category": "books", "price": 35.99, "stock": 53, "supplier": "PrimeVendor", "sku": "SKU-0147", "weight_kg": 1.15, "active": false}
-{"id": "PROD-0148", "name": "Food Product 0148", "category": "food", "price": 42.99, "stock": 56, "supplier": "AlphaGoods", "sku": "SKU-0148", "weight_kg": 1.3, "active": true}
-{"id": "PROD-0149", "name": "Tool Kit 0149", "category": "tools", "price": 49.99, "stock": 59, "supplier": "ZetaSupply", "sku": "SKU-0149", "weight_kg": 1.45, "active": true}
-{"id": "PROD-0150", "name": "Digital Device 0150", "category": "electronics", "price": 56.99, "stock": 62, "supplier": "Acme Corp", "sku": "SKU-0150", "weight_kg": 1.6, "active": true}
-{"id": "PROD-0151", "name": "Garment 0151", "category": "clothing", "price": 63.99, "stock": 65, "supplier": "GlobalTech", "sku": "SKU-0151", "weight_kg": 1.75, "active": true}
-{"id": "PROD-0152", "name": "Publication 0152", "category": "books", "price": 70.99, "stock": 68, "supplier": "MegaSupply", "sku": "SKU-0152", "weight_kg": 1.9, "active": true}
-{"id": "PROD-0153", "name": "Food Product 0153", "category": "food", "price": 77.99, "stock": 71, "supplier": "FastGoods", "sku": "SKU-0153", "weight_kg": 2.05, "active": true}
-{"id": "PROD-0154", "name": "Tool Kit 0154", "category": "tools", "price": 84.99, "stock": 74, "supplier": "TopVendor", "sku": "SKU-0154", "weight_kg": 2.2, "active": false}
-{"id": "PROD-0155", "name": "Digital Device 0155", "category": "electronics", "price": 91.99, "stock": 77, "supplier": "BestSource", "sku": "SKU-0155", "weight_kg": 2.35, "active": true}
-{"id": "PROD-0156", "name": "Garment 0156", "category": "clothing", "price": 98.99, "stock": 80, "supplier": "QuickShip", "sku": "SKU-0156", "weight_kg": 2.5, "active": true}
-{"id": "PROD-0157", "name": "Publication 0157", "category": "books", "price": 105.99, "stock": 83, "supplier": "PrimeVendor", "sku": "SKU-0157", "weight_kg": 2.65, "active": true}
-{"id": "PROD-0158", "name": "Food Product 0158", "category": "food", "price": 112.99, "stock": 86, "supplier": "AlphaGoods", "sku": "SKU-0158", "weight_kg": 2.8, "active": true}
-{"id": "PROD-0159", "name": "Tool Kit 0159", "category": "tools", "price": 119.99, "stock": 89, "supplier": "ZetaSupply", "sku": "SKU-0159", "weight_kg": 2.95, "active": true}
-{"id": "PROD-0160", "name": "Digital Device 0160", "category": "electronics", "price": 126.99, "stock": 92, "supplier": "Acme Corp", "sku": "SKU-0160", "weight_kg": 0.1, "active": true}
-{"id": "PROD-0161", "name": "Garment 0161", "category": "clothing", "price": 133.99, "stock": 95, "supplier": "GlobalTech", "sku": "SKU-0161", "weight_kg": 0.25, "active": false}
-{"id": "PROD-0162", "name": "Publication 0162", "category": "books", "price": 140.99, "stock": 1, "supplier": "MegaSupply", "sku": "SKU-0162", "weight_kg": 0.4, "active": true}
-{"id": "PROD-0163", "name": "Food Product 0163", "category": "food", "price": 147.99, "stock": 4, "supplier": "FastGoods", "sku": "SKU-0163", "weight_kg": 0.55, "active": true}
-{"id": "PROD-0164", "name": "Tool Kit 0164", "category": "tools", "price": 154.99, "stock": 7, "supplier": "TopVendor", "sku": "SKU-0164", "weight_kg": 0.7, "active": true}
-{"id": "PROD-0165", "name": "Digital Device 0165", "category": "electronics", "price": 161.99, "stock": 10, "supplier": "BestSource", "sku": "SKU-0165", "weight_kg": 0.85, "active": true}
-{"id": "PROD-0166", "name": "Garment 0166", "category": "clothing", "price": 168.99, "stock": 13, "supplier": "QuickShip", "sku": "SKU-0166", "weight_kg": 1.0, "active": true}
-{"id": "PROD-0167", "name": "Publication 0167", "category": "books", "price": 175.99, "stock": 16, "supplier": "PrimeVendor", "sku": "SKU-0167", "weight_kg": 1.15, "active": true}
-{"id": "PROD-0168", "name": "Food Product 0168", "category": "food", "price": 182.99, "stock": 19, "supplier": "AlphaGoods", "sku": "SKU-0168", "weight_kg": 1.3, "active": false}
-{"id": "PROD-0169", "name": "Tool Kit 0169", "category": "tools", "price": 189.99, "stock": 22, "supplier": "ZetaSupply", "sku": "SKU-0169", "weight_kg": 1.45, "active": true}
-{"id": "PROD-0170", "name": "Digital Device 0170", "category": "electronics", "price": 196.99, "stock": 25, "supplier": "Acme Corp", "sku": "SKU-0170", "weight_kg": 1.6, "active": true}
-{"id": "PROD-0171", "name": "Garment 0171", "category": "clothing", "price": 4.99, "stock": 28, "supplier": "GlobalTech", "sku": "SKU-0171", "weight_kg": 1.75, "active": true}
-{"id": "PROD-0172", "name": "Publication 0172", "category": "books", "price": 11.99, "stock": 31, "supplier": "MegaSupply", "sku": "SKU-0172", "weight_kg": 1.9, "active": true}
-{"id": "PROD-0173", "name": "Food Product 0173", "category": "food", "price": 18.99, "stock": 34, "supplier": "FastGoods", "sku": "SKU-0173", "weight_kg": 2.05, "active": true}
-{"id": "PROD-0174", "name": "Tool Kit 0174", "category": "tools", "price": 25.99, "stock": 37, "supplier": "TopVendor", "sku": "SKU-0174", "weight_kg": 2.2, "active": true}
-{"id": "PROD-0175", "name": "Digital Device 0175", "category": "electronics", "price": 32.99, "stock": 40, "supplier": "BestSource", "sku": "SKU-0175", "weight_kg": 2.35, "active": false}
-{"id": "PROD-0176", "name": "Garment 0176", "category": "clothing", "price": 39.99, "stock": 43, "supplier": "QuickShip", "sku": "SKU-0176", "weight_kg": 2.5, "active": true}
-{"id": "PROD-0177", "name": "Publication 0177", "category": "books", "price": 46.99, "stock": 46, "supplier": "PrimeVendor", "sku": "SKU-0177", "weight_kg": 2.65, "active": true}
-{"id": "PROD-0178", "name": "Food Product 0178", "category": "food", "price": 53.99, "stock": 49, "supplier": "AlphaGoods", "sku": "SKU-0178", "weight_kg": 2.8, "active": true}
-{"id": "PROD-0179", "name": "Tool Kit 0179", "category": "tools", "price": 60.99, "stock": 52, "supplier": "ZetaSupply", "sku": "SKU-0179", "weight_kg": 2.95, "active": true}
-{"id": "PROD-0180", "name": "Digital Device 0180", "category": "electronics", "price": 67.99, "stock": 55, "supplier": "Acme Corp", "sku": "SKU-0180", "weight_kg": 0.1, "active": true}
-{"id": "PROD-0181", "name": "Garment 0181", "category": "clothing", "price": 74.99, "stock": 58, "supplier": "GlobalTech", "sku": "SKU-0181", "weight_kg": 0.25, "active": true}
-{"id": "PROD-0182", "name": "Publication 0182", "category": "books", "price": 81.99, "stock": 61, "supplier": "MegaSupply", "sku": "SKU-0182", "weight_kg": 0.4, "active": false}
-{"id": "PROD-0183", "name": "Food Product 0183", "category": "food", "price": 88.99, "stock": 64, "supplier": "FastGoods", "sku": "SKU-0183", "weight_kg": 0.55, "active": true}
-{"id": "PROD-0184", "name": "Tool Kit 0184", "category": "tools", "price": 95.99, "stock": 67, "supplier": "TopVendor", "sku": "SKU-0184", "weight_kg": 0.7, "active": true}
-{"id": "PROD-0185", "name": "Digital Device 0185", "category": "electronics", "price": 102.99, "stock": 70, "supplier": "BestSource", "sku": "SKU-0185", "weight_kg": 0.85, "active": true}
-{"id": "PROD-0186", "name": "Garment 0186", "category": "clothing", "price": 109.99, "stock": 73, "supplier": "QuickShip", "sku": "SKU-0186", "weight_kg": 1.0, "active": true}
-{"id": "PROD-0187", "name": "Publication 0187", "category": "books", "price": 116.99, "stock": 76, "supplier": "PrimeVendor", "sku": "SKU-0187", "weight_kg": 1.15, "active": true}
-{"id": "PROD-0188", "name": "Food Product 0188", "category": "food", "price": 123.99, "stock": 79, "supplier": "AlphaGoods", "sku": "SKU-0188", "weight_kg": 1.3, "active": true}
-{"id": "PROD-0189", "name": "Tool Kit 0189", "category": "tools", "price": 130.99, "stock": 82, "supplier": "ZetaSupply", "sku": "SKU-0189", "weight_kg": 1.45, "active": false}
-{"id": "PROD-0190", "name": "Digital Device 0190", "category": "electronics", "price": 137.99, "stock": 85, "supplier": "Acme Corp", "sku": "SKU-0190", "weight_kg": 1.6, "active": true}
-{"id": "PROD-0191", "name": "Garment 0191", "category": "clothing", "price": 144.99, "stock": 88, "supplier": "GlobalTech", "sku": "SKU-0191", "weight_kg": 1.75, "active": true}
-{"id": "PROD-0192", "name": "Publication 0192", "category": "books", "price": 151.99, "stock": 91, "supplier": "MegaSupply", "sku": "SKU-0192", "weight_kg": 1.9, "active": true}
-{"id": "PROD-0193", "name": "Food Product 0193", "category": "food", "price": 158.99, "stock": 94, "supplier": "FastGoods", "sku": "SKU-0193", "weight_kg": 2.05, "active": true}
-{"id": "PROD-0194", "name": "Tool Kit 0194", "category": "tools", "price": 165.99, "stock": 0, "supplier": "TopVendor", "sku": "SKU-0194", "weight_kg": 2.2, "active": true}
-{"id": "PROD-0195", "name": "Digital Device 0195", "category": "electronics", "price": 172.99, "stock": 3, "supplier": "BestSource", "sku": "SKU-0195", "weight_kg": 2.35, "active": true}
-{"id": "PROD-0196", "name": "Garment 0196", "category": "clothing", "price": 179.99, "stock": 6, "supplier": "QuickShip", "sku": "SKU-0196", "weight_kg": 2.5, "active": false}
-{"id": "PROD-0197", "name": "Publication 0197", "category": "books", "price": 186.99, "stock": 9, "supplier": "PrimeVendor", "sku": "SKU-0197", "weight_kg": 2.65, "active": true}
-{"id": "PROD-0198", "name": "Food Product 0198", "category": "food", "price": 193.99, "stock": 12, "supplier": "AlphaGoods", "sku": "SKU-0198", "weight_kg": 2.8, "active": true}
-{"id": "PROD-0199", "name": "Tool Kit 0199", "category": "tools", "price": 1.99, "stock": 15, "supplier": "ZetaSupply", "sku": "SKU-0199", "weight_kg": 2.95, "active": true}
-{"id": "PROD-0200", "name": "Digital Device 0200", "category": "electronics", "price": 8.99, "stock": 18, "supplier": "Acme Corp", "sku": "SKU-0200", "weight_kg": 0.1, "active": true}
+﻿[
+{"id":"PROD-0001","name":"Garment 0001","category":"clothing","price":8.99,"stock":3,"supplier":"GlobalTech","sku":"SKU-0001","weight_kg":0.25,"active":true},
+{"id":"PROD-0002","name":"Publication 0002","category":"books","price":15.99,"stock":6,"supplier":"MegaSupply","sku":"SKU-0002","weight_kg":0.4,"active":true},
+{"id":"PROD-0003","name":"Food Product 0003","category":"food","price":22.99,"stock":9,"supplier":"FastGoods","sku":"SKU-0003","weight_kg":0.55,"active":true},
+{"id":"PROD-0004","name":"Tool Kit 0004","category":"tools","price":29.99,"stock":12,"supplier":"TopVendor","sku":"SKU-0004","weight_kg":0.7,"active":true},
+{"id":"PROD-0005","name":"Digital Device 0005","category":"electronics","price":36.99,"stock":15,"supplier":"BestSource","sku":"SKU-0005","weight_kg":0.85,"active":true},
+{"id":"PROD-0006","name":"Garment 0006","category":"clothing","price":43.99,"stock":18,"supplier":"QuickShip","sku":"SKU-0006","weight_kg":1.0,"active":true},
+{"id":"PROD-0007","name":"Publication 0007","category":"books","price":50.99,"stock":21,"supplier":"PrimeVendor","sku":"SKU-0007","weight_kg":1.15,"active":false},
+{"id":"PROD-0008","name":"Food Product 0008","category":"food","price":57.99,"stock":24,"supplier":"AlphaGoods","sku":"SKU-0008","weight_kg":1.3,"active":true},
+{"id":"PROD-0009","name":"Tool Kit 0009","category":"tools","price":64.99,"stock":27,"supplier":"ZetaSupply","sku":"SKU-0009","weight_kg":1.45,"active":true},
+{"id":"PROD-0010","name":"Digital Device 0010","category":"electronics","price":71.99,"stock":30,"supplier":"Acme Corp","sku":"SKU-0010","weight_kg":1.6,"active":true},
+{"id":"PROD-0011","name":"Garment 0011","category":"clothing","price":78.99,"stock":33,"supplier":"GlobalTech","sku":"SKU-0011","weight_kg":1.75,"active":true},
+{"id":"PROD-0012","name":"Publication 0012","category":"books","price":85.99,"stock":36,"supplier":"MegaSupply","sku":"SKU-0012","weight_kg":1.9,"active":true},
+{"id":"PROD-0013","name":"Food Product 0013","category":"food","price":92.99,"stock":39,"supplier":"FastGoods","sku":"SKU-0013","weight_kg":2.05,"active":true},
+{"id":"PROD-0014","name":"Tool Kit 0014","category":"tools","price":99.99,"stock":42,"supplier":"TopVendor","sku":"SKU-0014","weight_kg":2.2,"active":false},
+{"id":"PROD-0015","name":"Digital Device 0015","category":"electronics","price":106.99,"stock":45,"supplier":"BestSource","sku":"SKU-0015","weight_kg":2.35,"active":true},
+{"id":"PROD-0016","name":"Garment 0016","category":"clothing","price":113.99,"stock":48,"supplier":"QuickShip","sku":"SKU-0016","weight_kg":2.5,"active":true},
+{"id":"PROD-0017","name":"Publication 0017","category":"books","price":120.99,"stock":51,"supplier":"PrimeVendor","sku":"SKU-0017","weight_kg":2.65,"active":true},
+{"id":"PROD-0018","name":"Food Product 0018","category":"food","price":127.99,"stock":54,"supplier":"AlphaGoods","sku":"SKU-0018","weight_kg":2.8,"active":true},
+{"id":"PROD-0019","name":"Tool Kit 0019","category":"tools","price":134.99,"stock":57,"supplier":"ZetaSupply","sku":"SKU-0019","weight_kg":2.95,"active":true},
+{"id":"PROD-0020","name":"Digital Device 0020","category":"electronics","price":141.99,"stock":60,"supplier":"Acme Corp","sku":"SKU-0020","weight_kg":0.1,"active":true},
+{"id":"PROD-0021","name":"Garment 0021","category":"clothing","price":148.99,"stock":63,"supplier":"GlobalTech","sku":"SKU-0021","weight_kg":0.25,"active":false},
+{"id":"PROD-0022","name":"Publication 0022","category":"books","price":155.99,"stock":66,"supplier":"MegaSupply","sku":"SKU-0022","weight_kg":0.4,"active":true},
+{"id":"PROD-0023","name":"Food Product 0023","category":"food","price":162.99,"stock":69,"supplier":"FastGoods","sku":"SKU-0023","weight_kg":0.55,"active":true},
+{"id":"PROD-0024","name":"Tool Kit 0024","category":"tools","price":169.99,"stock":72,"supplier":"TopVendor","sku":"SKU-0024","weight_kg":0.7,"active":true},
+{"id":"PROD-0025","name":"Digital Device 0025","category":"electronics","price":176.99,"stock":75,"supplier":"BestSource","sku":"SKU-0025","weight_kg":0.85,"active":true},
+{"id":"PROD-0026","name":"Garment 0026","category":"clothing","price":183.99,"stock":78,"supplier":"QuickShip","sku":"SKU-0026","weight_kg":1.0,"active":true},
+{"id":"PROD-0027","name":"Publication 0027","category":"books","price":190.99,"stock":81,"supplier":"PrimeVendor","sku":"SKU-0027","weight_kg":1.15,"active":true},
+{"id":"PROD-0028","name":"Food Product 0028","category":"food","price":197.99,"stock":84,"supplier":"AlphaGoods","sku":"SKU-0028","weight_kg":1.3,"active":false},
+{"id":"PROD-0029","name":"Tool Kit 0029","category":"tools","price":5.99,"stock":87,"supplier":"ZetaSupply","sku":"SKU-0029","weight_kg":1.45,"active":true},
+{"id":"PROD-0030","name":"Digital Device 0030","category":"electronics","price":12.99,"stock":90,"supplier":"Acme Corp","sku":"SKU-0030","weight_kg":1.6,"active":true},
+{"id":"PROD-0031","name":"Garment 0031","category":"clothing","price":19.99,"stock":93,"supplier":"GlobalTech","sku":"SKU-0031","weight_kg":1.75,"active":true},
+{"id":"PROD-0032","name":"Publication 0032","category":"books","price":26.99,"stock":96,"supplier":"MegaSupply","sku":"SKU-0032","weight_kg":1.9,"active":true},
+{"id":"PROD-0033","name":"Food Product 0033","category":"food","price":33.99,"stock":2,"supplier":"FastGoods","sku":"SKU-0033","weight_kg":2.05,"active":true},
+{"id":"PROD-0034","name":"Tool Kit 0034","category":"tools","price":40.99,"stock":5,"supplier":"TopVendor","sku":"SKU-0034","weight_kg":2.2,"active":true},
+{"id":"PROD-0035","name":"Digital Device 0035","category":"electronics","price":47.99,"stock":8,"supplier":"BestSource","sku":"SKU-0035","weight_kg":2.35,"active":false},
+{"id":"PROD-0036","name":"Garment 0036","category":"clothing","price":54.99,"stock":11,"supplier":"QuickShip","sku":"SKU-0036","weight_kg":2.5,"active":true},
+{"id":"PROD-0037","name":"Publication 0037","category":"books","price":61.99,"stock":14,"supplier":"PrimeVendor","sku":"SKU-0037","weight_kg":2.65,"active":true},
+{"id":"PROD-0038","name":"Food Product 0038","category":"food","price":68.99,"stock":17,"supplier":"AlphaGoods","sku":"SKU-0038","weight_kg":2.8,"active":true},
+{"id":"PROD-0039","name":"Tool Kit 0039","category":"tools","price":75.99,"stock":20,"supplier":"ZetaSupply","sku":"SKU-0039","weight_kg":2.95,"active":true},
+{"id":"PROD-0040","name":"Digital Device 0040","category":"electronics","price":82.99,"stock":23,"supplier":"Acme Corp","sku":"SKU-0040","weight_kg":0.1,"active":true},
+{"id":"PROD-0041","name":"Garment 0041","category":"clothing","price":89.99,"stock":26,"supplier":"GlobalTech","sku":"SKU-0041","weight_kg":0.25,"active":true},
+{"id":"PROD-0042","name":"Publication 0042","category":"books","price":96.99,"stock":29,"supplier":"MegaSupply","sku":"SKU-0042","weight_kg":0.4,"active":false},
+{"id":"PROD-0043","name":"Food Product 0043","category":"food","price":103.99,"stock":32,"supplier":"FastGoods","sku":"SKU-0043","weight_kg":0.55,"active":true},
+{"id":"PROD-0044","name":"Tool Kit 0044","category":"tools","price":110.99,"stock":35,"supplier":"TopVendor","sku":"SKU-0044","weight_kg":0.7,"active":true},
+{"id":"PROD-0045","name":"Digital Device 0045","category":"electronics","price":117.99,"stock":38,"supplier":"BestSource","sku":"SKU-0045","weight_kg":0.85,"active":true},
+{"id":"PROD-0046","name":"Garment 0046","category":"clothing","price":124.99,"stock":41,"supplier":"QuickShip","sku":"SKU-0046","weight_kg":1.0,"active":true},
+{"id":"PROD-0047","name":"Publication 0047","category":"books","price":131.99,"stock":44,"supplier":"PrimeVendor","sku":"SKU-0047","weight_kg":1.15,"active":true},
+{"id":"PROD-0048","name":"Food Product 0048","category":"food","price":138.99,"stock":47,"supplier":"AlphaGoods","sku":"SKU-0048","weight_kg":1.3,"active":true},
+{"id":"PROD-0049","name":"Tool Kit 0049","category":"tools","price":145.99,"stock":50,"supplier":"ZetaSupply","sku":"SKU-0049","weight_kg":1.45,"active":false},
+{"id":"PROD-0050","name":"Digital Device 0050","category":"electronics","price":152.99,"stock":53,"supplier":"Acme Corp","sku":"SKU-0050","weight_kg":1.6,"active":true},
+{"id":"PROD-0051","name":"Garment 0051","category":"clothing","price":159.99,"stock":56,"supplier":"GlobalTech","sku":"SKU-0051","weight_kg":1.75,"active":true},
+{"id":"PROD-0052","name":"Publication 0052","category":"books","price":166.99,"stock":59,"supplier":"MegaSupply","sku":"SKU-0052","weight_kg":1.9,"active":true},
+{"id":"PROD-0053","name":"Food Product 0053","category":"food","price":173.99,"stock":62,"supplier":"FastGoods","sku":"SKU-0053","weight_kg":2.05,"active":true},
+{"id":"PROD-0054","name":"Tool Kit 0054","category":"tools","price":180.99,"stock":65,"supplier":"TopVendor","sku":"SKU-0054","weight_kg":2.2,"active":true},
+{"id":"PROD-0055","name":"Digital Device 0055","category":"electronics","price":187.99,"stock":68,"supplier":"BestSource","sku":"SKU-0055","weight_kg":2.35,"active":true},
+{"id":"PROD-0056","name":"Garment 0056","category":"clothing","price":194.99,"stock":71,"supplier":"QuickShip","sku":"SKU-0056","weight_kg":2.5,"active":false},
+{"id":"PROD-0057","name":"Publication 0057","category":"books","price":2.99,"stock":74,"supplier":"PrimeVendor","sku":"SKU-0057","weight_kg":2.65,"active":true},
+{"id":"PROD-0058","name":"Food Product 0058","category":"food","price":9.99,"stock":77,"supplier":"AlphaGoods","sku":"SKU-0058","weight_kg":2.8,"active":true},
+{"id":"PROD-0059","name":"Tool Kit 0059","category":"tools","price":16.99,"stock":80,"supplier":"ZetaSupply","sku":"SKU-0059","weight_kg":2.95,"active":true},
+{"id":"PROD-0060","name":"Digital Device 0060","category":"electronics","price":23.99,"stock":83,"supplier":"Acme Corp","sku":"SKU-0060","weight_kg":0.1,"active":true},
+{"id":"PROD-0061","name":"Garment 0061","category":"clothing","price":30.99,"stock":86,"supplier":"GlobalTech","sku":"SKU-0061","weight_kg":0.25,"active":true},
+{"id":"PROD-0062","name":"Publication 0062","category":"books","price":37.99,"stock":89,"supplier":"MegaSupply","sku":"SKU-0062","weight_kg":0.4,"active":true},
+{"id":"PROD-0063","name":"Food Product 0063","category":"food","price":44.99,"stock":92,"supplier":"FastGoods","sku":"SKU-0063","weight_kg":0.55,"active":false},
+{"id":"PROD-0064","name":"Tool Kit 0064","category":"tools","price":51.99,"stock":95,"supplier":"TopVendor","sku":"SKU-0064","weight_kg":0.7,"active":true},
+{"id":"PROD-0065","name":"Digital Device 0065","category":"electronics","price":58.99,"stock":1,"supplier":"BestSource","sku":"SKU-0065","weight_kg":0.85,"active":true},
+{"id":"PROD-0066","name":"Garment 0066","category":"clothing","price":65.99,"stock":4,"supplier":"QuickShip","sku":"SKU-0066","weight_kg":1.0,"active":true},
+{"id":"PROD-0067","name":"Publication 0067","category":"books","price":72.99,"stock":7,"supplier":"PrimeVendor","sku":"SKU-0067","weight_kg":1.15,"active":true},
+{"id":"PROD-0068","name":"Food Product 0068","category":"food","price":79.99,"stock":10,"supplier":"AlphaGoods","sku":"SKU-0068","weight_kg":1.3,"active":true},
+{"id":"PROD-0069","name":"Tool Kit 0069","category":"tools","price":86.99,"stock":13,"supplier":"ZetaSupply","sku":"SKU-0069","weight_kg":1.45,"active":true},
+{"id":"PROD-0070","name":"Digital Device 0070","category":"electronics","price":93.99,"stock":16,"supplier":"Acme Corp","sku":"SKU-0070","weight_kg":1.6,"active":false},
+{"id":"PROD-0071","name":"Garment 0071","category":"clothing","price":100.99,"stock":19,"supplier":"GlobalTech","sku":"SKU-0071","weight_kg":1.75,"active":true},
+{"id":"PROD-0072","name":"Publication 0072","category":"books","price":107.99,"stock":22,"supplier":"MegaSupply","sku":"SKU-0072","weight_kg":1.9,"active":true},
+{"id":"PROD-0073","name":"Food Product 0073","category":"food","price":114.99,"stock":25,"supplier":"FastGoods","sku":"SKU-0073","weight_kg":2.05,"active":true},
+{"id":"PROD-0074","name":"Tool Kit 0074","category":"tools","price":121.99,"stock":28,"supplier":"TopVendor","sku":"SKU-0074","weight_kg":2.2,"active":true},
+{"id":"PROD-0075","name":"Digital Device 0075","category":"electronics","price":128.99,"stock":31,"supplier":"BestSource","sku":"SKU-0075","weight_kg":2.35,"active":true},
+{"id":"PROD-0076","name":"Garment 0076","category":"clothing","price":135.99,"stock":34,"supplier":"QuickShip","sku":"SKU-0076","weight_kg":2.5,"active":true},
+{"id":"PROD-0077","name":"Publication 0077","category":"books","price":142.99,"stock":37,"supplier":"PrimeVendor","sku":"SKU-0077","weight_kg":2.65,"active":false},
+{"id":"PROD-0078","name":"Food Product 0078","category":"food","price":149.99,"stock":40,"supplier":"AlphaGoods","sku":"SKU-0078","weight_kg":2.8,"active":true},
+{"id":"PROD-0079","name":"Tool Kit 0079","category":"tools","price":156.99,"stock":43,"supplier":"ZetaSupply","sku":"SKU-0079","weight_kg":2.95,"active":true},
+{"id":"PROD-0080","name":"Digital Device 0080","category":"electronics","price":163.99,"stock":46,"supplier":"Acme Corp","sku":"SKU-0080","weight_kg":0.1,"active":true},
+{"id":"PROD-0081","name":"Garment 0081","category":"clothing","price":170.99,"stock":49,"supplier":"GlobalTech","sku":"SKU-0081","weight_kg":0.25,"active":true},
+{"id":"PROD-0082","name":"Publication 0082","category":"books","price":177.99,"stock":52,"supplier":"MegaSupply","sku":"SKU-0082","weight_kg":0.4,"active":true},
+{"id":"PROD-0083","name":"Food Product 0083","category":"food","price":184.99,"stock":55,"supplier":"FastGoods","sku":"SKU-0083","weight_kg":0.55,"active":true},
+{"id":"PROD-0084","name":"Tool Kit 0084","category":"tools","price":191.99,"stock":58,"supplier":"TopVendor","sku":"SKU-0084","weight_kg":0.7,"active":false},
+{"id":"PROD-0085","name":"Digital Device 0085","category":"electronics","price":198.99,"stock":61,"supplier":"BestSource","sku":"SKU-0085","weight_kg":0.85,"active":true},
+{"id":"PROD-0086","name":"Garment 0086","category":"clothing","price":6.99,"stock":64,"supplier":"QuickShip","sku":"SKU-0086","weight_kg":1.0,"active":true},
+{"id":"PROD-0087","name":"Publication 0087","category":"books","price":13.99,"stock":67,"supplier":"PrimeVendor","sku":"SKU-0087","weight_kg":1.15,"active":true},
+{"id":"PROD-0088","name":"Food Product 0088","category":"food","price":20.99,"stock":70,"supplier":"AlphaGoods","sku":"SKU-0088","weight_kg":1.3,"active":true},
+{"id":"PROD-0089","name":"Tool Kit 0089","category":"tools","price":27.99,"stock":73,"supplier":"ZetaSupply","sku":"SKU-0089","weight_kg":1.45,"active":true},
+{"id":"PROD-0090","name":"Digital Device 0090","category":"electronics","price":34.99,"stock":76,"supplier":"Acme Corp","sku":"SKU-0090","weight_kg":1.6,"active":true},
+{"id":"PROD-0091","name":"Garment 0091","category":"clothing","price":41.99,"stock":79,"supplier":"GlobalTech","sku":"SKU-0091","weight_kg":1.75,"active":false},
+{"id":"PROD-0092","name":"Publication 0092","category":"books","price":48.99,"stock":82,"supplier":"MegaSupply","sku":"SKU-0092","weight_kg":1.9,"active":true},
+{"id":"PROD-0093","name":"Food Product 0093","category":"food","price":55.99,"stock":85,"supplier":"FastGoods","sku":"SKU-0093","weight_kg":2.05,"active":true},
+{"id":"PROD-0094","name":"Tool Kit 0094","category":"tools","price":62.99,"stock":88,"supplier":"TopVendor","sku":"SKU-0094","weight_kg":2.2,"active":true},
+{"id":"PROD-0095","name":"Digital Device 0095","category":"electronics","price":69.99,"stock":91,"supplier":"BestSource","sku":"SKU-0095","weight_kg":2.35,"active":true},
+{"id":"PROD-0096","name":"Garment 0096","category":"clothing","price":76.99,"stock":94,"supplier":"QuickShip","sku":"SKU-0096","weight_kg":2.5,"active":true},
+{"id":"PROD-0097","name":"Publication 0097","category":"books","price":83.99,"stock":0,"supplier":"PrimeVendor","sku":"SKU-0097","weight_kg":2.65,"active":true},
+{"id":"PROD-0098","name":"Food Product 0098","category":"food","price":90.99,"stock":3,"supplier":"AlphaGoods","sku":"SKU-0098","weight_kg":2.8,"active":false},
+{"id":"PROD-0099","name":"Tool Kit 0099","category":"tools","price":97.99,"stock":6,"supplier":"ZetaSupply","sku":"SKU-0099","weight_kg":2.95,"active":true},
+{"id":"PROD-0100","name":"Digital Device 0100","category":"electronics","price":104.99,"stock":9,"supplier":"Acme Corp","sku":"SKU-0100","weight_kg":0.1,"active":true},
+{"id":"PROD-0101","name":"Garment 0101","category":"clothing","price":111.99,"stock":12,"supplier":"GlobalTech","sku":"SKU-0101","weight_kg":0.25,"active":true},
+{"id":"PROD-0102","name":"Publication 0102","category":"books","price":118.99,"stock":15,"supplier":"MegaSupply","sku":"SKU-0102","weight_kg":0.4,"active":true},
+{"id":"PROD-0103","name":"Food Product 0103","category":"food","price":125.99,"stock":18,"supplier":"FastGoods","sku":"SKU-0103","weight_kg":0.55,"active":true},
+{"id":"PROD-0104","name":"Tool Kit 0104","category":"tools","price":132.99,"stock":21,"supplier":"TopVendor","sku":"SKU-0104","weight_kg":0.7,"active":true},
+{"id":"PROD-0105","name":"Digital Device 0105","category":"electronics","price":139.99,"stock":24,"supplier":"BestSource","sku":"SKU-0105","weight_kg":0.85,"active":false},
+{"id":"PROD-0106","name":"Garment 0106","category":"clothing","price":146.99,"stock":27,"supplier":"QuickShip","sku":"SKU-0106","weight_kg":1.0,"active":true},
+{"id":"PROD-0107","name":"Publication 0107","category":"books","price":153.99,"stock":30,"supplier":"PrimeVendor","sku":"SKU-0107","weight_kg":1.15,"active":true},
+{"id":"PROD-0108","name":"Food Product 0108","category":"food","price":160.99,"stock":33,"supplier":"AlphaGoods","sku":"SKU-0108","weight_kg":1.3,"active":true},
+{"id":"PROD-0109","name":"Tool Kit 0109","category":"tools","price":167.99,"stock":36,"supplier":"ZetaSupply","sku":"SKU-0109","weight_kg":1.45,"active":true},
+{"id":"PROD-0110","name":"Digital Device 0110","category":"electronics","price":174.99,"stock":39,"supplier":"Acme Corp","sku":"SKU-0110","weight_kg":1.6,"active":true},
+{"id":"PROD-0111","name":"Garment 0111","category":"clothing","price":181.99,"stock":42,"supplier":"GlobalTech","sku":"SKU-0111","weight_kg":1.75,"active":true},
+{"id":"PROD-0112","name":"Publication 0112","category":"books","price":188.99,"stock":45,"supplier":"MegaSupply","sku":"SKU-0112","weight_kg":1.9,"active":false},
+{"id":"PROD-0113","name":"Food Product 0113","category":"food","price":195.99,"stock":48,"supplier":"FastGoods","sku":"SKU-0113","weight_kg":2.05,"active":true},
+{"id":"PROD-0114","name":"Tool Kit 0114","category":"tools","price":3.99,"stock":51,"supplier":"TopVendor","sku":"SKU-0114","weight_kg":2.2,"active":true},
+{"id":"PROD-0115","name":"Digital Device 0115","category":"electronics","price":10.99,"stock":54,"supplier":"BestSource","sku":"SKU-0115","weight_kg":2.35,"active":true},
+{"id":"PROD-0116","name":"Garment 0116","category":"clothing","price":17.99,"stock":57,"supplier":"QuickShip","sku":"SKU-0116","weight_kg":2.5,"active":true},
+{"id":"PROD-0117","name":"Publication 0117","category":"books","price":24.99,"stock":60,"supplier":"PrimeVendor","sku":"SKU-0117","weight_kg":2.65,"active":true},
+{"id":"PROD-0118","name":"Food Product 0118","category":"food","price":31.99,"stock":63,"supplier":"AlphaGoods","sku":"SKU-0118","weight_kg":2.8,"active":true},
+{"id":"PROD-0119","name":"Tool Kit 0119","category":"tools","price":38.99,"stock":66,"supplier":"ZetaSupply","sku":"SKU-0119","weight_kg":2.95,"active":false},
+{"id":"PROD-0120","name":"Digital Device 0120","category":"electronics","price":45.99,"stock":69,"supplier":"Acme Corp","sku":"SKU-0120","weight_kg":0.1,"active":true},
+{"id":"PROD-0121","name":"Garment 0121","category":"clothing","price":52.99,"stock":72,"supplier":"GlobalTech","sku":"SKU-0121","weight_kg":0.25,"active":true},
+{"id":"PROD-0122","name":"Publication 0122","category":"books","price":59.99,"stock":75,"supplier":"MegaSupply","sku":"SKU-0122","weight_kg":0.4,"active":true},
+{"id":"PROD-0123","name":"Food Product 0123","category":"food","price":66.99,"stock":78,"supplier":"FastGoods","sku":"SKU-0123","weight_kg":0.55,"active":true},
+{"id":"PROD-0124","name":"Tool Kit 0124","category":"tools","price":73.99,"stock":81,"supplier":"TopVendor","sku":"SKU-0124","weight_kg":0.7,"active":true},
+{"id":"PROD-0125","name":"Digital Device 0125","category":"electronics","price":80.99,"stock":84,"supplier":"BestSource","sku":"SKU-0125","weight_kg":0.85,"active":true},
+{"id":"PROD-0126","name":"Garment 0126","category":"clothing","price":87.99,"stock":87,"supplier":"QuickShip","sku":"SKU-0126","weight_kg":1.0,"active":false},
+{"id":"PROD-0127","name":"Publication 0127","category":"books","price":94.99,"stock":90,"supplier":"PrimeVendor","sku":"SKU-0127","weight_kg":1.15,"active":true},
+{"id":"PROD-0128","name":"Food Product 0128","category":"food","price":101.99,"stock":93,"supplier":"AlphaGoods","sku":"SKU-0128","weight_kg":1.3,"active":true},
+{"id":"PROD-0129","name":"Tool Kit 0129","category":"tools","price":108.99,"stock":96,"supplier":"ZetaSupply","sku":"SKU-0129","weight_kg":1.45,"active":true},
+{"id":"PROD-0130","name":"Digital Device 0130","category":"electronics","price":115.99,"stock":2,"supplier":"Acme Corp","sku":"SKU-0130","weight_kg":1.6,"active":true},
+{"id":"PROD-0131","name":"Garment 0131","category":"clothing","price":122.99,"stock":5,"supplier":"GlobalTech","sku":"SKU-0131","weight_kg":1.75,"active":true},
+{"id":"PROD-0132","name":"Publication 0132","category":"books","price":129.99,"stock":8,"supplier":"MegaSupply","sku":"SKU-0132","weight_kg":1.9,"active":true},
+{"id":"PROD-0133","name":"Food Product 0133","category":"food","price":136.99,"stock":11,"supplier":"FastGoods","sku":"SKU-0133","weight_kg":2.05,"active":false},
+{"id":"PROD-0134","name":"Tool Kit 0134","category":"tools","price":143.99,"stock":14,"supplier":"TopVendor","sku":"SKU-0134","weight_kg":2.2,"active":true},
+{"id":"PROD-0135","name":"Digital Device 0135","category":"electronics","price":150.99,"stock":17,"supplier":"BestSource","sku":"SKU-0135","weight_kg":2.35,"active":true},
+{"id":"PROD-0136","name":"Garment 0136","category":"clothing","price":157.99,"stock":20,"supplier":"QuickShip","sku":"SKU-0136","weight_kg":2.5,"active":true},
+{"id":"PROD-0137","name":"Publication 0137","category":"books","price":164.99,"stock":23,"supplier":"PrimeVendor","sku":"SKU-0137","weight_kg":2.65,"active":true},
+{"id":"PROD-0138","name":"Food Product 0138","category":"food","price":171.99,"stock":26,"supplier":"AlphaGoods","sku":"SKU-0138","weight_kg":2.8,"active":true},
+{"id":"PROD-0139","name":"Tool Kit 0139","category":"tools","price":178.99,"stock":29,"supplier":"ZetaSupply","sku":"SKU-0139","weight_kg":2.95,"active":true},
+{"id":"PROD-0140","name":"Digital Device 0140","category":"electronics","price":185.99,"stock":32,"supplier":"Acme Corp","sku":"SKU-0140","weight_kg":0.1,"active":false},
+{"id":"PROD-0141","name":"Garment 0141","category":"clothing","price":192.99,"stock":35,"supplier":"GlobalTech","sku":"SKU-0141","weight_kg":0.25,"active":true},
+{"id":"PROD-0142","name":"Publication 0142","category":"books","price":199.99,"stock":38,"supplier":"MegaSupply","sku":"SKU-0142","weight_kg":0.4,"active":true},
+{"id":"PROD-0143","name":"Food Product 0143","category":"food","price":7.99,"stock":41,"supplier":"FastGoods","sku":"SKU-0143","weight_kg":0.55,"active":true},
+{"id":"PROD-0144","name":"Tool Kit 0144","category":"tools","price":14.99,"stock":44,"supplier":"TopVendor","sku":"SKU-0144","weight_kg":0.7,"active":true},
+{"id":"PROD-0145","name":"Digital Device 0145","category":"electronics","price":21.99,"stock":47,"supplier":"BestSource","sku":"SKU-0145","weight_kg":0.85,"active":true},
+{"id":"PROD-0146","name":"Garment 0146","category":"clothing","price":28.99,"stock":50,"supplier":"QuickShip","sku":"SKU-0146","weight_kg":1.0,"active":true},
+{"id":"PROD-0147","name":"Publication 0147","category":"books","price":35.99,"stock":53,"supplier":"PrimeVendor","sku":"SKU-0147","weight_kg":1.15,"active":false},
+{"id":"PROD-0148","name":"Food Product 0148","category":"food","price":42.99,"stock":56,"supplier":"AlphaGoods","sku":"SKU-0148","weight_kg":1.3,"active":true},
+{"id":"PROD-0149","name":"Tool Kit 0149","category":"tools","price":49.99,"stock":59,"supplier":"ZetaSupply","sku":"SKU-0149","weight_kg":1.45,"active":true},
+{"id":"PROD-0150","name":"Digital Device 0150","category":"electronics","price":56.99,"stock":62,"supplier":"Acme Corp","sku":"SKU-0150","weight_kg":1.6,"active":true},
+{"id":"PROD-0151","name":"Garment 0151","category":"clothing","price":63.99,"stock":65,"supplier":"GlobalTech","sku":"SKU-0151","weight_kg":1.75,"active":true},
+{"id":"PROD-0152","name":"Publication 0152","category":"books","price":70.99,"stock":68,"supplier":"MegaSupply","sku":"SKU-0152","weight_kg":1.9,"active":true},
+{"id":"PROD-0153","name":"Food Product 0153","category":"food","price":77.99,"stock":71,"supplier":"FastGoods","sku":"SKU-0153","weight_kg":2.05,"active":true},
+{"id":"PROD-0154","name":"Tool Kit 0154","category":"tools","price":84.99,"stock":74,"supplier":"TopVendor","sku":"SKU-0154","weight_kg":2.2,"active":false},
+{"id":"PROD-0155","name":"Digital Device 0155","category":"electronics","price":91.99,"stock":77,"supplier":"BestSource","sku":"SKU-0155","weight_kg":2.35,"active":true},
+{"id":"PROD-0156","name":"Garment 0156","category":"clothing","price":98.99,"stock":80,"supplier":"QuickShip","sku":"SKU-0156","weight_kg":2.5,"active":true},
+{"id":"PROD-0157","name":"Publication 0157","category":"books","price":105.99,"stock":83,"supplier":"PrimeVendor","sku":"SKU-0157","weight_kg":2.65,"active":true},
+{"id":"PROD-0158","name":"Food Product 0158","category":"food","price":112.99,"stock":86,"supplier":"AlphaGoods","sku":"SKU-0158","weight_kg":2.8,"active":true},
+{"id":"PROD-0159","name":"Tool Kit 0159","category":"tools","price":119.99,"stock":89,"supplier":"ZetaSupply","sku":"SKU-0159","weight_kg":2.95,"active":true},
+{"id":"PROD-0160","name":"Digital Device 0160","category":"electronics","price":126.99,"stock":92,"supplier":"Acme Corp","sku":"SKU-0160","weight_kg":0.1,"active":true},
+{"id":"PROD-0161","name":"Garment 0161","category":"clothing","price":133.99,"stock":95,"supplier":"GlobalTech","sku":"SKU-0161","weight_kg":0.25,"active":false},
+{"id":"PROD-0162","name":"Publication 0162","category":"books","price":140.99,"stock":1,"supplier":"MegaSupply","sku":"SKU-0162","weight_kg":0.4,"active":true},
+{"id":"PROD-0163","name":"Food Product 0163","category":"food","price":147.99,"stock":4,"supplier":"FastGoods","sku":"SKU-0163","weight_kg":0.55,"active":true},
+{"id":"PROD-0164","name":"Tool Kit 0164","category":"tools","price":154.99,"stock":7,"supplier":"TopVendor","sku":"SKU-0164","weight_kg":0.7,"active":true},
+{"id":"PROD-0165","name":"Digital Device 0165","category":"electronics","price":161.99,"stock":10,"supplier":"BestSource","sku":"SKU-0165","weight_kg":0.85,"active":true},
+{"id":"PROD-0166","name":"Garment 0166","category":"clothing","price":168.99,"stock":13,"supplier":"QuickShip","sku":"SKU-0166","weight_kg":1.0,"active":true},
+{"id":"PROD-0167","name":"Publication 0167","category":"books","price":175.99,"stock":16,"supplier":"PrimeVendor","sku":"SKU-0167","weight_kg":1.15,"active":true},
+{"id":"PROD-0168","name":"Food Product 0168","category":"food","price":182.99,"stock":19,"supplier":"AlphaGoods","sku":"SKU-0168","weight_kg":1.3,"active":false},
+{"id":"PROD-0169","name":"Tool Kit 0169","category":"tools","price":189.99,"stock":22,"supplier":"ZetaSupply","sku":"SKU-0169","weight_kg":1.45,"active":true},
+{"id":"PROD-0170","name":"Digital Device 0170","category":"electronics","price":196.99,"stock":25,"supplier":"Acme Corp","sku":"SKU-0170","weight_kg":1.6,"active":true},
+{"id":"PROD-0171","name":"Garment 0171","category":"clothing","price":4.99,"stock":28,"supplier":"GlobalTech","sku":"SKU-0171","weight_kg":1.75,"active":true},
+{"id":"PROD-0172","name":"Publication 0172","category":"books","price":11.99,"stock":31,"supplier":"MegaSupply","sku":"SKU-0172","weight_kg":1.9,"active":true},
+{"id":"PROD-0173","name":"Food Product 0173","category":"food","price":18.99,"stock":34,"supplier":"FastGoods","sku":"SKU-0173","weight_kg":2.05,"active":true},
+{"id":"PROD-0174","name":"Tool Kit 0174","category":"tools","price":25.99,"stock":37,"supplier":"TopVendor","sku":"SKU-0174","weight_kg":2.2,"active":true},
+{"id":"PROD-0175","name":"Digital Device 0175","category":"electronics","price":32.99,"stock":40,"supplier":"BestSource","sku":"SKU-0175","weight_kg":2.35,"active":false},
+{"id":"PROD-0176","name":"Garment 0176","category":"clothing","price":39.99,"stock":43,"supplier":"QuickShip","sku":"SKU-0176","weight_kg":2.5,"active":true},
+{"id":"PROD-0177","name":"Publication 0177","category":"books","price":46.99,"stock":46,"supplier":"PrimeVendor","sku":"SKU-0177","weight_kg":2.65,"active":true},
+{"id":"PROD-0178","name":"Food Product 0178","category":"food","price":53.99,"stock":49,"supplier":"AlphaGoods","sku":"SKU-0178","weight_kg":2.8,"active":true},
+{"id":"PROD-0179","name":"Tool Kit 0179","category":"tools","price":60.99,"stock":52,"supplier":"ZetaSupply","sku":"SKU-0179","weight_kg":2.95,"active":true},
+{"id":"PROD-0180","name":"Digital Device 0180","category":"electronics","price":67.99,"stock":55,"supplier":"Acme Corp","sku":"SKU-0180","weight_kg":0.1,"active":true},
+{"id":"PROD-0181","name":"Garment 0181","category":"clothing","price":74.99,"stock":58,"supplier":"GlobalTech","sku":"SKU-0181","weight_kg":0.25,"active":true},
+{"id":"PROD-0182","name":"Publication 0182","category":"books","price":81.99,"stock":61,"supplier":"MegaSupply","sku":"SKU-0182","weight_kg":0.4,"active":false},
+{"id":"PROD-0183","name":"Food Product 0183","category":"food","price":88.99,"stock":64,"supplier":"FastGoods","sku":"SKU-0183","weight_kg":0.55,"active":true},
+{"id":"PROD-0184","name":"Tool Kit 0184","category":"tools","price":95.99,"stock":67,"supplier":"TopVendor","sku":"SKU-0184","weight_kg":0.7,"active":true},
+{"id":"PROD-0185","name":"Digital Device 0185","category":"electronics","price":102.99,"stock":70,"supplier":"BestSource","sku":"SKU-0185","weight_kg":0.85,"active":true},
+{"id":"PROD-0186","name":"Garment 0186","category":"clothing","price":109.99,"stock":73,"supplier":"QuickShip","sku":"SKU-0186","weight_kg":1.0,"active":true},
+{"id":"PROD-0187","name":"Publication 0187","category":"books","price":116.99,"stock":76,"supplier":"PrimeVendor","sku":"SKU-0187","weight_kg":1.15,"active":true},
+{"id":"PROD-0188","name":"Food Product 0188","category":"food","price":123.99,"stock":79,"supplier":"AlphaGoods","sku":"SKU-0188","weight_kg":1.3,"active":true},
+{"id":"PROD-0189","name":"Tool Kit 0189","category":"tools","price":130.99,"stock":82,"supplier":"ZetaSupply","sku":"SKU-0189","weight_kg":1.45,"active":false},
+{"id":"PROD-0190","name":"Digital Device 0190","category":"electronics","price":137.99,"stock":85,"supplier":"Acme Corp","sku":"SKU-0190","weight_kg":1.6,"active":true},
+{"id":"PROD-0191","name":"Garment 0191","category":"clothing","price":144.99,"stock":88,"supplier":"GlobalTech","sku":"SKU-0191","weight_kg":1.75,"active":true},
+{"id":"PROD-0192","name":"Publication 0192","category":"books","price":151.99,"stock":91,"supplier":"MegaSupply","sku":"SKU-0192","weight_kg":1.9,"active":true},
+{"id":"PROD-0193","name":"Food Product 0193","category":"food","price":158.99,"stock":94,"supplier":"FastGoods","sku":"SKU-0193","weight_kg":2.05,"active":true},
+{"id":"PROD-0194","name":"Tool Kit 0194","category":"tools","price":165.99,"stock":0,"supplier":"TopVendor","sku":"SKU-0194","weight_kg":2.2,"active":true},
+{"id":"PROD-0195","name":"Digital Device 0195","category":"electronics","price":172.99,"stock":3,"supplier":"BestSource","sku":"SKU-0195","weight_kg":2.35,"active":true},
+{"id":"PROD-0196","name":"Garment 0196","category":"clothing","price":179.99,"stock":6,"supplier":"QuickShip","sku":"SKU-0196","weight_kg":2.5,"active":false},
+{"id":"PROD-0197","name":"Publication 0197","category":"books","price":186.99,"stock":9,"supplier":"PrimeVendor","sku":"SKU-0197","weight_kg":2.65,"active":true},
+{"id":"PROD-0198","name":"Food Product 0198","category":"food","price":193.99,"stock":12,"supplier":"AlphaGoods","sku":"SKU-0198","weight_kg":2.8,"active":true},
+{"id":"PROD-0199","name":"Tool Kit 0199","category":"tools","price":1.99,"stock":15,"supplier":"ZetaSupply","sku":"SKU-0199","weight_kg":2.95,"active":true},
+{"id":"PROD-0200","name":"Digital Device 0200","category":"electronics","price":8.99,"stock":18,"supplier":"Acme Corp","sku":"SKU-0200","weight_kg":0.1,"active":true}
+]
