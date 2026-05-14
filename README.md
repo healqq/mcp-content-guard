@@ -7,10 +7,10 @@ When a tool response exceeds a configurable size threshold, the proxy caches it 
 ## How it works
 
 ```
-MCP Client → mcp-context-guard → your MCP server
+MCP Client → mcp-context-guard → your MCP server (local subprocess or remote HTTP)
 ```
 
-The wrapper sits between your MCP client and any stdio MCP server. It:
+The wrapper sits between your MCP client and any MCP server — local (stdio subprocess) or remote (Streamable HTTP). It:
 
 1. **Passes through all tool schemas unchanged** — the client sees the same tools as before, plus one new tool: `seek_result`.
 2. **Intercepts large responses** — when a tool call response exceeds the size threshold, it is cached and the client receives a human-readable stub:
@@ -41,6 +41,8 @@ Requires Go 1.21+. Produces a single static binary with no runtime dependencies.
 
 ## Usage
 
+### Local server (stdio subprocess)
+
 ```bash
 mcp-context-guard [--threshold N] [--config path] -- <upstream-command> [args...]
 ```
@@ -57,20 +59,52 @@ mcp-context-guard --threshold 10240 -- npx -y @modelcontextprotocol/server-files
 mcp-context-guard --config guard.json -- python my_server.py
 ```
 
+### Remote server (Streamable HTTP)
+
+```bash
+mcp-context-guard [--threshold N] [--config path] --upstream-url <url> [--upstream-header "Key: Value"]...
+```
+
+Point the proxy at any remote MCP server that speaks the [Streamable HTTP transport](https://modelcontextprotocol.io/specification/2025-03-26/basic/transports#streamable-http). The `--upstream-url` and `-- <command>` forms are mutually exclusive.
+
+**Example — wrap a hosted MCP API:**
+```bash
+mcp-context-guard \
+  --upstream-url https://api.example.com/mcp \
+  --upstream-header "Authorization: Bearer sk-..."
+```
+
+**Example — test against the official reference server:**
+```bash
+# Terminal 1
+npx -y @modelcontextprotocol/server-everything --port 3001
+
+# Terminal 2
+mcp-context-guard --upstream-url http://localhost:3001/mcp
+```
+
 ### Options
 
 | Flag | Default | Description |
 |---|---|---|
 | `--threshold N` | `10240` | Response size in bytes above which responses are cached instead of returned directly |
 | `--config path` | — | Path to a JSON config file (see below) |
+| `--upstream-url url` | — | URL of a remote MCP server (Streamable HTTP); mutually exclusive with `-- <cmd>` |
+| `--upstream-header K:V` | — | HTTP header added to every request to the remote server (repeatable) |
 
 ### Config file
 
 ```json
 {
-  "threshold": 10240
+  "threshold": 10240,
+  "upstream_url": "https://api.example.com/mcp",
+  "upstream_headers": {
+    "Authorization": "Bearer sk-..."
+  }
 }
 ```
+
+`upstream_url` and `upstream_headers` in the config file are overridden by the corresponding CLI flags when both are provided.
 
 ## seek_result tool
 

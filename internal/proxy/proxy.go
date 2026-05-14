@@ -35,7 +35,9 @@ func New(upstreamIn io.WriteCloser, upstreamOut io.Reader, upstreamErr io.Reader
 		out:         make(chan []byte, 64),
 		pending:     make(map[string]rpc.Message),
 	}
-	go io.Copy(os.Stderr, upstreamErr)
+	if upstreamErr != nil {
+		go io.Copy(os.Stderr, upstreamErr)
+	}
 	return p
 }
 

@@ -17,10 +17,17 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Architecture
 
 ```
-MCP Client → mcp-context-guard (proxy + cache + filter) → upstream MCP server (subprocess)
+MCP Client → mcp-context-guard (proxy + cache + filter) → upstream MCP server
+                                                            (subprocess or remote HTTP)
 ```
 
-Transport: **stdio on both sides**. The client spawns the wrapper; the wrapper spawns the upstream server. All messages are newline-delimited JSON-RPC 2.0.
+**Client side**: always stdio. The client spawns the wrapper; messages are newline-delimited JSON-RPC 2.0.
+
+**Upstream side**: two transport modes:
+- **Local (stdio)**: the wrapper spawns the upstream server as a subprocess and communicates via stdin/stdout pipes. Selected when a command is passed after `--`.
+- **Remote (Streamable HTTP)**: the wrapper sends each JSON-RPC message as an HTTP POST to the upstream URL; responses arrive as inline JSON (`Content-Type: application/json`) or SSE events (`Content-Type: text/event-stream`). Selected via `--upstream-url`.
+
+Both modes are abstracted by the same `io.WriteCloser` / `io.Reader` pair passed to `proxy.New()`. The `internal/remote` package implements the HTTP transport.
 
 ### Message handling
 
@@ -71,6 +78,15 @@ In-memory `map[string]json.RawMessage` (hex-encoded random id → raw `content` 
 
 Implemented in Go using `github.com/itchyny/gojq` (pure Go, no cgo, no external binary).
 
+## Workflow
+
+When making changes, keep documentation in sync:
+
+- **`README.md`** — update whenever user-facing behaviour changes: new CLI flags, new filter syntax, changed defaults, new transport modes, or revised usage examples. This is the primary user reference.
+- **`CLAUDE.md` (this file)** — update the Architecture, Key invariants, or Filter DSL sections whenever the internal design changes (new packages, changed interfaces, revised message-handling rules). Do not let architecture prose drift from the code.
+
+Both files must be updated in the same commit as the code change. Do not leave a feature undocumented.
+
 ## Commands
 
 ```bash
@@ -80,13 +96,14 @@ go test -v -run TestName ./...               # run a single test
 GOOS=linux GOARCH=arm64 go build -o mcp-context-guard-linux-arm64 .  # cross-compile
 ```
 
-Tests are integration tests in `proxy_test.go` — they spawn the compiled binary against a Python mock upstream.
+Integration tests in `proxy_test.go` spawn the compiled binary against either a Python mock upstream (local mode) or a Go `httptest.NewServer` (remote mode). Unit tests for the HTTP transport live in `internal/remote/conn_test.go`.
 
 ## Tech stack
 
 - **Language**: Go
 - **JSON querying**: `github.com/itchyny/gojq` (pure Go jq implementation, no cgo)
 - **Grep / line filters**: stdlib `regexp`, `strings`
+- **HTTP transport**: stdlib `net/http`, `bufio` (SSE parsing) — no new dependencies
 - **Everything else**: stdlib only (`encoding/json`, `bufio`, `os/exec`, `sync`)
 
 ## Key invariants
@@ -95,3 +112,5 @@ Tests are integration tests in `proxy_test.go` — they spawn the compiled binar
 - The wrapper never modifies `inputSchema` or `outputSchema` of upstream tools.
 - `seek_result` calls are never forwarded upstream.
 - Threshold is configurable via `--threshold` flag or config file (default: 10240 bytes); applies globally.
+- `--upstream-url` and `-- <cmd>` are mutually exclusive; exactly one must be provided.
+- Remote headers can be set via `--upstream-header "Key: Value"` (repeatable) or `upstream_headers` in the config file; CLI wins on key conflicts.
