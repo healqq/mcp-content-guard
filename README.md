@@ -59,22 +59,7 @@ mcp-context-guard --threshold 10240 -- npx -y @modelcontextprotocol/server-files
 mcp-context-guard --config guard.json -- python my_server.py
 ```
 
-### Remote server — stdio client (Streamable HTTP)
-
-```bash
-mcp-context-guard [--threshold N] [--config path] --upstream-url <url> [--upstream-header "Key: Value"]...
-```
-
-Point the proxy at any remote MCP server that speaks the [Streamable HTTP transport](https://modelcontextprotocol.io/specification/2025-03-26/basic/transports#streamable-http). Your MCP client still spawns the proxy over stdio. Static auth tokens can be passed via `--upstream-header`.
-
-**Example — wrap a hosted MCP API with a static token:**
-```bash
-mcp-context-guard \
-  --upstream-url https://api.example.com/mcp \
-  --upstream-header "Authorization: Bearer sk-..."
-```
-
-### Remote server — HTTP server mode (OAuth-compatible)
+### Remote server (OAuth-compatible)
 
 ```bash
 mcp-context-guard [--threshold N] [--config path] --listen :PORT --upstream-url <url>
@@ -105,7 +90,7 @@ mcp-context-guard --upstream-url http://localhost:3001/mcp
 |---|---|---|
 | `--threshold N` | `10240` | Response size in bytes above which responses are cached instead of returned directly |
 | `--config path` | — | Path to a JSON config file (see below) |
-| `--upstream-url url` | — | URL of a remote MCP server (Streamable HTTP) |
+| `--upstream-url url` | — | URL of a remote MCP server (Streamable HTTP); requires `--listen` |
 | `--listen addr` | — | Listen as an HTTP server on this address (e.g. `:8080`); requires `--upstream-url` |
 | `--upstream-header K:V` | — | HTTP header added to every request to the remote server (repeatable) |
 

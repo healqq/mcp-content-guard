@@ -13,7 +13,6 @@ import (
 	"mcp-context-guard/internal/cache"
 	"mcp-context-guard/internal/httpserver"
 	"mcp-context-guard/internal/proxy"
-	"mcp-context-guard/internal/remote"
 )
 
 const defaultThreshold = 10240 // 10 KB
@@ -42,9 +41,9 @@ func main() {
 
 	flag.StringVar(&configPath, "config", "", "path to config JSON file")
 	flag.Int64Var(&thresholdFlag, "threshold", 0, "response size threshold in bytes (overrides config)")
-	flag.StringVar(&upstreamURL, "upstream-url", "", "URL of remote MCP server (Streamable HTTP)")
+	flag.StringVar(&upstreamURL, "upstream-url", "", "URL of remote MCP server (Streamable HTTP); requires --listen")
 	flag.StringVar(&listenAddr, "listen", "", "address to listen on as HTTP server, e.g. :8080 (requires --upstream-url)")
-	flag.Var(&rawHeaders, "upstream-header", `header for remote server, e.g. "Authorization: Bearer token" (repeatable)`)
+	flag.Var(&rawHeaders, "upstream-header", `header added to every upstream request, e.g. "Authorization: Bearer token" (repeatable)`)
 	flag.Parse()
 
 	cfg := Config{Threshold: defaultThreshold}
@@ -61,29 +60,6 @@ func main() {
 		cfg.Threshold = thresholdFlag
 	}
 
-	hasRemote := upstreamURL != "" || cfg.UpstreamURL != ""
-	hasLocal := len(flag.Args()) > 0
-	hasListen := listenAddr != ""
-
-	if hasListen && !hasRemote {
-		fmt.Fprintln(os.Stderr, "error: --listen requires --upstream-url")
-		os.Exit(1)
-	}
-	if hasListen && hasLocal {
-		fmt.Fprintln(os.Stderr, "error: --listen and a command are mutually exclusive")
-		os.Exit(1)
-	}
-	if hasRemote && hasLocal {
-		fmt.Fprintln(os.Stderr, "error: --upstream-url and a command are mutually exclusive")
-		os.Exit(1)
-	}
-	if !hasRemote && !hasLocal {
-		fmt.Fprintln(os.Stderr, "usage: mcp-context-guard [--config path] [--threshold N] -- <cmd> [args...]")
-		fmt.Fprintln(os.Stderr, "       mcp-context-guard [--config path] [--threshold N] --upstream-url <url> [--upstream-header K:V]...")
-		fmt.Fprintln(os.Stderr, "       mcp-context-guard [--config path] [--threshold N] --listen :PORT --upstream-url <url> [--upstream-header K:V]...")
-		os.Exit(1)
-	}
-
 	// Build merged headers: config-file values as base, CLI flags win on conflict.
 	headers := make(map[string]string)
 	for k, v := range cfg.UpstreamHeaders {
@@ -94,14 +70,33 @@ func main() {
 		if idx < 0 {
 			log.Fatalf("invalid --upstream-header %q: must be 'Key: Value' or 'Key:Value'", h)
 		}
-		key := strings.TrimSpace(h[:idx])
-		val := strings.TrimSpace(h[idx+1:])
-		headers[key] = val
+		headers[strings.TrimSpace(h[:idx])] = strings.TrimSpace(h[idx+1:])
 	}
 
 	effectiveURL := upstreamURL
 	if effectiveURL == "" {
 		effectiveURL = cfg.UpstreamURL
+	}
+
+	hasListen := listenAddr != ""
+	hasURL := effectiveURL != ""
+	hasLocal := len(flag.Args()) > 0
+
+	switch {
+	case hasURL && !hasListen:
+		fmt.Fprintln(os.Stderr, "error: --upstream-url requires --listen")
+		fmt.Fprintln(os.Stderr, "usage: mcp-context-guard --listen :PORT --upstream-url <url> [--upstream-header K:V]...")
+		os.Exit(1)
+	case hasListen && !hasURL:
+		fmt.Fprintln(os.Stderr, "error: --listen requires --upstream-url")
+		os.Exit(1)
+	case hasListen && hasLocal:
+		fmt.Fprintln(os.Stderr, "error: --listen and a command are mutually exclusive")
+		os.Exit(1)
+	case !hasListen && !hasLocal:
+		fmt.Fprintln(os.Stderr, "usage: mcp-context-guard [--config path] [--threshold N] -- <cmd> [args...]")
+		fmt.Fprintln(os.Stderr, "       mcp-context-guard [--config path] [--threshold N] --listen :PORT --upstream-url <url> [--upstream-header K:V]...")
+		os.Exit(1)
 	}
 
 	c := cache.New()
@@ -116,13 +111,7 @@ func main() {
 		return
 	}
 
-	if hasRemote {
-		conn := remote.New(effectiveURL, headers)
-		p := proxy.New(conn, conn, nil, c, cfg.Threshold)
-		p.Run()
-		return
-	}
-
+	// Local subprocess mode.
 	args := flag.Args()
 	cmd := exec.Command(args[0], args[1:]...)
 
