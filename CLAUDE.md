@@ -21,13 +21,17 @@ MCP Client → mcp-context-guard (proxy + cache + filter) → upstream MCP serve
                                                             (subprocess or remote HTTP)
 ```
 
-**Client side**: always stdio. The client spawns the wrapper; messages are newline-delimited JSON-RPC 2.0.
+Three operating modes depending on flags:
 
-**Upstream side**: two transport modes:
-- **Local (stdio)**: the wrapper spawns the upstream server as a subprocess and communicates via stdin/stdout pipes. Selected when a command is passed after `--`.
-- **Remote (Streamable HTTP)**: the wrapper sends each JSON-RPC message as an HTTP POST to the upstream URL; responses arrive as inline JSON (`Content-Type: application/json`) or SSE events (`Content-Type: text/event-stream`). Selected via `--upstream-url`.
+| Mode | Client side | Upstream side | Selected by |
+|---|---|---|---|
+| **Local** | stdio | subprocess (stdin/stdout) | `-- <cmd>` |
+| **Remote stdio** | stdio | Streamable HTTP | `--upstream-url` |
+| **HTTP server** | HTTP | Streamable HTTP | `--listen :PORT --upstream-url` |
 
-Both modes are abstracted by the same `io.WriteCloser` / `io.Reader` pair passed to `proxy.New()`. The `internal/remote` package implements the HTTP transport.
+**Local / Remote stdio**: the client spawns the wrapper; messages are newline-delimited JSON-RPC 2.0 on stdin/stdout. `internal/remote` implements the HTTP client transport; both are abstracted by the same `io.WriteCloser` / `io.Reader` pair passed to `proxy.New()`.
+
+**HTTP server mode**: the wrapper itself listens as an HTTP server (`--listen :PORT`). Both client and upstream speak Streamable HTTP. All traffic that is not an MCP tool call — including `401` responses, `/.well-known/oauth-authorization-server`, `/register`, `/token`, redirects — is forwarded byte-for-byte via `httputil.ReverseProxy`. This makes OAuth completely transparent: the MCP client handles the OAuth flow directly with the auth server; the proxy never sees or stores tokens. Implemented in `internal/httpserver`.
 
 ### Message handling
 
@@ -96,7 +100,7 @@ go test -v -run TestName ./...               # run a single test
 GOOS=linux GOARCH=arm64 go build -o mcp-context-guard-linux-arm64 .  # cross-compile
 ```
 
-Integration tests in `proxy_test.go` spawn the compiled binary against either a Python mock upstream (local mode) or a Go `httptest.NewServer` (remote mode). Unit tests for the HTTP transport live in `internal/remote/conn_test.go`.
+Integration tests in `proxy_test.go` spawn the compiled binary against either a Python mock upstream (local mode) or a Go `httptest.NewServer` (remote stdio mode). Unit tests for the HTTP transport live in `internal/remote/conn_test.go`. Unit tests for HTTP server mode live in `internal/httpserver/server_test.go`.
 
 ## Tech stack
 
@@ -112,5 +116,7 @@ Integration tests in `proxy_test.go` spawn the compiled binary against either a 
 - The wrapper never modifies `inputSchema` or `outputSchema` of upstream tools.
 - `seek_result` calls are never forwarded upstream.
 - Threshold is configurable via `--threshold` flag or config file (default: 10240 bytes); applies globally.
-- `--upstream-url` and `-- <cmd>` are mutually exclusive; exactly one must be provided.
+- `--upstream-url`, `-- <cmd>`, and `--listen` are three mutually exclusive modes; exactly one must be provided.
+- `--listen` requires `--upstream-url`; it enables HTTP server mode with transparent OAuth passthrough.
 - Remote headers can be set via `--upstream-header "Key: Value"` (repeatable) or `upstream_headers` in the config file; CLI wins on key conflicts.
+- In HTTP server mode the proxy never inspects or stores auth tokens — they pass through unchanged from client to upstream.

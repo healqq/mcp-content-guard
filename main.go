@@ -5,11 +5,13 @@ import (
 	"flag"
 	"fmt"
 	"log"
+	"net/http"
 	"os"
 	"os/exec"
 	"strings"
 
 	"mcp-context-guard/internal/cache"
+	"mcp-context-guard/internal/httpserver"
 	"mcp-context-guard/internal/proxy"
 	"mcp-context-guard/internal/remote"
 )
@@ -35,11 +37,13 @@ func main() {
 	var configPath string
 	var thresholdFlag int64
 	var upstreamURL string
+	var listenAddr string
 	var rawHeaders headerFlags
 
 	flag.StringVar(&configPath, "config", "", "path to config JSON file")
 	flag.Int64Var(&thresholdFlag, "threshold", 0, "response size threshold in bytes (overrides config)")
 	flag.StringVar(&upstreamURL, "upstream-url", "", "URL of remote MCP server (Streamable HTTP)")
+	flag.StringVar(&listenAddr, "listen", "", "address to listen on as HTTP server, e.g. :8080 (requires --upstream-url)")
 	flag.Var(&rawHeaders, "upstream-header", `header for remote server, e.g. "Authorization: Bearer token" (repeatable)`)
 	flag.Parse()
 
@@ -59,7 +63,16 @@ func main() {
 
 	hasRemote := upstreamURL != "" || cfg.UpstreamURL != ""
 	hasLocal := len(flag.Args()) > 0
+	hasListen := listenAddr != ""
 
+	if hasListen && !hasRemote {
+		fmt.Fprintln(os.Stderr, "error: --listen requires --upstream-url")
+		os.Exit(1)
+	}
+	if hasListen && hasLocal {
+		fmt.Fprintln(os.Stderr, "error: --listen and a command are mutually exclusive")
+		os.Exit(1)
+	}
 	if hasRemote && hasLocal {
 		fmt.Fprintln(os.Stderr, "error: --upstream-url and a command are mutually exclusive")
 		os.Exit(1)
@@ -67,6 +80,7 @@ func main() {
 	if !hasRemote && !hasLocal {
 		fmt.Fprintln(os.Stderr, "usage: mcp-context-guard [--config path] [--threshold N] -- <cmd> [args...]")
 		fmt.Fprintln(os.Stderr, "       mcp-context-guard [--config path] [--threshold N] --upstream-url <url> [--upstream-header K:V]...")
+		fmt.Fprintln(os.Stderr, "       mcp-context-guard [--config path] [--threshold N] --listen :PORT --upstream-url <url> [--upstream-header K:V]...")
 		os.Exit(1)
 	}
 
@@ -91,6 +105,16 @@ func main() {
 	}
 
 	c := cache.New()
+
+	if hasListen {
+		srv, err := httpserver.New(effectiveURL, headers, c, cfg.Threshold)
+		if err != nil {
+			log.Fatalf("httpserver: %v", err)
+		}
+		log.Printf("mcp-context-guard listening on %s → %s", listenAddr, effectiveURL)
+		log.Fatal(http.ListenAndServe(listenAddr, srv))
+		return
+	}
 
 	if hasRemote {
 		conn := remote.New(effectiveURL, headers)
