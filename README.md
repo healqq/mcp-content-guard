@@ -41,10 +41,20 @@ Requires Go 1.21+. Produces a single static binary with no runtime dependencies.
 
 ## Usage
 
+Each invocation takes an MCP config (either a local command or an HTTP upstream) and an optional subcommand:
+
+```
+mcp-context-guard [flags] <mcp-config>          # start proxy (default)
+mcp-context-guard [flags] <mcp-config> start    # start proxy (explicit)
+mcp-context-guard         <mcp-config> stats    # print stats for this MCP and exit
+```
+
 ### Local server (stdio subprocess)
 
 ```bash
 mcp-context-guard [--threshold N] [--config path] -- <upstream-command> [args...]
+mcp-context-guard [--threshold N] [--config path] start -- <upstream-command> [args...]
+mcp-context-guard                                 stats -- <upstream-command> [args...]
 ```
 
 Anywhere you currently point your MCP client at an upstream server, point it at `mcp-context-guard` instead and pass the original command after `--`.
@@ -63,6 +73,8 @@ mcp-context-guard --config guard.json -- python my_server.py
 
 ```bash
 mcp-context-guard [--threshold N] [--config path] --listen :PORT --upstream-url <url>
+mcp-context-guard [--threshold N] [--config path] --listen :PORT --upstream-url <url> start
+mcp-context-guard                                 --listen :PORT --upstream-url <url> stats
 ```
 
 Runs the proxy as an HTTP server. Your MCP client connects to `http://localhost:PORT` via HTTP transport instead of spawning the proxy over stdio. This mode is fully transparent for OAuth: `401` responses, `/.well-known/oauth-authorization-server`, `/register`, `/token` and all other non-tool-call traffic are forwarded byte-for-byte — the MCP client handles the OAuth flow directly with the auth server.
@@ -93,6 +105,7 @@ mcp-context-guard --upstream-url http://localhost:3001/mcp
 | `--upstream-url url` | — | URL of a remote MCP server (Streamable HTTP); requires `--listen` |
 | `--listen addr` | — | Listen as an HTTP server on this address (e.g. `:8080`); requires `--upstream-url` |
 | `--upstream-header K:V` | — | HTTP header added to every request to the remote server (repeatable) |
+| `--collect-stats` | off | Persist token-saving stats to local disk (see [Stats](#stats)) |
 
 ### Config file
 
@@ -146,6 +159,31 @@ line:9                 → single line at 0-based index 9
 These are useful when the data you need is at a known position — for example, `tail:50` to read the oldest entries in a git log, or `line:0` to read the first record of a large list.
 
 The same `id` can be queried multiple times with different filters — the cached response is not consumed.
+
+## Stats
+
+When `--collect-stats` is enabled, the proxy accumulates token-saving stats in a file named after a hash of the upstream config (URL or command). This means each unique upstream gets its own file, and multiple instances pointing at the same upstream share one file without interfering with instances pointing at a different one.
+
+Files live in:
+
+- **Windows:** `%LOCALAPPDATA%\mcp-context-guard\stats-<hash>.json`
+- **Linux / macOS:** `~/.cache/mcp-context-guard/stats-<hash>.json`
+
+Each file holds running totals — bytes intercepted, bytes sent as stubs, responses cached, and `seek_result` calls. Updates are written atomically (write to a sibling temp file, then rename), so files are never left in a partial state. Two instances sharing the same file may occasionally race on the rename; counts are approximate in that scenario, but the file is never corrupted.
+
+To view the accumulated totals for a specific upstream, pass `stats` as the subcommand with the same config you use to start the proxy:
+
+```bash
+# Local mode
+mcp-context-guard stats -- npx -y @modelcontextprotocol/server-filesystem /home/user
+# responses cached: 47 | intercepted: 8.3 MB | saved: 8.2 MB (~2097152 tokens) | seek_result calls: 31
+
+# HTTP mode
+mcp-context-guard --listen :8080 --upstream-url https://api.example.com/mcp stats
+# responses cached: 12 | intercepted: 1.2 MB | saved: 1.1 MB (~288000 tokens) | seek_result calls: 4
+```
+
+Stats are **local-only** — nothing is sent anywhere. Delete the corresponding `stats-*.json` file to reset counters for a specific upstream.
 
 ## Cross-compilation
 
