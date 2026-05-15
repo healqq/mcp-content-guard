@@ -21,13 +21,16 @@ MCP Client → mcp-context-guard (proxy + cache + filter) → upstream MCP serve
                                                             (subprocess or remote HTTP)
 ```
 
-**Client side**: always stdio. The client spawns the wrapper; messages are newline-delimited JSON-RPC 2.0.
+Two operating modes depending on flags:
 
-**Upstream side**: two transport modes:
-- **Local (stdio)**: the wrapper spawns the upstream server as a subprocess and communicates via stdin/stdout pipes. Selected when a command is passed after `--`.
-- **Remote (Streamable HTTP)**: the wrapper sends each JSON-RPC message as an HTTP POST to the upstream URL; responses arrive as inline JSON (`Content-Type: application/json`) or SSE events (`Content-Type: text/event-stream`). Selected via `--upstream-url`.
+| Mode | Client side | Upstream side | Selected by |
+|---|---|---|---|
+| **Local** | stdio | subprocess (stdin/stdout) | `-- <cmd>` |
+| **HTTP server** | HTTP | Streamable HTTP | `--listen :PORT --upstream-url` |
 
-Both modes are abstracted by the same `io.WriteCloser` / `io.Reader` pair passed to `proxy.New()`. The `internal/remote` package implements the HTTP transport.
+**Local**: the client spawns the wrapper; messages are newline-delimited JSON-RPC 2.0 on stdin/stdout. The wrapper spawns the upstream server as a subprocess and communicates via stdin/stdout pipes. Implemented in `internal/proxy`.
+
+**HTTP server mode**: the wrapper itself listens as an HTTP server (`--listen :PORT`). Both client and upstream speak Streamable HTTP. All traffic that is not an MCP tool call — including `401` responses, `/.well-known/oauth-authorization-server`, `/register`, `/token`, redirects — is forwarded byte-for-byte via `httputil.ReverseProxy`. This makes OAuth completely transparent: the MCP client handles the OAuth flow directly with the auth server; the proxy never sees or stores tokens. Implemented in `internal/httpserver`.
 
 ### Message handling
 
@@ -67,6 +70,10 @@ When a response exceeds the threshold, the client receives a `text` ContentBlock
 
 In-memory `map[string]json.RawMessage` (hex-encoded random id → raw `content` JSON). Scoped to the wrapper process lifetime (one client session). `structuredContent` is never cached — always forwarded directly.
 
+### Stats (`internal/stats`)
+
+Optional stats collection enabled by `--collect-stats`. Tracks bytes intercepted, bytes sent as stubs, responses cached, and `seek_result` calls using `sync/atomic` counters. Stats are partitioned by config: `main.go` derives a key (`"http:<url>"` or `"local:<cmd args>"`) and calls `stats.PathForKey(key)` to get a SHA-256-hashed filename (`stats-<16hexchars>.json`) under `<UserCacheDir>/mcp-context-guard/`. Each unique upstream gets its own file; instances with the same config share one. Updates use read-modify-write with atomic rename (write tmp, rename) — the file is never corrupted. Two instances sharing the same file may race on the rename; counts are approximate in that case. The `stats` subcommand calls `stats.Load(stats.PathForKey(configKey))` for the specific upstream and exits without starting the proxy. A nil `*stats.Stats` is safe everywhere — all methods are no-ops.
+
 ### Filter DSL
 
 - **empty / omitted**: return the full concatenated text of all content blocks
@@ -94,9 +101,11 @@ go build -o mcp-context-guard.exe .          # build
 go test -v -timeout 30s ./...                # run all tests
 go test -v -run TestName ./...               # run a single test
 GOOS=linux GOARCH=arm64 go build -o mcp-context-guard-linux-arm64 .  # cross-compile
+golangci-lint run . ./bench ./internal/...               # lint (install: go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest)
+sh scripts/install-hooks.sh                  # install pre-commit lint hook
 ```
 
-Integration tests in `proxy_test.go` spawn the compiled binary against either a Python mock upstream (local mode) or a Go `httptest.NewServer` (remote mode). Unit tests for the HTTP transport live in `internal/remote/conn_test.go`.
+Integration tests in `proxy_test.go` spawn the compiled binary against a Python mock upstream (local mode). Unit tests for HTTP server mode live in `internal/httpserver/server_test.go`.
 
 ## Tech stack
 
@@ -112,5 +121,11 @@ Integration tests in `proxy_test.go` spawn the compiled binary against either a 
 - The wrapper never modifies `inputSchema` or `outputSchema` of upstream tools.
 - `seek_result` calls are never forwarded upstream.
 - Threshold is configurable via `--threshold` flag or config file (default: 10240 bytes); applies globally.
-- `--upstream-url` and `-- <cmd>` are mutually exclusive; exactly one must be provided.
+- `-- <cmd>` and `--listen :PORT --upstream-url` are the two modes; exactly one must be used.
+- `--upstream-url` always requires `--listen`; `--upstream-url` alone is an error.
+- `--listen` requires `--upstream-url`; it enables HTTP server mode with transparent OAuth passthrough.
 - Remote headers can be set via `--upstream-header "Key: Value"` (repeatable) or `upstream_headers` in the config file; CLI wins on key conflicts.
+- In HTTP server mode the proxy never inspects or stores auth tokens — they pass through unchanged from client to upstream.
+- Stats are opt-in via `--collect-stats`; disabled by default. A nil `*stats.Stats` propagates through all constructors and is safe everywhere.
+- Stats are local-only and per-upstream (one `stats-<hash>.json` per unique config key); delete the file to reset counters.
+- The `stats` subcommand resolves the same config key as `start` and prints totals without starting the proxy.

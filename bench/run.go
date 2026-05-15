@@ -303,10 +303,10 @@ func (c *mcpConn) recv(timeout time.Duration) (map[string]any, error) {
 }
 
 func (c *mcpConn) close() {
-	c.stdin.Close()
+	_ = c.stdin.Close()
 	if c.cmd.Process != nil {
-		c.cmd.Process.Kill()
-		c.cmd.Wait()
+		_ = c.cmd.Process.Kill()
+		_ = c.cmd.Wait()
 	}
 }
 
