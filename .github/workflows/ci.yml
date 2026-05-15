@@ -16,10 +16,11 @@ jobs:
         with:
           go-version-file: go.mod
 
-      - uses: golangci/golangci-lint-action@v6
-        with:
-          version: latest
-          args: . ./bench ./internal/...
+      - name: Install golangci-lint
+        run: go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
+
+      - name: Run lint
+        run: golangci-lint run . ./bench ./internal/...
 
   test:
     runs-on: ubuntu-latest
