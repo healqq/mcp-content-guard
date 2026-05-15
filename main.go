@@ -13,6 +13,7 @@ import (
 	"mcp-context-guard/internal/cache"
 	"mcp-context-guard/internal/httpserver"
 	"mcp-context-guard/internal/proxy"
+	"mcp-context-guard/internal/stats"
 )
 
 const defaultThreshold = 10240 // 10 KB
@@ -38,13 +39,30 @@ func main() {
 	var upstreamURL string
 	var listenAddr string
 	var rawHeaders headerFlags
+	var enableStats bool
 
 	flag.StringVar(&configPath, "config", "", "path to config JSON file")
 	flag.Int64Var(&thresholdFlag, "threshold", 0, "response size threshold in bytes (overrides config)")
 	flag.StringVar(&upstreamURL, "upstream-url", "", "URL of remote MCP server (Streamable HTTP); requires --listen")
 	flag.StringVar(&listenAddr, "listen", "", "address to listen on as HTTP server, e.g. :8080 (requires --upstream-url)")
 	flag.Var(&rawHeaders, "upstream-header", `header added to every upstream request, e.g. "Authorization: Bearer token" (repeatable)`)
+	flag.BoolVar(&enableStats, "collect-stats", false, "persist token-saving stats to local disk")
 	flag.Parse()
+
+	// Extract optional subcommand (start|stats) from positional args.
+	// Handles both orderings:
+	//   HTTP:  mcp-context-guard --listen :PORT --upstream-url <url> [start|stats]
+	//   Local: mcp-context-guard [start|stats] -- <cmd> [args...]
+	posArgs := flag.Args()
+	subcommand := "start"
+	if len(posArgs) > 0 && (posArgs[0] == "start" || posArgs[0] == "stats") {
+		subcommand = posArgs[0]
+		posArgs = posArgs[1:]
+	}
+	// Strip "--" separator that may follow the subcommand in local mode.
+	if len(posArgs) > 0 && posArgs[0] == "--" {
+		posArgs = posArgs[1:]
+	}
 
 	cfg := Config{Threshold: defaultThreshold}
 	if configPath != "" {
@@ -80,7 +98,28 @@ func main() {
 
 	hasListen := listenAddr != ""
 	hasURL := effectiveURL != ""
-	hasLocal := len(flag.Args()) > 0
+	hasLocal := len(posArgs) > 0
+
+	// Derive the config key used for the stats file.
+	// Must be done before mode validation so the stats subcommand can also
+	// resolve the path without needing a running upstream.
+	var configKey string
+	switch {
+	case hasListen && hasURL:
+		configKey = "http:" + effectiveURL
+	case hasLocal:
+		configKey = "local:" + strings.Join(posArgs, " ")
+	}
+
+	if subcommand == "stats" {
+		if configKey == "" {
+			fmt.Fprintln(os.Stderr, "usage: mcp-context-guard [flags] stats -- <cmd> [args...]")
+			fmt.Fprintln(os.Stderr, "       mcp-context-guard [flags] --listen :PORT --upstream-url <url> stats")
+			os.Exit(1)
+		}
+		fmt.Println(stats.Format(stats.Load(stats.PathForKey(configKey))))
+		return
+	}
 
 	switch {
 	case hasURL && !hasListen:
@@ -94,15 +133,25 @@ func main() {
 		fmt.Fprintln(os.Stderr, "error: --listen and a command are mutually exclusive")
 		os.Exit(1)
 	case !hasListen && !hasLocal:
-		fmt.Fprintln(os.Stderr, "usage: mcp-context-guard [--config path] [--threshold N] -- <cmd> [args...]")
-		fmt.Fprintln(os.Stderr, "       mcp-context-guard [--config path] [--threshold N] --listen :PORT --upstream-url <url> [--upstream-header K:V]...")
+		fmt.Fprintln(os.Stderr, "usage: mcp-context-guard [--config path] [--threshold N] [--collect-stats] -- <cmd> [args...]")
+		fmt.Fprintln(os.Stderr, "       mcp-context-guard [--config path] [--threshold N] [--collect-stats] --listen :PORT --upstream-url <url> [--upstream-header K:V]...")
 		os.Exit(1)
 	}
 
 	c := cache.New()
 
+	var st *stats.Stats
+	if enableStats {
+		var err error
+		st, err = stats.New(stats.PathForKey(configKey))
+		if err != nil {
+			log.Fatalf("stats: %v", err)
+		}
+		defer st.Save() //nolint:errcheck
+	}
+
 	if hasListen {
-		srv, err := httpserver.New(effectiveURL, headers, c, cfg.Threshold)
+		srv, err := httpserver.New(effectiveURL, headers, c, cfg.Threshold, st)
 		if err != nil {
 			log.Fatalf("httpserver: %v", err)
 		}
@@ -112,8 +161,7 @@ func main() {
 	}
 
 	// Local subprocess mode.
-	args := flag.Args()
-	cmd := exec.Command(args[0], args[1:]...)
+	cmd := exec.Command(posArgs[0], posArgs[1:]...)
 
 	upstreamIn, err := cmd.StdinPipe()
 	if err != nil {
@@ -132,8 +180,8 @@ func main() {
 		log.Fatalf("start upstream: %v", err)
 	}
 
-	p := proxy.New(upstreamIn, upstreamOut, upstreamErr, c, cfg.Threshold)
+	p := proxy.New(upstreamIn, upstreamOut, upstreamErr, c, cfg.Threshold, st)
 	p.Run()
 
-	cmd.Wait()
+	_ = cmd.Wait()
 }

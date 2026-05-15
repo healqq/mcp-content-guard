@@ -15,6 +15,7 @@ import (
 	"mcp-context-guard/internal/filter"
 	"mcp-context-guard/internal/rpc"
 	"mcp-context-guard/internal/schema"
+	"mcp-context-guard/internal/stats"
 )
 
 // Server is an HTTP handler that proxies MCP traffic to a remote upstream,
@@ -27,13 +28,14 @@ type Server struct {
 	headers   map[string]string
 	cache     *cache.Cache
 	threshold int64
+	stats     *stats.Stats
 	rp        *httputil.ReverseProxy
 	client    *http.Client
 }
 
 // New creates an HTTP server that proxies to upstreamURL, applying tool call
 // interception and caching. headers are added to every forwarded request.
-func New(upstreamURL string, headers map[string]string, c *cache.Cache, threshold int64) (*Server, error) {
+func New(upstreamURL string, headers map[string]string, c *cache.Cache, threshold int64, st *stats.Stats) (*Server, error) {
 	u, err := url.Parse(upstreamURL)
 	if err != nil {
 		return nil, fmt.Errorf("httpserver: parse upstream URL: %w", err)
@@ -56,6 +58,7 @@ func New(upstreamURL string, headers map[string]string, c *cache.Cache, threshol
 		headers:   headers,
 		cache:     c,
 		threshold: threshold,
+		stats:     st,
 		rp:        rp,
 		client:    &http.Client{},
 	}, nil
@@ -258,6 +261,7 @@ func (s *Server) maybeCache(msg rpc.Message) []byte {
 	if err != nil {
 		return nil
 	}
+	s.stats.RecordCache(int64(len(contentRaw)), int64(len(stubText)))
 	return b
 }
 
@@ -274,6 +278,7 @@ func (s *Server) handleSeekResult(req rpc.Message, id, filterExpr string) []byte
 	if err != nil {
 		return rpc.EncodeErrorResult(req.ID, fmt.Sprintf("filter error: %s", err))
 	}
+	s.stats.RecordSeek()
 	return rpc.EncodeTextResult(req.ID, result)
 }
 
@@ -300,7 +305,7 @@ func (s *Server) forwardRaw(w http.ResponseWriter, r *http.Request, body []byte)
 
 func (s *Server) writeJSON(w http.ResponseWriter, b []byte) {
 	w.Header().Set("Content-Type", "application/json")
-	w.Write(b)
+	_, _ = w.Write(b)
 }
 
 func copyResponse(w http.ResponseWriter, resp *http.Response, body []byte) {
@@ -310,5 +315,5 @@ func copyResponse(w http.ResponseWriter, resp *http.Response, body []byte) {
 		}
 	}
 	w.WriteHeader(resp.StatusCode)
-	w.Write(body)
+	_, _ = w.Write(body)
 }

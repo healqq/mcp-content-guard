@@ -2,7 +2,6 @@ package filter
 
 import (
 	"encoding/json"
-	"strings"
 	"testing"
 )
 
@@ -10,19 +9,6 @@ import (
 func makeContent(text string) json.RawMessage {
 	b, _ := json.Marshal([]map[string]string{{"type": "text", "text": text}})
 	return b
-}
-
-func lines(n int) string {
-	var sb strings.Builder
-	for i := 0; i < n; i++ {
-		if i > 0 {
-			sb.WriteByte('\n')
-		}
-		sb.WriteString(strings.Repeat("line", 1))
-		sb.WriteString(string(rune('0' + i%10)))
-		sb.WriteString(strings.Repeat("x", i))
-	}
-	return sb.String()
 }
 
 func TestHead(t *testing.T) {

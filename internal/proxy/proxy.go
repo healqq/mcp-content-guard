@@ -13,6 +13,7 @@ import (
 	"mcp-context-guard/internal/filter"
 	"mcp-context-guard/internal/rpc"
 	"mcp-context-guard/internal/schema"
+	"mcp-context-guard/internal/stats"
 )
 
 type Proxy struct {
@@ -20,23 +21,25 @@ type Proxy struct {
 	upstreamOut io.Reader
 	cache       *cache.Cache
 	threshold   int64
+	stats       *stats.Stats
 	out         chan []byte
 
 	mu      sync.Mutex
 	pending map[string]rpc.Message // idKey → original request
 }
 
-func New(upstreamIn io.WriteCloser, upstreamOut io.Reader, upstreamErr io.Reader, c *cache.Cache, threshold int64) *Proxy {
+func New(upstreamIn io.WriteCloser, upstreamOut io.Reader, upstreamErr io.Reader, c *cache.Cache, threshold int64, st *stats.Stats) *Proxy {
 	p := &Proxy{
 		upstreamIn:  upstreamIn,
 		upstreamOut: upstreamOut,
 		cache:       c,
 		threshold:   threshold,
+		stats:       st,
 		out:         make(chan []byte, 64),
 		pending:     make(map[string]rpc.Message),
 	}
 	if upstreamErr != nil {
-		go io.Copy(os.Stderr, upstreamErr)
+		go func() { _, _ = io.Copy(os.Stderr, upstreamErr) }()
 	}
 	return p
 }
@@ -50,9 +53,9 @@ func (p *Proxy) Run() {
 		defer close(writerDone)
 		w := bufio.NewWriter(os.Stdout)
 		for line := range p.out {
-			w.Write(line)
-			w.WriteByte('\n')
-			w.Flush()
+			_, _ = w.Write(line)
+			_ = w.WriteByte('\n')
+			_ = w.Flush()
 		}
 	}()
 
@@ -194,6 +197,7 @@ func (p *Proxy) handleSeekResult(req rpc.Message, id, filterExpr string) {
 		p.out <- rpc.EncodeErrorResult(req.ID, fmt.Sprintf("filter error: %s", err))
 		return
 	}
+	p.stats.RecordSeek()
 	p.out <- rpc.EncodeTextResult(req.ID, result)
 }
 
@@ -235,6 +239,7 @@ func (p *Proxy) maybeCache(msg rpc.Message) []byte {
 	if err != nil {
 		return nil
 	}
+	p.stats.RecordCache(int64(len(contentRaw)), int64(len(stubText)))
 	return b
 }
 
@@ -244,9 +249,9 @@ func idKey(id any) string {
 }
 
 func forward(w *bufio.Writer, line []byte) {
-	w.Write(line)
-	w.WriteByte('\n')
-	w.Flush()
+	_, _ = w.Write(line)
+	_ = w.WriteByte('\n')
+	_ = w.Flush()
 }
 
 func clone(b []byte) []byte {

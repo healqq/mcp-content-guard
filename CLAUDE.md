@@ -70,6 +70,10 @@ When a response exceeds the threshold, the client receives a `text` ContentBlock
 
 In-memory `map[string]json.RawMessage` (hex-encoded random id → raw `content` JSON). Scoped to the wrapper process lifetime (one client session). `structuredContent` is never cached — always forwarded directly.
 
+### Stats (`internal/stats`)
+
+Optional stats collection enabled by `--collect-stats`. Tracks bytes intercepted, bytes sent as stubs, responses cached, and `seek_result` calls using `sync/atomic` counters. Stats are partitioned by config: `main.go` derives a key (`"http:<url>"` or `"local:<cmd args>"`) and calls `stats.PathForKey(key)` to get a SHA-256-hashed filename (`stats-<16hexchars>.json`) under `<UserCacheDir>/mcp-context-guard/`. Each unique upstream gets its own file; instances with the same config share one. Updates use read-modify-write with atomic rename (write tmp, rename) — the file is never corrupted. Two instances sharing the same file may race on the rename; counts are approximate in that case. The `stats` subcommand calls `stats.Load(stats.PathForKey(configKey))` for the specific upstream and exits without starting the proxy. A nil `*stats.Stats` is safe everywhere — all methods are no-ops.
+
 ### Filter DSL
 
 - **empty / omitted**: return the full concatenated text of all content blocks
@@ -97,6 +101,8 @@ go build -o mcp-context-guard.exe .          # build
 go test -v -timeout 30s ./...                # run all tests
 go test -v -run TestName ./...               # run a single test
 GOOS=linux GOARCH=arm64 go build -o mcp-context-guard-linux-arm64 .  # cross-compile
+golangci-lint run . ./bench ./internal/...               # lint (install: go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest)
+sh scripts/install-hooks.sh                  # install pre-commit lint hook
 ```
 
 Integration tests in `proxy_test.go` spawn the compiled binary against a Python mock upstream (local mode). Unit tests for HTTP server mode live in `internal/httpserver/server_test.go`.
@@ -120,3 +126,6 @@ Integration tests in `proxy_test.go` spawn the compiled binary against a Python 
 - `--listen` requires `--upstream-url`; it enables HTTP server mode with transparent OAuth passthrough.
 - Remote headers can be set via `--upstream-header "Key: Value"` (repeatable) or `upstream_headers` in the config file; CLI wins on key conflicts.
 - In HTTP server mode the proxy never inspects or stores auth tokens — they pass through unchanged from client to upstream.
+- Stats are opt-in via `--collect-stats`; disabled by default. A nil `*stats.Stats` propagates through all constructors and is safe everywhere.
+- Stats are local-only and per-upstream (one `stats-<hash>.json` per unique config key); delete the file to reset counters.
+- The `stats` subcommand resolves the same config key as `start` and prints totals without starting the proxy.

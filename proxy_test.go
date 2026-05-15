@@ -67,7 +67,7 @@ func startProxy(t *testing.T, threshold int) *proxyConn {
 	if err != nil {
 		t.Fatal(err)
 	}
-	f.WriteString(mockUpstreamSrc)
+	_, _ = f.WriteString(mockUpstreamSrc)
 	f.Close()
 	t.Cleanup(func() { os.Remove(f.Name()) })
 
@@ -87,7 +87,7 @@ func startProxy(t *testing.T, threshold int) *proxyConn {
 	if err := cmd.Start(); err != nil {
 		t.Fatalf("start proxy: %v", err)
 	}
-	t.Cleanup(func() { stdin.Close(); cmd.Process.Kill(); cmd.Wait() })
+	t.Cleanup(func() { _ = stdin.Close(); _ = cmd.Process.Kill(); _ = cmd.Wait() })
 
 	return &proxyConn{
 		cmd:    cmd,
@@ -100,8 +100,8 @@ func startProxy(t *testing.T, threshold int) *proxyConn {
 func (p *proxyConn) send(msg map[string]any) {
 	p.t.Helper()
 	b, _ := json.Marshal(msg)
-	p.stdin.Write(b)
-	p.stdin.Write([]byte("\n"))
+	_, _ = p.stdin.Write(b)
+	_, _ = p.stdin.Write([]byte("\n"))
 }
 
 func (p *proxyConn) recv() map[string]any {

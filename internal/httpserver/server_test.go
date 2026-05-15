@@ -12,11 +12,9 @@ import (
 	"mcp-context-guard/internal/httpserver"
 )
 
-const largePayload = "x" // repeated in tests via strings.Repeat
-
 func newServer(t *testing.T, upstream *httptest.Server, threshold int) http.Handler {
 	t.Helper()
-	srv, err := httpserver.New(upstream.URL+"/mcp", nil, cache.New(), int64(threshold))
+	srv, err := httpserver.New(upstream.URL+"/mcp", nil, cache.New(), int64(threshold), nil)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -31,7 +29,7 @@ func post(t *testing.T, srv http.Handler, path, body string) (int, map[string]an
 	srv.ServeHTTP(w, req)
 	resp := w.Result()
 	var out map[string]any
-	json.NewDecoder(resp.Body).Decode(&out)
+	_ = json.NewDecoder(resp.Body).Decode(&out)
 	return resp.StatusCode, out
 }
 
@@ -61,7 +59,7 @@ func mcpUpstream(sseForDump bool) http.Handler {
 		id := msg["id"]
 		respond := func(result any) {
 			w.Header().Set("Content-Type", "application/json")
-			json.NewEncoder(w).Encode(map[string]any{"jsonrpc": "2.0", "id": id, "result": result})
+			_ = json.NewEncoder(w).Encode(map[string]any{"jsonrpc": "2.0", "id": id, "result": result})
 		}
 		switch method {
 		case "initialize":
@@ -147,7 +145,7 @@ func TestHTTPSeekResult(t *testing.T) {
 	defer upstream.Close()
 
 	c := cache.New()
-	srv, _ := httpserver.New(upstream.URL+"/mcp", nil, c, 100)
+	srv, _ := httpserver.New(upstream.URL+"/mcp", nil, c, 100, nil)
 
 	// trigger caching
 	req := httptest.NewRequest(http.MethodPost, "/mcp", strings.NewReader(`{"jsonrpc":"2.0","id":1,"method":"tools/call","params":{"name":"dump","arguments":{}}}`))
@@ -156,7 +154,7 @@ func TestHTTPSeekResult(t *testing.T) {
 	srv.ServeHTTP(w, req)
 
 	var first map[string]any
-	json.NewDecoder(w.Body).Decode(&first)
+	_ = json.NewDecoder(w.Body).Decode(&first)
 	stub := first["result"].(map[string]any)["content"].([]any)[0].(map[string]any)["text"].(string)
 
 	// extract cache id
@@ -225,7 +223,7 @@ func TestHTTPAuthHeaderForwarded(t *testing.T) {
 	upstream := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		gotAuth = r.Header.Get("Authorization")
 		w.Header().Set("Content-Type", "application/json")
-		json.NewEncoder(w).Encode(map[string]any{
+		_ = json.NewEncoder(w).Encode(map[string]any{
 			"jsonrpc": "2.0", "id": 1,
 			"result": map[string]any{"protocolVersion": "2024-11-05", "capabilities": map[string]any{}, "serverInfo": map[string]any{"name": "mock", "version": "1"}},
 		})
