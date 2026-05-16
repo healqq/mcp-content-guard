@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"errors"
 	"flag"
 	"fmt"
 	"log"
@@ -9,6 +10,7 @@ import (
 	"os"
 	"os/exec"
 	"strings"
+	"time"
 
 	"mcp-context-guard/internal/cache"
 	"mcp-context-guard/internal/httpserver"
@@ -88,7 +90,11 @@ func main() {
 		if idx < 0 {
 			log.Fatalf("invalid --upstream-header %q: must be 'Key: Value' or 'Key:Value'", h)
 		}
-		headers[strings.TrimSpace(h[:idx])] = strings.TrimSpace(h[idx+1:])
+		key := strings.TrimSpace(h[:idx])
+		if key == "" {
+			log.Fatalf("invalid --upstream-header %q: header name must not be empty", h)
+		}
+		headers[key] = strings.TrimSpace(h[idx+1:])
 	}
 
 	effectiveURL := upstreamURL
@@ -156,12 +162,17 @@ func main() {
 			log.Fatalf("httpserver: %v", err)
 		}
 		log.Printf("mcp-context-guard listening on %s → %s", listenAddr, effectiveURL)
-		log.Fatal(http.ListenAndServe(listenAddr, srv))
+		httpSrv := &http.Server{
+			Addr:              listenAddr,
+			Handler:           srv,
+			ReadHeaderTimeout: 30 * time.Second,
+		}
+		log.Fatal(httpSrv.ListenAndServe())
 		return
 	}
 
-	// Local subprocess mode.
-	cmd := exec.Command(posArgs[0], posArgs[1:]...)
+	// Local subprocess mode. posArgs is operator-supplied (CLI), not network input.
+	cmd := exec.Command(posArgs[0], posArgs[1:]...) //nolint:gosec // G204: command is operator-supplied
 
 	upstreamIn, err := cmd.StdinPipe()
 	if err != nil {
@@ -183,5 +194,12 @@ func main() {
 	p := proxy.New(upstreamIn, upstreamOut, upstreamErr, c, cfg.Threshold, st)
 	p.Run()
 
-	_ = cmd.Wait()
+	// Propagate the upstream's exit code so the client sees the real result.
+	if err := cmd.Wait(); err != nil {
+		var ee *exec.ExitError
+		if errors.As(err, &ee) {
+			os.Exit(ee.ExitCode())
+		}
+		log.Fatalf("upstream: %v", err)
+	}
 }

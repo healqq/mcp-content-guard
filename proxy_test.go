@@ -76,7 +76,7 @@ func startProxy(t *testing.T, threshold int) *proxyConn {
 		binary = "./mcp-context-guard"
 	}
 
-	cmd := exec.Command(binary,
+	cmd := exec.Command(binary, //nolint:gosec // G204: test fixtures, paths controlled by test
 		fmt.Sprintf("--threshold=%d", threshold),
 		"--",
 		"python", f.Name(),
