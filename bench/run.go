@@ -236,7 +236,7 @@ type mcpConn struct {
 }
 
 func startMCP(args []string, verbose bool) (*mcpConn, error) {
-	cmd := exec.Command(args[0], args[1:]...)
+	cmd := exec.Command(args[0], args[1:]...) //nolint:gosec // G204: operator-supplied command
 	stdin, err := cmd.StdinPipe()
 	if err != nil {
 		return nil, err

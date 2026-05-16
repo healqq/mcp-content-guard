@@ -4,6 +4,7 @@ import (
 	"crypto/rand"
 	"encoding/hex"
 	"encoding/json"
+	"fmt"
 	"sync"
 )
 
@@ -16,13 +17,18 @@ func New() *Cache {
 	return &Cache{items: make(map[string]json.RawMessage)}
 }
 
-// Store saves content and returns a new random id.
-func (c *Cache) Store(content json.RawMessage) string {
-	id := newID()
+// Store saves content and returns a new random id. Returns an error if the
+// system entropy source fails — callers must fail the request rather than
+// degrade to a predictable id (which would let any client read any payload).
+func (c *Cache) Store(content json.RawMessage) (string, error) {
+	id, err := newID()
+	if err != nil {
+		return "", err
+	}
 	c.mu.Lock()
 	c.items[id] = content
 	c.mu.Unlock()
-	return id
+	return id, nil
 }
 
 func (c *Cache) Get(id string) (json.RawMessage, bool) {
@@ -32,8 +38,10 @@ func (c *Cache) Get(id string) (json.RawMessage, bool) {
 	return v, ok
 }
 
-func newID() string {
+func newID() (string, error) {
 	b := make([]byte, 16)
-	_, _ = rand.Read(b)
-	return hex.EncodeToString(b)
+	if _, err := rand.Read(b); err != nil {
+		return "", fmt.Errorf("cache: read entropy: %w", err)
+	}
+	return hex.EncodeToString(b), nil
 }

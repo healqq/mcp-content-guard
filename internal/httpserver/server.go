@@ -243,7 +243,10 @@ func (s *Server) maybeCache(msg rpc.Message) []byte {
 	if !ok || int64(len(contentRaw)) < s.threshold {
 		return nil
 	}
-	cacheID := s.cache.Store(contentRaw)
+	cacheID, err := s.cache.Store(contentRaw)
+	if err != nil {
+		return nil
+	}
 	stubText := fmt.Sprintf(
 		"[Response too large to return (%d bytes cached, id=%q). Call seek_result(id) to get the full payload, or seek_result(id, filter) to extract a subset (jq expression, grep:<pattern>, head:<N>, tail:<N>, line:<N>).]",
 		len(contentRaw), cacheID,
