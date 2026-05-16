@@ -62,6 +62,15 @@ type proxyConn struct {
 func startProxy(t *testing.T, threshold int) *proxyConn {
 	t.Helper()
 
+	// The mock upstream is a Python script. Skip cleanly when python isn't
+	// on PATH (Windows CI, minimal containers) rather than failing with a
+	// confusing exec error from inside the wrapper.
+	if _, err := exec.LookPath("python"); err != nil {
+		if _, err := exec.LookPath("python3"); err != nil {
+			t.Skip("python not found on PATH; skipping integration test")
+		}
+	}
+
 	// write mock upstream script
 	f, err := os.CreateTemp("", "mock_upstream_*.py")
 	if err != nil {
