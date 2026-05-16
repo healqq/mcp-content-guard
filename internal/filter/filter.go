@@ -1,11 +1,14 @@
 package filter
 
 import (
+	"context"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"regexp"
 	"strconv"
 	"strings"
+	"time"
 
 	"github.com/itchyny/gojq"
 )
@@ -18,6 +21,15 @@ const (
 	modeLine
 )
 
+// DefaultTimeout bounds the wall time a single Apply call may spend on
+// CPU-heavy filters (grep against very long input, runaway jq expressions).
+// Override via ApplyWithTimeout or by passing your own context to Apply.
+var DefaultTimeout = 5 * time.Second
+
+// MaxJQResults caps the number of values a jq pipeline may emit before
+// Apply aborts. Protects against expressions like `range(1e9)`.
+var MaxJQResults = 100_000
+
 // Apply runs filterExpr against content (a JSON-encoded MCP content array).
 // Supported prefixes:
 //   - ""                — no filter: return full concatenated text
@@ -27,14 +39,22 @@ const (
 //   - "line:<N>"        — single line at 0-based index N
 //
 // Anything else is treated as a jq expression applied to the raw content array.
+// The call is bounded by DefaultTimeout.
 func Apply(content json.RawMessage, filterExpr string) (string, error) {
+	ctx, cancel := context.WithTimeout(context.Background(), DefaultTimeout)
+	defer cancel()
+	return ApplyContext(ctx, content, filterExpr)
+}
+
+// ApplyContext is Apply with a caller-supplied context for cancellation.
+func ApplyContext(ctx context.Context, content json.RawMessage, filterExpr string) (string, error) {
 	filterExpr = stripJQShellSyntax(filterExpr)
 
 	switch {
 	case filterExpr == "":
 		return applyFull(content)
 	case strings.HasPrefix(filterExpr, "grep:"):
-		return applyGrep(content, filterExpr[5:])
+		return applyGrep(ctx, content, filterExpr[5:])
 	case strings.HasPrefix(filterExpr, "head:"):
 		return applyLines(content, filterExpr[5:], modeHead)
 	case strings.HasPrefix(filterExpr, "tail:"):
@@ -42,7 +62,7 @@ func Apply(content json.RawMessage, filterExpr string) (string, error) {
 	case strings.HasPrefix(filterExpr, "line:"):
 		return applyLines(content, filterExpr[5:], modeLine)
 	default:
-		return applyJQ(content, filterExpr)
+		return applyJQ(ctx, content, filterExpr)
 	}
 }
 
@@ -79,7 +99,7 @@ func applyFull(content json.RawMessage) (string, error) {
 	return strings.Join(parts, "\n"), nil
 }
 
-func applyGrep(content json.RawMessage, pattern string) (string, error) {
+func applyGrep(ctx context.Context, content json.RawMessage, pattern string) (string, error) {
 	re, err := regexp.Compile(pattern)
 	if err != nil {
 		return "", fmt.Errorf("invalid grep pattern: %w", err)
@@ -89,11 +109,18 @@ func applyGrep(content json.RawMessage, pattern string) (string, error) {
 		return "", fmt.Errorf("content is not a ContentBlock array: %w", err)
 	}
 	var lines []string
+	// Check ctx periodically. Go's regexp is RE2 (no catastrophic backtracking),
+	// but a long alternation against MB of input can still pin CPU for seconds.
 	for _, b := range blocks {
 		if b.Type != "text" {
 			continue
 		}
-		for _, line := range strings.Split(b.Text, "\n") {
+		for i, line := range strings.Split(b.Text, "\n") {
+			if i&0x3FF == 0 {
+				if err := ctx.Err(); err != nil {
+					return "", fmt.Errorf("grep: %w", err)
+				}
+			}
 			if re.MatchString(line) {
 				lines = append(lines, line)
 			}
@@ -137,10 +164,17 @@ func applyLines(content json.RawMessage, nStr string, mode lineMode) (string, er
 	return "", nil
 }
 
-func applyJQ(content json.RawMessage, expr string) (string, error) {
+// errTooManyResults is returned when a jq pipeline exceeds MaxJQResults.
+var errTooManyResults = errors.New("jq produced too many results")
+
+func applyJQ(ctx context.Context, content json.RawMessage, expr string) (string, error) {
 	q, err := gojq.Parse(expr)
 	if err != nil {
 		return "", fmt.Errorf("invalid jq expression: %w", err)
+	}
+	code, err := gojq.Compile(q)
+	if err != nil {
+		return "", fmt.Errorf("compile jq expression: %w", err)
 	}
 
 	// Unwrap MCP content blocks: if the text inside parses as JSON, use that
@@ -148,14 +182,14 @@ func applyJQ(content json.RawMessage, expr string) (string, error) {
 	var input any
 	var blocks []contentBlock
 	if json.Unmarshal(content, &blocks) == nil {
-		var text string
+		var sb strings.Builder
 		for _, b := range blocks {
 			if b.Type == "text" {
-				text += b.Text
+				sb.WriteString(b.Text)
 			}
 		}
 		var parsed any
-		if json.Unmarshal([]byte(text), &parsed) == nil {
+		if json.Unmarshal([]byte(sb.String()), &parsed) == nil {
 			input = parsed
 		}
 	}
@@ -165,7 +199,7 @@ func applyJQ(content json.RawMessage, expr string) (string, error) {
 		}
 	}
 
-	iter := q.Run(input)
+	iter := code.RunWithContext(ctx, input)
 	var results []any
 	for {
 		v, ok := iter.Next()
@@ -176,6 +210,9 @@ func applyJQ(content json.RawMessage, expr string) (string, error) {
 			return "", fmt.Errorf("jq error: %w", e)
 		}
 		results = append(results, v)
+		if len(results) > MaxJQResults {
+			return "", fmt.Errorf("jq error: %w (limit %d)", errTooManyResults, MaxJQResults)
+		}
 	}
 	var out any
 	if len(results) == 1 {

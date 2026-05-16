@@ -14,7 +14,7 @@ import (
 
 func newServer(t *testing.T, upstream *httptest.Server, threshold int) http.Handler {
 	t.Helper()
-	srv, err := httpserver.New(upstream.URL+"/mcp", nil, cache.New(), int64(threshold), nil)
+	srv, err := httpserver.New(upstream.URL+"/mcp", nil, cache.New(), int64(threshold), nil, nil)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -145,7 +145,7 @@ func TestHTTPSeekResult(t *testing.T) {
 	defer upstream.Close()
 
 	c := cache.New()
-	srv, _ := httpserver.New(upstream.URL+"/mcp", nil, c, 100, nil)
+	srv, _ := httpserver.New(upstream.URL+"/mcp", nil, c, 100, nil, nil)
 
 	// trigger caching
 	req := httptest.NewRequest(http.MethodPost, "/mcp", strings.NewReader(`{"jsonrpc":"2.0","id":1,"method":"tools/call","params":{"name":"dump","arguments":{}}}`))

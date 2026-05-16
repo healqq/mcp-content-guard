@@ -4,12 +4,15 @@ import (
 	"bufio"
 	"bytes"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io"
+	"net"
 	"net/http"
 	"net/http/httputil"
 	"net/url"
 	"strings"
+	"time"
 
 	"mcp-context-guard/internal/cache"
 	"mcp-context-guard/internal/filter"
@@ -22,27 +25,77 @@ import (
 // intercepting tool call responses for caching and injecting seek_result.
 // All non-tool-call traffic (including 401s, /.well-known/*, /token, etc.)
 // is forwarded unchanged, enabling the MCP client to handle OAuth itself.
+// Config carries optional limits and timeouts. Zero/negative values use the
+// package defaults documented on each field.
+type Config struct {
+	// MaxBodyBytes caps the size of an inbound client body and an upstream
+	// response body. Defaults to DefaultMaxBodyBytes if <= 0.
+	MaxBodyBytes int64
+	// UpstreamHeaderTimeout caps how long the upstream may take to send
+	// response headers. The body itself is read until EOF so SSE streams are
+	// not killed mid-flight. Defaults to DefaultUpstreamHeaderTimeout.
+	UpstreamHeaderTimeout time.Duration
+	// UpstreamDialTimeout bounds the TCP/TLS handshake. Defaults to
+	// DefaultUpstreamDialTimeout.
+	UpstreamDialTimeout time.Duration
+}
+
+const (
+	DefaultMaxBodyBytes          int64 = 64 << 20 // 64 MiB
+	DefaultUpstreamHeaderTimeout       = 30 * time.Second
+	DefaultUpstreamDialTimeout         = 10 * time.Second
+)
+
 type Server struct {
-	mcpPath   string // path segment to intercept, e.g. "/mcp"
-	upstream  *url.URL
-	headers   map[string]string
-	cache     *cache.Cache
-	threshold int64
-	stats     *stats.Stats
-	rp        *httputil.ReverseProxy
-	client    *http.Client
+	mcpPath      string // path segment to intercept, e.g. "/mcp"
+	upstream     *url.URL
+	headers      map[string]string
+	cache        *cache.Cache
+	threshold    int64
+	stats        *stats.Stats
+	rp           *httputil.ReverseProxy
+	client       *http.Client
+	maxBodyBytes int64
 }
 
 // New creates an HTTP server that proxies to upstreamURL, applying tool call
 // interception and caching. headers are added to every forwarded request.
-func New(upstreamURL string, headers map[string]string, c *cache.Cache, threshold int64, st *stats.Stats) (*Server, error) {
+// Pass nil cfg for defaults.
+func New(upstreamURL string, headers map[string]string, c *cache.Cache, threshold int64, st *stats.Stats, cfg *Config) (*Server, error) {
 	u, err := url.Parse(upstreamURL)
 	if err != nil {
 		return nil, fmt.Errorf("httpserver: parse upstream URL: %w", err)
 	}
+	if cfg == nil {
+		cfg = &Config{}
+	}
+	maxBody := cfg.MaxBodyBytes
+	if maxBody <= 0 {
+		maxBody = DefaultMaxBodyBytes
+	}
+	headerTimeout := cfg.UpstreamHeaderTimeout
+	if headerTimeout <= 0 {
+		headerTimeout = DefaultUpstreamHeaderTimeout
+	}
+	dialTimeout := cfg.UpstreamDialTimeout
+	if dialTimeout <= 0 {
+		dialTimeout = DefaultUpstreamDialTimeout
+	}
+
+	transport := &http.Transport{
+		DialContext: (&net.Dialer{
+			Timeout:   dialTimeout,
+			KeepAlive: 30 * time.Second,
+		}).DialContext,
+		TLSHandshakeTimeout:   dialTimeout,
+		ResponseHeaderTimeout: headerTimeout,
+		IdleConnTimeout:       90 * time.Second,
+		ExpectContinueTimeout: 1 * time.Second,
+	}
 
 	base := &url.URL{Scheme: u.Scheme, Host: u.Host}
 	rp := httputil.NewSingleHostReverseProxy(base)
+	rp.Transport = transport
 	rp.Director = func(req *http.Request) {
 		req.URL.Scheme = base.Scheme
 		req.URL.Host = base.Host
@@ -53,14 +106,15 @@ func New(upstreamURL string, headers map[string]string, c *cache.Cache, threshol
 	}
 
 	return &Server{
-		mcpPath:   u.Path,
-		upstream:  u,
-		headers:   headers,
-		cache:     c,
-		threshold: threshold,
-		stats:     st,
-		rp:        rp,
-		client:    &http.Client{},
+		mcpPath:      u.Path,
+		upstream:     u,
+		headers:      headers,
+		cache:        c,
+		threshold:    threshold,
+		stats:        st,
+		rp:           rp,
+		client:       &http.Client{Transport: transport},
+		maxBodyBytes: maxBody,
 	}, nil
 }
 
@@ -76,8 +130,14 @@ func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 }
 
 func (s *Server) handleMCPPost(w http.ResponseWriter, r *http.Request) {
+	r.Body = http.MaxBytesReader(w, r.Body, s.maxBodyBytes)
 	body, err := io.ReadAll(r.Body)
 	if err != nil {
+		var mb *http.MaxBytesError
+		if errors.As(err, &mb) {
+			http.Error(w, "request body too large", http.StatusRequestEntityTooLarge)
+			return
+		}
 		http.Error(w, "read body", http.StatusBadRequest)
 		return
 	}
@@ -182,7 +242,7 @@ func (s *Server) doUpstream(r *http.Request, body []byte) (*http.Response, []byt
 
 	ct := resp.Header.Get("Content-Type")
 	if strings.HasPrefix(ct, "text/event-stream") {
-		collected, err := collectSSE(resp.Body)
+		collected, err := collectSSE(io.LimitReader(resp.Body, s.maxBodyBytes))
 		if err != nil {
 			resp.Body.Close()
 			return nil, nil, fmt.Errorf("read SSE: %w", err)
@@ -194,7 +254,7 @@ func (s *Server) doUpstream(r *http.Request, body []byte) (*http.Response, []byt
 		return resp, collected, nil
 	}
 
-	out, err := io.ReadAll(resp.Body)
+	out, err := io.ReadAll(io.LimitReader(resp.Body, s.maxBodyBytes))
 	resp.Body.Close()
 	resp.Body = io.NopCloser(bytes.NewReader(out))
 	return resp, out, err
@@ -302,7 +362,7 @@ func (s *Server) forwardRaw(w http.ResponseWriter, r *http.Request, body []byte)
 		return
 	}
 	defer resp.Body.Close()
-	out, _ := io.ReadAll(resp.Body)
+	out, _ := io.ReadAll(io.LimitReader(resp.Body, s.maxBodyBytes))
 	copyResponse(w, resp, out)
 }
 
