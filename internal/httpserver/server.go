@@ -218,13 +218,15 @@ func (s *Server) doUpstream(r *http.Request, body []byte) (*http.Response, []byt
 	req.Header.Set("Content-Type", "application/json")
 	req.Header.Set("Accept", "application/json, text/event-stream")
 	// Forward client's request headers (e.g. Authorization from OAuth).
+	// Use Add (not Set) so multi-valued headers like Forwarded or
+	// X-Forwarded-For survive instead of being silently collapsed to one.
 	for k, vv := range r.Header {
 		switch strings.ToLower(k) {
 		case "content-length", "content-type", "accept", "host":
 			// skip — already set above or managed by http.Client
 		default:
 			for _, v := range vv {
-				req.Header.Set(k, v)
+				req.Header.Add(k, v)
 			}
 		}
 	}
