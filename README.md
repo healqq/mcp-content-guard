@@ -101,6 +101,7 @@ mcp-context-guard --upstream-url http://localhost:3001/mcp
 | Flag | Default | Description |
 |---|---|---|
 | `--threshold N` | `10240` | Response size in bytes above which responses are cached instead of returned directly |
+| `--max-body-bytes N` | `67108864` (64 MiB) | Max inbound/upstream HTTP body size in bytes (HTTP mode only). Exceeding requests return `413`. |
 | `--config path` | — | Path to a JSON config file (see below) |
 | `--upstream-url url` | — | URL of a remote MCP server (Streamable HTTP); requires `--listen` |
 | `--listen addr` | — | Listen as an HTTP server on this address (e.g. `:8080`); requires `--upstream-url` |
@@ -112,6 +113,7 @@ mcp-context-guard --upstream-url http://localhost:3001/mcp
 ```json
 {
   "threshold": 10240,
+  "max_body_bytes": 67108864,
   "upstream_url": "https://api.example.com/mcp",
   "upstream_headers": {
     "Authorization": "Bearer sk-..."
