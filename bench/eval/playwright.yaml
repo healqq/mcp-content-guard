@@ -20,7 +20,7 @@ providers:
     label: "playwright/direct"
     config:
       mcpCmd: ["npx", "-y", "@playwright/mcp", "--headless", "--allow-unrestricted-file-access"]
-      maxTurns: 8
+      maxTurns: 15
       model: gpt-5.4-mini-2026-03-17
 
   - id: file://provider.js
@@ -35,7 +35,7 @@ providers:
         - "@playwright/mcp"
         - "--headless"
         - "--allow-unrestricted-file-access"
-      maxTurns: 8
+      maxTurns: 15
       model: gpt-5.4-mini-2026-03-17
 
 prompts:

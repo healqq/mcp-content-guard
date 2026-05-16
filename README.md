@@ -13,10 +13,11 @@ MCP Client → mcp-context-guard → your MCP server (local subprocess or remote
 The wrapper sits between your MCP client and any MCP server — local (stdio subprocess) or remote (Streamable HTTP). It:
 
 1. **Passes through all tool schemas unchanged** — the client sees the same tools as before, plus one new tool: `seek_result`.
-2. **Intercepts large responses** — when a tool call response exceeds the size threshold, it is cached and the client receives a human-readable stub:
+2. **Intercepts large responses** — when a tool call response exceeds the size threshold, it is cached and the client receives a short stub:
    ```
-   [Response too large to return (142830 bytes cached, id="3f9a..."). Call seek_result(id) to get the full payload, or seek_result(id, filter) to extract a subset (jq expression, grep:<pattern>, head:<N>, tail:<N>, line:<N>).]
+   [cached id="3f9a..." (142830 bytes) — call seek_result to read]
    ```
+   The `seek_result` tool's own description (visible to the model in `tools/list`) carries the filter syntax and strategy guidance, so the per-response stub stays minimal.
 3. **Lets you query the cache** — call `seek_result` with the id and a filter to extract the relevant portion.
 
 Small responses (under the threshold) are returned directly with no change in behaviour.
@@ -202,16 +203,23 @@ GOOS=windows GOARCH=amd64  go build -o mcp-context-guard-windows-amd64.exe .
 
 ## Benchmark
 
-Tested across four MCP servers with model `gpt-5.4-mini-2026-03-17`. The proxy pays off whenever tool responses exceed the threshold. SQLite is the counter-example: query results are small and never cached, so the proxy adds a small overhead from the extra tool in the schema.
+Tested across four MCP servers with model `gpt-5.4-mini-2026-03-17`. The proxy pays off whenever tool responses exceed the threshold. SQLite is the counter-example: query results are small and never cached, so the proxy is pure overhead from the extra tool in the schema.
 
-| Suite | Direct tokens | Proxied tokens | Savings | Pass rate |
+| Suite | Direct tokens | Proxied tokens | Δ | Pass rate |
 |---|---:|---:|---:|:---:|
-| Filesystem (35–46 KB files) | 79 812 | 33 249 | **−58 %** | 5/5 vs 5/5 |
-| Git log (300 commits, ~120 KB) | 218 704 | 74 285 | **−66 %** | 5/5 vs 4/5 |
-| SQLite (small query results) | 8 140 | 10 300 | **+27 %** | 5/5 vs 5/5 |
-| Playwright (75 KB page snapshots) | 640 708 | 87 685 | **−86 %** | 5/5 vs 3/5 |
+| SQLite (small query results) | 7 315 | 18 014 | **+146 %** | 5/5 vs 5/5 |
+| Filesystem (35–46 KB files) | 80 044 | 54 826 | **−31 %** | **4/5 vs 5/5** |
+| Git log (300 commits, ~120 KB) | 219 105 | 103 663 | **−53 %** | 5/5 vs 5/5 |
+| Playwright (75 KB page snapshots) | 385 462 | 130 041 | **−66 %** | 5/5 vs 5/5 |
+| **Combined** | **691 926** | **306 544** | **−56 %** | 19/20 vs **20/20** |
 
-See [bench/REPORT.md](bench/REPORT.md) for the full per-task breakdown including turn counts, token diffs, and filter expressions used.
+Proxy passes every task across all four suites while spending 56 % fewer tokens overall. On filesystem it actually beats direct on correctness (direct miscounted log lines).
+
+See [bench/REPORT.md](bench/REPORT.md) for the full per-task breakdown including turn counts, token diffs, and notes on the regressions.
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for the dev loop (build, test, lint, pre-commit hook, project layout, PR conventions).
 
 ## Limitations
 
