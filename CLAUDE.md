@@ -68,7 +68,7 @@ When a response exceeds the threshold, the client receives a `text` ContentBlock
 
 ### Cache
 
-In-memory `map[string]json.RawMessage` (hex-encoded random id → raw `content` JSON). Scoped to the wrapper process lifetime (one client session). `structuredContent` is never cached — always forwarded directly.
+Bounded in-memory LRU (hex-encoded random id → raw `content` JSON). Scoped to the wrapper process lifetime (one client session). `structuredContent` is never cached — always forwarded directly. Sized by `--cache-max-bytes` (default 256 MiB); once full, the least-recently-used entry is evicted to make room. A single payload larger than the whole budget is still admitted (the cache empties to fit it) — rejection would silently break `seek_result`. `cache.Store` returns an error if the OS entropy source fails; callers fall back to forwarding the original (large) payload rather than emitting a predictable id.
 
 ### Stats (`internal/stats`)
 

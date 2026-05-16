@@ -23,6 +23,7 @@ const defaultThreshold = 10240 // 10 KB
 type Config struct {
 	Threshold       int64             `json:"threshold"`
 	MaxBodyBytes    int64             `json:"max_body_bytes,omitempty"`
+	CacheMaxBytes   int64             `json:"cache_max_bytes,omitempty"`
 	UpstreamURL     string            `json:"upstream_url,omitempty"`
 	UpstreamHeaders map[string]string `json:"upstream_headers,omitempty"`
 }
@@ -40,6 +41,7 @@ func main() {
 	var configPath string
 	var thresholdFlag int64
 	var maxBodyFlag int64
+	var cacheMaxFlag int64
 	var upstreamURL string
 	var listenAddr string
 	var rawHeaders headerFlags
@@ -48,6 +50,7 @@ func main() {
 	flag.StringVar(&configPath, "config", "", "path to config JSON file")
 	flag.Int64Var(&thresholdFlag, "threshold", 0, "response size threshold in bytes (overrides config)")
 	flag.Int64Var(&maxBodyFlag, "max-body-bytes", 0, "max inbound/upstream HTTP body in bytes (overrides config; 0 = default 64 MiB)")
+	flag.Int64Var(&cacheMaxFlag, "cache-max-bytes", 0, "max in-memory cache size in bytes (overrides config; 0 = default 256 MiB)")
 	flag.StringVar(&upstreamURL, "upstream-url", "", "URL of remote MCP server (Streamable HTTP); requires --listen")
 	flag.StringVar(&listenAddr, "listen", "", "address to listen on as HTTP server, e.g. :8080 (requires --upstream-url)")
 	flag.Var(&rawHeaders, "upstream-header", `header added to every upstream request, e.g. "Authorization: Bearer token" (repeatable)`)
@@ -84,6 +87,9 @@ func main() {
 	}
 	if maxBodyFlag > 0 {
 		cfg.MaxBodyBytes = maxBodyFlag
+	}
+	if cacheMaxFlag > 0 {
+		cfg.CacheMaxBytes = cacheMaxFlag
 	}
 
 	// Build merged headers: config-file values as base, CLI flags win on conflict.
@@ -150,7 +156,7 @@ func main() {
 		os.Exit(1)
 	}
 
-	c := cache.New()
+	c := cache.NewWithCapacity(cfg.CacheMaxBytes)
 
 	var st *stats.Stats
 	if enableStats {
