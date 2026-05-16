@@ -18,5 +18,8 @@
   },
   "devDependencies": {
     "promptfoo": "^0.121.11"
+  },
+  "overrides": {
+    "protobufjs": "^8.0.3"
   }
 }
