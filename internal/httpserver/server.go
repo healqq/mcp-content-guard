@@ -15,7 +15,7 @@ import (
 	"time"
 
 	"mcp-context-guard/internal/cache"
-	"mcp-context-guard/internal/filter"
+	"mcp-context-guard/internal/intercept"
 	"mcp-context-guard/internal/rpc"
 	"mcp-context-guard/internal/schema"
 	"mcp-context-guard/internal/stats"
@@ -159,7 +159,7 @@ func (s *Server) handleMCPPost(w http.ResponseWriter, r *http.Request) {
 			} `json:"arguments"`
 		}
 		if err := json.Unmarshal(msg.Params, &params); err == nil && params.Name == "seek_result" {
-			s.writeJSON(w, s.handleSeekResult(msg, params.Arguments.ID, params.Arguments.Filter))
+			s.writeJSON(w, intercept.SeekResult(s.cache, s.stats, msg, params.Arguments.ID, params.Arguments.Filter))
 			return
 		}
 	}
@@ -198,7 +198,7 @@ func (s *Server) handleMCPPost(w http.ResponseWriter, r *http.Request) {
 				}
 			}
 		case "tools/call":
-			if b := s.maybeCache(respMsg); b != nil {
+			if b := intercept.MaybeCache(s.cache, s.stats, s.threshold, respMsg); b != nil {
 				s.writeJSON(w, b)
 				return
 			}
@@ -284,65 +284,6 @@ func collectSSE(body io.Reader) ([]byte, error) {
 		return []byte("{}"), nil
 	}
 	return last, nil
-}
-
-// maybeCache checks whether the tools/call response exceeds the threshold.
-// Returns a replacement stub response, or nil if the original should be used.
-func (s *Server) maybeCache(msg rpc.Message) []byte {
-	var result map[string]json.RawMessage
-	if err := json.Unmarshal(msg.Result, &result); err != nil {
-		return nil
-	}
-	if raw, ok := result["isError"]; ok {
-		var isErr bool
-		if json.Unmarshal(raw, &isErr) == nil && isErr {
-			return nil
-		}
-	}
-	contentRaw, ok := result["content"]
-	if !ok || int64(len(contentRaw)) < s.threshold {
-		return nil
-	}
-	cacheID, err := s.cache.Store(contentRaw)
-	if err != nil {
-		return nil
-	}
-	stubText := fmt.Sprintf(
-		"[Response too large to return (%d bytes cached, id=%q). Call seek_result(id) to get the full payload, or seek_result(id, filter) to extract a subset (jq expression, grep:<pattern>, head:<N>, tail:<N>, line:<N>).]",
-		len(contentRaw), cacheID,
-	)
-	contentJSON, err := json.Marshal([]map[string]string{{"type": "text", "text": stubText}})
-	if err != nil {
-		return nil
-	}
-	result["content"] = contentJSON
-	msg.Result, err = json.Marshal(result)
-	if err != nil {
-		return nil
-	}
-	b, err := json.Marshal(msg)
-	if err != nil {
-		return nil
-	}
-	s.stats.RecordCache(int64(len(contentRaw)), int64(len(stubText)))
-	return b
-}
-
-// handleSeekResult looks up a cached result and applies the filter expression.
-func (s *Server) handleSeekResult(req rpc.Message, id, filterExpr string) []byte {
-	if id == "" {
-		return rpc.EncodeErrorResult(req.ID, "seek_result: id is required")
-	}
-	content, ok := s.cache.Get(id)
-	if !ok {
-		return rpc.EncodeErrorResult(req.ID, fmt.Sprintf("no cached result with id %q", id))
-	}
-	result, err := filter.Apply(content, filterExpr)
-	if err != nil {
-		return rpc.EncodeErrorResult(req.ID, fmt.Sprintf("filter error: %s", err))
-	}
-	s.stats.RecordSeek()
-	return rpc.EncodeTextResult(req.ID, result)
 }
 
 func (s *Server) forwardRaw(w http.ResponseWriter, r *http.Request, body []byte) {

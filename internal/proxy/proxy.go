@@ -4,13 +4,12 @@ import (
 	"bufio"
 	"bytes"
 	"encoding/json"
-	"fmt"
 	"io"
 	"os"
 	"sync"
 
 	"mcp-context-guard/internal/cache"
-	"mcp-context-guard/internal/filter"
+	"mcp-context-guard/internal/intercept"
 	"mcp-context-guard/internal/rpc"
 	"mcp-context-guard/internal/schema"
 	"mcp-context-guard/internal/stats"
@@ -123,7 +122,7 @@ func (p *Proxy) handleClientMessage(line []byte, uw *bufio.Writer) {
 				} `json:"arguments"`
 			}
 			if err := json.Unmarshal(msg.Params, &params); err == nil && params.Name == "seek_result" {
-				p.handleSeekResult(msg, params.Arguments.ID, params.Arguments.Filter)
+				p.out <- intercept.SeekResult(p.cache, p.stats, msg, params.Arguments.ID, params.Arguments.Filter)
 				return
 			}
 		}
@@ -171,7 +170,7 @@ func (p *Proxy) handleUpstreamMessage(line []byte) {
 					}
 				}
 			case "tools/call":
-				if b := p.maybeCache(msg); b != nil {
+				if b := intercept.MaybeCache(p.cache, p.stats, p.threshold, msg); b != nil {
 					p.out <- b
 					return
 				}
@@ -180,70 +179,6 @@ func (p *Proxy) handleUpstreamMessage(line []byte) {
 	}
 
 	p.out <- clone(line)
-}
-
-func (p *Proxy) handleSeekResult(req rpc.Message, id, filterExpr string) {
-	if id == "" {
-		p.out <- rpc.EncodeErrorResult(req.ID, "seek_result: id is required")
-		return
-	}
-	content, ok := p.cache.Get(id)
-	if !ok {
-		p.out <- rpc.EncodeErrorResult(req.ID, fmt.Sprintf("no cached result with id %q", id))
-		return
-	}
-	result, err := filter.Apply(content, filterExpr)
-	if err != nil {
-		p.out <- rpc.EncodeErrorResult(req.ID, fmt.Sprintf("filter error: %s", err))
-		return
-	}
-	p.stats.RecordSeek()
-	p.out <- rpc.EncodeTextResult(req.ID, result)
-}
-
-// maybeCache checks whether the tools/call response is large enough to cache.
-// Returns a replacement response with a stub, or nil if forwarding unchanged.
-func (p *Proxy) maybeCache(msg rpc.Message) []byte {
-	var result map[string]json.RawMessage
-	if err := json.Unmarshal(msg.Result, &result); err != nil {
-		return nil
-	}
-	// never cache error responses
-	if raw, ok := result["isError"]; ok {
-		var isErr bool
-		if json.Unmarshal(raw, &isErr) == nil && isErr {
-			return nil
-		}
-	}
-	contentRaw, ok := result["content"]
-	if !ok || int64(len(contentRaw)) < p.threshold {
-		return nil
-	}
-	cacheID, err := p.cache.Store(contentRaw)
-	if err != nil {
-		return nil
-	}
-	stubText := fmt.Sprintf(
-		"[Response too large to return (%d bytes cached, id=%q). Call seek_result(id) to get the full payload, or seek_result(id, filter) to extract a subset (jq expression, grep:<pattern>, head:<N>, tail:<N>, line:<N>).]",
-		len(contentRaw), cacheID,
-	)
-	contentJSON, err := json.Marshal([]map[string]string{
-		{"type": "text", "text": stubText},
-	})
-	if err != nil {
-		return nil
-	}
-	result["content"] = contentJSON
-	msg.Result, err = json.Marshal(result)
-	if err != nil {
-		return nil
-	}
-	b, err := json.Marshal(msg)
-	if err != nil {
-		return nil
-	}
-	p.stats.RecordCache(int64(len(contentRaw)), int64(len(stubText)))
-	return b
 }
 
 func idKey(id any) string {
