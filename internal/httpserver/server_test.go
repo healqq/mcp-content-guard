@@ -135,7 +135,7 @@ func TestHTTPLargeResponseCached(t *testing.T) {
 	result := resp["result"].(map[string]any)
 	content := result["content"].([]any)
 	text := content[0].(map[string]any)["text"].(string)
-	if !strings.Contains(text, "bytes cached") {
+	if !strings.Contains(text, "cached id=") || !strings.Contains(text, "bytes") {
 		t.Errorf("expected cache stub, got: %q", text)
 	}
 }

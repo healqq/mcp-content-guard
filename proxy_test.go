@@ -204,7 +204,7 @@ func TestLargeResponseCached(t *testing.T) {
 		t.Fatalf("stub missing seek_result call hint, got: %q", text)
 	}
 	cacheID := m[1]
-	if !strings.Contains(text, "bytes cached") {
+	if !strings.Contains(text, "bytes") {
 		t.Errorf("stub missing size hint: %q", text)
 	}
 

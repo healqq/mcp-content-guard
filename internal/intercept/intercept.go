@@ -38,10 +38,10 @@ func MaybeCache(c *cache.Cache, st *stats.Stats, threshold int64, msg rpc.Messag
 	if err != nil {
 		return nil
 	}
-	stubText := fmt.Sprintf(
-		"[Response too large to return (%d bytes cached, id=%q). Call seek_result(id) to get the full payload, or seek_result(id, filter) to extract a subset (jq expression, grep:<pattern>, head:<N>, tail:<N>, line:<N>).]",
-		len(contentRaw), cacheID,
-	)
+	// Keep the stub minimal — the seek_result tool description (injected into
+	// tools/list) carries the filter syntax and usage guidance.
+	stubText := fmt.Sprintf("[cached id=%q (%d bytes) — call seek_result to read]",
+		cacheID, len(contentRaw))
 	contentJSON, err := json.Marshal([]map[string]string{
 		{"type": "text", "text": stubText},
 	})
