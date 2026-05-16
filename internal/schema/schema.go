@@ -24,6 +24,11 @@ func InjectSeekResult(result json.RawMessage) (json.RawMessage, error) {
 	if err := json.Unmarshal(result, &r); err != nil {
 		return nil, fmt.Errorf("parse tools/list result: %w", err)
 	}
+	if r == nil {
+		// JSON "null" unmarshals to a nil map; treat it as empty so we can
+		// still attach the seek_result tool.
+		r = make(map[string]json.RawMessage)
+	}
 	var tools []json.RawMessage
 	if raw, ok := r["tools"]; ok {
 		if err := json.Unmarshal(raw, &tools); err != nil {

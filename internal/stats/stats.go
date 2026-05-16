@@ -8,6 +8,7 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
+	"sync"
 	"sync/atomic"
 )
 
@@ -42,6 +43,10 @@ type Stats struct {
 	bytesSent       atomic.Int64
 	responsesCached atomic.Int64
 	seekCalls       atomic.Int64
+
+	// flushMu serialises read-modify-write against the on-disk file so
+	// the per-process delta is added to the existing totals exactly once.
+	flushMu sync.Mutex
 }
 
 // New creates a Stats tracker backed by path (a per-config stats file).
@@ -82,17 +87,30 @@ func (s *Stats) Save() error {
 	return s.flush()
 }
 
-// flush reads the existing totals, adds this session's delta, and writes back
-// atomically. Concurrent instances with the same config may race on the rename
-// — one write wins — so counts are approximate in that case, but the file is
-// never corrupted (atomic rename guarantees a complete write or none).
+// flush reads the existing totals, adds the unflushed delta, and writes back
+// atomically. Resets the in-memory counters so the next flush does not
+// re-add the same delta. Multiple processes pointed at the same file may
+// still race on the rename — one write wins — so cross-process counts are
+// approximate, but the file is never corrupted (atomic rename guarantees
+// a complete write or none).
 func (s *Stats) flush() error {
+	s.flushMu.Lock()
+	defer s.flushMu.Unlock()
+
+	bc := s.bytesCached.Swap(0)
+	bs := s.bytesSent.Swap(0)
+	rc := s.responsesCached.Swap(0)
+	sk := s.seekCalls.Swap(0)
+	if bc == 0 && bs == 0 && rc == 0 && sk == 0 {
+		return nil
+	}
+
 	existing := readTotals(s.path)
 	merged := Totals{
-		BytesCached:     existing.BytesCached + s.bytesCached.Load(),
-		BytesSent:       existing.BytesSent + s.bytesSent.Load(),
-		ResponsesCached: existing.ResponsesCached + s.responsesCached.Load(),
-		SeekCalls:       existing.SeekCalls + s.seekCalls.Load(),
+		BytesCached:     existing.BytesCached + bc,
+		BytesSent:       existing.BytesSent + bs,
+		ResponsesCached: existing.ResponsesCached + rc,
+		SeekCalls:       existing.SeekCalls + sk,
 	}
 	return writeTotals(s.path, merged)
 }
